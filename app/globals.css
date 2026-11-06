@@ -1,26 +1,132 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  /* ── Arium Core Brand Palette ── */
+  --color-midnight: #162047; /* Main slide canvas background */
+  --color-midnight-lighter: #1c2a55; /* Cards, editor panels, callouts */
+  --color-midnight-lightest: #243365; /* Hover states, borders, active items */
+  --color-midnight-blue: #162047;
+  --color-teal: #00e8d9; /* Brand Primary (Cyan) */
+  --color-sky-teal: #00e8d9;
+  --color-white: #ffffff;
+
+  /* ── Secondary Brand Accents ── */
+  --color-secondary-teal: #bcf6f2; /* Subtle tags & light borders */
+  --color-secondary-purple: #d2c7ff; /* API & GraphQL/REST badges */
+  --color-secondary-yellow: #ffffca; /* Attention & warning notes */
+  --color-secondary-peach: #ffdac8; /* Client & editor badges */
+  --color-secondary-grey: #ededee; /* Secondary neutral borders */
+
+  /* ── Presentation & Flow Status Accents ── */
+  --color-accent-teal: #0d9488; /* High contrast teal on light background */
+  --color-accent-blue: #3b82f6; /* REST API & Data Schema layer */
+  --color-accent-purple: #8b5cf6; /* Next.js & SSR engine */
+  --color-accent-amber: #f59e0b; /* Cache / Fallback indicators */
+  --color-accent-red: #ef4444; /* Production environment badge */
+  --color-accent-green: #10b981; /* Dev environment & active status */
+
+  /* ── Typography Families ── */
+  --font-heading: "ulmGrotesk", "Geist Sans", "Inter", system-ui, sans-serif;
+  --font-body: "ulmGrotesk", "Inter", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", "Geist Mono", monospace;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* UlmGrotesk Font Face Declarations */
+@font-face {
+  font-family: ulmGrotesk;
+  src: url("/fonts/ulmGrotesk-300.otf") format("opentype");
+  font-display: swap;
+  font-weight: 300;
+  font-style: normal;
 }
 
-@media (prefers-color-scheme: dark) {
+@font-face {
+  font-family: ulmGrotesk;
+  src: url("/fonts/ulmGrotesk-400.otf") format("opentype");
+  font-display: swap;
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: ulmGrotesk;
+  src: url("/fonts/ulmGrotesk-500.otf") format("opentype");
+  font-display: swap;
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: ulmGrotesk;
+  src: url("/fonts/ulmGrotesk-700.otf") format("opentype");
+  font-display: swap;
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: ulmGrotesk;
+  src: url("/fonts/ulmGrotesk-800.otf") format("opentype");
+  font-display: swap;
+  font-weight: 800;
+  font-style: normal;
+}
+
+/* ── Shadcn UI Dark Midnight Semantic Tokens ── */
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: 228 53% 18%; /* #162047 - Midnight Canvas */
+    --foreground: 0 0% 100%; /* White text */
+
+    --card: 226 51% 22%; /* #1c2a55 - Midnight Lighter */
+    --card-foreground: 0 0% 100%;
+
+    --popover: 228 53% 18%;
+    --popover-foreground: 0 0% 100%;
+
+    --primary: 176 100% 45%; /* #00e8d9 - Arium Teal */
+    --primary-foreground: 228 53% 18%; /* Midnight text on teal */
+
+    --secondary: 226 51% 22%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 226 45% 26%;
+    --muted-foreground: 218 15% 75%;
+
+    --accent: 226 51% 25%;
+    --accent-foreground: 176 100% 45%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 225 35% 28%;
+    --input: 225 35% 28%;
+    --ring: 176 100% 45%;
+    --radius: 0.75rem;
   }
 }
 
+/* ── Reset & Slide Viewport ── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: var(--color-midnight);
+  color: var(--color-white);
+  font-family: var(--font-body);
+  overflow: hidden;
+  height: 100vh;
+  width: 100vw;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background-color: var(--color-teal);
+  color: var(--color-midnight);
 }
