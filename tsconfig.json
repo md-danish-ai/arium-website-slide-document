@@ -24,7 +24,9 @@
       "@ui/*": ["./components/ui/*"],
       "@lib/*": ["./lib/*"],
       "@data/*": ["./data/*"],
-      "@public/*": ["./public/*"]
+      "@public/*": ["./public/*"],
+      "@types/*": ["./types/*"],
+      "@types": ["./types/index.ts"]
     }
   },
   "include": [
