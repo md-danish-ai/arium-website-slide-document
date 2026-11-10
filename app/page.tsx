@@ -1,6 +1,6 @@
-import Image from "next/image";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import { Badge } from "@components/ui/badge";
+import { Button } from "@components/ui/button";
 
 export default function Home() {
   return (
@@ -48,6 +48,18 @@ export default function Home() {
           <Badge variant="midnight" className="border-teal/30 text-teal">
             Brand Tokens In Sync
           </Badge>
+        </div>
+
+        {/* Start / Launch Explorer CTA */}
+        <div className="pt-2">
+          <Button
+            asChild
+            className="bg-teal hover:bg-teal/90 text-midnight font-bold px-6 py-2.5 text-sm rounded-xl shadow-lg shadow-teal/20 transition-all hover:scale-105"
+          >
+            <Link href="/start">
+              Open Dynamic Widgets Wireframe Platform (/start) →
+            </Link>
+          </Button>
         </div>
 
         {/* Feature showcase cards */}
