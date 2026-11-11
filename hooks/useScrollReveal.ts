@@ -9,7 +9,7 @@ export function useScrollReveal(pathname?: string) {
 
     const setupObserver = () => {
       const reveals = document.querySelectorAll(
-        ".reveal, .reveal-left, .reveal-right, .reveal-scale"
+        ".reveal, .reveal-left, .reveal-right, .reveal-scale",
       );
       if (!reveals.length) return;
 
@@ -24,7 +24,7 @@ export function useScrollReveal(pathname?: string) {
               }
             });
           },
-          { threshold: 0.08 }
+          { threshold: 0.08 },
         );
       }
 
@@ -44,7 +44,8 @@ export function useScrollReveal(pathname?: string) {
       setupObserver();
     });
 
-    const mainContent = document.getElementById("main-content") || document.body;
+    const mainContent =
+      document.getElementById("main-content") || document.body;
     if (mainContent) {
       mutationObserver.observe(mainContent, { childList: true, subtree: true });
     }

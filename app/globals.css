@@ -130,3 +130,123 @@ body {
   background-color: var(--color-teal);
   color: var(--color-midnight);
 }
+
+/* ── Crisp White Frosted Glass Surface System ── */
+.glass-surface {
+  background: rgba(255, 255, 255, 0.86);
+  backdrop-filter: blur(18px) saturate(150%);
+  -webkit-backdrop-filter: blur(18px) saturate(150%);
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  box-shadow:
+    0 10px 30px -12px rgba(15, 23, 42, 0.08),
+    0 1px 2px rgba(15, 23, 42, 0.04),
+    inset 0 1px 0 rgba(255, 255, 255, 1);
+}
+
+.glass-header-light {
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(18px) saturate(150%);
+  -webkit-backdrop-filter: blur(18px) saturate(150%);
+  border-bottom: 1px solid rgba(226, 232, 240, 0.9);
+  box-shadow: 0 2px 16px -6px rgba(15, 23, 42, 0.06);
+}
+
+.glass-inset {
+  background: rgba(248, 250, 252, 0.88);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(226, 232, 240, 0.88);
+}
+
+/* ── Subtle Glass Scrollbars ── */
+.glass-scrollbar {
+  scroll-behavior: smooth;
+  overscroll-behavior: contain;
+}
+
+.glass-scrollbar::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.glass-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.glass-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.38);
+  border-radius: 9999px;
+}
+
+.glass-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(6, 182, 212, 0.5);
+}
+
+/* ── Hidden Scrollbar with Contained Smooth Scrolling ── */
+.no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* ── Smooth Dialog / Previewer Open & Close Animations ── */
+@keyframes dialogOverlayIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes dialogOverlayOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes dialogPanelIn {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 16px, 0) scale(0.94);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes dialogPanelOut {
+  from {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: translate3d(0, 12px, 0) scale(0.95);
+  }
+}
+
+.dialog-overlay-anim[data-state="open"] {
+  animation: dialogOverlayIn 240ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.dialog-overlay-anim[data-state="closed"] {
+  animation: dialogOverlayOut 200ms cubic-bezier(0.4, 0, 1, 1) forwards;
+}
+
+.dialog-panel-anim[data-state="open"] {
+  animation: dialogPanelIn 280ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.dialog-panel-anim[data-state="closed"] {
+  animation: dialogPanelOut 200ms cubic-bezier(0.4, 0, 1, 1) forwards;
+}

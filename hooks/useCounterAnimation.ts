@@ -18,7 +18,7 @@ function easeOutQuart(t: number) {
 // Animates scoped number counters inside a container
 export function useCounterAnimation<T extends HTMLElement = HTMLDivElement>(
   options: CounterAnimationOptions = {},
-  externalRef?: RefObject<T | null>
+  externalRef?: RefObject<T | null>,
 ): RefObject<T | null> {
   const internalRef = useRef<T>(null);
   const containerRef = externalRef || internalRef;
@@ -71,7 +71,7 @@ export function useCounterAnimation<T extends HTMLElement = HTMLDivElement>(
           }
         });
       },
-      { threshold }
+      { threshold },
     );
 
     observer.observe(root);

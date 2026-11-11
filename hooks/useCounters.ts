@@ -57,7 +57,7 @@ export function useCounters(pathname?: string) {
               }
             });
           },
-          { threshold: 0.15 }
+          { threshold: 0.15 },
         );
       }
 

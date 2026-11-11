@@ -34,6 +34,12 @@ export interface PageSectionItem {
   child_count?: number;
 }
 
+export interface WidgetPreviewImages {
+  desktop: string;
+  tablet?: string;
+  mobile?: string;
+}
+
 /**
  * Child widget structure nested inside a page (pages-by-widgets array)
  */
@@ -52,6 +58,7 @@ export interface ChildWidget {
   is_flow_grouped?: boolean;
   key_props?: string[];
   fallback_key?: string;
+  preview_images?: WidgetPreviewImages;
 }
 
 /**
@@ -93,5 +100,6 @@ export interface FlatWidget {
   is_flow_grouped?: boolean;
   key_props?: string[];
   fallback_key?: string;
+  preview_images?: WidgetPreviewImages;
   used_in_pages: string[];
 }

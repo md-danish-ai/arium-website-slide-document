@@ -1,19 +1,38 @@
 "use client";
 
-import React, { useState, useMemo } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { PageWithWidgets, FlatWidget } from "@/types/widget.types";
-import { ChevronDown, ChevronRight, Search } from "lucide-react";
+import { Card } from "@components/ui/card";
+import { Tabs, TabsList, TabsTrigger } from "@components/ui/tabs";
+import { Input } from "@components/ui/input";
+import { Button } from "@components/ui/button";
+import { Separator } from "@components/ui/separator";
+import { SidebarCollapsibleGroup } from "./SidebarCollapsibleGroup";
+import { SidebarWidgetItem } from "./SidebarWidgetItem";
+import { Layers, LayoutGrid, Search, X } from "lucide-react";
 import { cn } from "@lib/utils";
 
-interface PageSidebarProps {
+export type SidebarMode = "by-page" | "all-widgets";
+
+export interface PageSidebarProps {
   pages: PageWithWidgets[];
   flatWidgets: FlatWidget[];
   selectedPageId: string;
   selectedWidgetId: string;
   onSelectWidget: (pageId: string, widgetId: string) => void;
   onSelectPage: (pageId: string) => void;
+  mode?: SidebarMode;
+  defaultMode?: SidebarMode;
+  onModeChange?: (mode: SidebarMode) => void;
+  showModeTabs?: boolean;
+  defaultOpenPageId?: string;
+  className?: string;
 }
 
+/**
+ * Reusable White Frosted Glass Sidebar supporting both By Page (animated tree)
+ * and All Widgets (independent numbered list) via shared Shadcn UI primitives.
+ */
 export function PageSidebar({
   pages,
   flatWidgets,
@@ -21,21 +40,119 @@ export function PageSidebar({
   selectedWidgetId,
   onSelectWidget,
   onSelectPage,
+  mode,
+  defaultMode = "by-page",
+  onModeChange,
+  showModeTabs = true,
+  defaultOpenPageId = "home",
+  className,
 }: PageSidebarProps) {
-  const [activeTab, setActiveTab] = useState<"by-page" | "all-widgets">("by-page");
+  const [internalMode, setInternalMode] = useState<SidebarMode>(defaultMode);
+  const activeMode = mode ?? internalMode;
+
   const [searchQuery, setSearchQuery] = useState("");
+  const [allWidgetsSelectedId, setAllWidgetsSelectedId] = useState<
+    string | null
+  >(null);
+  const [prevSelectedPageId, setPrevSelectedPageId] = useState(selectedPageId);
 
-  const [expandedPages, setExpandedPages] = useState<Record<string, boolean>>(() => {
-    const initial: Record<string, boolean> = {};
-    pages.forEach((p, idx) => {
-      initial[p.id] = idx < 3 || p.id === selectedPageId;
+  // Default: ONLY Home (defaultOpenPageId) is open; all other pages are closed
+  const buildSingleOpenMap = (openPageId: string) => {
+    const map: Record<string, boolean> = {};
+    pages.forEach((p) => {
+      map[p.id] = p.id === openPageId;
     });
-    return initial;
-  });
+    return map;
+  };
 
-  const togglePageAccordion = (pageId: string, e?: React.MouseEvent) => {
-    if (e) e.stopPropagation();
-    setExpandedPages((prev) => ({ ...prev, [pageId]: !prev[pageId] }));
+  const [expandedPages, setExpandedPages] = useState<Record<string, boolean>>(
+    () => buildSingleOpenMap(defaultOpenPageId),
+  );
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+
+  // Buttery-smooth wheel scroll interpolation with hidden scrollbar
+  useEffect(() => {
+    const el = scrollContainerRef.current;
+    if (!el) return;
+
+    let targetScroll = el.scrollTop;
+    let currentScroll = el.scrollTop;
+    let rafId: number | null = null;
+
+    const animateScroll = () => {
+      const diff = targetScroll - currentScroll;
+      if (Math.abs(diff) < 0.5) {
+        el.scrollTop = targetScroll;
+        rafId = null;
+        return;
+      }
+      currentScroll += diff * 0.18;
+      el.scrollTop = currentScroll;
+      rafId = requestAnimationFrame(animateScroll);
+    };
+
+    const handleWheel = (e: WheelEvent) => {
+      if (e.ctrlKey || el.scrollHeight <= el.clientHeight) return;
+      e.preventDefault();
+
+      if (rafId === null) {
+        currentScroll = el.scrollTop;
+        targetScroll = el.scrollTop;
+      }
+
+      const delta =
+        e.deltaMode === 1
+          ? e.deltaY * 32
+          : e.deltaMode === 2
+            ? e.deltaY * el.clientHeight
+            : e.deltaY;
+
+      const maxScroll = el.scrollHeight - el.clientHeight;
+      targetScroll = Math.max(0, Math.min(maxScroll, targetScroll + delta));
+
+      if (rafId === null) {
+        rafId = requestAnimationFrame(animateScroll);
+      }
+    };
+
+    el.addEventListener("wheel", handleWheel, { passive: false });
+    return () => {
+      el.removeEventListener("wheel", handleWheel);
+      if (rafId !== null) cancelAnimationFrame(rafId);
+    };
+  }, []);
+
+  // Keep ONLY the newly selected page open when navigated externally (e.g. Usage chips)
+  if (selectedPageId !== prevSelectedPageId) {
+    setPrevSelectedPageId(selectedPageId);
+    if (selectedPageId) {
+      setExpandedPages(buildSingleOpenMap(selectedPageId));
+    }
+  }
+
+  const handleModeChange = (nextMode: string) => {
+    const typed = nextMode as SidebarMode;
+    if (mode === undefined) setInternalMode(typed);
+    setSearchQuery("");
+    if (typed === "all-widgets") {
+      setAllWidgetsSelectedId(null);
+    } else if (selectedPageId) {
+      setExpandedPages(buildSingleOpenMap(selectedPageId));
+    }
+    scrollContainerRef.current?.scrollTo({ top: 0, behavior: "smooth" });
+    onModeChange?.(typed);
+  };
+
+  const handlePageHeaderClick = (page: PageWithWidgets) => {
+    const isCurrentlyOpen = Boolean(expandedPages[page.id]);
+    if (isCurrentlyOpen) {
+      setExpandedPages((prev) => ({ ...prev, [page.id]: false }));
+      return;
+    }
+
+    setPrevSelectedPageId(page.id);
+    setExpandedPages(buildSingleOpenMap(page.id));
+    onSelectPage(page.id);
   };
 
   const filteredPages = useMemo(() => {
@@ -52,10 +169,13 @@ export function PageSidebar({
             w.widgets_title.toLowerCase().includes(query) ||
             w.widgets_label.toLowerCase().includes(query) ||
             w.component_name.toLowerCase().includes(query) ||
-            w.category.toLowerCase().includes(query)
+            w.category.toLowerCase().includes(query),
         );
         if (pageMatches || matchingWidgets.length > 0) {
-          return { ...p, child_widgets: pageMatches ? p.child_widgets : matchingWidgets };
+          return {
+            ...p,
+            child_widgets: pageMatches ? p.child_widgets : matchingWidgets,
+          };
         }
         return null;
       })
@@ -70,76 +190,92 @@ export function PageSidebar({
         w.widgets_title.toLowerCase().includes(query) ||
         w.widgets_label.toLowerCase().includes(query) ||
         w.component_name.toLowerCase().includes(query) ||
-        w.category.toLowerCase().includes(query) ||
-        w.page_label.toLowerCase().includes(query)
+        w.category.toLowerCase().includes(query),
     );
   }, [flatWidgets, searchQuery]);
 
-  // Category color map (light theme)
-  const categoryColor: Record<string, string> = {
-    hero: "bg-cyan-50 text-cyan-700 border-cyan-200",
-    feature: "bg-purple-50 text-purple-700 border-purple-200",
-    stats: "bg-emerald-50 text-emerald-700 border-emerald-200",
-    flow: "bg-violet-50 text-violet-700 border-violet-200",
-    cta: "bg-amber-50 text-amber-700 border-amber-200",
-  };
-
   return (
-    <aside className="h-full flex flex-col bg-white border border-slate-200 rounded-xl p-3 shadow-sm overflow-hidden">
-      {/* Tab Switcher */}
-      <div className="flex items-center gap-1 pb-3 border-b border-slate-100">
-        <div className="inline-flex rounded-lg bg-slate-100 p-0.5 w-full">
-          <button
-            type="button"
-            onClick={() => setActiveTab("by-page")}
-            className={cn(
-              "flex-1 px-3 py-1.5 rounded-md text-xs font-semibold transition-all",
-              activeTab === "by-page"
-                ? "bg-white text-slate-900 shadow-sm"
-                : "text-slate-500 hover:text-slate-700"
-            )}
-          >
-            BY PAGE
-          </button>
-          <button
-            type="button"
-            onClick={() => setActiveTab("all-widgets")}
-            className={cn(
-              "flex-1 px-3 py-1.5 rounded-md text-xs font-semibold transition-all",
-              activeTab === "all-widgets"
-                ? "bg-white text-slate-900 shadow-sm"
-                : "text-slate-500 hover:text-slate-700"
-            )}
-          >
-            ALL WIDGETS
-          </button>
+    <Card
+      variant="glass"
+      className={cn(
+        "h-full flex flex-col p-2.5 rounded-xl overflow-hidden",
+        className,
+      )}
+    >
+      {/* Reusable Mode Tabs with Icons & Smooth Sliding Indicator */}
+      {showModeTabs && (
+        <div className="pt-1 pb-3">
+          <Tabs value={activeMode} onValueChange={handleModeChange}>
+            <TabsList
+              variant="glass"
+              className="relative w-full grid grid-cols-2 h-auto p-1 rounded-lg overflow-hidden"
+            >
+              {/* Animated sliding Midnight-Teal pill */}
+              <span
+                aria-hidden="true"
+                className={cn(
+                  "pointer-events-none absolute top-1 bottom-1 left-1 w-[calc(50%-4px)] rounded-md bg-gradient-to-r from-[#162047] via-[#1c2a55] to-[#134e6f] shadow-sm ring-1 ring-cyan-400/30 transition-transform duration-200 ease-out",
+                  activeMode === "all-widgets"
+                    ? "translate-x-full"
+                    : "translate-x-0",
+                )}
+              />
+              <TabsTrigger
+                value="by-page"
+                className="relative z-10 gap-1.5 py-2 rounded-md text-xs font-semibold tracking-wide transition-colors duration-200 data-[state=active]:bg-transparent data-[state=active]:text-white data-[state=active]:shadow-none"
+              >
+                <Layers className="w-3.5 h-3.5 shrink-0" />
+                <span>BY PAGE</span>
+              </TabsTrigger>
+              <TabsTrigger
+                value="all-widgets"
+                className="relative z-10 gap-1.5 py-2 rounded-md text-xs font-semibold tracking-wide transition-colors duration-200 data-[state=active]:bg-transparent data-[state=active]:text-white data-[state=active]:shadow-none"
+              >
+                <LayoutGrid className="w-3.5 h-3.5 shrink-0" />
+                <span>BY WIDGETS</span>
+              </TabsTrigger>
+            </TabsList>
+          </Tabs>
         </div>
-      </div>
+      )}
 
-      {/* Search */}
-      <div className="relative my-2.5">
-        <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-slate-400" />
-        <input
+      {/* Search Filter */}
+      <div className="relative mb-2">
+        <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-slate-400 pointer-events-none z-10" />
+        <Input
           type="text"
+          variant="glass"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          placeholder="Filter pages or widgets..."
-          className="w-full pl-8 pr-3 py-1.5 text-xs bg-slate-50 border border-slate-200 rounded-lg text-slate-700 placeholder-slate-400 focus:outline-none focus:border-cyan-400 focus:ring-1 focus:ring-cyan-400/20 transition-all"
+          placeholder={
+            activeMode === "by-page"
+              ? "Filter pages or widgets..."
+              : "Filter widgets..."
+          }
+          className="pl-8 pr-7 rounded-md"
         />
         {searchQuery && (
-          <button
+          <Button
             type="button"
+            variant="ghost"
+            size="xs"
+            aria-label="Clear filter"
             onClick={() => setSearchQuery("")}
-            className="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 text-xs"
+            className="absolute right-1 top-1/2 -translate-y-1/2 h-6 w-6 p-0 text-slate-400 hover:text-slate-700 hover:bg-transparent"
           >
-            ×
-          </button>
+            <X className="w-3.5 h-3.5" />
+          </Button>
         )}
       </div>
 
-      {/* List */}
-      <div className="flex-1 overflow-y-auto space-y-1.5 pr-0.5">
-        {activeTab === "by-page" ? (
+      <Separator className="mb-2 bg-slate-200/70" />
+
+      {/* Reusable List Container */}
+      <div
+        ref={scrollContainerRef}
+        className="flex-1 overflow-y-auto space-y-2 px-1 py-0.5 no-scrollbar"
+      >
+        {activeMode === "by-page" ? (
           filteredPages.length === 0 ? (
             <div className="p-6 text-center text-slate-400 text-xs">
               No results for &ldquo;{searchQuery}&rdquo;.
@@ -147,155 +283,81 @@ export function PageSidebar({
           ) : (
             filteredPages.map((page, index) => {
               const isPageSelected = page.id === selectedPageId;
-              const isExpanded = !!expandedPages[page.id] || searchQuery.length > 0;
+              const isExpanded =
+                Boolean(expandedPages[page.id]) ||
+                searchQuery.trim().length > 0;
 
               return (
-                <div
+                <SidebarCollapsibleGroup
                   key={page.id}
-                  className={cn(
-                    "rounded-lg border transition-all duration-150 overflow-hidden",
-                    isPageSelected
-                      ? "border-cyan-300 bg-cyan-50"
-                      : "border-slate-200 bg-white hover:border-slate-300"
-                  )}
+                  index={index}
+                  title={`${page.label} Page`}
+                  count={page.child_widgets?.length ?? 0}
+                  isSelected={isPageSelected}
+                  isOpen={isExpanded}
+                  onHeaderClick={() => handlePageHeaderClick(page)}
                 >
-                  {/* Page Header */}
-                  <div
-                    onClick={() => {
-                      onSelectPage(page.id);
-                      togglePageAccordion(page.id);
-                      if (page.child_widgets?.length > 0) {
-                        onSelectWidget(page.id, page.child_widgets[0].id);
-                      }
-                    }}
-                    className="flex items-center justify-between px-3 py-2 cursor-pointer select-none"
-                  >
-                    <div className="flex items-center gap-2 min-w-0">
-                      <span className="text-xs font-bold text-slate-400 shrink-0 font-mono">
-                        {index + 1}.
-                      </span>
-                      <span
-                        className={cn(
-                          "text-xs font-semibold truncate",
-                          isPageSelected ? "text-cyan-700" : "text-slate-700"
-                        )}
-                      >
-                        {page.label} Page
-                      </span>
-                      <span className="text-[10px] font-mono px-1.5 py-0.5 rounded-full bg-slate-100 text-slate-500 border border-slate-200 shrink-0">
-                        {page.child_widgets?.length ?? 0}
-                      </span>
-                    </div>
-                    <button
-                      type="button"
-                      onClick={(e) => togglePageAccordion(page.id, e)}
-                      aria-label="Toggle"
-                      className="p-0.5 rounded text-slate-400 hover:text-slate-600 transition-colors"
-                    >
-                      {isExpanded ? (
-                        <ChevronDown className="w-3.5 h-3.5" />
-                      ) : (
-                        <ChevronRight className="w-3.5 h-3.5" />
-                      )}
-                    </button>
-                  </div>
-
-                  {/* Child Widgets */}
-                  {isExpanded && (
-                    <div className="px-2 pb-1.5 space-y-0.5 border-t border-slate-100">
-                      {page.child_widgets?.length > 0 ? (
-                        page.child_widgets.map((widget) => {
-                          const isActive =
-                            widget.id === selectedWidgetId && page.id === selectedPageId;
-                          return (
-                            <button
-                              key={widget.id}
-                              type="button"
-                              onClick={() => onSelectWidget(page.id, widget.id)}
-                              className={cn(
-                                "w-full flex items-center justify-between px-2.5 py-1.5 rounded-md text-left text-xs transition-all",
-                                isActive
-                                  ? "bg-cyan-500 text-white"
-                                  : "text-slate-600 hover:bg-slate-50 hover:text-slate-900"
-                              )}
-                            >
-                              <span className="truncate font-medium">
-                                {widget.widgets_label || widget.component_name}
-                              </span>
-                              <span
-                                className={cn(
-                                  "text-[9px] uppercase font-bold px-1.5 py-0.5 rounded border shrink-0 ml-1.5",
-                                  isActive
-                                    ? "bg-white/20 text-white border-white/30"
-                                    : (categoryColor[widget.category] ??
-                                      "bg-slate-100 text-slate-500 border-slate-200")
-                                )}
-                              >
-                                {widget.category}
-                              </span>
-                            </button>
-                          );
-                        })
-                      ) : (
-                        <div className="text-[11px] text-slate-400 italic p-2 text-center">
-                          No widgets.
-                        </div>
-                      )}
+                  {page.child_widgets?.length > 0 ? (
+                    page.child_widgets.map((widget) => {
+                      const isActive =
+                        widget.id === selectedWidgetId &&
+                        page.id === selectedPageId;
+                      return (
+                        <SidebarWidgetItem
+                          key={widget.id}
+                          label={widget.widgets_label || widget.component_name}
+                          category={widget.category}
+                          isActive={isActive}
+                          onClick={() => onSelectWidget(page.id, widget.id)}
+                        />
+                      );
+                    })
+                  ) : (
+                    <div className="text-[11px] text-slate-400 italic p-2 text-center">
+                      No widgets.
                     </div>
                   )}
-                </div>
+                </SidebarCollapsibleGroup>
               );
             })
           )
+        ) : filteredFlatWidgets.length === 0 ? (
+          <div className="p-6 text-center text-slate-400 text-xs">
+            No widgets match &ldquo;{searchQuery}&rdquo;.
+          </div>
         ) : (
-          /* ALL WIDGETS flat list */
-          <div className="space-y-1">
-            {filteredFlatWidgets.map((flat) => {
-              const isSelected =
-                flat.id === selectedWidgetId ||
-                (flat.widget_key && flat.widget_key === selectedWidgetId);
+          <div className="space-y-2">
+            {filteredFlatWidgets.map((flat, index) => {
+              const targetPage = pages.find((p) => p.id === flat.page_id);
+              const matchedChild = targetPage?.child_widgets?.find(
+                (cw) =>
+                  cw.id === flat.id ||
+                  (cw.widget_key === flat.widget_key &&
+                    cw.component_name === flat.component_name &&
+                    cw.position === flat.position) ||
+                  cw.widget_key === flat.widget_key,
+              );
+              const resolvedWidgetId =
+                matchedChild?.id ?? flat.widget_key ?? flat.id;
+              const isSelected = allWidgetsSelectedId === flat.id;
+
               return (
-                <button
+                <SidebarWidgetItem
                   key={flat.id}
-                  type="button"
-                  onClick={() => onSelectWidget(flat.page_id, flat.id)}
-                  className={cn(
-                    "w-full flex items-center justify-between p-2.5 rounded-lg text-left text-xs transition-all border",
-                    isSelected
-                      ? "bg-cyan-500 text-white border-cyan-500"
-                      : "bg-white text-slate-600 border-slate-200 hover:border-slate-300 hover:bg-slate-50"
-                  )}
-                >
-                  <div className="truncate pr-2">
-                    <span className="font-semibold truncate block">
-                      {flat.widgets_label || flat.component_name}
-                    </span>
-                    <span className={cn("text-[10px] truncate block mt-0.5", isSelected ? "text-white/70" : "text-slate-400")}>
-                      {flat.page_label}
-                    </span>
-                  </div>
-                  <span
-                    className={cn(
-                      "text-[9px] uppercase font-bold px-1.5 py-0.5 rounded border shrink-0",
-                      isSelected
-                        ? "bg-white/20 text-white border-white/30"
-                        : (categoryColor[flat.category] ?? "bg-slate-100 text-slate-500 border-slate-200")
-                    )}
-                  >
-                    {flat.category}
-                  </span>
-                </button>
+                  index={index}
+                  label={flat.widgets_label || flat.component_name}
+                  category={flat.category}
+                  isActive={isSelected}
+                  onClick={() => {
+                    setAllWidgetsSelectedId(flat.id);
+                    onSelectWidget(flat.page_id, resolvedWidgetId);
+                  }}
+                />
               );
             })}
           </div>
         )}
       </div>
-
-      {/* Footer */}
-      <div className="pt-2 mt-1.5 border-t border-slate-100 text-[10px] font-mono text-slate-400 flex items-center justify-between">
-        <span>Canonical Architecture</span>
-        <span className="text-cyan-600 font-semibold">Strapi v5</span>
-      </div>
-    </aside>
+    </Card>
   );
 }

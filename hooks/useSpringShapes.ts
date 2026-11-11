@@ -152,7 +152,12 @@ export function useSpringShapes(): SpringShapesRefs {
 
     const handlePointerMove = (e: PointerEvent) => {
       if (!ready) return;
-      if (e.clientX >= rL && e.clientX <= rR && e.clientY >= rT && e.clientY <= rB) {
+      if (
+        e.clientX >= rL &&
+        e.clientX <= rR &&
+        e.clientY >= rT &&
+        e.clientY <= rB
+      ) {
         lastPt = Date.now();
         idle = false;
         gx = e.clientX - rL;
@@ -203,7 +208,15 @@ export function useSpringShapes(): SpringShapesRefs {
         const near = ln < 100;
         const rt = hx > cx,
           bel = hy > cy;
-        const qm = near ? 1 : rt && !bel ? QD.tr : rt && bel ? QD.br : !rt && bel ? QD.bl : QD.tl;
+        const qm = near
+          ? 1
+          : rt && !bel
+            ? QD.tr
+            : rt && bel
+              ? QD.br
+              : !rt && bel
+                ? QD.bl
+                : QD.tl;
         const dd = near ? 720 : 600 * qm;
         tL.set(hx - dx * dd);
         tT.set(hy - dy * dd);
@@ -256,7 +269,10 @@ export function useSpringShapes(): SpringShapesRefs {
     return () => {
       clearTimeout(fadeTimeout);
       clearTimeout(readyTimeout);
-      window.removeEventListener("pointermove", handlePointerMove as EventListener);
+      window.removeEventListener(
+        "pointermove",
+        handlePointerMove as EventListener,
+      );
       window.removeEventListener("resize", init);
       cancelAnimationFrame(animationFrameId);
     };

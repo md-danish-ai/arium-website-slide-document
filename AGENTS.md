@@ -20,14 +20,15 @@ Every agent, developer, and automated assistant working on this repository MUST 
 - ✅ **ALWAYS USE** `@components/...` (e.g. `import { Badge } from "@components/ui/badge"`).
 
 ### Official Alias Mappings (configured in `tsconfig.json`):
-| Alias | Target Directory | Example Usage |
-| :--- | :--- | :--- |
-| `@components/*` | `./components/*` | `import { Badge } from "@components/ui/badge";` (MANDATORY: Never use `@/components/...`) |
-| `@ui/*` | `./components/ui/*` | `import { Button } from "@ui/button";` |
-| `@lib/*` | `./lib/*` | `import { cn } from "@lib/utils";` |
-| `@data/*` | `./data/*` | `import { PAGE_WIDGETS } from "@data/page.widget";` |
-| `@/types/*` | `./types/*` | `import { ChildWidget } from "@/types/widget.types";` |
-| `@public/*` | `./public/*` | Static assets resolution |
+
+| Alias           | Target Directory    | Example Usage                                                                             |
+| :-------------- | :------------------ | :---------------------------------------------------------------------------------------- |
+| `@components/*` | `./components/*`    | `import { Badge } from "@components/ui/badge";` (MANDATORY: Never use `@/components/...`) |
+| `@ui/*`         | `./components/ui/*` | `import { Button } from "@ui/button";`                                                    |
+| `@lib/*`        | `./lib/*`           | `import { cn } from "@lib/utils";`                                                        |
+| `@data/*`       | `./data/*`          | `import { PAGE_WIDGETS } from "@data/page.widget";`                                       |
+| `@/types/*`     | `./types/*`         | `import { ChildWidget } from "@/types/widget.types";`                                     |
+| `@public/*`     | `./public/*`        | Static assets resolution                                                                  |
 
 ---
 

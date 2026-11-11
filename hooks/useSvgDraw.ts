@@ -19,7 +19,7 @@ export interface SvgDrawOptions {
 // Animates SVG path drawing and fill on scroll enter/exit
 export function useSvgDraw<T extends HTMLElement = HTMLElement>(
   options: SvgDrawOptions = {},
-  externalRef?: RefObject<T | null>
+  externalRef?: RefObject<T | null>,
 ): RefObject<T | null> {
   const internalRef = useRef<T>(null);
   const containerRef = externalRef || internalRef;
@@ -93,7 +93,9 @@ export function useSvgDraw<T extends HTMLElement = HTMLElement>(
 
       const fillStart = (lastDelay + drawDuration + fillDelay) * 1000;
       const timer = setTimeout(() => {
-        const fillTargets = svg.querySelectorAll('path[data-circle="1"], path[data-fill="1"]');
+        const fillTargets = svg.querySelectorAll(
+          'path[data-circle="1"], path[data-fill="1"]',
+        );
         fillTargets.forEach((c) => {
           const el = c as SVGPathElement;
           el.style.transition = `fill ${fillDuration}s ease`;
@@ -121,7 +123,7 @@ export function useSvgDraw<T extends HTMLElement = HTMLElement>(
           }
         });
       },
-      { threshold }
+      { threshold },
     );
 
     svgs.forEach((svg) => observer.observe(svg));

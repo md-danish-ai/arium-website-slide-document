@@ -18,7 +18,8 @@ export function useParallax(pathname?: string) {
         const elCenter = rect.top + rect.height / 2;
         const viewCenter = window.innerHeight / 2;
         const offset = (elCenter - viewCenter) * SPEED;
-        (el as HTMLElement).style.backgroundPositionY = `calc(50% + ${offset}px)`;
+        (el as HTMLElement).style.backgroundPositionY =
+          `calc(50% + ${offset}px)`;
       });
     }
 

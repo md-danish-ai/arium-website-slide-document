@@ -1,6 +1,13 @@
 import { PAGE_WIDGETS } from "@data/page.widget";
 import { WIDGETS_LIST } from "@data/widget";
-import { ChildWidget, FlatWidget, PageWithWidgets } from "@/types/widget.types";
+import {
+  ChildWidget,
+  FlatWidget,
+  PageWithWidgets,
+  WidgetCategory,
+  WidgetPreviewImages,
+} from "@/types/widget.types";
+import type { BadgeProps } from "@components/ui/badge";
 
 export interface SelectedWidgetContext {
   widget: ChildWidget;
@@ -11,9 +18,25 @@ export interface SelectedWidgetContext {
 }
 
 /**
- * Maps component names and widget categories to authentic SVG graphics and preview layouts
+ * Shared mapping from widget category to Shadcn Badge variants.
  */
-export function getWidgetVisualMeta(widget: ChildWidget) {
+export const WIDGET_CATEGORY_BADGE_VARIANT: Record<
+  WidgetCategory,
+  NonNullable<BadgeProps["variant"]>
+> = {
+  hero: "glassCyan",
+  feature: "glassPurple",
+  content: "glassCyan",
+  stats: "glassEmerald",
+  cta: "glassAmber",
+  testimonials: "glassPurple",
+  flow: "glassViolet",
+  people: "glassCyan",
+  form: "glass",
+  shared: "glassCyan",
+};
+
+function resolveWidgetVisualBase(widget: ChildWidget) {
   const comp = widget.component_name;
   const key = widget.widget_key;
   const cat = widget.category;
@@ -119,7 +142,8 @@ export function getWidgetVisualMeta(widget: ChildWidget) {
       accentBadge: "STORYTELLER FLOW",
       layoutType: "timeline",
       badgeVariant: "purple" as const,
-      displayPattern: "Contiguous Radial Flow Container with Dynamic Step Nodes",
+      displayPattern:
+        "Contiguous Radial Flow Container with Dynamic Step Nodes",
     };
   }
 
@@ -147,22 +171,52 @@ export function getWidgetVisualMeta(widget: ChildWidget) {
 }
 
 /**
+ * Maps component names and widget categories to authentic SVG graphics, data-driven preview screenshots, and visual metadata.
+ */
+export function getWidgetVisualMeta(widget: ChildWidget) {
+  const base = resolveWidgetVisualBase(widget);
+  const matchingFlat = !widget.preview_images
+    ? WIDGETS_LIST.find(
+        (fw) =>
+          (fw.widget_key === widget.widget_key &&
+            fw.component_name === widget.component_name) ||
+          fw.id === widget.id,
+      )
+    : undefined;
+  const screenshots: WidgetPreviewImages | undefined =
+    widget.preview_images ?? matchingFlat?.preview_images;
+
+  return {
+    ...base,
+    screenshot: screenshots?.desktop,
+    screenshots,
+  };
+}
+
+/**
  * Computes all pages where a given widget or component is utilized across the whole platform
  */
 export function getWidgetUsageAcrossPages(
-  widget: ChildWidget
+  widget: ChildWidget,
 ): { id: string; title: string; label: string; route: string }[] {
-  const matchingPages: { id: string; title: string; label: string; route: string }[] = [];
+  const matchingPages: {
+    id: string;
+    title: string;
+    label: string;
+    route: string;
+  }[] = [];
   const seenIds = new Set<string>();
 
   // Check from WIDGETS_LIST used_in_pages if available
   const flat = WIDGETS_LIST.find(
-    (w) => w.widget_key === widget.widget_key || w.component_name === widget.component_name
+    (w) =>
+      w.widget_key === widget.widget_key ||
+      w.component_name === widget.component_name,
   );
   if (flat && Array.isArray(flat.used_in_pages)) {
     for (const pageSlug of flat.used_in_pages) {
       const pageMatch = PAGE_WIDGETS.find(
-        (p) => p.id === pageSlug || p.strapi_slug === pageSlug
+        (p) => p.id === pageSlug || p.strapi_slug === pageSlug,
       );
       if (pageMatch && !seenIds.has(pageMatch.id)) {
         seenIds.add(pageMatch.id);
@@ -183,7 +237,7 @@ export function getWidgetUsageAcrossPages(
       (cw) =>
         cw.widget_key === widget.widget_key ||
         cw.component_name === widget.component_name ||
-        (cw.fallback_key && cw.fallback_key === widget.fallback_key)
+        (cw.fallback_key && cw.fallback_key === widget.fallback_key),
     );
     if (hasWidget) {
       seenIds.add(page.id);
@@ -224,9 +278,9 @@ ${propsList
         p.includes("cards") || p.includes("items") || p.includes("stats")
           ? "any[]"
           : p.includes("image")
-          ? "string | { url: string; alt?: string }"
-          : "string"
-      };`
+            ? "string | { url: string; alt?: string }"
+            : "string"
+      };`,
   )
   .join("\n")}
   className?: string;
@@ -288,9 +342,9 @@ ${propsList
         p.includes("items")
           ? "Array<Record<string, unknown>>"
           : p.includes("image") || p.includes("icon")
-          ? "string | { url: string; alternativeText?: string }"
-          : "string"
-      };`
+            ? "string | { url: string; alternativeText?: string }"
+            : "string"
+      };`,
   )
   .join("\n")}
   /** Optional custom CSS classes */
@@ -359,4 +413,3 @@ ${propsList
     mapperCode,
   };
 }
-

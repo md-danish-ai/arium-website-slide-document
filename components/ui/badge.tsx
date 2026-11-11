@@ -23,6 +23,20 @@ const badgeVariants = cva(
         peach:
           "border-secondary-peach/30 bg-secondary-peach/10 text-orange-200",
         midnight: "border-midnight-lightest bg-midnight-lighter text-slate-300",
+        glass:
+          "border-slate-200/85 bg-white/85 backdrop-blur-md text-slate-600 shadow-xs",
+        glassCyan:
+          "border-cyan-200/80 bg-cyan-50/85 backdrop-blur-md text-cyan-700",
+        glassPurple:
+          "border-purple-200/80 bg-purple-50/85 backdrop-blur-md text-purple-700",
+        glassEmerald:
+          "border-emerald-200/80 bg-emerald-50/85 backdrop-blur-md text-emerald-700",
+        glassViolet:
+          "border-violet-200/80 bg-violet-50/85 backdrop-blur-md text-violet-700",
+        glassAmber:
+          "border-amber-200/80 bg-amber-50/85 backdrop-blur-md text-amber-700",
+        glassRose:
+          "border-rose-200/80 bg-rose-50/85 backdrop-blur-md text-rose-700",
       },
     },
     defaultVariants: {
