@@ -19,6 +19,7 @@ export interface PageSidebarProps {
   flatWidgets: FlatWidget[];
   selectedPageId: string;
   selectedWidgetId: string;
+  selectedWidgetKey?: string;
   onSelectWidget: (pageId: string, widgetId: string) => void;
   onSelectPage: (pageId: string) => void;
   mode?: SidebarMode;
@@ -38,6 +39,7 @@ export function PageSidebar({
   flatWidgets,
   selectedPageId,
   selectedWidgetId,
+  selectedWidgetKey,
   onSelectWidget,
   onSelectPage,
   mode,
@@ -55,6 +57,7 @@ export function PageSidebar({
     string | null
   >(null);
   const [prevSelectedPageId, setPrevSelectedPageId] = useState(selectedPageId);
+  const [prevMode, setPrevMode] = useState<SidebarMode>(activeMode);
 
   // Default: ONLY Home (defaultOpenPageId) is open; all other pages are closed
   const buildSingleOpenMap = (openPageId: string) => {
@@ -123,9 +126,10 @@ export function PageSidebar({
   }, []);
 
   // Keep ONLY the newly selected page open when navigated externally (e.g. Usage chips)
-  if (selectedPageId !== prevSelectedPageId) {
+  if (selectedPageId !== prevSelectedPageId || activeMode !== prevMode) {
     setPrevSelectedPageId(selectedPageId);
-    if (selectedPageId) {
+    setPrevMode(activeMode);
+    if (activeMode === "by-page" && selectedPageId) {
       setExpandedPages(buildSingleOpenMap(selectedPageId));
     }
   }
@@ -338,7 +342,9 @@ export function PageSidebar({
               );
               const resolvedWidgetId =
                 matchedChild?.id ?? flat.widget_key ?? flat.id;
-              const isSelected = allWidgetsSelectedId === flat.id;
+              const isSelected = selectedWidgetKey
+                ? flat.widget_key === selectedWidgetKey
+                : allWidgetsSelectedId === flat.id;
 
               return (
                 <SidebarWidgetItem

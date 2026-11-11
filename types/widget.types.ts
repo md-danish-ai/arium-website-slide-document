@@ -43,6 +43,8 @@ export interface WidgetUsagePage {
   matchingWidgetId?: string;
   matchingWidgetLabel?: string;
   matchingPosition?: number;
+  previewImages?: WidgetPreviewImages;
+  strapiImage?: PreviewImageSource;
 }
 
 /**

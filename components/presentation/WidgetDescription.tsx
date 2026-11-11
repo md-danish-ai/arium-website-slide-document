@@ -28,6 +28,7 @@ interface WidgetDescriptionProps {
   mode?: SidebarMode;
   onNavigateToPage: (pageId: string) => void;
   onSelectWidget?: (pageId: string, widgetId: string) => void;
+  onNavigateToUsage?: (pageId: string, widgetId?: string) => void;
 }
 
 interface DescriptionBgDrawWatermarkProps {
@@ -87,6 +88,7 @@ export function WidgetDescription({
   mode = "by-page",
   onNavigateToPage,
   onSelectWidget,
+  onNavigateToUsage,
 }: WidgetDescriptionProps) {
   const flatMeta =
     flatWidget ??
@@ -116,12 +118,18 @@ export function WidgetDescription({
   ];
 
   const handleUsageClick = (targetPage: WidgetUsagePage) => {
+    if (onNavigateToUsage) {
+      onNavigateToUsage(targetPage.id, targetPage.matchingWidgetId);
+      return;
+    }
     if (onSelectWidget && targetPage.matchingWidgetId) {
       onSelectWidget(targetPage.id, targetPage.matchingWidgetId);
       return;
     }
     onNavigateToPage(targetPage.id);
   };
+
+  const showUsageSection = mode === "all-widgets";
 
   return (
     <Card
@@ -140,14 +148,18 @@ export function WidgetDescription({
         {/* Breadcrumb & Strapi widget_key */}
         <div className="flex flex-wrap items-center justify-between gap-2 pb-2.5 border-b border-slate-200/60">
           <div className="min-w-0 flex items-center gap-1.5 text-xs font-medium">
-            <button
-              type="button"
-              onClick={() => onNavigateToPage(page.id)}
-              className="text-cyan-700 hover:text-cyan-600 hover:underline transition-colors font-semibold shrink-0"
-            >
-              {page.label}
-            </button>
-            <span className="text-slate-300">/</span>
+            {mode === "by-page" && (
+              <>
+                <button
+                  type="button"
+                  onClick={() => onNavigateToPage(page.id)}
+                  className="text-cyan-700 hover:text-cyan-600 hover:underline transition-colors font-semibold shrink-0"
+                >
+                  {page.label}
+                </button>
+                <span className="text-slate-300">/</span>
+              </>
+            )}
             <span className="text-slate-800 font-semibold truncate">
               {widget.widgets_label || widget.widget_key}
             </span>
@@ -205,37 +217,42 @@ export function WidgetDescription({
           </div>
         )}
 
-        <Separator className="bg-slate-200/60" />
+        {showUsageSection && (
+          <>
+            <Separator className="bg-slate-200/60" />
 
-        {/* Usage — Uniform Page Badges */}
-        <div className="space-y-2">
-          <div className="flex items-center justify-between">
-            <h4 className="text-[11px] font-bold text-slate-500 uppercase tracking-wider">
-              Usage — Where Widgets Are Used
-            </h4>
-            <Badge
-              variant="glass"
-              className="rounded-md text-[10px] font-mono px-2 py-0.5"
-            >
-              {usedInPages.length} {usedInPages.length === 1 ? "page" : "pages"}
-            </Badge>
-          </div>
+            {/* Usage — Uniform Page Badges */}
+            <div className="space-y-2">
+              <div className="flex items-center justify-between">
+                <h4 className="text-[11px] font-bold text-slate-500 uppercase tracking-wider">
+                  Usage — Where Widgets Are Used
+                </h4>
+                <Badge
+                  variant="glass"
+                  className="rounded-md text-[10px] font-mono px-2 py-0.5"
+                >
+                  {usedInPages.length}{" "}
+                  {usedInPages.length === 1 ? "page" : "pages"}
+                </Badge>
+              </div>
 
-          <div className="flex flex-wrap items-center gap-2">
-            {usedInPages.map((targetPage) => (
-              <button
-                key={targetPage.id}
-                type="button"
-                onClick={() => handleUsageClick(targetPage)}
-                className="group inline-flex items-center gap-1.5 rounded-md border border-slate-200/90 border-l-2 border-l-cyan-500/75 bg-slate-50/85 px-2.5 py-1 text-xs font-medium text-slate-700 shadow-[0_1px_2px_rgba(15,23,42,0.03)] transition-all duration-150 hover:border-cyan-400 hover:border-l-cyan-500 hover:bg-white hover:text-slate-900 hover:shadow-xs cursor-pointer"
-              >
-                <PanelTop className="w-3 h-3 text-slate-400 group-hover:text-cyan-600 transition-colors shrink-0" />
-                <span>{targetPage.label} Page</span>
-                <ArrowUpRight className="w-3 h-3 text-slate-300 group-hover:text-cyan-600 transition-colors shrink-0" />
-              </button>
-            ))}
-          </div>
-        </div>
+              <div className="flex flex-wrap items-center gap-2">
+                {usedInPages.map((targetPage) => (
+                  <button
+                    key={targetPage.id}
+                    type="button"
+                    onClick={() => handleUsageClick(targetPage)}
+                    className="group inline-flex items-center gap-1.5 rounded-md border border-slate-200/90 border-l-2 border-l-cyan-500/75 bg-slate-50/85 px-2.5 py-1 text-xs font-medium text-slate-700 shadow-[0_1px_2px_rgba(15,23,42,0.03)] transition-all duration-150 hover:border-cyan-400 hover:border-l-cyan-500 hover:bg-white hover:text-slate-900 hover:shadow-xs cursor-pointer"
+                  >
+                    <PanelTop className="w-3 h-3 text-slate-400 group-hover:text-cyan-600 transition-colors shrink-0" />
+                    <span>{targetPage.label} Page</span>
+                    <ArrowUpRight className="w-3 h-3 text-slate-300 group-hover:text-cyan-600 transition-colors shrink-0" />
+                  </button>
+                ))}
+              </div>
+            </div>
+          </>
+        )}
       </div>
     </Card>
   );

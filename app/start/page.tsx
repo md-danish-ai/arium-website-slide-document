@@ -2,7 +2,7 @@
 
 import React, { useState, useMemo, useCallback } from "react";
 import { PAGE_WIDGETS } from "@data/page.widget";
-import { WIDGETS_LIST } from "@data/widget";
+import { UNIQUE_WIDGETS_LIST, WIDGETS_LIST } from "@data/widget";
 import {
   ChildWidget,
   PageWithWidgets,
@@ -46,7 +46,7 @@ export default function StartPage() {
         position: 0,
         widget_key: "shared.main-hero",
         widgets_title: "Home Main Hero Banner",
-        widgets_label: "Hero Banner",
+        widgets_label: "Home Hero",
         category: "hero",
         description:
           "Full-bleed canvas hero displaying the primary value proposition, background video or image, and dual CTAs.",
@@ -104,6 +104,8 @@ export default function StartPage() {
           matchingWidgetId: matchingWidget.id,
           matchingWidgetLabel: matchingWidget.widgets_label,
           matchingPosition: matchingWidget.position,
+          previewImages: matchingWidget.preview_images,
+          strapiImage: matchingWidget.strapi_image,
         });
       }
     }
@@ -128,6 +130,8 @@ export default function StartPage() {
             matchingWidgetId: matchingWidget?.id,
             matchingWidgetLabel: matchingWidget?.widgets_label,
             matchingPosition: matchingWidget?.position,
+            previewImages: matchingWidget?.preview_images,
+            strapiImage: matchingWidget?.strapi_image,
           });
         }
       }
@@ -144,7 +148,15 @@ export default function StartPage() {
         matchingWidgetId: activeWidget.id,
         matchingWidgetLabel: activeWidget.widgets_label,
         matchingPosition: activeWidget.position,
+        previewImages: activeWidget.preview_images,
+        strapiImage: activeWidget.strapi_image,
       });
+    } else {
+      const activeIdx = pages.findIndex((p) => p.id === activePage.id);
+      if (activeIdx > 0) {
+        const [activeEntry] = pages.splice(activeIdx, 1);
+        pages.unshift(activeEntry);
+      }
     }
 
     return pages;
@@ -153,6 +165,19 @@ export default function StartPage() {
   const handleSelectWidget = useCallback((pageId: string, widgetId: string) => {
     setSelectedPageId(pageId);
     setSelectedWidgetId(widgetId);
+  }, []);
+
+  const handleSelectUsage = useCallback((pageId: string, widgetId?: string) => {
+    setSidebarMode("by-page");
+    setSelectedPageId(pageId);
+    if (widgetId) {
+      setSelectedWidgetId(widgetId);
+      return;
+    }
+    const targetPage = PAGE_WIDGETS.find((p) => p.id === pageId);
+    if (targetPage?.child_widgets && targetPage.child_widgets.length > 0) {
+      setSelectedWidgetId(targetPage.child_widgets[0].id);
+    }
   }, []);
 
   const handleSelectPage = useCallback((pageId: string) => {
@@ -171,7 +196,7 @@ export default function StartPage() {
   }, []);
 
   const totalPages = PAGE_WIDGETS.length;
-  const totalWidgets = WIDGETS_LIST.length;
+  const totalWidgets = UNIQUE_WIDGETS_LIST.length;
   const pageWidgetCount = activePage.child_widgets?.length ?? 0;
 
   return (
@@ -206,11 +231,12 @@ export default function StartPage() {
             <PageSidebar
               key={resetKey}
               pages={PAGE_WIDGETS}
-              flatWidgets={WIDGETS_LIST}
+              flatWidgets={UNIQUE_WIDGETS_LIST}
               mode={sidebarMode}
               onModeChange={setSidebarMode}
               selectedPageId={selectedPageId}
               selectedWidgetId={selectedWidgetId}
+              selectedWidgetKey={activeWidget.widget_key}
               defaultOpenPageId="home"
               onSelectWidget={handleSelectWidget}
               onSelectPage={handleSelectPage}
@@ -221,8 +247,10 @@ export default function StartPage() {
           <div className="lg:col-span-5 flex flex-col gap-3 min-h-0 overflow-y-auto lg:overflow-hidden">
             <div className="shrink-0">
               <WebsitePreviewCard
+                mode={sidebarMode}
                 widget={activeWidget}
                 page={activePage}
+                usagePages={usedInPages}
                 heightClass="h-56 md:h-60"
               />
             </div>
@@ -236,6 +264,7 @@ export default function StartPage() {
                 mode={sidebarMode}
                 onNavigateToPage={handleSelectPage}
                 onSelectWidget={handleSelectWidget}
+                onNavigateToUsage={handleSelectUsage}
               />
             </div>
           </div>
@@ -245,8 +274,10 @@ export default function StartPage() {
             {/* Blueprint — fixed/shrink height */}
             <div className="shrink-0">
               <WidgetBlueprintCard
+                mode={sidebarMode}
                 widget={activeWidget}
                 page={activePage}
+                usagePages={usedInPages}
                 heightClass="h-56 md:h-60"
               />
             </div>

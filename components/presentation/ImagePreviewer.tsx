@@ -43,6 +43,7 @@ export interface ImagePreviewerProps {
   alt: string;
   title?: string;
   subtitle?: string;
+  slideLabels?: string[];
   description?: string;
   tagText?: string;
   showViewportSwitcher?: boolean;
@@ -107,6 +108,7 @@ export function ImagePreviewer({
   alt,
   title = "Image Preview",
   subtitle,
+  slideLabels,
   description,
   tagText,
   showViewportSwitcher = true,
@@ -158,32 +160,35 @@ export function ImagePreviewer({
   };
 
   const cardImages = responsiveSrc?.desktop ? desktopImages : baseImages;
-  const cardSlideKey = responsiveSrc?.desktop
-    ? `desktop:${desktopImages.join("|")}`
-    : `card:${baseImages.join("|")}`;
+  const slideScopeKey =
+    slideLabels && slideLabels.length > 0
+      ? `labels:${slideLabels.join("|")}:${responsiveSrc?.desktop ? desktopImages.join("|") : baseImages.join("|")}`
+      : responsiveSrc?.desktop
+        ? `responsive:${desktopImages.join("|")}`
+        : `card:${baseImages.join("|")}`;
+
   const cardSlideIndex = wrapSlideIndex(
-    slideIndices[cardSlideKey] ?? 0,
+    slideIndices[slideScopeKey] ?? 0,
     cardImages.length,
   );
   const cardRawSrc = cardImages[cardSlideIndex] ?? src;
   const cardSrc = resolveSafeSrc(cardRawSrc);
 
-  const getViewportStateKey = (vp: PreviewViewport) =>
-    vp === "desktop" && !responsiveSrc?.desktop && images
-      ? `card:${baseImages.join("|")}`
-      : `${vp}:${viewportImagesByKey[vp].join("|")}`;
-
   const getViewportSlideIndex = (vp: PreviewViewport) =>
     wrapSlideIndex(
-      slideIndices[getViewportStateKey(vp)] ?? 0,
+      slideIndices[slideScopeKey] ?? 0,
       viewportImagesByKey[vp].length,
     );
 
   const activeModalImages = viewportImagesByKey[viewport];
-  const activeModalKey = getViewportStateKey(viewport);
   const activeModalIndex = getViewportSlideIndex(viewport);
   const activeModalRawSrc = activeModalImages[activeModalIndex] ?? src;
   const activeModalSrc = resolveSafeSrc(activeModalRawSrc);
+
+  const activeCardLabel = slideLabels?.[cardSlideIndex];
+  const resolvedCardSubtitle = activeCardLabel ?? subtitle;
+  const activeModalLabel = slideLabels?.[activeModalIndex];
+  const resolvedModalSubtitle = activeModalLabel ?? subtitle;
 
   const getSlideAnimClass = (key: string) => {
     const dir = slideDirections[key];
@@ -234,10 +239,10 @@ export function ImagePreviewer({
     if (activeModalImages.length <= 1 || modalContent) return;
     if (e.key === "ArrowLeft") {
       e.preventDefault();
-      stepSlide(activeModalKey, activeModalImages.length, -1);
+      stepSlide(slideScopeKey, activeModalImages.length, -1);
     } else if (e.key === "ArrowRight") {
       e.preventDefault();
-      stepSlide(activeModalKey, activeModalImages.length, 1);
+      stepSlide(slideScopeKey, activeModalImages.length, 1);
     }
   };
 
@@ -279,17 +284,17 @@ export function ImagePreviewer({
                   previewContent
                 ) : (
                   <div
-                    key={`${cardSlideKey}-${cardSlideIndex}`}
+                    key={`${slideScopeKey}-${cardSlideIndex}`}
                     className={cn(
                       "relative w-full h-full",
-                      getSlideAnimClass(cardSlideKey),
+                      getSlideAnimClass(slideScopeKey),
                     )}
                   >
                     <Image
                       src={cardSrc}
                       alt={
-                        cardImages.length > 1
-                          ? `${alt} (${cardSlideIndex + 1} of ${cardImages.length})`
+                        cardImages.length > 1 && activeCardLabel
+                          ? `${alt} — ${activeCardLabel}`
                           : alt
                       }
                       fill
@@ -313,7 +318,11 @@ export function ImagePreviewer({
                     className="px-3.5 py-1.5 rounded-xl bg-white/95 border-cyan-200 text-slate-800 shadow-md flex items-center gap-2 text-xs font-semibold group-hover:scale-105 transition-transform"
                   >
                     <Maximize2 className="w-3.5 h-3.5 text-cyan-600" />
-                    <span>{subtitle ? `${subtitle} / ${title}` : title}</span>
+                    <span>
+                      {resolvedCardSubtitle
+                        ? `${resolvedCardSubtitle} / ${title}`
+                        : title}
+                    </span>
                   </Badge>
                 </div>
               </div>
@@ -328,7 +337,7 @@ export function ImagePreviewer({
                 aria-label="Previous preview image"
                 onClick={(e) => {
                   e.stopPropagation();
-                  stepSlide(cardSlideKey, cardImages.length, -1);
+                  stepSlide(slideScopeKey, cardImages.length, -1);
                 }}
                 className="absolute left-2.5 top-1/2 -translate-y-1/2 z-30 w-8 h-8 rounded-full bg-white/95 backdrop-blur-md border border-slate-200/90 text-slate-700 shadow-md flex items-center justify-center opacity-85 md:opacity-0 md:group-hover:opacity-100 focus-visible:opacity-100 transition-all duration-150 hover:border-cyan-500 hover:text-cyan-700 hover:scale-105 active:scale-95 cursor-pointer"
               >
@@ -339,7 +348,7 @@ export function ImagePreviewer({
                 aria-label="Next preview image"
                 onClick={(e) => {
                   e.stopPropagation();
-                  stepSlide(cardSlideKey, cardImages.length, 1);
+                  stepSlide(slideScopeKey, cardImages.length, 1);
                 }}
                 className="absolute right-2.5 top-1/2 -translate-y-1/2 z-30 w-8 h-8 rounded-full bg-white/95 backdrop-blur-md border border-slate-200/90 text-slate-700 shadow-md flex items-center justify-center opacity-85 md:opacity-0 md:group-hover:opacity-100 focus-visible:opacity-100 transition-all duration-150 hover:border-cyan-500 hover:text-cyan-700 hover:scale-105 active:scale-95 cursor-pointer"
               >
@@ -348,16 +357,25 @@ export function ImagePreviewer({
 
               <div
                 onClick={(e) => e.stopPropagation()}
-                className="absolute bottom-2.5 right-2.5 z-30 inline-flex items-center gap-1.5 rounded-lg bg-white/95 backdrop-blur-md border border-slate-200/90 px-2 py-1 shadow-sm"
+                className="absolute bottom-2.5 right-2.5 z-30 inline-flex items-center gap-1.5 rounded-lg bg-white/95 backdrop-blur-md border border-slate-200/90 px-2.5 py-1 shadow-sm"
               >
+                {activeCardLabel && (
+                  <span className="text-[10px] font-semibold text-slate-700 pr-0.5 whitespace-nowrap">
+                    {activeCardLabel}
+                  </span>
+                )}
                 <div className="flex items-center gap-1">
                   {cardImages.map((_, idx) => (
                     <button
                       key={idx}
                       type="button"
-                      aria-label={`View image ${idx + 1} of ${cardImages.length}`}
+                      aria-label={
+                        slideLabels?.[idx]
+                          ? `View ${slideLabels[idx]} preview`
+                          : `View image ${idx + 1}`
+                      }
                       onClick={() =>
-                        setExactSlide(cardSlideKey, idx, cardImages.length)
+                        setExactSlide(slideScopeKey, idx, cardImages.length)
                       }
                       className={cn(
                         "h-1.5 rounded-full transition-all duration-150 cursor-pointer",
@@ -368,9 +386,6 @@ export function ImagePreviewer({
                     />
                   ))}
                 </div>
-                <span className="text-[10px] font-mono font-semibold text-slate-600 tabular-nums pl-0.5">
-                  {cardSlideIndex + 1}/{cardImages.length}
-                </span>
               </div>
             </>
           )}
@@ -379,7 +394,8 @@ export function ImagePreviewer({
           side="bottom"
           className="bg-white/95 backdrop-blur-md border-slate-200 text-slate-700 text-xs shadow-md"
         >
-          Click to preview {subtitle ? `${subtitle} / ${title}` : title}
+          Click to preview{" "}
+          {resolvedCardSubtitle ? `${resolvedCardSubtitle} / ${title}` : title}
         </TooltipContent>
       </Tooltip>
 
@@ -393,10 +409,10 @@ export function ImagePreviewer({
           <DialogHeader className="shrink-0 px-5 py-3.5 bg-white/95 backdrop-blur-md border-b border-slate-200/80 flex flex-row items-center justify-between gap-4 space-y-0 pr-12">
             <div className="min-w-0 flex items-center gap-2">
               <DialogTitle className="text-sm md:text-base font-bold text-slate-900 flex items-center gap-1.5 truncate">
-                {subtitle && (
+                {resolvedModalSubtitle && (
                   <>
                     <span className="text-slate-500 font-medium">
-                      {subtitle}
+                      {resolvedModalSubtitle}
                     </span>
                     <span className="text-slate-300">/</span>
                   </>
@@ -412,7 +428,8 @@ export function ImagePreviewer({
                 </Badge>
               )}
               <DialogDescription className="sr-only">
-                {description || `${subtitle ? `${subtitle} / ` : ""}${title}`}
+                {description ||
+                  `${resolvedModalSubtitle ? `${resolvedModalSubtitle} / ` : ""}${title}`}
               </DialogDescription>
             </div>
 
@@ -464,10 +481,10 @@ export function ImagePreviewer({
                 >
                   {isActiveModalSvg ? (
                     <div
-                      key={`${activeModalKey}-${activeModalIndex}`}
+                      key={`${slideScopeKey}-${activeModalIndex}`}
                       className={cn(
                         "relative w-full h-[65vh] min-h-[320px] max-h-[620px] flex items-center justify-center bg-white rounded-xl",
-                        getSlideAnimClass(activeModalKey),
+                        getSlideAnimClass(slideScopeKey),
                       )}
                     >
                       <Image
@@ -482,7 +499,6 @@ export function ImagePreviewer({
                     </div>
                   ) : (
                     VIEWPORT_OPTIONS.map(({ value }) => {
-                      const vpKey = getViewportStateKey(value);
                       const vpList = viewportImagesByKey[value];
                       const vpIdx = getViewportSlideIndex(value);
                       const rawSrc = vpList[vpIdx] ?? src;
@@ -500,7 +516,7 @@ export function ImagePreviewer({
                             isActive
                               ? cn(
                                   "relative z-10 w-full opacity-100 scale-100",
-                                  getSlideAnimClass(vpKey),
+                                  getSlideAnimClass(slideScopeKey),
                                 )
                               : "absolute inset-0 m-auto w-full h-full opacity-0 scale-[0.985] pointer-events-none",
                           )}
@@ -508,8 +524,8 @@ export function ImagePreviewer({
                           <Image
                             src={resolvedSrc}
                             alt={
-                              vpList.length > 1
-                                ? `${alt} — ${value} (${vpIdx + 1} of ${vpList.length})`
+                              vpList.length > 1 && slideLabels?.[vpIdx]
+                                ? `${alt} — ${value} (${slideLabels[vpIdx]})`
                                 : alt
                             }
                             width={1920}
@@ -545,7 +561,7 @@ export function ImagePreviewer({
                   type="button"
                   aria-label="Previous image"
                   onClick={() =>
-                    stepSlide(activeModalKey, activeModalImages.length, -1)
+                    stepSlide(slideScopeKey, activeModalImages.length, -1)
                   }
                   className="absolute left-3 md:left-4 top-1/2 -translate-y-1/2 z-30 w-9 h-9 md:w-10 md:h-10 rounded-full bg-white/95 backdrop-blur-md border border-slate-200/90 text-slate-700 shadow-lg flex items-center justify-center transition-all duration-150 hover:border-cyan-500 hover:text-cyan-700 hover:scale-105 active:scale-95 cursor-pointer"
                 >
@@ -555,7 +571,7 @@ export function ImagePreviewer({
                   type="button"
                   aria-label="Next image"
                   onClick={() =>
-                    stepSlide(activeModalKey, activeModalImages.length, 1)
+                    stepSlide(slideScopeKey, activeModalImages.length, 1)
                   }
                   className="absolute right-3 md:right-4 top-1/2 -translate-y-1/2 z-30 w-9 h-9 md:w-10 md:h-10 rounded-full bg-white/95 backdrop-blur-md border border-slate-200/90 text-slate-700 shadow-lg flex items-center justify-center transition-all duration-150 hover:border-cyan-500 hover:text-cyan-700 hover:scale-105 active:scale-95 cursor-pointer"
                 >
@@ -567,18 +583,20 @@ export function ImagePreviewer({
 
           {activeModalImages.length > 1 && !modalContent && (
             <div className="shrink-0 px-4 py-2.5 bg-white/95 backdrop-blur-md border-t border-slate-200/80 flex items-center justify-between gap-3">
-              <div className="flex items-center gap-2 text-xs text-slate-500 font-medium">
+              <div className="flex items-center gap-2 text-xs text-slate-500 font-medium min-w-[90px]">
                 {showViewportSwitcher && (
                   <span className="capitalize text-slate-700 font-semibold">
                     {viewport}
                   </span>
                 )}
-                {showViewportSwitcher && (
+                {showViewportSwitcher && resolvedModalSubtitle && (
                   <span className="text-slate-300">·</span>
                 )}
-                <span className="font-mono text-[11px] tabular-nums">
-                  Slide {activeModalIndex + 1} of {activeModalImages.length}
-                </span>
+                {resolvedModalSubtitle && (
+                  <span className="text-slate-700 font-medium truncate max-w-[180px]">
+                    {resolvedModalSubtitle}
+                  </span>
+                )}
               </div>
 
               <div className="flex items-center gap-1.5">
@@ -586,10 +604,14 @@ export function ImagePreviewer({
                   <button
                     key={idx}
                     type="button"
-                    aria-label={`Go to slide ${idx + 1}`}
+                    aria-label={
+                      slideLabels?.[idx]
+                        ? `Go to ${slideLabels[idx]} slide`
+                        : `Go to slide ${idx + 1}`
+                    }
                     onClick={() =>
                       setExactSlide(
-                        activeModalKey,
+                        slideScopeKey,
                         idx,
                         activeModalImages.length,
                       )
@@ -608,7 +630,7 @@ export function ImagePreviewer({
                 <button
                   type="button"
                   onClick={() =>
-                    stepSlide(activeModalKey, activeModalImages.length, -1)
+                    stepSlide(slideScopeKey, activeModalImages.length, -1)
                   }
                   className="inline-flex items-center gap-1 rounded-md border border-slate-200/90 bg-white px-2.5 py-1 text-xs font-medium text-slate-700 transition-colors hover:border-cyan-500 hover:text-cyan-700 cursor-pointer"
                 >
@@ -618,7 +640,7 @@ export function ImagePreviewer({
                 <button
                   type="button"
                   onClick={() =>
-                    stepSlide(activeModalKey, activeModalImages.length, 1)
+                    stepSlide(slideScopeKey, activeModalImages.length, 1)
                   }
                   className="inline-flex items-center gap-1 rounded-md border border-slate-200/90 bg-white px-2.5 py-1 text-xs font-medium text-slate-700 transition-colors hover:border-cyan-500 hover:text-cyan-700 cursor-pointer"
                 >

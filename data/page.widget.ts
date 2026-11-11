@@ -22,7 +22,7 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
         position: 0,
         widget_key: "shared.main-hero",
         widgets_title: "Home Main Hero Banner",
-        widgets_label: "Hero Banner",
+        widgets_label: "Home Hero",
         category: "hero",
         description:
           "Full-bleed hero canvas featuring spring-animated breathing vector shapes (shape-teal.svg, shape-white.svg), headline typography, and a scroll-down indicator.",
