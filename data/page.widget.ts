@@ -9,7 +9,7 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
   // ── 1. HOME PAGE ────────────────────────────────────────────────────────
   {
     id: "home",
-    title: "Home Page Architecture",
+    title: "Home Page",
     label: "Home",
     route: "/",
     strapi_slug: "home",
@@ -194,7 +194,7 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
   // ── 2. ABOUT PAGE ────────────────────────────────────────────────────────
   {
     id: "about",
-    title: "About Page Architecture",
+    title: "About Page",
     label: "About",
     route: "/about",
     strapi_slug: "about",
@@ -350,7 +350,7 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
   // ── 3. CAREERS PAGE ──────────────────────────────────────────────────────
   {
     id: "careers",
-    title: "Careers Page Architecture",
+    title: "Careers Page",
     label: "Careers",
     route: "/careers",
     strapi_slug: "careers",
@@ -495,7 +495,7 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
   // ── 4. COMMUNITY PAGE ────────────────────────────────────────────────────
   {
     id: "community",
-    title: "Community Page Architecture",
+    title: "Community Page",
     label: "Community",
     route: "/community",
     strapi_slug: "community",
@@ -648,7 +648,7 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
   // ── 5. SOLUTIONS PAGE ────────────────────────────────────────────────────
   {
     id: "solutions",
-    title: "Solutions Page Architecture",
+    title: "Solutions Page",
     label: "Solutions",
     route: "/solutions",
     strapi_slug: "solutions",
@@ -802,7 +802,7 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
   // ── 6. PRIVATE VENUES PAGE ───────────────────────────────────────────────
   {
     id: "private-venues",
-    title: "Private Venues Architecture",
+    title: "Private Venues",
     label: "Private Venues",
     route: "/private-venues",
     strapi_slug: "private-venues",
@@ -913,7 +913,7 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
   // ── 7. RIGHT OF WAYS PAGE ────────────────────────────────────────────────
   {
     id: "right-of-ways",
-    title: "Right of Ways Architecture",
+    title: "Right of Ways",
     label: "Right of Ways",
     route: "/right-of-ways",
     strapi_slug: "right-of-ways",
@@ -1024,7 +1024,7 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
   // ── 8. WHERE WE BUILD PAGE ───────────────────────────────────────────────
   {
     id: "where-we-build",
-    title: "Where We Build Architecture",
+    title: "Where We Build",
     label: "Where We Build",
     route: "/where-we-build",
     strapi_slug: "where-we-build",
@@ -1122,7 +1122,7 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
   // ── 9. LEADERSHIP PAGE ───────────────────────────────────────────────────
   {
     id: "leadership",
-    title: "Leadership Page Architecture",
+    title: "Leadership Page",
     label: "Leadership",
     route: "/leadership",
     strapi_slug: "leadership",
@@ -1206,7 +1206,7 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
   // ── 10. BOARD OF DIRECTORS PAGE ──────────────────────────────────────────
   {
     id: "board-of-directors",
-    title: "Board of Directors Architecture",
+    title: "Board of Directors",
     label: "Board of Directors",
     route: "/board-of-directors",
     strapi_slug: "board-of-directors",
@@ -1295,7 +1295,7 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
   // ── 11. CONTACT PAGE ─────────────────────────────────────────────────────
   {
     id: "contact",
-    title: "Contact Page Architecture",
+    title: "Contact Page",
     label: "Contact",
     route: "/contact",
     strapi_slug: "contact",
@@ -1351,7 +1351,7 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
   // ── 12. DYNAMIC STRAPI PAGE ──────────────────────────────────────────────
   {
     id: "dynamic-slug",
-    title: "Dynamic Strapi CMS Page Architecture",
+    title: "Dynamic Strapi CMS Page",
     label: "Dynamic [slug]",
     route: "/[slug]",
     strapi_slug: "[slug]",

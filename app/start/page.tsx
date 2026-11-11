@@ -9,6 +9,7 @@ import {
   WidgetUsagePage,
 } from "@/types/widget.types";
 import { StartHeader, PageSidebar } from "@components/navigation";
+import type { SidebarMode } from "@components/navigation/PageSidebar";
 import {
   WebsitePreviewCard,
   WidgetDescription,
@@ -17,6 +18,7 @@ import {
 } from "@components/presentation";
 
 export default function StartPage() {
+  const [sidebarMode, setSidebarMode] = useState<SidebarMode>("by-page");
   const [selectedPageId, setSelectedPageId] = useState<string>("home");
   const [selectedWidgetId, setSelectedWidgetId] = useState<string>("w-home-0");
   const [resetKey, setResetKey] = useState<number>(0);
@@ -162,6 +164,7 @@ export default function StartPage() {
   }, []);
 
   const handleReset = useCallback(() => {
+    setSidebarMode("by-page");
     setSelectedPageId("home");
     setSelectedWidgetId("w-home-0");
     setResetKey((prev) => prev + 1);
@@ -169,6 +172,7 @@ export default function StartPage() {
 
   const totalPages = PAGE_WIDGETS.length;
   const totalWidgets = WIDGETS_LIST.length;
+  const pageWidgetCount = activePage.child_widgets?.length ?? 0;
 
   return (
     <main className="relative w-screen h-screen bg-slate-50 text-slate-900 flex flex-col overflow-hidden font-body select-none">
@@ -182,10 +186,14 @@ export default function StartPage() {
       {/* HEADER */}
       <div className="relative z-10 shrink-0">
         <StartHeader
+          mode={sidebarMode}
           totalPages={totalPages}
           totalWidgets={totalWidgets}
-          activePageTitle={activePage.title}
-          activeWidgetTitle={activeWidget.widgets_title}
+          pageWidgetCount={pageWidgetCount}
+          activePageLabel={activePage.label}
+          activeWidgetName={
+            activeWidget.widgets_label || activeWidget.widgets_title
+          }
           onReset={handleReset}
         />
       </div>
@@ -199,6 +207,8 @@ export default function StartPage() {
               key={resetKey}
               pages={PAGE_WIDGETS}
               flatWidgets={WIDGETS_LIST}
+              mode={sidebarMode}
+              onModeChange={setSidebarMode}
               selectedPageId={selectedPageId}
               selectedWidgetId={selectedWidgetId}
               defaultOpenPageId="home"
@@ -223,6 +233,7 @@ export default function StartPage() {
                 page={activePage}
                 usedInPages={usedInPages}
                 flatWidget={activeFlatWidget}
+                mode={sidebarMode}
                 onNavigateToPage={handleSelectPage}
                 onSelectWidget={handleSelectWidget}
               />

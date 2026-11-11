@@ -3,7 +3,10 @@
 import React from "react";
 import { ChildWidget, PageWithWidgets } from "@/types/widget.types";
 import { WIDGETS_LIST } from "@data/widget";
-import { ImagePreviewer } from "@components/presentation/ImagePreviewer";
+import {
+  ImagePreviewer,
+  normalizeImageSource,
+} from "@components/presentation/ImagePreviewer";
 
 export type PreviewVariant = "browser" | "blueprint" | "media";
 
@@ -56,17 +59,21 @@ export function WebsitePreviewCard({
                 item.position === widget.position),
           ) ??
           WIDGETS_LIST.find((item) => item.widget_key === widget.widget_key);
-        const screenshots = widget.preview_images ?? flatMatch?.preview_images;
-        const strapiImage = widget.strapi_image ?? flatMatch?.strapi_image;
+        const screenshots = flatMatch?.preview_images ?? widget.preview_images;
+        const strapiImage = flatMatch?.strapi_image ?? widget.strapi_image;
         const svg =
           widget.category === "flow" ||
           widget.widget_key.includes("small-cells")
             ? "/assets/small-cells-illustration.svg"
             : "/assets/connection-globe.svg";
+        const desktopImages = normalizeImageSource(screenshots?.desktop);
+        const blueprintImages = normalizeImageSource(strapiImage);
         return {
           screenshots,
-          screenshot: screenshots?.desktop,
-          strapiImage,
+          desktopImages,
+          screenshot: desktopImages[0],
+          blueprintImages,
+          strapiImage: blueprintImages[0],
           svg,
         };
       })()
@@ -84,16 +91,21 @@ export function WebsitePreviewCard({
       ? "Widget Image"
       : widget?.widgets_label || widget?.widget_key || resolvedHeadline);
 
-  const resolvedPreviewImage =
-    variant === "blueprint"
-      ? (imageSrc ??
-        visualMeta?.strapiImage ??
-        visualMeta?.svg ??
-        "/assets/connection-globe.svg")
-      : (imageSrc ??
-        visualMeta?.screenshot ??
-        visualMeta?.svg ??
-        "/assets/connection-globe.svg");
+  const blueprintImages = imageSrc
+    ? [imageSrc]
+    : visualMeta?.blueprintImages?.length
+      ? visualMeta.blueprintImages
+      : [visualMeta?.svg ?? "/assets/connection-globe.svg"];
+
+  const browserImages = imageSrc
+    ? [imageSrc]
+    : visualMeta?.desktopImages?.length
+      ? visualMeta.desktopImages
+      : [visualMeta?.svg ?? "/assets/connection-globe.svg"];
+
+  const resolvedPreviewImages =
+    variant === "blueprint" ? blueprintImages : browserImages;
+  const resolvedPreviewImage = resolvedPreviewImages[0];
 
   const responsiveScreenshots =
     variant !== "blueprint" && !imageSrc ? visualMeta?.screenshots : undefined;
@@ -109,6 +121,9 @@ export function WebsitePreviewCard({
   return (
     <ImagePreviewer
       src={resolvedPreviewImage}
+      images={
+        variant === "blueprint" || imageSrc ? resolvedPreviewImages : undefined
+      }
       responsiveSrc={responsiveScreenshots}
       fallbackSrc="/assets/connection-globe.svg"
       alt={resolvedImageAlt}

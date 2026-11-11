@@ -251,6 +251,37 @@ body {
   animation: dialogPanelOut 200ms cubic-bezier(0.4, 0, 1, 1) forwards;
 }
 
+/* ── Directional Image Carousel Slide Transitions ── */
+@keyframes slidePreviewNext {
+  from {
+    opacity: 0.2;
+    transform: translate3d(28px, 0, 0) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes slidePreviewPrev {
+  from {
+    opacity: 0.2;
+    transform: translate3d(-28px, 0, 0) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+.preview-slide-next {
+  animation: slidePreviewNext 260ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.preview-slide-prev {
+  animation: slidePreviewPrev 260ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
 /* =========================================================
    SCROLL REVEAL, PARALLAX, TIMELINE & SVG DRAW TRANSITIONS
    ========================================================= */
@@ -306,6 +337,11 @@ body {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .preview-slide-next,
+  .preview-slide-prev {
+    animation: none;
+  }
+
   .reveal,
   .reveal-left,
   .reveal-right,

@@ -17,10 +17,12 @@ export type WidgetCategory =
 export type PageCategory =
   "Corporate" | "Solutions" | "Operations" | "Team" | "Dynamic";
 
+export type PreviewImageSource = string | string[];
+
 export interface WidgetPreviewImages {
-  desktop: string;
-  tablet?: string;
-  mobile?: string;
+  desktop: PreviewImageSource;
+  tablet?: PreviewImageSource;
+  mobile?: PreviewImageSource;
 }
 
 export interface StrapiWidgetPayload {
@@ -56,7 +58,7 @@ export interface ChildWidget {
   description: string;
   key_props?: string[];
   preview_images?: WidgetPreviewImages;
-  strapi_image?: string;
+  strapi_image?: PreviewImageSource;
   widgets_response?: WidgetResponseSchema;
 }
 
@@ -92,7 +94,7 @@ export interface FlatWidget {
   fallback_key?: string;
   key_props?: string[];
   preview_images?: WidgetPreviewImages;
-  strapi_image?: string;
+  strapi_image?: PreviewImageSource;
   widgets_response: WidgetResponseSchema;
   used_in_pages: string[];
 }

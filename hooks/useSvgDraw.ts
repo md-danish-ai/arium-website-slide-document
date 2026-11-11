@@ -43,12 +43,21 @@ export function useSvgDraw<T extends HTMLElement = HTMLElement>(
     const svgs = root.querySelectorAll(selector);
     if (!svgs.length) return;
 
-    const timerMap = new Map<Element, NodeJS.Timeout[]>();
+    const timerMap = new Map<Element, ReturnType<typeof setTimeout>[]>();
+    const rafMap = new Map<Element, number[]>();
 
-    const resetSvg = (svg: Element) => {
+    const clearSvgAsync = (svg: Element) => {
       const activeTimers = timerMap.get(svg) || [];
       activeTimers.forEach((t) => clearTimeout(t));
       timerMap.set(svg, []);
+
+      const activeRafs = rafMap.get(svg) || [];
+      activeRafs.forEach((id) => cancelAnimationFrame(id));
+      rafMap.set(svg, []);
+    };
+
+    const resetSvg = (svg: Element) => {
+      clearSvgAsync(svg);
 
       const paths = svg.querySelectorAll("path[data-i]");
       for (let p = 0; p < paths.length; p++) {
@@ -64,6 +73,7 @@ export function useSvgDraw<T extends HTMLElement = HTMLElement>(
         path.style.strokeWidth = strokeW;
         path.style.strokeDasharray = len.toString();
         path.style.strokeDashoffset = len.toString();
+        void path.getBoundingClientRect();
       }
     };
 
@@ -75,6 +85,7 @@ export function useSvgDraw<T extends HTMLElement = HTMLElement>(
     }
 
     const animate = (svg: Element) => {
+      clearSvgAsync(svg);
       const paths = svg.querySelectorAll("path[data-i]");
       for (let j = 0; j < paths.length; j++) {
         const p = paths[j] as SVGPathElement;
@@ -82,30 +93,42 @@ export function useSvgDraw<T extends HTMLElement = HTMLElement>(
       }
 
       const stagger = paths.length > 1 ? totalSpread / (paths.length - 1) : 0;
-      let lastDelay = 0;
-      for (let k = 0; k < paths.length; k++) {
-        const p2 = paths[k] as SVGPathElement;
-        const delay = k * stagger;
-        p2.style.transition = `stroke-dashoffset ${drawDuration}s ease ${delay}s`;
-        p2.style.strokeDashoffset = "0";
-        lastDelay = delay;
-      }
+      const lastDelay = paths.length > 1 ? totalSpread : 0;
 
-      const fillStart = (lastDelay + drawDuration + fillDelay) * 1000;
-      const timer = setTimeout(() => {
-        const fillTargets = svg.querySelectorAll(
-          'path[data-circle="1"], path[data-fill="1"]',
-        );
-        fillTargets.forEach((c) => {
-          const el = c as SVGPathElement;
-          el.style.transition = `fill ${fillDuration}s ease`;
-          el.style.fill = fillColor || color;
+      const raf1 = requestAnimationFrame(() => {
+        const raf2 = requestAnimationFrame(() => {
+          for (let k = 0; k < paths.length; k++) {
+            const p2 = paths[k] as SVGPathElement;
+            const delay = k * stagger;
+            p2.style.transition = `stroke-dashoffset ${drawDuration}s ease ${delay}s`;
+            p2.style.strokeDashoffset = "0";
+          }
+
+          const fillStart = (lastDelay + drawDuration + fillDelay) * 1000;
+          const timer = setTimeout(() => {
+            const fillTargets = svg.querySelectorAll(
+              'path[data-circle="1"], path[data-fill="1"]',
+            );
+            fillTargets.forEach((c) => {
+              const el = c as SVGPathElement;
+              el.style.transition = `fill ${fillDuration}s ease`;
+              el.style.fill = fillColor || color;
+            });
+          }, fillStart);
+
+          const currentTimers = timerMap.get(svg) || [];
+          currentTimers.push(timer);
+          timerMap.set(svg, currentTimers);
         });
-      }, fillStart);
 
-      const currentTimers = timerMap.get(svg) || [];
-      currentTimers.push(timer);
-      timerMap.set(svg, currentTimers);
+        const currentRafs = rafMap.get(svg) || [];
+        currentRafs.push(raf2);
+        rafMap.set(svg, currentRafs);
+      });
+
+      const currentRafs = rafMap.get(svg) || [];
+      currentRafs.push(raf1);
+      rafMap.set(svg, currentRafs);
     };
 
     const observer = new IntersectionObserver(
@@ -132,6 +155,8 @@ export function useSvgDraw<T extends HTMLElement = HTMLElement>(
       observer.disconnect();
       timerMap.forEach((timers) => timers.forEach((t) => clearTimeout(t)));
       timerMap.clear();
+      rafMap.forEach((rafs) => rafs.forEach((id) => cancelAnimationFrame(id)));
+      rafMap.clear();
     };
   }, [
     containerRef,

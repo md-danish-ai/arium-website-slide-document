@@ -31,9 +31,21 @@ export const WIDGETS_LIST: FlatWidget[] = [
       "scroll_text",
     ],
     preview_images: {
-      desktop: "/images/home/home-hero/home-hero.png",
-      tablet: "/images/home/home-hero/home-hero-tablet.png",
-      mobile: "/images/home/home-hero/home-hero-mobile.png",
+      desktop: [
+        "/images/home/home-hero/home-hero.png",
+        "/images/home/home-hero/home-hero.png",
+        "/images/home/home-hero/home-hero.png",
+      ],
+      tablet: [
+        "/images/home/home-hero/home-hero-tablet.png",
+        "/images/home/home-hero/home-hero-tablet.png",
+        "/images/home/home-hero/home-hero-tablet.png",
+      ],
+      mobile: [
+        "/images/home/home-hero/home-hero-mobile.png",
+        "/images/home/home-hero/home-hero-mobile.png",
+        "/images/home/home-hero/home-hero-mobile.png",
+      ],
     },
     strapi_image: "/images/strapi-widgets/home/home-hero.png",
     widgets_response: WIDGETS_RESPONSES["shared.main-hero"],
@@ -65,9 +77,21 @@ export const WIDGETS_LIST: FlatWidget[] = [
       "feature_cards",
     ],
     preview_images: {
-      desktop: "/images/home/background-feature/background-feature.png",
-      tablet: "/images/home/background-feature/background-feature-tablet.png",
-      mobile: "/images/home/background-feature/background-feature-mobile.png",
+      desktop: [
+        "/images/home/background-feature/background-feature.png",
+        "/images/home/background-feature/background-feature.png",
+        "/images/home/background-feature/background-feature.png",
+      ],
+      tablet: [
+        "/images/home/background-feature/background-feature-tablet.png",
+        "/images/home/background-feature/background-feature-tablet.png",
+        "/images/home/background-feature/background-feature-tablet.png",
+      ],
+      mobile: [
+        "/images/home/background-feature/background-feature-mobile.png",
+        "/images/home/background-feature/background-feature-mobile.png",
+        "/images/home/background-feature/background-feature-mobile.png",
+      ],
     },
     strapi_image: "/images/strapi-widgets/home/background-feature.png",
     widgets_response: WIDGETS_RESPONSES["shared.background-feature-section"],
@@ -89,9 +113,21 @@ export const WIDGETS_LIST: FlatWidget[] = [
     fallback_key: "detailed-card-grid",
     key_props: ["title", "description", "background_color", "panel_cards"],
     preview_images: {
-      desktop: "/images/home/detailed-card-grid/detailed-card-grid.png",
-      tablet: "/images/home/detailed-card-grid/detailed-card-grid-tablet.png",
-      mobile: "/images/home/detailed-card-grid/detailed-card-grid-mobile.png",
+      desktop: [
+        "/images/home/detailed-card-grid/detailed-card-grid.png",
+        "/images/home/detailed-card-grid/detailed-card-grid.png",
+        "/images/home/detailed-card-grid/detailed-card-grid.png",
+      ],
+      tablet: [
+        "/images/home/detailed-card-grid/detailed-card-grid-tablet.png",
+        "/images/home/detailed-card-grid/detailed-card-grid-tablet.png",
+        "/images/home/detailed-card-grid/detailed-card-grid-tablet.png",
+      ],
+      mobile: [
+        "/images/home/detailed-card-grid/detailed-card-grid-mobile.png",
+        "/images/home/detailed-card-grid/detailed-card-grid-mobile.png",
+        "/images/home/detailed-card-grid/detailed-card-grid-mobile.png",
+      ],
     },
     strapi_image: "/images/strapi-widgets/home/detailed-card-grid.png",
     widgets_response: WIDGETS_RESPONSES["shared.detailed-card-grid"],
@@ -113,9 +149,21 @@ export const WIDGETS_LIST: FlatWidget[] = [
     fallback_key: "stats-with-image",
     key_props: ["title", "title_color", "stat_illustration", "stats_card"],
     preview_images: {
-      desktop: "/images/home/stats-with-image/stats-with-image.png",
-      tablet: "/images/home/stats-with-image/stats-with-image-tablet.png",
-      mobile: "/images/home/stats-with-image/stats-with-image-mobile.png",
+      desktop: [
+        "/images/home/stats-with-image/stats-with-image.png",
+        "/images/home/stats-with-image/stats-with-image.png",
+        "/images/home/stats-with-image/stats-with-image.png",
+      ],
+      tablet: [
+        "/images/home/stats-with-image/stats-with-image-tablet.png",
+        "/images/home/stats-with-image/stats-with-image-tablet.png",
+        "/images/home/stats-with-image/stats-with-image-tablet.png",
+      ],
+      mobile: [
+        "/images/home/stats-with-image/stats-with-image-mobile.png",
+        "/images/home/stats-with-image/stats-with-image-mobile.png",
+        "/images/home/stats-with-image/stats-with-image-mobile.png",
+      ],
     },
     strapi_image: "/images/strapi-widgets/home/stats-with-image.png",
     widgets_response: WIDGETS_RESPONSES["shared.stats-with-image"],
@@ -147,11 +195,21 @@ export const WIDGETS_LIST: FlatWidget[] = [
       "CTA_url",
     ],
     preview_images: {
-      desktop: "/images/home/image-gradient-split/image-gradient-split.png",
-      tablet:
+      desktop: [
+        "/images/home/image-gradient-split/image-gradient-split.png",
+        "/images/home/image-gradient-split/image-gradient-split.png",
+        "/images/home/image-gradient-split/image-gradient-split.png",
+      ],
+      tablet: [
         "/images/home/image-gradient-split/image-gradient-split-tablet.png",
-      mobile:
+        "/images/home/image-gradient-split/image-gradient-split-tablet.png",
+        "/images/home/image-gradient-split/image-gradient-split-tablet.png",
+      ],
+      mobile: [
         "/images/home/image-gradient-split/image-gradient-split-mobile.png",
+        "/images/home/image-gradient-split/image-gradient-split-mobile.png",
+        "/images/home/image-gradient-split/image-gradient-split-mobile.png",
+      ],
     },
     strapi_image: "/images/strapi-widgets/home/image-gradient-split.png",
     widgets_response: WIDGETS_RESPONSES["shared.image-gradient-split"],
@@ -181,9 +239,21 @@ export const WIDGETS_LIST: FlatWidget[] = [
       "CTA_url",
     ],
     preview_images: {
-      desktop: "/images/home/centered-image-cta/centered-image-cta.png",
-      tablet: "/images/home/centered-image-cta/centered-image-cta-tablet.png",
-      mobile: "/images/home/centered-image-cta/centered-image-cta-mobile.png",
+      desktop: [
+        "/images/home/centered-image-cta/centered-image-cta.png",
+        "/images/home/centered-image-cta/centered-image-cta.png",
+        "/images/home/centered-image-cta/centered-image-cta.png",
+      ],
+      tablet: [
+        "/images/home/centered-image-cta/centered-image-cta-tablet.png",
+        "/images/home/centered-image-cta/centered-image-cta-tablet.png",
+        "/images/home/centered-image-cta/centered-image-cta-tablet.png",
+      ],
+      mobile: [
+        "/images/home/centered-image-cta/centered-image-cta-mobile.png",
+        "/images/home/centered-image-cta/centered-image-cta-mobile.png",
+        "/images/home/centered-image-cta/centered-image-cta-mobile.png",
+      ],
     },
     strapi_image: "/images/strapi-widgets/home/centered-image-cta.png",
     widgets_response: WIDGETS_RESPONSES["shared.centered-image-cta"],
@@ -215,9 +285,21 @@ export const WIDGETS_LIST: FlatWidget[] = [
       "background_color",
     ],
     preview_images: {
-      desktop: "/images/home/cta-with-graphic/cta-with-graphic.png",
-      tablet: "/images/home/cta-with-graphic/cta-with-graphic-tablet.png",
-      mobile: "/images/home/cta-with-graphic/cta-with-graphic-mobile.png",
+      desktop: [
+        "/images/home/cta-with-graphic/cta-with-graphic.png",
+        "/images/home/cta-with-graphic/cta-with-graphic.png",
+        "/images/home/cta-with-graphic/cta-with-graphic.png",
+      ],
+      tablet: [
+        "/images/home/cta-with-graphic/cta-with-graphic-tablet.png",
+        "/images/home/cta-with-graphic/cta-with-graphic-tablet.png",
+        "/images/home/cta-with-graphic/cta-with-graphic-tablet.png",
+      ],
+      mobile: [
+        "/images/home/cta-with-graphic/cta-with-graphic-mobile.png",
+        "/images/home/cta-with-graphic/cta-with-graphic-mobile.png",
+        "/images/home/cta-with-graphic/cta-with-graphic-mobile.png",
+      ],
     },
     strapi_image: "/images/strapi-widgets/home/cta-with-graphic.png",
     widgets_response: WIDGETS_RESPONSES["shared.cta-with-graphic"],
@@ -250,9 +332,21 @@ export const WIDGETS_LIST: FlatWidget[] = [
       "max_width_description",
     ],
     preview_images: {
-      desktop: "/images/about/hero-banner/hero-banner.png",
-      tablet: "/images/about/hero-banner/hero-banner-tablet.png",
-      mobile: "/images/about/hero-banner/hero-banner-mobile.png",
+      desktop: [
+        "/images/about/hero-banner/hero-banner.png",
+        "/images/about/hero-banner/hero-banner.png",
+        "/images/about/hero-banner/hero-banner.png",
+      ],
+      tablet: [
+        "/images/about/hero-banner/hero-banner-tablet.png",
+        "/images/about/hero-banner/hero-banner-tablet.png",
+        "/images/about/hero-banner/hero-banner-tablet.png",
+      ],
+      mobile: [
+        "/images/about/hero-banner/hero-banner-mobile.png",
+        "/images/about/hero-banner/hero-banner-mobile.png",
+        "/images/about/hero-banner/hero-banner-mobile.png",
+      ],
     },
     strapi_image: "/images/strapi-widgets/about/hero-banner.png",
     widgets_response: WIDGETS_RESPONSES["shared.hero-banner--about"],
@@ -288,12 +382,21 @@ export const WIDGETS_LIST: FlatWidget[] = [
       "image",
     ],
     preview_images: {
-      desktop:
+      desktop: [
         "/images/about/content-with-side-graphic/content-with-side-graphic.png",
-      tablet:
+        "/images/about/content-with-side-graphic/content-with-side-graphic.png",
+        "/images/about/content-with-side-graphic/content-with-side-graphic.png",
+      ],
+      tablet: [
         "/images/about/content-with-side-graphic/content-with-side-graphic-tablet.png",
-      mobile:
+        "/images/about/content-with-side-graphic/content-with-side-graphic-tablet.png",
+        "/images/about/content-with-side-graphic/content-with-side-graphic-tablet.png",
+      ],
+      mobile: [
         "/images/about/content-with-side-graphic/content-with-side-graphic-mobile.png",
+        "/images/about/content-with-side-graphic/content-with-side-graphic-mobile.png",
+        "/images/about/content-with-side-graphic/content-with-side-graphic-mobile.png",
+      ],
     },
     strapi_image: "/images/strapi-widgets/about/content-with-side-graphic.png",
     widgets_response: WIDGETS_RESPONSES["shared.content-with-side-graphic"],
@@ -315,9 +418,21 @@ export const WIDGETS_LIST: FlatWidget[] = [
     fallback_key: "storyteller-flow",
     key_props: ["title", "description", "timeline_cards"],
     preview_images: {
-      desktop: "/images/about/journey-timeline/journey-timeline.png",
-      tablet: "/images/about/journey-timeline/journey-timeline-tablet.png",
-      mobile: "/images/about/journey-timeline/journey-timeline-mobile.png",
+      desktop: [
+        "/images/about/journey-timeline/journey-timeline.png",
+        "/images/about/journey-timeline/journey-timeline.png",
+        "/images/about/journey-timeline/journey-timeline.png",
+      ],
+      tablet: [
+        "/images/about/journey-timeline/journey-timeline-tablet.png",
+        "/images/about/journey-timeline/journey-timeline-tablet.png",
+        "/images/about/journey-timeline/journey-timeline-tablet.png",
+      ],
+      mobile: [
+        "/images/about/journey-timeline/journey-timeline-mobile.png",
+        "/images/about/journey-timeline/journey-timeline-mobile.png",
+        "/images/about/journey-timeline/journey-timeline-mobile.png",
+      ],
     },
     strapi_image: "/images/strapi-widgets/about/journey-timeline.png",
     widgets_response: WIDGETS_RESPONSES["shared.timeline"],
@@ -339,9 +454,21 @@ export const WIDGETS_LIST: FlatWidget[] = [
     fallback_key: "storyteller-flow",
     key_props: ["title", "description", "cards"],
     preview_images: {
-      desktop: "/images/about/stats-cards/stats-cards.png",
-      tablet: "/images/about/stats-cards/stats-cards-tablet.png",
-      mobile: "/images/about/stats-cards/stats-cards-mobile.png",
+      desktop: [
+        "/images/about/stats-cards/stats-cards.png",
+        "/images/about/stats-cards/stats-cards.png",
+        "/images/about/stats-cards/stats-cards.png",
+      ],
+      tablet: [
+        "/images/about/stats-cards/stats-cards-tablet.png",
+        "/images/about/stats-cards/stats-cards-tablet.png",
+        "/images/about/stats-cards/stats-cards-tablet.png",
+      ],
+      mobile: [
+        "/images/about/stats-cards/stats-cards-mobile.png",
+        "/images/about/stats-cards/stats-cards-mobile.png",
+        "/images/about/stats-cards/stats-cards-mobile.png",
+      ],
     },
     strapi_image: "/images/strapi-widgets/about/stats-cards.png",
     widgets_response: WIDGETS_RESPONSES["shared.stats-cards"],
@@ -370,9 +497,21 @@ export const WIDGETS_LIST: FlatWidget[] = [
       "commitment_cards",
     ],
     preview_images: {
-      desktop: "/images/about/commitments/commitments.png",
-      tablet: "/images/about/commitments/commitments-tablet.png",
-      mobile: "/images/about/commitments/commitments-mobile.png",
+      desktop: [
+        "/images/about/commitments/commitments.png",
+        "/images/about/commitments/commitments.png",
+        "/images/about/commitments/commitments.png",
+      ],
+      tablet: [
+        "/images/about/commitments/commitments-tablet.png",
+        "/images/about/commitments/commitments-tablet.png",
+        "/images/about/commitments/commitments-tablet.png",
+      ],
+      mobile: [
+        "/images/about/commitments/commitments-mobile.png",
+        "/images/about/commitments/commitments-mobile.png",
+        "/images/about/commitments/commitments-mobile.png",
+      ],
     },
     strapi_image: "/images/strapi-widgets/about/commitments.png",
     widgets_response: WIDGETS_RESPONSES["shared.commitments"],
@@ -404,11 +543,21 @@ export const WIDGETS_LIST: FlatWidget[] = [
       "CTA_url",
     ],
     preview_images: {
-      desktop: "/images/about/image-gradient-split/image-gradient-split.png",
-      tablet:
+      desktop: [
+        "/images/about/image-gradient-split/image-gradient-split.png",
+        "/images/about/image-gradient-split/image-gradient-split.png",
+        "/images/about/image-gradient-split/image-gradient-split.png",
+      ],
+      tablet: [
         "/images/about/image-gradient-split/image-gradient-split-tablet.png",
-      mobile:
+        "/images/about/image-gradient-split/image-gradient-split-tablet.png",
+        "/images/about/image-gradient-split/image-gradient-split-tablet.png",
+      ],
+      mobile: [
         "/images/about/image-gradient-split/image-gradient-split-mobile.png",
+        "/images/about/image-gradient-split/image-gradient-split-mobile.png",
+        "/images/about/image-gradient-split/image-gradient-split-mobile.png",
+      ],
     },
     strapi_image: "/images/strapi-widgets/about/image-gradient-split.png",
     widgets_response: WIDGETS_RESPONSES["shared.image-gradient-split--about"],
@@ -441,9 +590,21 @@ export const WIDGETS_LIST: FlatWidget[] = [
       "max_width_description",
     ],
     preview_images: {
-      desktop: "/images/careers/hero-banner/hero-banner.png",
-      tablet: "/images/careers/hero-banner/hero-banner-tablet.png",
-      mobile: "/images/careers/hero-banner/hero-banner-mobile.png",
+      desktop: [
+        "/images/careers/hero-banner/hero-banner.png",
+        "/images/careers/hero-banner/hero-banner.png",
+        "/images/careers/hero-banner/hero-banner.png",
+      ],
+      tablet: [
+        "/images/careers/hero-banner/hero-banner-tablet.png",
+        "/images/careers/hero-banner/hero-banner-tablet.png",
+        "/images/careers/hero-banner/hero-banner-tablet.png",
+      ],
+      mobile: [
+        "/images/careers/hero-banner/hero-banner-mobile.png",
+        "/images/careers/hero-banner/hero-banner-mobile.png",
+        "/images/careers/hero-banner/hero-banner-mobile.png",
+      ],
     },
     strapi_image: "/images/strapi-widgets/careers/hero-banner.png",
     widgets_response: WIDGETS_RESPONSES["shared.hero-banner--careers"],
@@ -480,9 +641,21 @@ export const WIDGETS_LIST: FlatWidget[] = [
       "accordian_cards",
     ],
     preview_images: {
-      desktop: "/images/careers/culture-accordion/culture-accordion.png",
-      tablet: "/images/careers/culture-accordion/culture-accordion-tablet.png",
-      mobile: "/images/careers/culture-accordion/culture-accordion-mobile.png",
+      desktop: [
+        "/images/careers/culture-accordion/culture-accordion.png",
+        "/images/careers/culture-accordion/culture-accordion.png",
+        "/images/careers/culture-accordion/culture-accordion.png",
+      ],
+      tablet: [
+        "/images/careers/culture-accordion/culture-accordion-tablet.png",
+        "/images/careers/culture-accordion/culture-accordion-tablet.png",
+        "/images/careers/culture-accordion/culture-accordion-tablet.png",
+      ],
+      mobile: [
+        "/images/careers/culture-accordion/culture-accordion-mobile.png",
+        "/images/careers/culture-accordion/culture-accordion-mobile.png",
+        "/images/careers/culture-accordion/culture-accordion-mobile.png",
+      ],
     },
     strapi_image: "/images/strapi-widgets/careers/culture-accordion.png",
     widgets_response: WIDGETS_RESPONSES["shared.accordion-split"],
@@ -504,11 +677,21 @@ export const WIDGETS_LIST: FlatWidget[] = [
     fallback_key: "gloabl-testimonails",
     key_props: ["title", "cards"],
     preview_images: {
-      desktop: "/images/careers/global-testimonials/global-testimonials.png",
-      tablet:
+      desktop: [
+        "/images/careers/global-testimonials/global-testimonials.png",
+        "/images/careers/global-testimonials/global-testimonials.png",
+        "/images/careers/global-testimonials/global-testimonials.png",
+      ],
+      tablet: [
         "/images/careers/global-testimonials/global-testimonials-tablet.png",
-      mobile:
+        "/images/careers/global-testimonials/global-testimonials-tablet.png",
+        "/images/careers/global-testimonials/global-testimonials-tablet.png",
+      ],
+      mobile: [
         "/images/careers/global-testimonials/global-testimonials-mobile.png",
+        "/images/careers/global-testimonials/global-testimonials-mobile.png",
+        "/images/careers/global-testimonials/global-testimonials-mobile.png",
+      ],
     },
     strapi_image: "/images/strapi-widgets/careers/global-testimonials.png",
     widgets_response: WIDGETS_RESPONSES["shared.gloabl-testimonails--careers"],
@@ -537,9 +720,21 @@ export const WIDGETS_LIST: FlatWidget[] = [
       "items",
     ],
     preview_images: {
-      desktop: "/images/careers/job-areas/job-areas.png",
-      tablet: "/images/careers/job-areas/job-areas-tablet.png",
-      mobile: "/images/careers/job-areas/job-areas-mobile.png",
+      desktop: [
+        "/images/careers/job-areas/job-areas.png",
+        "/images/careers/job-areas/job-areas.png",
+        "/images/careers/job-areas/job-areas.png",
+      ],
+      tablet: [
+        "/images/careers/job-areas/job-areas-tablet.png",
+        "/images/careers/job-areas/job-areas-tablet.png",
+        "/images/careers/job-areas/job-areas-tablet.png",
+      ],
+      mobile: [
+        "/images/careers/job-areas/job-areas-mobile.png",
+        "/images/careers/job-areas/job-areas-mobile.png",
+        "/images/careers/job-areas/job-areas-mobile.png",
+      ],
     },
     strapi_image: "/images/strapi-widgets/careers/job-areas.png",
     widgets_response: WIDGETS_RESPONSES["shared.highlight-list"],
@@ -561,9 +756,21 @@ export const WIDGETS_LIST: FlatWidget[] = [
     fallback_key: "benefits",
     key_props: ["title", "description", "cards", "bottom_message"],
     preview_images: {
-      desktop: "/images/careers/benefits-grid/benefits-grid.png",
-      tablet: "/images/careers/benefits-grid/benefits-grid-tablet.png",
-      mobile: "/images/careers/benefits-grid/benefits-grid-mobile.png",
+      desktop: [
+        "/images/careers/benefits-grid/benefits-grid.png",
+        "/images/careers/benefits-grid/benefits-grid.png",
+        "/images/careers/benefits-grid/benefits-grid.png",
+      ],
+      tablet: [
+        "/images/careers/benefits-grid/benefits-grid-tablet.png",
+        "/images/careers/benefits-grid/benefits-grid-tablet.png",
+        "/images/careers/benefits-grid/benefits-grid-tablet.png",
+      ],
+      mobile: [
+        "/images/careers/benefits-grid/benefits-grid-mobile.png",
+        "/images/careers/benefits-grid/benefits-grid-mobile.png",
+        "/images/careers/benefits-grid/benefits-grid-mobile.png",
+      ],
     },
     strapi_image: "/images/strapi-widgets/careers/benefits-grid.png",
     widgets_response: WIDGETS_RESPONSES["shared.benefits"],
@@ -585,9 +792,21 @@ export const WIDGETS_LIST: FlatWidget[] = [
     fallback_key: "eeo",
     key_props: ["bottom_message", "statementText", "contentHtml"],
     preview_images: {
-      desktop: "/images/careers/eeo-statement/eeo-statement.png",
-      tablet: "/images/careers/eeo-statement/eeo-statement-tablet.png",
-      mobile: "/images/careers/eeo-statement/eeo-statement-mobile.png",
+      desktop: [
+        "/images/careers/eeo-statement/eeo-statement.png",
+        "/images/careers/eeo-statement/eeo-statement.png",
+        "/images/careers/eeo-statement/eeo-statement.png",
+      ],
+      tablet: [
+        "/images/careers/eeo-statement/eeo-statement-tablet.png",
+        "/images/careers/eeo-statement/eeo-statement-tablet.png",
+        "/images/careers/eeo-statement/eeo-statement-tablet.png",
+      ],
+      mobile: [
+        "/images/careers/eeo-statement/eeo-statement-mobile.png",
+        "/images/careers/eeo-statement/eeo-statement-mobile.png",
+        "/images/careers/eeo-statement/eeo-statement-mobile.png",
+      ],
     },
     strapi_image: "/images/strapi-widgets/careers/eeo-statement.png",
     widgets_response: WIDGETS_RESPONSES["shared.eeo"],
@@ -620,9 +839,21 @@ export const WIDGETS_LIST: FlatWidget[] = [
       "max_width_description",
     ],
     preview_images: {
-      desktop: "/images/community/hero-banner/hero-banner.png",
-      tablet: "/images/community/hero-banner/hero-banner-tablet.png",
-      mobile: "/images/community/hero-banner/hero-banner-mobile.png",
+      desktop: [
+        "/images/community/hero-banner/hero-banner.png",
+        "/images/community/hero-banner/hero-banner.png",
+        "/images/community/hero-banner/hero-banner.png",
+      ],
+      tablet: [
+        "/images/community/hero-banner/hero-banner-tablet.png",
+        "/images/community/hero-banner/hero-banner-tablet.png",
+        "/images/community/hero-banner/hero-banner-tablet.png",
+      ],
+      mobile: [
+        "/images/community/hero-banner/hero-banner-mobile.png",
+        "/images/community/hero-banner/hero-banner-mobile.png",
+        "/images/community/hero-banner/hero-banner-mobile.png",
+      ],
     },
     strapi_image: "/images/strapi-widgets/community/hero-banner.png",
     widgets_response: WIDGETS_RESPONSES["shared.hero-banner--community"],
@@ -661,11 +892,21 @@ export const WIDGETS_LIST: FlatWidget[] = [
       "background",
     ],
     preview_images: {
-      desktop: "/images/community/illustration-split/illustration-split.png",
-      tablet:
+      desktop: [
+        "/images/community/illustration-split/illustration-split.png",
+        "/images/community/illustration-split/illustration-split.png",
+        "/images/community/illustration-split/illustration-split.png",
+      ],
+      tablet: [
         "/images/community/illustration-split/illustration-split-tablet.png",
-      mobile:
+        "/images/community/illustration-split/illustration-split-tablet.png",
+        "/images/community/illustration-split/illustration-split-tablet.png",
+      ],
+      mobile: [
         "/images/community/illustration-split/illustration-split-mobile.png",
+        "/images/community/illustration-split/illustration-split-mobile.png",
+        "/images/community/illustration-split/illustration-split-mobile.png",
+      ],
     },
     strapi_image: "/images/strapi-widgets/community/illustration-split.png",
     widgets_response: WIDGETS_RESPONSES["shared.illustration-split"],
@@ -687,9 +928,21 @@ export const WIDGETS_LIST: FlatWidget[] = [
     fallback_key: "image-card-grid",
     key_props: ["title", "title_color", "cards"],
     preview_images: {
-      desktop: "/images/community/image-card-grid/image-card-grid.png",
-      tablet: "/images/community/image-card-grid/image-card-grid-tablet.png",
-      mobile: "/images/community/image-card-grid/image-card-grid-mobile.png",
+      desktop: [
+        "/images/community/image-card-grid/image-card-grid.png",
+        "/images/community/image-card-grid/image-card-grid.png",
+        "/images/community/image-card-grid/image-card-grid.png",
+      ],
+      tablet: [
+        "/images/community/image-card-grid/image-card-grid-tablet.png",
+        "/images/community/image-card-grid/image-card-grid-tablet.png",
+        "/images/community/image-card-grid/image-card-grid-tablet.png",
+      ],
+      mobile: [
+        "/images/community/image-card-grid/image-card-grid-mobile.png",
+        "/images/community/image-card-grid/image-card-grid-mobile.png",
+        "/images/community/image-card-grid/image-card-grid-mobile.png",
+      ],
     },
     strapi_image: "/images/strapi-widgets/community/image-card-grid.png",
     widgets_response: WIDGETS_RESPONSES["shared.image-card-grid"],
@@ -720,9 +973,21 @@ export const WIDGETS_LIST: FlatWidget[] = [
       "background_image_mobile",
     ],
     preview_images: {
-      desktop: "/images/community/how-we-work/how-we-work.png",
-      tablet: "/images/community/how-we-work/how-we-work-tablet.png",
-      mobile: "/images/community/how-we-work/how-we-work-mobile.png",
+      desktop: [
+        "/images/community/how-we-work/how-we-work.png",
+        "/images/community/how-we-work/how-we-work.png",
+        "/images/community/how-we-work/how-we-work.png",
+      ],
+      tablet: [
+        "/images/community/how-we-work/how-we-work-tablet.png",
+        "/images/community/how-we-work/how-we-work-tablet.png",
+        "/images/community/how-we-work/how-we-work-tablet.png",
+      ],
+      mobile: [
+        "/images/community/how-we-work/how-we-work-mobile.png",
+        "/images/community/how-we-work/how-we-work-mobile.png",
+        "/images/community/how-we-work/how-we-work-mobile.png",
+      ],
     },
     strapi_image: "/images/strapi-widgets/community/how-we-work.png",
     widgets_response:
@@ -745,11 +1010,21 @@ export const WIDGETS_LIST: FlatWidget[] = [
     fallback_key: "gloabl-testimonails",
     key_props: ["title", "cards"],
     preview_images: {
-      desktop: "/images/community/global-testimonials/global-testimonials.png",
-      tablet:
+      desktop: [
+        "/images/community/global-testimonials/global-testimonials.png",
+        "/images/community/global-testimonials/global-testimonials.png",
+        "/images/community/global-testimonials/global-testimonials.png",
+      ],
+      tablet: [
         "/images/community/global-testimonials/global-testimonials-tablet.png",
-      mobile:
+        "/images/community/global-testimonials/global-testimonials-tablet.png",
+        "/images/community/global-testimonials/global-testimonials-tablet.png",
+      ],
+      mobile: [
         "/images/community/global-testimonials/global-testimonials-mobile.png",
+        "/images/community/global-testimonials/global-testimonials-mobile.png",
+        "/images/community/global-testimonials/global-testimonials-mobile.png",
+      ],
     },
     strapi_image: "/images/strapi-widgets/community/global-testimonials.png",
     widgets_response:
@@ -772,9 +1047,21 @@ export const WIDGETS_LIST: FlatWidget[] = [
     fallback_key: "faq",
     key_props: ["title", "title_color", "faq_data"],
     preview_images: {
-      desktop: "/images/community/faq-accordion/faq-accordion.png",
-      tablet: "/images/community/faq-accordion/faq-accordion-tablet.png",
-      mobile: "/images/community/faq-accordion/faq-accordion-mobile.png",
+      desktop: [
+        "/images/community/faq-accordion/faq-accordion.png",
+        "/images/community/faq-accordion/faq-accordion.png",
+        "/images/community/faq-accordion/faq-accordion.png",
+      ],
+      tablet: [
+        "/images/community/faq-accordion/faq-accordion-tablet.png",
+        "/images/community/faq-accordion/faq-accordion-tablet.png",
+        "/images/community/faq-accordion/faq-accordion-tablet.png",
+      ],
+      mobile: [
+        "/images/community/faq-accordion/faq-accordion-mobile.png",
+        "/images/community/faq-accordion/faq-accordion-mobile.png",
+        "/images/community/faq-accordion/faq-accordion-mobile.png",
+      ],
     },
     strapi_image: "/images/strapi-widgets/community/faq-accordion.png",
     widgets_response: WIDGETS_RESPONSES["shared.faq"],
@@ -807,9 +1094,21 @@ export const WIDGETS_LIST: FlatWidget[] = [
       "max_width_description",
     ],
     preview_images: {
-      desktop: "/images/solutions/hero-banner/hero-banner.png",
-      tablet: "/images/solutions/hero-banner/hero-banner-tablet.png",
-      mobile: "/images/solutions/hero-banner/hero-banner-mobile.png",
+      desktop: [
+        "/images/solutions/hero-banner/hero-banner.png",
+        "/images/solutions/hero-banner/hero-banner.png",
+        "/images/solutions/hero-banner/hero-banner.png",
+      ],
+      tablet: [
+        "/images/solutions/hero-banner/hero-banner-tablet.png",
+        "/images/solutions/hero-banner/hero-banner-tablet.png",
+        "/images/solutions/hero-banner/hero-banner-tablet.png",
+      ],
+      mobile: [
+        "/images/solutions/hero-banner/hero-banner-mobile.png",
+        "/images/solutions/hero-banner/hero-banner-mobile.png",
+        "/images/solutions/hero-banner/hero-banner-mobile.png",
+      ],
     },
     strapi_image: "/images/strapi-widgets/solutions/hero-banner.png",
     widgets_response: WIDGETS_RESPONSES["shared.hero-banner--solutions"],
@@ -848,11 +1147,21 @@ export const WIDGETS_LIST: FlatWidget[] = [
       "background",
     ],
     preview_images: {
-      desktop: "/images/solutions/small-cells-split/small-cells-split.png",
-      tablet:
+      desktop: [
+        "/images/solutions/small-cells-split/small-cells-split.png",
+        "/images/solutions/small-cells-split/small-cells-split.png",
+        "/images/solutions/small-cells-split/small-cells-split.png",
+      ],
+      tablet: [
         "/images/solutions/small-cells-split/small-cells-split-tablet.png",
-      mobile:
+        "/images/solutions/small-cells-split/small-cells-split-tablet.png",
+        "/images/solutions/small-cells-split/small-cells-split-tablet.png",
+      ],
+      mobile: [
         "/images/solutions/small-cells-split/small-cells-split-mobile.png",
+        "/images/solutions/small-cells-split/small-cells-split-mobile.png",
+        "/images/solutions/small-cells-split/small-cells-split-mobile.png",
+      ],
     },
     strapi_image: "/images/strapi-widgets/solutions/small-cells-split.png",
     widgets_response: WIDGETS_RESPONSES["shared.small-cells"],
@@ -884,9 +1193,21 @@ export const WIDGETS_LIST: FlatWidget[] = [
       "background",
     ],
     preview_images: {
-      desktop: "/images/solutions/das-split/das-split.png",
-      tablet: "/images/solutions/das-split/das-split-tablet.png",
-      mobile: "/images/solutions/das-split/das-split-mobile.png",
+      desktop: [
+        "/images/solutions/das-split/das-split.png",
+        "/images/solutions/das-split/das-split.png",
+        "/images/solutions/das-split/das-split.png",
+      ],
+      tablet: [
+        "/images/solutions/das-split/das-split-tablet.png",
+        "/images/solutions/das-split/das-split-tablet.png",
+        "/images/solutions/das-split/das-split-tablet.png",
+      ],
+      mobile: [
+        "/images/solutions/das-split/das-split-mobile.png",
+        "/images/solutions/das-split/das-split-mobile.png",
+        "/images/solutions/das-split/das-split-mobile.png",
+      ],
     },
     strapi_image: "/images/strapi-widgets/solutions/das-split.png",
     widgets_response: WIDGETS_RESPONSES["shared.das"],
@@ -916,12 +1237,21 @@ export const WIDGETS_LIST: FlatWidget[] = [
       "accordian_cards",
     ],
     preview_images: {
-      desktop:
+      desktop: [
         "/images/solutions/industries-accordion/industries-accordion.png",
-      tablet:
+        "/images/solutions/industries-accordion/industries-accordion.png",
+        "/images/solutions/industries-accordion/industries-accordion.png",
+      ],
+      tablet: [
         "/images/solutions/industries-accordion/industries-accordion-tablet.png",
-      mobile:
+        "/images/solutions/industries-accordion/industries-accordion-tablet.png",
+        "/images/solutions/industries-accordion/industries-accordion-tablet.png",
+      ],
+      mobile: [
         "/images/solutions/industries-accordion/industries-accordion-mobile.png",
+        "/images/solutions/industries-accordion/industries-accordion-mobile.png",
+        "/images/solutions/industries-accordion/industries-accordion-mobile.png",
+      ],
     },
     strapi_image: "/images/strapi-widgets/solutions/industries-accordion.png",
     widgets_response: WIDGETS_RESPONSES["shared.industry"],
@@ -953,9 +1283,21 @@ export const WIDGETS_LIST: FlatWidget[] = [
       "background_color",
     ],
     preview_images: {
-      desktop: "/images/solutions/cta-with-graphic/cta-with-graphic.png",
-      tablet: "/images/solutions/cta-with-graphic/cta-with-graphic-tablet.png",
-      mobile: "/images/solutions/cta-with-graphic/cta-with-graphic-mobile.png",
+      desktop: [
+        "/images/solutions/cta-with-graphic/cta-with-graphic.png",
+        "/images/solutions/cta-with-graphic/cta-with-graphic.png",
+        "/images/solutions/cta-with-graphic/cta-with-graphic.png",
+      ],
+      tablet: [
+        "/images/solutions/cta-with-graphic/cta-with-graphic-tablet.png",
+        "/images/solutions/cta-with-graphic/cta-with-graphic-tablet.png",
+        "/images/solutions/cta-with-graphic/cta-with-graphic-tablet.png",
+      ],
+      mobile: [
+        "/images/solutions/cta-with-graphic/cta-with-graphic-mobile.png",
+        "/images/solutions/cta-with-graphic/cta-with-graphic-mobile.png",
+        "/images/solutions/cta-with-graphic/cta-with-graphic-mobile.png",
+      ],
     },
     strapi_image: "/images/strapi-widgets/solutions/cta-with-graphic.png",
     widgets_response: WIDGETS_RESPONSES["shared.cta-with-graphic--solutions"],
@@ -987,9 +1329,21 @@ export const WIDGETS_LIST: FlatWidget[] = [
       "content_max_width",
     ],
     preview_images: {
-      desktop: "/images/private-venues/sub-page-hero/sub-page-hero.png",
-      tablet: "/images/private-venues/sub-page-hero/sub-page-hero-tablet.png",
-      mobile: "/images/private-venues/sub-page-hero/sub-page-hero-mobile.png",
+      desktop: [
+        "/images/private-venues/sub-page-hero/sub-page-hero.png",
+        "/images/private-venues/sub-page-hero/sub-page-hero.png",
+        "/images/private-venues/sub-page-hero/sub-page-hero.png",
+      ],
+      tablet: [
+        "/images/private-venues/sub-page-hero/sub-page-hero-tablet.png",
+        "/images/private-venues/sub-page-hero/sub-page-hero-tablet.png",
+        "/images/private-venues/sub-page-hero/sub-page-hero-tablet.png",
+      ],
+      mobile: [
+        "/images/private-venues/sub-page-hero/sub-page-hero-mobile.png",
+        "/images/private-venues/sub-page-hero/sub-page-hero-mobile.png",
+        "/images/private-venues/sub-page-hero/sub-page-hero-mobile.png",
+      ],
     },
     strapi_image: "/images/strapi-widgets/private-venues/sub-page-hero.png",
     widgets_response: WIDGETS_RESPONSES["shared.sub-page-hero--private-venues"],
@@ -1023,11 +1377,21 @@ export const WIDGETS_LIST: FlatWidget[] = [
       "maxWidthTitle",
     ],
     preview_images: {
-      desktop: "/images/private-venues/process-section/process-section.png",
-      tablet:
+      desktop: [
+        "/images/private-venues/process-section/process-section.png",
+        "/images/private-venues/process-section/process-section.png",
+        "/images/private-venues/process-section/process-section.png",
+      ],
+      tablet: [
         "/images/private-venues/process-section/process-section-tablet.png",
-      mobile:
+        "/images/private-venues/process-section/process-section-tablet.png",
+        "/images/private-venues/process-section/process-section-tablet.png",
+      ],
+      mobile: [
         "/images/private-venues/process-section/process-section-mobile.png",
+        "/images/private-venues/process-section/process-section-mobile.png",
+        "/images/private-venues/process-section/process-section-mobile.png",
+      ],
     },
     strapi_image: "/images/strapi-widgets/private-venues/process-section.png",
     widgets_response: WIDGETS_RESPONSES["shared.process--private-venues"],
@@ -1049,12 +1413,21 @@ export const WIDGETS_LIST: FlatWidget[] = [
     fallback_key: "gloabl-testimonails",
     key_props: ["title", "cards"],
     preview_images: {
-      desktop:
+      desktop: [
         "/images/private-venues/global-testimonials/global-testimonials.png",
-      tablet:
+        "/images/private-venues/global-testimonials/global-testimonials.png",
+        "/images/private-venues/global-testimonials/global-testimonials.png",
+      ],
+      tablet: [
         "/images/private-venues/global-testimonials/global-testimonials-tablet.png",
-      mobile:
+        "/images/private-venues/global-testimonials/global-testimonials-tablet.png",
+        "/images/private-venues/global-testimonials/global-testimonials-tablet.png",
+      ],
+      mobile: [
         "/images/private-venues/global-testimonials/global-testimonials-mobile.png",
+        "/images/private-venues/global-testimonials/global-testimonials-mobile.png",
+        "/images/private-venues/global-testimonials/global-testimonials-mobile.png",
+      ],
     },
     strapi_image:
       "/images/strapi-widgets/private-venues/global-testimonials.png",
@@ -1084,9 +1457,21 @@ export const WIDGETS_LIST: FlatWidget[] = [
       "globe_illustration",
     ],
     preview_images: {
-      desktop: "/images/private-venues/sub-page-cta/sub-page-cta.png",
-      tablet: "/images/private-venues/sub-page-cta/sub-page-cta-tablet.png",
-      mobile: "/images/private-venues/sub-page-cta/sub-page-cta-mobile.png",
+      desktop: [
+        "/images/private-venues/sub-page-cta/sub-page-cta.png",
+        "/images/private-venues/sub-page-cta/sub-page-cta.png",
+        "/images/private-venues/sub-page-cta/sub-page-cta.png",
+      ],
+      tablet: [
+        "/images/private-venues/sub-page-cta/sub-page-cta-tablet.png",
+        "/images/private-venues/sub-page-cta/sub-page-cta-tablet.png",
+        "/images/private-venues/sub-page-cta/sub-page-cta-tablet.png",
+      ],
+      mobile: [
+        "/images/private-venues/sub-page-cta/sub-page-cta-mobile.png",
+        "/images/private-venues/sub-page-cta/sub-page-cta-mobile.png",
+        "/images/private-venues/sub-page-cta/sub-page-cta-mobile.png",
+      ],
     },
     strapi_image: "/images/strapi-widgets/private-venues/sub-page-cta.png",
     widgets_response: WIDGETS_RESPONSES["shared.global-cta--private-venues"],
@@ -1123,9 +1508,21 @@ export const WIDGETS_LIST: FlatWidget[] = [
       "content_max_width",
     ],
     preview_images: {
-      desktop: "/images/right-of-ways/sub-page-hero/sub-page-hero.png",
-      tablet: "/images/right-of-ways/sub-page-hero/sub-page-hero-tablet.png",
-      mobile: "/images/right-of-ways/sub-page-hero/sub-page-hero-mobile.png",
+      desktop: [
+        "/images/right-of-ways/sub-page-hero/sub-page-hero.png",
+        "/images/right-of-ways/sub-page-hero/sub-page-hero.png",
+        "/images/right-of-ways/sub-page-hero/sub-page-hero.png",
+      ],
+      tablet: [
+        "/images/right-of-ways/sub-page-hero/sub-page-hero-tablet.png",
+        "/images/right-of-ways/sub-page-hero/sub-page-hero-tablet.png",
+        "/images/right-of-ways/sub-page-hero/sub-page-hero-tablet.png",
+      ],
+      mobile: [
+        "/images/right-of-ways/sub-page-hero/sub-page-hero-mobile.png",
+        "/images/right-of-ways/sub-page-hero/sub-page-hero-mobile.png",
+        "/images/right-of-ways/sub-page-hero/sub-page-hero-mobile.png",
+      ],
     },
     strapi_image: "/images/strapi-widgets/right-of-ways/sub-page-hero.png",
     widgets_response: WIDGETS_RESPONSES["shared.sub-page-hero--right-of-ways"],
@@ -1159,11 +1556,21 @@ export const WIDGETS_LIST: FlatWidget[] = [
       "maxWidthTitle",
     ],
     preview_images: {
-      desktop: "/images/right-of-ways/process-section/process-section.png",
-      tablet:
+      desktop: [
+        "/images/right-of-ways/process-section/process-section.png",
+        "/images/right-of-ways/process-section/process-section.png",
+        "/images/right-of-ways/process-section/process-section.png",
+      ],
+      tablet: [
         "/images/right-of-ways/process-section/process-section-tablet.png",
-      mobile:
+        "/images/right-of-ways/process-section/process-section-tablet.png",
+        "/images/right-of-ways/process-section/process-section-tablet.png",
+      ],
+      mobile: [
         "/images/right-of-ways/process-section/process-section-mobile.png",
+        "/images/right-of-ways/process-section/process-section-mobile.png",
+        "/images/right-of-ways/process-section/process-section-mobile.png",
+      ],
     },
     strapi_image: "/images/strapi-widgets/right-of-ways/process-section.png",
     widgets_response: WIDGETS_RESPONSES["shared.process--right-of-ways"],
@@ -1185,12 +1592,21 @@ export const WIDGETS_LIST: FlatWidget[] = [
     fallback_key: "gloabl-testimonails",
     key_props: ["title", "cards"],
     preview_images: {
-      desktop:
+      desktop: [
         "/images/right-of-ways/global-testimonials/global-testimonials.png",
-      tablet:
+        "/images/right-of-ways/global-testimonials/global-testimonials.png",
+        "/images/right-of-ways/global-testimonials/global-testimonials.png",
+      ],
+      tablet: [
         "/images/right-of-ways/global-testimonials/global-testimonials-tablet.png",
-      mobile:
+        "/images/right-of-ways/global-testimonials/global-testimonials-tablet.png",
+        "/images/right-of-ways/global-testimonials/global-testimonials-tablet.png",
+      ],
+      mobile: [
         "/images/right-of-ways/global-testimonials/global-testimonials-mobile.png",
+        "/images/right-of-ways/global-testimonials/global-testimonials-mobile.png",
+        "/images/right-of-ways/global-testimonials/global-testimonials-mobile.png",
+      ],
     },
     strapi_image:
       "/images/strapi-widgets/right-of-ways/global-testimonials.png",
@@ -1220,9 +1636,21 @@ export const WIDGETS_LIST: FlatWidget[] = [
       "globe_illustration",
     ],
     preview_images: {
-      desktop: "/images/right-of-ways/sub-page-cta/sub-page-cta.png",
-      tablet: "/images/right-of-ways/sub-page-cta/sub-page-cta-tablet.png",
-      mobile: "/images/right-of-ways/sub-page-cta/sub-page-cta-mobile.png",
+      desktop: [
+        "/images/right-of-ways/sub-page-cta/sub-page-cta.png",
+        "/images/right-of-ways/sub-page-cta/sub-page-cta.png",
+        "/images/right-of-ways/sub-page-cta/sub-page-cta.png",
+      ],
+      tablet: [
+        "/images/right-of-ways/sub-page-cta/sub-page-cta-tablet.png",
+        "/images/right-of-ways/sub-page-cta/sub-page-cta-tablet.png",
+        "/images/right-of-ways/sub-page-cta/sub-page-cta-tablet.png",
+      ],
+      mobile: [
+        "/images/right-of-ways/sub-page-cta/sub-page-cta-mobile.png",
+        "/images/right-of-ways/sub-page-cta/sub-page-cta-mobile.png",
+        "/images/right-of-ways/sub-page-cta/sub-page-cta-mobile.png",
+      ],
     },
     strapi_image: "/images/strapi-widgets/right-of-ways/sub-page-cta.png",
     widgets_response: WIDGETS_RESPONSES["shared.global-cta--right-of-ways"],
@@ -1260,9 +1688,21 @@ export const WIDGETS_LIST: FlatWidget[] = [
       "max_width_description",
     ],
     preview_images: {
-      desktop: "/images/where-we-build/hero-banner/hero-banner.png",
-      tablet: "/images/where-we-build/hero-banner/hero-banner-tablet.png",
-      mobile: "/images/where-we-build/hero-banner/hero-banner-mobile.png",
+      desktop: [
+        "/images/where-we-build/hero-banner/hero-banner.png",
+        "/images/where-we-build/hero-banner/hero-banner.png",
+        "/images/where-we-build/hero-banner/hero-banner.png",
+      ],
+      tablet: [
+        "/images/where-we-build/hero-banner/hero-banner-tablet.png",
+        "/images/where-we-build/hero-banner/hero-banner-tablet.png",
+        "/images/where-we-build/hero-banner/hero-banner-tablet.png",
+      ],
+      mobile: [
+        "/images/where-we-build/hero-banner/hero-banner-mobile.png",
+        "/images/where-we-build/hero-banner/hero-banner-mobile.png",
+        "/images/where-we-build/hero-banner/hero-banner-mobile.png",
+      ],
     },
     strapi_image: "/images/strapi-widgets/where-we-build/hero-banner.png",
     widgets_response: WIDGETS_RESPONSES["shared.hero-banner--where-we-build"],
@@ -1301,11 +1741,21 @@ export const WIDGETS_LIST: FlatWidget[] = [
       "CTA_url",
     ],
     preview_images: {
-      desktop: "/images/where-we-build/where-communities/where-communities.png",
-      tablet:
+      desktop: [
+        "/images/where-we-build/where-communities/where-communities.png",
+        "/images/where-we-build/where-communities/where-communities.png",
+        "/images/where-we-build/where-communities/where-communities.png",
+      ],
+      tablet: [
         "/images/where-we-build/where-communities/where-communities-tablet.png",
-      mobile:
+        "/images/where-we-build/where-communities/where-communities-tablet.png",
+        "/images/where-we-build/where-communities/where-communities-tablet.png",
+      ],
+      mobile: [
         "/images/where-we-build/where-communities/where-communities-mobile.png",
+        "/images/where-we-build/where-communities/where-communities-mobile.png",
+        "/images/where-we-build/where-communities/where-communities-mobile.png",
+      ],
     },
     strapi_image: "/images/strapi-widgets/where-we-build/where-communities.png",
     widgets_response: WIDGETS_RESPONSES["shared.communities"],
@@ -1337,9 +1787,21 @@ export const WIDGETS_LIST: FlatWidget[] = [
       "CTA_url",
     ],
     preview_images: {
-      desktop: "/images/where-we-build/where-venues/where-venues.png",
-      tablet: "/images/where-we-build/where-venues/where-venues-tablet.png",
-      mobile: "/images/where-we-build/where-venues/where-venues-mobile.png",
+      desktop: [
+        "/images/where-we-build/where-venues/where-venues.png",
+        "/images/where-we-build/where-venues/where-venues.png",
+        "/images/where-we-build/where-venues/where-venues.png",
+      ],
+      tablet: [
+        "/images/where-we-build/where-venues/where-venues-tablet.png",
+        "/images/where-we-build/where-venues/where-venues-tablet.png",
+        "/images/where-we-build/where-venues/where-venues-tablet.png",
+      ],
+      mobile: [
+        "/images/where-we-build/where-venues/where-venues-mobile.png",
+        "/images/where-we-build/where-venues/where-venues-mobile.png",
+        "/images/where-we-build/where-venues/where-venues-mobile.png",
+      ],
     },
     strapi_image: "/images/strapi-widgets/where-we-build/where-venues.png",
     widgets_response: WIDGETS_RESPONSES["shared.venues"],
@@ -1371,9 +1833,21 @@ export const WIDGETS_LIST: FlatWidget[] = [
       "content_max_width",
     ],
     preview_images: {
-      desktop: "/images/leadership/sub-page-hero/sub-page-hero.png",
-      tablet: "/images/leadership/sub-page-hero/sub-page-hero-tablet.png",
-      mobile: "/images/leadership/sub-page-hero/sub-page-hero-mobile.png",
+      desktop: [
+        "/images/leadership/sub-page-hero/sub-page-hero.png",
+        "/images/leadership/sub-page-hero/sub-page-hero.png",
+        "/images/leadership/sub-page-hero/sub-page-hero.png",
+      ],
+      tablet: [
+        "/images/leadership/sub-page-hero/sub-page-hero-tablet.png",
+        "/images/leadership/sub-page-hero/sub-page-hero-tablet.png",
+        "/images/leadership/sub-page-hero/sub-page-hero-tablet.png",
+      ],
+      mobile: [
+        "/images/leadership/sub-page-hero/sub-page-hero-mobile.png",
+        "/images/leadership/sub-page-hero/sub-page-hero-mobile.png",
+        "/images/leadership/sub-page-hero/sub-page-hero-mobile.png",
+      ],
     },
     strapi_image: "/images/strapi-widgets/leadership/sub-page-hero.png",
     widgets_response: WIDGETS_RESPONSES["shared.sub-page-hero--leadership"],
@@ -1401,12 +1875,21 @@ export const WIDGETS_LIST: FlatWidget[] = [
     fallback_key: "people-global-section",
     key_props: ["members", "background_gradient"],
     preview_images: {
-      desktop:
+      desktop: [
         "/images/leadership/people-global-section/people-global-section.png",
-      tablet:
+        "/images/leadership/people-global-section/people-global-section.png",
+        "/images/leadership/people-global-section/people-global-section.png",
+      ],
+      tablet: [
         "/images/leadership/people-global-section/people-global-section-tablet.png",
-      mobile:
+        "/images/leadership/people-global-section/people-global-section-tablet.png",
+        "/images/leadership/people-global-section/people-global-section-tablet.png",
+      ],
+      mobile: [
         "/images/leadership/people-global-section/people-global-section-mobile.png",
+        "/images/leadership/people-global-section/people-global-section-mobile.png",
+        "/images/leadership/people-global-section/people-global-section-mobile.png",
+      ],
     },
     strapi_image: "/images/strapi-widgets/leadership/people-global-section.png",
     widgets_response:
@@ -1435,9 +1918,21 @@ export const WIDGETS_LIST: FlatWidget[] = [
       "globe_illustration",
     ],
     preview_images: {
-      desktop: "/images/leadership/sub-page-cta/sub-page-cta.png",
-      tablet: "/images/leadership/sub-page-cta/sub-page-cta-tablet.png",
-      mobile: "/images/leadership/sub-page-cta/sub-page-cta-mobile.png",
+      desktop: [
+        "/images/leadership/sub-page-cta/sub-page-cta.png",
+        "/images/leadership/sub-page-cta/sub-page-cta.png",
+        "/images/leadership/sub-page-cta/sub-page-cta.png",
+      ],
+      tablet: [
+        "/images/leadership/sub-page-cta/sub-page-cta-tablet.png",
+        "/images/leadership/sub-page-cta/sub-page-cta-tablet.png",
+        "/images/leadership/sub-page-cta/sub-page-cta-tablet.png",
+      ],
+      mobile: [
+        "/images/leadership/sub-page-cta/sub-page-cta-mobile.png",
+        "/images/leadership/sub-page-cta/sub-page-cta-mobile.png",
+        "/images/leadership/sub-page-cta/sub-page-cta-mobile.png",
+      ],
     },
     strapi_image: "/images/strapi-widgets/leadership/sub-page-cta.png",
     widgets_response: WIDGETS_RESPONSES["shared.global-cta--leadership"],
@@ -1474,11 +1969,21 @@ export const WIDGETS_LIST: FlatWidget[] = [
       "content_max_width",
     ],
     preview_images: {
-      desktop: "/images/board-of-directors/sub-page-hero/sub-page-hero.png",
-      tablet:
+      desktop: [
+        "/images/board-of-directors/sub-page-hero/sub-page-hero.png",
+        "/images/board-of-directors/sub-page-hero/sub-page-hero.png",
+        "/images/board-of-directors/sub-page-hero/sub-page-hero.png",
+      ],
+      tablet: [
         "/images/board-of-directors/sub-page-hero/sub-page-hero-tablet.png",
-      mobile:
+        "/images/board-of-directors/sub-page-hero/sub-page-hero-tablet.png",
+        "/images/board-of-directors/sub-page-hero/sub-page-hero-tablet.png",
+      ],
+      mobile: [
         "/images/board-of-directors/sub-page-hero/sub-page-hero-mobile.png",
+        "/images/board-of-directors/sub-page-hero/sub-page-hero-mobile.png",
+        "/images/board-of-directors/sub-page-hero/sub-page-hero-mobile.png",
+      ],
     },
     strapi_image: "/images/strapi-widgets/board-of-directors/sub-page-hero.png",
     widgets_response:
@@ -1507,12 +2012,21 @@ export const WIDGETS_LIST: FlatWidget[] = [
     fallback_key: "people-global-section",
     key_props: ["members", "background_gradient"],
     preview_images: {
-      desktop:
+      desktop: [
         "/images/board-of-directors/people-global-section/people-global-section.png",
-      tablet:
+        "/images/board-of-directors/people-global-section/people-global-section.png",
+        "/images/board-of-directors/people-global-section/people-global-section.png",
+      ],
+      tablet: [
         "/images/board-of-directors/people-global-section/people-global-section-tablet.png",
-      mobile:
+        "/images/board-of-directors/people-global-section/people-global-section-tablet.png",
+        "/images/board-of-directors/people-global-section/people-global-section-tablet.png",
+      ],
+      mobile: [
         "/images/board-of-directors/people-global-section/people-global-section-mobile.png",
+        "/images/board-of-directors/people-global-section/people-global-section-mobile.png",
+        "/images/board-of-directors/people-global-section/people-global-section-mobile.png",
+      ],
     },
     strapi_image:
       "/images/strapi-widgets/board-of-directors/people-global-section.png",
@@ -1542,9 +2056,21 @@ export const WIDGETS_LIST: FlatWidget[] = [
       "globe_illustration",
     ],
     preview_images: {
-      desktop: "/images/board-of-directors/sub-page-cta/sub-page-cta.png",
-      tablet: "/images/board-of-directors/sub-page-cta/sub-page-cta-tablet.png",
-      mobile: "/images/board-of-directors/sub-page-cta/sub-page-cta-mobile.png",
+      desktop: [
+        "/images/board-of-directors/sub-page-cta/sub-page-cta.png",
+        "/images/board-of-directors/sub-page-cta/sub-page-cta.png",
+        "/images/board-of-directors/sub-page-cta/sub-page-cta.png",
+      ],
+      tablet: [
+        "/images/board-of-directors/sub-page-cta/sub-page-cta-tablet.png",
+        "/images/board-of-directors/sub-page-cta/sub-page-cta-tablet.png",
+        "/images/board-of-directors/sub-page-cta/sub-page-cta-tablet.png",
+      ],
+      mobile: [
+        "/images/board-of-directors/sub-page-cta/sub-page-cta-mobile.png",
+        "/images/board-of-directors/sub-page-cta/sub-page-cta-mobile.png",
+        "/images/board-of-directors/sub-page-cta/sub-page-cta-mobile.png",
+      ],
     },
     strapi_image: "/images/strapi-widgets/board-of-directors/sub-page-cta.png",
     widgets_response:
@@ -1582,9 +2108,21 @@ export const WIDGETS_LIST: FlatWidget[] = [
       "content_max_width",
     ],
     preview_images: {
-      desktop: "/images/contact/sub-page-hero/sub-page-hero.png",
-      tablet: "/images/contact/sub-page-hero/sub-page-hero-tablet.png",
-      mobile: "/images/contact/sub-page-hero/sub-page-hero-mobile.png",
+      desktop: [
+        "/images/contact/sub-page-hero/sub-page-hero.png",
+        "/images/contact/sub-page-hero/sub-page-hero.png",
+        "/images/contact/sub-page-hero/sub-page-hero.png",
+      ],
+      tablet: [
+        "/images/contact/sub-page-hero/sub-page-hero-tablet.png",
+        "/images/contact/sub-page-hero/sub-page-hero-tablet.png",
+        "/images/contact/sub-page-hero/sub-page-hero-tablet.png",
+      ],
+      mobile: [
+        "/images/contact/sub-page-hero/sub-page-hero-mobile.png",
+        "/images/contact/sub-page-hero/sub-page-hero-mobile.png",
+        "/images/contact/sub-page-hero/sub-page-hero-mobile.png",
+      ],
     },
     strapi_image: "/images/strapi-widgets/contact/sub-page-hero.png",
     widgets_response: WIDGETS_RESPONSES["shared.sub-page-hero--contact"],
@@ -1612,9 +2150,21 @@ export const WIDGETS_LIST: FlatWidget[] = [
     fallback_key: "contact-form",
     key_props: ["topicOptions"],
     preview_images: {
-      desktop: "/images/contact/contact-form/contact-form.png",
-      tablet: "/images/contact/contact-form/contact-form-tablet.png",
-      mobile: "/images/contact/contact-form/contact-form-mobile.png",
+      desktop: [
+        "/images/contact/contact-form/contact-form.png",
+        "/images/contact/contact-form/contact-form.png",
+        "/images/contact/contact-form/contact-form.png",
+      ],
+      tablet: [
+        "/images/contact/contact-form/contact-form-tablet.png",
+        "/images/contact/contact-form/contact-form-tablet.png",
+        "/images/contact/contact-form/contact-form-tablet.png",
+      ],
+      mobile: [
+        "/images/contact/contact-form/contact-form-mobile.png",
+        "/images/contact/contact-form/contact-form-mobile.png",
+        "/images/contact/contact-form/contact-form-mobile.png",
+      ],
     },
     strapi_image: "/images/strapi-widgets/contact/contact-form.png",
     widgets_response: WIDGETS_RESPONSES["contact-form"],
@@ -1647,9 +2197,21 @@ export const WIDGETS_LIST: FlatWidget[] = [
       "max_width_description",
     ],
     preview_images: {
-      desktop: "/images/dynamic-slug/hero-banner/hero-banner.png",
-      tablet: "/images/dynamic-slug/hero-banner/hero-banner-tablet.png",
-      mobile: "/images/dynamic-slug/hero-banner/hero-banner-mobile.png",
+      desktop: [
+        "/images/dynamic-slug/hero-banner/hero-banner.png",
+        "/images/dynamic-slug/hero-banner/hero-banner.png",
+        "/images/dynamic-slug/hero-banner/hero-banner.png",
+      ],
+      tablet: [
+        "/images/dynamic-slug/hero-banner/hero-banner-tablet.png",
+        "/images/dynamic-slug/hero-banner/hero-banner-tablet.png",
+        "/images/dynamic-slug/hero-banner/hero-banner-tablet.png",
+      ],
+      mobile: [
+        "/images/dynamic-slug/hero-banner/hero-banner-mobile.png",
+        "/images/dynamic-slug/hero-banner/hero-banner-mobile.png",
+        "/images/dynamic-slug/hero-banner/hero-banner-mobile.png",
+      ],
     },
     strapi_image: "/images/strapi-widgets/dynamic-slug/hero-banner.png",
     widgets_response: WIDGETS_RESPONSES["shared.hero-banner--dynamic-slug"],
@@ -1678,9 +2240,21 @@ export const WIDGETS_LIST: FlatWidget[] = [
     fallback_key: "dynamic-zone",
     key_props: ["PositionNumber", "CustomCssClass", "Sections", "__component"],
     preview_images: {
-      desktop: "/images/dynamic-slug/dynamic-zone/dynamic-zone.png",
-      tablet: "/images/dynamic-slug/dynamic-zone/dynamic-zone-tablet.png",
-      mobile: "/images/dynamic-slug/dynamic-zone/dynamic-zone-mobile.png",
+      desktop: [
+        "/images/dynamic-slug/dynamic-zone/dynamic-zone.png",
+        "/images/dynamic-slug/dynamic-zone/dynamic-zone.png",
+        "/images/dynamic-slug/dynamic-zone/dynamic-zone.png",
+      ],
+      tablet: [
+        "/images/dynamic-slug/dynamic-zone/dynamic-zone-tablet.png",
+        "/images/dynamic-slug/dynamic-zone/dynamic-zone-tablet.png",
+        "/images/dynamic-slug/dynamic-zone/dynamic-zone-tablet.png",
+      ],
+      mobile: [
+        "/images/dynamic-slug/dynamic-zone/dynamic-zone-mobile.png",
+        "/images/dynamic-slug/dynamic-zone/dynamic-zone-mobile.png",
+        "/images/dynamic-slug/dynamic-zone/dynamic-zone-mobile.png",
+      ],
     },
     strapi_image: "/images/strapi-widgets/dynamic-slug/dynamic-zone.png",
     widgets_response: WIDGETS_RESPONSES["shared.dynamic-zone"],

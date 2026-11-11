@@ -5,26 +5,31 @@ import Link from "next/link";
 import { Button } from "@components/ui/button";
 import { Badge } from "@components/ui/badge";
 import { ArrowLeft, RotateCcw } from "lucide-react";
+import type { SidebarMode } from "./PageSidebar";
 
 interface StartHeaderProps {
+  mode: SidebarMode;
   totalPages: number;
   totalWidgets: number;
-  activePageTitle?: string;
-  activeWidgetTitle?: string;
+  pageWidgetCount: number;
+  activePageLabel?: string;
+  activeWidgetName?: string;
   onReset?: () => void;
 }
 
 export function StartHeader({
+  mode,
   totalPages,
   totalWidgets,
-  activePageTitle,
-  activeWidgetTitle,
+  pageWidgetCount,
+  activePageLabel,
+  activeWidgetName,
   onReset,
 }: StartHeaderProps) {
   return (
     <header className="w-full glass-header-light px-5 py-3 mb-3 flex items-center justify-between gap-4">
       {/* Left: Brand */}
-      <div className="flex items-center gap-3">
+      <div className="flex items-center gap-3 shrink-0">
         <div className="flex items-center justify-center w-8 h-8 rounded-xl bg-gradient-to-br from-cyan-400 to-teal-500 shadow-sm shadow-cyan-500/25">
           <svg
             className="w-4 h-4 text-white"
@@ -53,33 +58,51 @@ export function StartHeader({
         </div>
       </div>
 
-      {/* Center: Breadcrumb */}
-      <div className="hidden md:flex items-center gap-2 text-xs text-slate-500 font-medium px-3.5 py-1.5 rounded-full glass-inset">
-        <span className="font-semibold text-slate-700">{totalPages} Pages</span>
-        <span className="text-slate-300">·</span>
-        <span className="font-semibold text-slate-700">
-          {totalWidgets} Widgets
-        </span>
-        {activePageTitle && (
+      {/* Center: Mode-Aware Actual Page / Widget Details */}
+      <div className="hidden md:flex items-center gap-2 min-w-0 text-xs text-slate-500 font-medium px-3.5 py-1.5 rounded-full glass-inset">
+        {mode === "by-page" ? (
           <>
+            <span className="font-semibold text-slate-700 shrink-0 tabular-nums">
+              {totalPages} {totalPages === 1 ? "Page" : "Pages"}
+            </span>
             <span className="text-slate-300">·</span>
-            <span className="text-slate-500 max-w-[180px] truncate">
-              {activePageTitle}
+            <span className="font-semibold text-slate-700 shrink-0 tabular-nums">
+              {pageWidgetCount} {pageWidgetCount === 1 ? "Widget" : "Widgets"}
             </span>
+            {activePageLabel && activeWidgetName && (
+              <>
+                <span className="h-3.5 w-px bg-slate-200/90 mx-0.5 shrink-0" />
+                <div className="flex items-center gap-1.5 min-w-0">
+                  <span className="text-slate-700 font-medium max-w-[160px] truncate">
+                    {activePageLabel}
+                  </span>
+                  <span className="text-slate-300 shrink-0">/</span>
+                  <span className="text-cyan-700 font-semibold max-w-[220px] truncate">
+                    {activeWidgetName}
+                  </span>
+                </div>
+              </>
+            )}
           </>
-        )}
-        {activeWidgetTitle && (
+        ) : (
           <>
-            <span className="text-cyan-500">›</span>
-            <span className="text-cyan-700 font-semibold max-w-[190px] truncate">
-              {activeWidgetTitle}
+            <span className="font-semibold text-slate-700 shrink-0 tabular-nums">
+              {totalWidgets} {totalWidgets === 1 ? "Widget" : "Widgets"}
             </span>
+            {activeWidgetName && (
+              <>
+                <span className="h-3.5 w-px bg-slate-200/90 mx-0.5 shrink-0" />
+                <span className="text-cyan-700 font-semibold max-w-[260px] truncate">
+                  {activeWidgetName}
+                </span>
+              </>
+            )}
           </>
         )}
       </div>
 
       {/* Right: Actions */}
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-2 shrink-0">
         {onReset && (
           <Button
             type="button"

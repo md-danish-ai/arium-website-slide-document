@@ -18,17 +18,26 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@components/ui/tooltip";
-import { Maximize2, Laptop, Tablet, Smartphone } from "lucide-react";
+import {
+  Maximize2,
+  Laptop,
+  Tablet,
+  Smartphone,
+  ChevronLeft,
+  ChevronRight,
+} from "lucide-react";
+import { PreviewImageSource } from "@/types/widget.types";
 import { cn } from "@lib/utils";
 
 export type PreviewViewport = "desktop" | "tablet" | "mobile";
 
 export interface ImagePreviewerProps {
   src: string;
+  images?: PreviewImageSource;
   responsiveSrc?: {
-    desktop?: string;
-    tablet?: string;
-    mobile?: string;
+    desktop?: PreviewImageSource;
+    tablet?: PreviewImageSource;
+    mobile?: PreviewImageSource;
   };
   fallbackSrc?: string;
   alt: string;
@@ -44,6 +53,20 @@ export interface ImagePreviewerProps {
   previewContent?: React.ReactNode;
   modalContent?: React.ReactNode;
   onClick?: () => void;
+}
+
+export function normalizeImageSource(
+  source?: PreviewImageSource,
+  fallback: string[] = [],
+): string[] {
+  if (!source) return fallback;
+  const list = (Array.isArray(source) ? source : [source]).filter(Boolean);
+  return list.length > 0 ? list : fallback;
+}
+
+function wrapSlideIndex(index: number, total: number): number {
+  if (total <= 0) return 0;
+  return ((index % total) + total) % total;
 }
 
 const VIEWPORT_OPTIONS: {
@@ -78,6 +101,7 @@ const VIEWPORT_OPTIONS: {
  */
 export function ImagePreviewer({
   src,
+  images,
   responsiveSrc,
   fallbackSrc = "/assets/connection-globe.svg",
   alt,
@@ -97,6 +121,10 @@ export function ImagePreviewer({
   const [isOpen, setIsOpen] = useState(false);
   const [viewport, setViewport] = useState<PreviewViewport>("desktop");
   const [failedSrcs, setFailedSrcs] = useState<Record<string, boolean>>({});
+  const [slideIndices, setSlideIndices] = useState<Record<string, number>>({});
+  const [slideDirections, setSlideDirections] = useState<
+    Record<string, "next" | "prev">
+  >({});
 
   const resolveSafeSrc = (candidate: string) =>
     failedSrcs[candidate] && fallbackSrc ? fallbackSrc : candidate;
@@ -109,15 +137,86 @@ export function ImagePreviewer({
     }
   };
 
-  const cardSrc = resolveSafeSrc(src);
+  const baseImages = normalizeImageSource(images, [src]);
+  const desktopImages = normalizeImageSource(
+    responsiveSrc?.desktop,
+    baseImages,
+  );
+  const tabletImages = normalizeImageSource(
+    responsiveSrc?.tablet,
+    desktopImages,
+  );
+  const mobileImages = normalizeImageSource(
+    responsiveSrc?.mobile,
+    desktopImages,
+  );
 
-  const viewportRawByKey: Record<PreviewViewport, string> = {
-    desktop: responsiveSrc?.desktop || src,
-    tablet: responsiveSrc?.tablet || responsiveSrc?.desktop || src,
-    mobile: responsiveSrc?.mobile || responsiveSrc?.desktop || src,
+  const viewportImagesByKey: Record<PreviewViewport, string[]> = {
+    desktop: desktopImages,
+    tablet: tabletImages,
+    mobile: mobileImages,
   };
 
-  const activeModalSrc = resolveSafeSrc(viewportRawByKey[viewport]);
+  const cardImages = responsiveSrc?.desktop ? desktopImages : baseImages;
+  const cardSlideKey = responsiveSrc?.desktop
+    ? `desktop:${desktopImages.join("|")}`
+    : `card:${baseImages.join("|")}`;
+  const cardSlideIndex = wrapSlideIndex(
+    slideIndices[cardSlideKey] ?? 0,
+    cardImages.length,
+  );
+  const cardRawSrc = cardImages[cardSlideIndex] ?? src;
+  const cardSrc = resolveSafeSrc(cardRawSrc);
+
+  const getViewportStateKey = (vp: PreviewViewport) =>
+    vp === "desktop" && !responsiveSrc?.desktop && images
+      ? `card:${baseImages.join("|")}`
+      : `${vp}:${viewportImagesByKey[vp].join("|")}`;
+
+  const getViewportSlideIndex = (vp: PreviewViewport) =>
+    wrapSlideIndex(
+      slideIndices[getViewportStateKey(vp)] ?? 0,
+      viewportImagesByKey[vp].length,
+    );
+
+  const activeModalImages = viewportImagesByKey[viewport];
+  const activeModalKey = getViewportStateKey(viewport);
+  const activeModalIndex = getViewportSlideIndex(viewport);
+  const activeModalRawSrc = activeModalImages[activeModalIndex] ?? src;
+  const activeModalSrc = resolveSafeSrc(activeModalRawSrc);
+
+  const getSlideAnimClass = (key: string) => {
+    const dir = slideDirections[key];
+    if (dir === "next") return "preview-slide-next";
+    if (dir === "prev") return "preview-slide-prev";
+    return "";
+  };
+
+  const stepSlide = (key: string, total: number, delta: number) => {
+    if (total <= 1) return;
+    setSlideDirections((prev) => ({
+      ...prev,
+      [key]: delta >= 0 ? "next" : "prev",
+    }));
+    setSlideIndices((prev) => ({
+      ...prev,
+      [key]: wrapSlideIndex((prev[key] ?? 0) + delta, total),
+    }));
+  };
+
+  const setExactSlide = (key: string, index: number, total: number) => {
+    const wrapped = wrapSlideIndex(index, total);
+    const current = wrapSlideIndex(slideIndices[key] ?? 0, total);
+    if (wrapped === current) return;
+    setSlideDirections((prev) => ({
+      ...prev,
+      [key]: wrapped > current ? "next" : "prev",
+    }));
+    setSlideIndices((prev) => ({
+      ...prev,
+      [key]: wrapped,
+    }));
+  };
 
   const handleOpen = () => {
     onClick?.();
@@ -128,6 +227,17 @@ export function ImagePreviewer({
     if (e.key === "Enter" || e.key === " ") {
       e.preventDefault();
       handleOpen();
+    }
+  };
+
+  const handleModalKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    if (activeModalImages.length <= 1 || modalContent) return;
+    if (e.key === "ArrowLeft") {
+      e.preventDefault();
+      stepSlide(activeModalKey, activeModalImages.length, -1);
+    } else if (e.key === "ArrowRight") {
+      e.preventDefault();
+      stepSlide(activeModalKey, activeModalImages.length, 1);
     }
   };
 
@@ -142,64 +252,129 @@ export function ImagePreviewer({
   return (
     <TooltipProvider delayDuration={250}>
       <Tooltip>
-        <TooltipTrigger asChild>
-          <Card
-            variant="glass"
-            role="button"
-            tabIndex={0}
-            aria-label={`Open ${title} preview`}
-            onClick={handleOpen}
-            onKeyDown={handleKeyDown}
-            className={cn(
-              "group relative w-full overflow-hidden cursor-pointer flex flex-col focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/60",
-              isFullBleedScreenshot
-                ? "border-0 bg-transparent shadow-md hover:shadow-[0_12px_30px_-10px_rgba(6,182,212,0.28)]"
-                : "hover:border-cyan-300 hover:shadow-[0_12px_30px_-10px_rgba(6,182,212,0.18)]",
-              heightClass,
-              className,
-            )}
-          >
-            <div
+        <div className={cn("group relative w-full", heightClass, className)}>
+          <TooltipTrigger asChild>
+            <Card
+              variant="glass"
+              role="button"
+              tabIndex={0}
+              aria-label={`Open ${title} preview`}
+              onClick={handleOpen}
+              onKeyDown={handleKeyDown}
               className={cn(
-                "relative flex-1 w-full h-full overflow-hidden flex items-center justify-center",
-                isFullBleedScreenshot ? "bg-transparent" : "bg-white/80",
-                canvasClassName,
+                "relative w-full h-full overflow-hidden cursor-pointer flex flex-col focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/60",
+                isFullBleedScreenshot
+                  ? "border-0 bg-transparent shadow-md hover:shadow-[0_12px_30px_-10px_rgba(6,182,212,0.28)]"
+                  : "hover:border-cyan-300 hover:shadow-[0_12px_30px_-10px_rgba(6,182,212,0.18)]",
               )}
             >
-              {previewContent ? (
-                previewContent
-              ) : (
-                <div className="relative w-full h-full">
-                  <Image
-                    src={cardSrc}
-                    alt={alt}
-                    fill
-                    unoptimized={isCardSvg}
-                    sizes="(max-width: 1024px) 100vw, 45vw"
-                    onError={() => markSrcFailed(src)}
+              <div
+                className={cn(
+                  "relative flex-1 w-full h-full overflow-hidden flex items-center justify-center",
+                  isFullBleedScreenshot ? "bg-transparent" : "bg-white/80",
+                  canvasClassName,
+                )}
+              >
+                {previewContent ? (
+                  previewContent
+                ) : (
+                  <div
+                    key={`${cardSlideKey}-${cardSlideIndex}`}
                     className={cn(
-                      "w-full h-full transition-transform duration-300 group-hover:scale-[1.015]",
-                      objectFit === "cover"
-                        ? "object-cover object-top"
-                        : "object-contain p-4",
+                      "relative w-full h-full",
+                      getSlideAnimClass(cardSlideKey),
                     )}
-                  />
-                </div>
-              )}
+                  >
+                    <Image
+                      src={cardSrc}
+                      alt={
+                        cardImages.length > 1
+                          ? `${alt} (${cardSlideIndex + 1} of ${cardImages.length})`
+                          : alt
+                      }
+                      fill
+                      unoptimized={isCardSvg}
+                      sizes="(max-width: 1024px) 100vw, 45vw"
+                      onError={() => markSrcFailed(cardRawSrc)}
+                      className={cn(
+                        "w-full h-full transition-transform duration-300 group-hover:scale-[1.015]",
+                        objectFit === "cover"
+                          ? "object-cover object-top"
+                          : "object-contain p-4",
+                      )}
+                    />
+                  </div>
+                )}
 
-              {/* Subtle Hover Expand Pill */}
-              <div className="absolute inset-0 bg-white/25 backdrop-blur-[1.5px] opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-center justify-center pointer-events-none z-20">
-                <Badge
-                  variant="glass"
-                  className="px-3.5 py-1.5 rounded-xl bg-white/95 border-cyan-200 text-slate-800 shadow-md flex items-center gap-2 text-xs font-semibold group-hover:scale-105 transition-transform"
-                >
-                  <Maximize2 className="w-3.5 h-3.5 text-cyan-600" />
-                  <span>{subtitle ? `${subtitle} / ${title}` : title}</span>
-                </Badge>
+                {/* Subtle Hover Expand Pill */}
+                <div className="absolute inset-0 bg-white/25 backdrop-blur-[1.5px] opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-center justify-center pointer-events-none z-20">
+                  <Badge
+                    variant="glass"
+                    className="px-3.5 py-1.5 rounded-xl bg-white/95 border-cyan-200 text-slate-800 shadow-md flex items-center gap-2 text-xs font-semibold group-hover:scale-105 transition-transform"
+                  >
+                    <Maximize2 className="w-3.5 h-3.5 text-cyan-600" />
+                    <span>{subtitle ? `${subtitle} / ${title}` : title}</span>
+                  </Badge>
+                </div>
               </div>
-            </div>
-          </Card>
-        </TooltipTrigger>
+            </Card>
+          </TooltipTrigger>
+
+          {/* Inline Prev / Next Slide Controls when multiple images exist */}
+          {cardImages.length > 1 && !previewContent && (
+            <>
+              <button
+                type="button"
+                aria-label="Previous preview image"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  stepSlide(cardSlideKey, cardImages.length, -1);
+                }}
+                className="absolute left-2.5 top-1/2 -translate-y-1/2 z-30 w-8 h-8 rounded-full bg-white/95 backdrop-blur-md border border-slate-200/90 text-slate-700 shadow-md flex items-center justify-center opacity-85 md:opacity-0 md:group-hover:opacity-100 focus-visible:opacity-100 transition-all duration-150 hover:border-cyan-500 hover:text-cyan-700 hover:scale-105 active:scale-95 cursor-pointer"
+              >
+                <ChevronLeft className="w-4 h-4" />
+              </button>
+              <button
+                type="button"
+                aria-label="Next preview image"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  stepSlide(cardSlideKey, cardImages.length, 1);
+                }}
+                className="absolute right-2.5 top-1/2 -translate-y-1/2 z-30 w-8 h-8 rounded-full bg-white/95 backdrop-blur-md border border-slate-200/90 text-slate-700 shadow-md flex items-center justify-center opacity-85 md:opacity-0 md:group-hover:opacity-100 focus-visible:opacity-100 transition-all duration-150 hover:border-cyan-500 hover:text-cyan-700 hover:scale-105 active:scale-95 cursor-pointer"
+              >
+                <ChevronRight className="w-4 h-4" />
+              </button>
+
+              <div
+                onClick={(e) => e.stopPropagation()}
+                className="absolute bottom-2.5 right-2.5 z-30 inline-flex items-center gap-1.5 rounded-lg bg-white/95 backdrop-blur-md border border-slate-200/90 px-2 py-1 shadow-sm"
+              >
+                <div className="flex items-center gap-1">
+                  {cardImages.map((_, idx) => (
+                    <button
+                      key={idx}
+                      type="button"
+                      aria-label={`View image ${idx + 1} of ${cardImages.length}`}
+                      onClick={() =>
+                        setExactSlide(cardSlideKey, idx, cardImages.length)
+                      }
+                      className={cn(
+                        "h-1.5 rounded-full transition-all duration-150 cursor-pointer",
+                        idx === cardSlideIndex
+                          ? "w-4 bg-cyan-500"
+                          : "w-1.5 bg-slate-300 hover:bg-slate-400",
+                      )}
+                    />
+                  ))}
+                </div>
+                <span className="text-[10px] font-mono font-semibold text-slate-600 tabular-nums pl-0.5">
+                  {cardSlideIndex + 1}/{cardImages.length}
+                </span>
+              </div>
+            </>
+          )}
+        </div>
         <TooltipContent
           side="bottom"
           className="bg-white/95 backdrop-blur-md border-slate-200 text-slate-700 text-xs shadow-md"
@@ -212,9 +387,10 @@ export function ImagePreviewer({
       <Dialog open={isOpen} onOpenChange={setIsOpen}>
         <DialogContent
           variant="glass"
+          onKeyDown={handleModalKeyDown}
           className="max-w-[1400px] w-[94vw] max-h-[92vh] p-0 overflow-hidden flex flex-col gap-0 border-0 bg-white shadow-2xl"
         >
-          <DialogHeader className="px-5 py-3.5 bg-white/95 backdrop-blur-md border-b border-slate-200/80 flex flex-row items-center justify-between gap-4 space-y-0 pr-12">
+          <DialogHeader className="shrink-0 px-5 py-3.5 bg-white/95 backdrop-blur-md border-b border-slate-200/80 flex flex-row items-center justify-between gap-4 space-y-0 pr-12">
             <div className="min-w-0 flex items-center gap-2">
               <DialogTitle className="text-sm md:text-base font-bold text-slate-900 flex items-center gap-1.5 truncate">
                 {subtitle && (
@@ -265,78 +441,193 @@ export function ImagePreviewer({
             )}
           </DialogHeader>
 
-          {/* Modal Body — White standard stage with preloaded smooth cross-fade */}
-          <div
-            className={cn(
-              "flex-1 overflow-auto flex items-center justify-center glass-scrollbar transition-[padding] duration-300",
-              modalContent || isActiveModalSvg
-                ? "p-4 md:p-6 bg-slate-50"
-                : viewport === "desktop"
-                  ? "p-0 bg-white"
-                  : "p-4 md:p-6 bg-slate-50",
-            )}
-          >
-            {modalContent ? (
-              modalContent
-            ) : (
-              <div
-                className={cn(
-                  "relative transition-all duration-300 ease-out overflow-hidden flex items-center justify-center",
-                  currentViewport.containerClass,
-                )}
-              >
-                {isActiveModalSvg ? (
-                  <div className="relative w-full h-[65vh] min-h-[320px] max-h-[620px] flex items-center justify-center bg-white rounded-xl">
-                    <Image
-                      src={activeModalSrc}
-                      alt={alt}
-                      fill
-                      unoptimized
-                      sizes="(max-width: 768px) 95vw, 90vw"
-                      onError={() => markSrcFailed(viewportRawByKey[viewport])}
-                      className="w-full h-full object-contain p-6"
-                    />
-                  </div>
-                ) : (
-                  VIEWPORT_OPTIONS.map(({ value }) => {
-                    const rawSrc = viewportRawByKey[value];
-                    const resolvedSrc = resolveSafeSrc(rawSrc);
-                    const isLayerSvg = resolvedSrc
-                      .toLowerCase()
-                      .endsWith(".svg");
-                    const isActive = viewport === value;
-
-                    return (
+          {/* Modal Body — White standard stage with preloaded smooth cross-fade + Prev/Next */}
+          <div className="relative flex-1 min-h-0 flex flex-col">
+            <div
+              className={cn(
+                "flex-1 min-h-0 overflow-auto flex items-center justify-center glass-scrollbar transition-[padding] duration-300",
+                modalContent || isActiveModalSvg
+                  ? "p-4 md:p-6 bg-slate-50"
+                  : viewport === "desktop"
+                    ? "p-0 bg-white"
+                    : "p-4 md:p-6 bg-slate-50",
+              )}
+            >
+              {modalContent ? (
+                modalContent
+              ) : (
+                <div
+                  className={cn(
+                    "relative transition-all duration-300 ease-out overflow-hidden flex items-center justify-center",
+                    currentViewport.containerClass,
+                  )}
+                >
+                  {isActiveModalSvg ? (
+                    <div
+                      key={`${activeModalKey}-${activeModalIndex}`}
+                      className={cn(
+                        "relative w-full h-[65vh] min-h-[320px] max-h-[620px] flex items-center justify-center bg-white rounded-xl",
+                        getSlideAnimClass(activeModalKey),
+                      )}
+                    >
                       <Image
-                        key={value}
-                        src={resolvedSrc}
+                        src={activeModalSrc}
                         alt={alt}
-                        width={1920}
-                        height={1080}
-                        priority
-                        unoptimized={isLayerSvg}
-                        sizes={
-                          value === "desktop"
-                            ? "94vw"
-                            : value === "tablet"
-                              ? "576px"
-                              : "320px"
-                        }
-                        onError={() => markSrcFailed(rawSrc)}
-                        className={cn(
-                          "block mx-auto object-contain transition-all duration-200 ease-out",
-                          value === "desktop" ? "max-h-[82vh]" : "max-h-[78vh]",
-                          isActive
-                            ? "relative z-10 w-auto max-w-full h-auto opacity-100 scale-100"
-                            : "absolute inset-0 m-auto w-full h-full opacity-0 scale-[0.985] pointer-events-none",
-                        )}
+                        fill
+                        unoptimized
+                        sizes="(max-width: 768px) 95vw, 90vw"
+                        onError={() => markSrcFailed(activeModalRawSrc)}
+                        className="w-full h-full object-contain p-6"
                       />
-                    );
-                  })
-                )}
-              </div>
+                    </div>
+                  ) : (
+                    VIEWPORT_OPTIONS.map(({ value }) => {
+                      const vpKey = getViewportStateKey(value);
+                      const vpList = viewportImagesByKey[value];
+                      const vpIdx = getViewportSlideIndex(value);
+                      const rawSrc = vpList[vpIdx] ?? src;
+                      const resolvedSrc = resolveSafeSrc(rawSrc);
+                      const isLayerSvg = resolvedSrc
+                        .toLowerCase()
+                        .endsWith(".svg");
+                      const isActive = viewport === value;
+
+                      return (
+                        <div
+                          key={`${value}-${vpIdx}`}
+                          className={cn(
+                            "flex items-center justify-center transition-all duration-200 ease-out",
+                            isActive
+                              ? cn(
+                                  "relative z-10 w-full opacity-100 scale-100",
+                                  getSlideAnimClass(vpKey),
+                                )
+                              : "absolute inset-0 m-auto w-full h-full opacity-0 scale-[0.985] pointer-events-none",
+                          )}
+                        >
+                          <Image
+                            src={resolvedSrc}
+                            alt={
+                              vpList.length > 1
+                                ? `${alt} — ${value} (${vpIdx + 1} of ${vpList.length})`
+                                : alt
+                            }
+                            width={1920}
+                            height={1080}
+                            priority
+                            unoptimized={isLayerSvg}
+                            sizes={
+                              value === "desktop"
+                                ? "94vw"
+                                : value === "tablet"
+                                  ? "576px"
+                                  : "320px"
+                            }
+                            onError={() => markSrcFailed(rawSrc)}
+                            className={cn(
+                              "block mx-auto w-auto max-w-full h-auto object-contain",
+                              value === "desktop"
+                                ? "max-h-[78vh]"
+                                : "max-h-[74vh]",
+                            )}
+                          />
+                        </div>
+                      );
+                    })
+                  )}
+                </div>
+              )}
+            </div>
+
+            {activeModalImages.length > 1 && !modalContent && (
+              <>
+                <button
+                  type="button"
+                  aria-label="Previous image"
+                  onClick={() =>
+                    stepSlide(activeModalKey, activeModalImages.length, -1)
+                  }
+                  className="absolute left-3 md:left-4 top-1/2 -translate-y-1/2 z-30 w-9 h-9 md:w-10 md:h-10 rounded-full bg-white/95 backdrop-blur-md border border-slate-200/90 text-slate-700 shadow-lg flex items-center justify-center transition-all duration-150 hover:border-cyan-500 hover:text-cyan-700 hover:scale-105 active:scale-95 cursor-pointer"
+                >
+                  <ChevronLeft className="w-5 h-5" />
+                </button>
+                <button
+                  type="button"
+                  aria-label="Next image"
+                  onClick={() =>
+                    stepSlide(activeModalKey, activeModalImages.length, 1)
+                  }
+                  className="absolute right-3 md:right-4 top-1/2 -translate-y-1/2 z-30 w-9 h-9 md:w-10 md:h-10 rounded-full bg-white/95 backdrop-blur-md border border-slate-200/90 text-slate-700 shadow-lg flex items-center justify-center transition-all duration-150 hover:border-cyan-500 hover:text-cyan-700 hover:scale-105 active:scale-95 cursor-pointer"
+                >
+                  <ChevronRight className="w-5 h-5" />
+                </button>
+              </>
             )}
           </div>
+
+          {activeModalImages.length > 1 && !modalContent && (
+            <div className="shrink-0 px-4 py-2.5 bg-white/95 backdrop-blur-md border-t border-slate-200/80 flex items-center justify-between gap-3">
+              <div className="flex items-center gap-2 text-xs text-slate-500 font-medium">
+                {showViewportSwitcher && (
+                  <span className="capitalize text-slate-700 font-semibold">
+                    {viewport}
+                  </span>
+                )}
+                {showViewportSwitcher && (
+                  <span className="text-slate-300">·</span>
+                )}
+                <span className="font-mono text-[11px] tabular-nums">
+                  Slide {activeModalIndex + 1} of {activeModalImages.length}
+                </span>
+              </div>
+
+              <div className="flex items-center gap-1.5">
+                {activeModalImages.map((_, idx) => (
+                  <button
+                    key={idx}
+                    type="button"
+                    aria-label={`Go to slide ${idx + 1}`}
+                    onClick={() =>
+                      setExactSlide(
+                        activeModalKey,
+                        idx,
+                        activeModalImages.length,
+                      )
+                    }
+                    className={cn(
+                      "h-2 rounded-full transition-all duration-150 cursor-pointer",
+                      idx === activeModalIndex
+                        ? "w-6 bg-cyan-500 shadow-[0_0_8px_rgba(6,182,212,0.4)]"
+                        : "w-2 bg-slate-200 hover:bg-slate-300",
+                    )}
+                  />
+                ))}
+              </div>
+
+              <div className="flex items-center gap-1.5">
+                <button
+                  type="button"
+                  onClick={() =>
+                    stepSlide(activeModalKey, activeModalImages.length, -1)
+                  }
+                  className="inline-flex items-center gap-1 rounded-md border border-slate-200/90 bg-white px-2.5 py-1 text-xs font-medium text-slate-700 transition-colors hover:border-cyan-500 hover:text-cyan-700 cursor-pointer"
+                >
+                  <ChevronLeft className="w-3.5 h-3.5" />
+                  <span>Prev</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() =>
+                    stepSlide(activeModalKey, activeModalImages.length, 1)
+                  }
+                  className="inline-flex items-center gap-1 rounded-md border border-slate-200/90 bg-white px-2.5 py-1 text-xs font-medium text-slate-700 transition-colors hover:border-cyan-500 hover:text-cyan-700 cursor-pointer"
+                >
+                  <span>Next</span>
+                  <ChevronRight className="w-3.5 h-3.5" />
+                </button>
+              </div>
+            </div>
+          )}
         </DialogContent>
       </Dialog>
     </TooltipProvider>
