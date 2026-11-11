@@ -157,14 +157,14 @@ export function SidebarWidgetItem({
         className={cn(
           "inline-flex items-center gap-1 rounded px-1.5 py-0.5 text-[9px] uppercase font-bold tracking-wider shrink-0 leading-none backdrop-blur-none shadow-none transition-all duration-200",
           isActive
-            ? "bg-slate-900 text-[#00e8d9] border-slate-800 shadow-xs"
+            ? "bg-white/95 text-cyan-700 border-cyan-400/90"
             : badgeStyle.pill,
         )}
       >
         <span
           className={cn(
             "w-1.5 h-1.5 rounded-full shrink-0",
-            isActive ? "bg-[#00e8d9] shadow-[0_0_5px_#00e8d9]" : badgeStyle.dot,
+            isActive ? "bg-cyan-500" : badgeStyle.dot,
           )}
         />
         <span>{category}</span>
