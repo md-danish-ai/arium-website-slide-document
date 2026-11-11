@@ -28,9 +28,6 @@ export function WidgetDescription({
 }: WidgetDescriptionProps) {
   const flatMeta = getFlatWidgetMeta(widget, page.id);
   const keyProps = flatMeta?.key_props ?? widget.key_props ?? [];
-  const positionNumber = String(
-    (flatMeta?.position ?? widget.position) + 1,
-  ).padStart(2, "0");
 
   const specs = [
     {
@@ -44,10 +41,6 @@ export function WidgetDescription({
     {
       label: "Fallback Key",
       value: flatMeta?.fallback_key ?? widget.widget_key,
-    },
-    {
-      label: "Category · Slot",
-      value: `${widget.category} · #${positionNumber}`,
     },
   ];
 
@@ -98,22 +91,19 @@ export function WidgetDescription({
         </p>
       </div>
 
-      {/* Simple Metadata Grid */}
-      <div className="grid grid-cols-2 gap-2">
+      {/* Inline Technical Metadata */}
+      <dl className="grid grid-cols-1 sm:grid-cols-3 gap-x-4 gap-y-2 py-2.5 border-y border-slate-200/60">
         {specs.map((item) => (
-          <div
-            key={item.label}
-            className="rounded-lg border border-slate-200/70 bg-slate-50/70 px-2.5 py-1.5 min-w-0"
-          >
-            <div className="text-[10px] font-semibold uppercase tracking-wider text-slate-400">
+          <div key={item.label} className="min-w-0">
+            <dt className="text-[10px] font-semibold uppercase tracking-wider text-slate-400">
               {item.label}
-            </div>
-            <div className="mt-0.5 font-mono text-[11px] text-slate-700 truncate">
+            </dt>
+            <dd className="mt-0.5 font-mono text-[11px] font-medium text-slate-700 truncate">
               {item.value}
-            </div>
+            </dd>
           </div>
         ))}
-      </div>
+      </dl>
 
       {/* Key Props */}
       {keyProps.length > 0 && (

@@ -18,7 +18,12 @@ function renderJsonValue(value: string) {
   if (trimmed.startsWith('"')) {
     return <span className="text-emerald-700">{value}</span>;
   }
-  if (trimmed === "true" || trimmed === "false" || trimmed === "true," || trimmed === "false,") {
+  if (
+    trimmed === "true" ||
+    trimmed === "false" ||
+    trimmed === "true," ||
+    trimmed === "false,"
+  ) {
     return <span className="text-violet-700 font-medium">{value}</span>;
   }
   return <span className="text-slate-600">{value}</span>;
