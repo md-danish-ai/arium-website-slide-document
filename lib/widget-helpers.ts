@@ -9,12 +9,24 @@ import {
 } from "@/types/widget.types";
 import type { BadgeProps } from "@components/ui/badge";
 
+export interface WidgetUsagePage {
+  id: string;
+  title: string;
+  label: string;
+  route: string;
+  strapiSlug: string;
+  pageCategory: string;
+  matchingWidgetId?: string;
+  matchingWidgetLabel?: string;
+  matchingPosition?: number;
+}
+
 export interface SelectedWidgetContext {
   widget: ChildWidget;
   page: PageWithWidgets;
   pageIndex: number;
   flatWidget?: FlatWidget;
-  usedInPages: { id: string; title: string; label: string; route: string }[];
+  usedInPages: WidgetUsagePage[];
 }
 
 /**
@@ -37,7 +49,9 @@ export const WIDGET_CATEGORY_BADGE_VARIANT: Record<
 };
 
 function toPascalIdentifier(widgetKey: string): string {
-  const suffix = widgetKey.includes(".") ? widgetKey.split(".").pop() || widgetKey : widgetKey;
+  const suffix = widgetKey.includes(".")
+    ? widgetKey.split(".").pop() || widgetKey
+    : widgetKey;
   return suffix
     .split(/[^a-zA-Z0-9]+/)
     .filter(Boolean)
@@ -214,52 +228,78 @@ export function getWidgetVisualMeta(widget: ChildWidget) {
 }
 
 /**
+ * Resolves the canonical `FlatWidget` metadata record from `data/widget.ts`.
+ */
+export function getFlatWidgetMeta(
+  widget: ChildWidget,
+  pageId?: string,
+): FlatWidget | undefined {
+  if (pageId) {
+    const exactMatch = WIDGETS_LIST.find(
+      (fw) =>
+        fw.page_id === pageId &&
+        fw.widget_key === widget.widget_key &&
+        fw.position === widget.position,
+    );
+    if (exactMatch) return exactMatch;
+
+    const pageKeyMatch = WIDGETS_LIST.find(
+      (fw) => fw.page_id === pageId && fw.widget_key === widget.widget_key,
+    );
+    if (pageKeyMatch) return pageKeyMatch;
+  }
+
+  return WIDGETS_LIST.find(
+    (fw) => fw.id === widget.id || fw.widget_key === widget.widget_key,
+  );
+}
+
+/**
  * Computes all pages where a given Strapi `widget_key` is utilized across the platform.
  */
 export function getWidgetUsageAcrossPages(
   widget: ChildWidget,
-): { id: string; title: string; label: string; route: string }[] {
-  const matchingPages: {
-    id: string;
-    title: string;
-    label: string;
-    route: string;
-  }[] = [];
+  pageId?: string,
+): WidgetUsagePage[] {
+  const matchingPages: WidgetUsagePage[] = [];
   const seenIds = new Set<string>();
 
-  const flat = WIDGETS_LIST.find(
-    (w) => w.id === widget.id || w.widget_key === widget.widget_key,
-  );
+  const pushPage = (pageMatch: PageWithWidgets) => {
+    if (seenIds.has(pageMatch.id)) return;
+    seenIds.add(pageMatch.id);
+    const matchingChild = pageMatch.child_widgets?.find(
+      (cw) => cw.widget_key === widget.widget_key,
+    );
+    matchingPages.push({
+      id: pageMatch.id,
+      title: pageMatch.title,
+      label: pageMatch.label,
+      route: pageMatch.route,
+      strapiSlug: pageMatch.strapi_slug,
+      pageCategory: pageMatch.category,
+      matchingWidgetId: matchingChild?.id,
+      matchingWidgetLabel: matchingChild?.widgets_label,
+      matchingPosition: matchingChild?.position,
+    });
+  };
+
+  const flat = getFlatWidgetMeta(widget, pageId);
   if (flat && Array.isArray(flat.used_in_pages)) {
     for (const pageSlug of flat.used_in_pages) {
       const pageMatch = PAGE_WIDGETS.find(
-        (p) => p.id === pageSlug || p.strapi_slug === pageSlug,
+        (p) =>
+          p.id === pageSlug ||
+          p.strapi_slug === pageSlug ||
+          p.route === pageSlug ||
+          (pageSlug === "[slug]" && p.id === "dynamic-slug"),
       );
-      if (pageMatch && !seenIds.has(pageMatch.id)) {
-        seenIds.add(pageMatch.id);
-        matchingPages.push({
-          id: pageMatch.id,
-          title: pageMatch.title,
-          label: pageMatch.label,
-          route: pageMatch.route,
-        });
-      }
+      if (pageMatch) pushPage(pageMatch);
     }
   }
 
   for (const page of PAGE_WIDGETS) {
-    if (seenIds.has(page.id)) continue;
-    const hasWidget = page.child_widgets?.some(
-      (cw) => cw.widget_key === widget.widget_key,
-    );
-    if (hasWidget) {
-      seenIds.add(page.id);
-      matchingPages.push({
-        id: page.id,
-        title: page.title,
-        label: page.label,
-        route: page.route,
-      });
+    if (page.child_widgets?.some((cw) => cw.widget_key === widget.widget_key)) {
+      pushPage(page);
     }
   }
 

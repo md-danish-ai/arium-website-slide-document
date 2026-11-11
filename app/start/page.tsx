@@ -51,8 +51,8 @@ export default function StartPage() {
   }, [activePage, selectedWidgetId]);
 
   const usedInPages = useMemo(() => {
-    return getWidgetUsageAcrossPages(activeWidget);
-  }, [activeWidget]);
+    return getWidgetUsageAcrossPages(activeWidget, activePage.id);
+  }, [activeWidget, activePage.id]);
 
   const handleSelectWidget = useCallback((pageId: string, widgetId: string) => {
     setSelectedPageId(pageId);
@@ -129,6 +129,7 @@ export default function StartPage() {
                 page={activePage}
                 usedInPages={usedInPages}
                 onNavigateToPage={handleSelectPage}
+                onSelectWidget={handleSelectWidget}
               />
             </div>
           </div>

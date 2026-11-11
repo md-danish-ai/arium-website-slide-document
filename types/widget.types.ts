@@ -15,11 +15,7 @@ export type WidgetCategory =
   | "shared";
 
 export type PageCategory =
-  | "Corporate"
-  | "Solutions"
-  | "Operations"
-  | "Team"
-  | "Dynamic";
+  "Corporate" | "Solutions" | "Operations" | "Team" | "Dynamic";
 
 export interface WidgetPreviewImages {
   desktop: string;
