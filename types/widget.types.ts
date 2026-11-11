@@ -23,17 +23,13 @@ export interface WidgetPreviewImages {
   mobile?: string;
 }
 
-export interface WidgetResponseSchema {
-  collectionName: string;
-  info: {
-    displayName: string;
-    icon: string;
-    category: WidgetCategory;
-    description: string;
-  };
-  options: Record<string, unknown>;
-  attributes: Record<string, Record<string, unknown>>;
+export interface StrapiWidgetPayload {
+  id?: number | string;
+  __component?: string;
+  [key: string]: unknown;
 }
+
+export type WidgetResponseSchema = StrapiWidgetPayload;
 
 export interface WidgetUsagePage {
   id: string;

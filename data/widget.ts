@@ -255,7 +255,7 @@ export const WIDGETS_LIST: FlatWidget[] = [
       mobile: "/images/about/hero-banner/hero-banner-mobile.png",
     },
     strapi_image: "/images/strapi-widgets/about/hero-banner.png",
-    widgets_response: WIDGETS_RESPONSES["shared.hero-banner"],
+    widgets_response: WIDGETS_RESPONSES["shared.hero-banner--about"],
     used_in_pages: [
       "about",
       "careers",
@@ -411,7 +411,7 @@ export const WIDGETS_LIST: FlatWidget[] = [
         "/images/about/image-gradient-split/image-gradient-split-mobile.png",
     },
     strapi_image: "/images/strapi-widgets/about/image-gradient-split.png",
-    widgets_response: WIDGETS_RESPONSES["shared.image-gradient-split"],
+    widgets_response: WIDGETS_RESPONSES["shared.image-gradient-split--about"],
     used_in_pages: ["about", "home"],
   },
 
@@ -446,7 +446,7 @@ export const WIDGETS_LIST: FlatWidget[] = [
       mobile: "/images/careers/hero-banner/hero-banner-mobile.png",
     },
     strapi_image: "/images/strapi-widgets/careers/hero-banner.png",
-    widgets_response: WIDGETS_RESPONSES["shared.hero-banner"],
+    widgets_response: WIDGETS_RESPONSES["shared.hero-banner--careers"],
     used_in_pages: [
       "careers",
       "about",
@@ -511,7 +511,7 @@ export const WIDGETS_LIST: FlatWidget[] = [
         "/images/careers/global-testimonials/global-testimonials-mobile.png",
     },
     strapi_image: "/images/strapi-widgets/careers/global-testimonials.png",
-    widgets_response: WIDGETS_RESPONSES["shared.gloabl-testimonails"],
+    widgets_response: WIDGETS_RESPONSES["shared.gloabl-testimonails--careers"],
     used_in_pages: ["careers", "community", "private-venues", "right-of-ways"],
   },
   {
@@ -625,7 +625,7 @@ export const WIDGETS_LIST: FlatWidget[] = [
       mobile: "/images/community/hero-banner/hero-banner-mobile.png",
     },
     strapi_image: "/images/strapi-widgets/community/hero-banner.png",
-    widgets_response: WIDGETS_RESPONSES["shared.hero-banner"],
+    widgets_response: WIDGETS_RESPONSES["shared.hero-banner--community"],
     used_in_pages: [
       "community",
       "about",
@@ -752,7 +752,8 @@ export const WIDGETS_LIST: FlatWidget[] = [
         "/images/community/global-testimonials/global-testimonials-mobile.png",
     },
     strapi_image: "/images/strapi-widgets/community/global-testimonials.png",
-    widgets_response: WIDGETS_RESPONSES["shared.gloabl-testimonails"],
+    widgets_response:
+      WIDGETS_RESPONSES["shared.gloabl-testimonails--community"],
     used_in_pages: ["community", "careers", "private-venues", "right-of-ways"],
   },
   {
@@ -811,7 +812,7 @@ export const WIDGETS_LIST: FlatWidget[] = [
       mobile: "/images/solutions/hero-banner/hero-banner-mobile.png",
     },
     strapi_image: "/images/strapi-widgets/solutions/hero-banner.png",
-    widgets_response: WIDGETS_RESPONSES["shared.hero-banner"],
+    widgets_response: WIDGETS_RESPONSES["shared.hero-banner--solutions"],
     used_in_pages: [
       "solutions",
       "about",
@@ -957,7 +958,7 @@ export const WIDGETS_LIST: FlatWidget[] = [
       mobile: "/images/solutions/cta-with-graphic/cta-with-graphic-mobile.png",
     },
     strapi_image: "/images/strapi-widgets/solutions/cta-with-graphic.png",
-    widgets_response: WIDGETS_RESPONSES["shared.cta-with-graphic"],
+    widgets_response: WIDGETS_RESPONSES["shared.cta-with-graphic--solutions"],
     used_in_pages: ["solutions", "home"],
   },
 
@@ -991,7 +992,7 @@ export const WIDGETS_LIST: FlatWidget[] = [
       mobile: "/images/private-venues/sub-page-hero/sub-page-hero-mobile.png",
     },
     strapi_image: "/images/strapi-widgets/private-venues/sub-page-hero.png",
-    widgets_response: WIDGETS_RESPONSES["shared.sub-page-hero"],
+    widgets_response: WIDGETS_RESPONSES["shared.sub-page-hero--private-venues"],
     used_in_pages: [
       "private-venues",
       "right-of-ways",
@@ -1029,7 +1030,7 @@ export const WIDGETS_LIST: FlatWidget[] = [
         "/images/private-venues/process-section/process-section-mobile.png",
     },
     strapi_image: "/images/strapi-widgets/private-venues/process-section.png",
-    widgets_response: WIDGETS_RESPONSES["shared.process"],
+    widgets_response: WIDGETS_RESPONSES["shared.process--private-venues"],
     used_in_pages: ["private-venues", "right-of-ways"],
   },
   {
@@ -1057,7 +1058,8 @@ export const WIDGETS_LIST: FlatWidget[] = [
     },
     strapi_image:
       "/images/strapi-widgets/private-venues/global-testimonials.png",
-    widgets_response: WIDGETS_RESPONSES["shared.gloabl-testimonails"],
+    widgets_response:
+      WIDGETS_RESPONSES["shared.gloabl-testimonails--private-venues"],
     used_in_pages: ["private-venues", "careers", "community", "right-of-ways"],
   },
   {
@@ -1087,7 +1089,7 @@ export const WIDGETS_LIST: FlatWidget[] = [
       mobile: "/images/private-venues/sub-page-cta/sub-page-cta-mobile.png",
     },
     strapi_image: "/images/strapi-widgets/private-venues/sub-page-cta.png",
-    widgets_response: WIDGETS_RESPONSES["shared.global-cta"],
+    widgets_response: WIDGETS_RESPONSES["shared.global-cta--private-venues"],
     used_in_pages: [
       "private-venues",
       "right-of-ways",
@@ -1126,7 +1128,7 @@ export const WIDGETS_LIST: FlatWidget[] = [
       mobile: "/images/right-of-ways/sub-page-hero/sub-page-hero-mobile.png",
     },
     strapi_image: "/images/strapi-widgets/right-of-ways/sub-page-hero.png",
-    widgets_response: WIDGETS_RESPONSES["shared.sub-page-hero"],
+    widgets_response: WIDGETS_RESPONSES["shared.sub-page-hero--right-of-ways"],
     used_in_pages: [
       "right-of-ways",
       "private-venues",
@@ -1164,7 +1166,7 @@ export const WIDGETS_LIST: FlatWidget[] = [
         "/images/right-of-ways/process-section/process-section-mobile.png",
     },
     strapi_image: "/images/strapi-widgets/right-of-ways/process-section.png",
-    widgets_response: WIDGETS_RESPONSES["shared.process"],
+    widgets_response: WIDGETS_RESPONSES["shared.process--right-of-ways"],
     used_in_pages: ["right-of-ways", "private-venues"],
   },
   {
@@ -1192,7 +1194,8 @@ export const WIDGETS_LIST: FlatWidget[] = [
     },
     strapi_image:
       "/images/strapi-widgets/right-of-ways/global-testimonials.png",
-    widgets_response: WIDGETS_RESPONSES["shared.gloabl-testimonails"],
+    widgets_response:
+      WIDGETS_RESPONSES["shared.gloabl-testimonails--right-of-ways"],
     used_in_pages: ["right-of-ways", "careers", "community", "private-venues"],
   },
   {
@@ -1222,7 +1225,7 @@ export const WIDGETS_LIST: FlatWidget[] = [
       mobile: "/images/right-of-ways/sub-page-cta/sub-page-cta-mobile.png",
     },
     strapi_image: "/images/strapi-widgets/right-of-ways/sub-page-cta.png",
-    widgets_response: WIDGETS_RESPONSES["shared.global-cta"],
+    widgets_response: WIDGETS_RESPONSES["shared.global-cta--right-of-ways"],
     used_in_pages: [
       "right-of-ways",
       "private-venues",
@@ -1262,7 +1265,7 @@ export const WIDGETS_LIST: FlatWidget[] = [
       mobile: "/images/where-we-build/hero-banner/hero-banner-mobile.png",
     },
     strapi_image: "/images/strapi-widgets/where-we-build/hero-banner.png",
-    widgets_response: WIDGETS_RESPONSES["shared.hero-banner"],
+    widgets_response: WIDGETS_RESPONSES["shared.hero-banner--where-we-build"],
     used_in_pages: [
       "where-we-build",
       "about",
@@ -1373,7 +1376,7 @@ export const WIDGETS_LIST: FlatWidget[] = [
       mobile: "/images/leadership/sub-page-hero/sub-page-hero-mobile.png",
     },
     strapi_image: "/images/strapi-widgets/leadership/sub-page-hero.png",
-    widgets_response: WIDGETS_RESPONSES["shared.sub-page-hero"],
+    widgets_response: WIDGETS_RESPONSES["shared.sub-page-hero--leadership"],
     used_in_pages: [
       "leadership",
       "private-venues",
@@ -1406,7 +1409,8 @@ export const WIDGETS_LIST: FlatWidget[] = [
         "/images/leadership/people-global-section/people-global-section-mobile.png",
     },
     strapi_image: "/images/strapi-widgets/leadership/people-global-section.png",
-    widgets_response: WIDGETS_RESPONSES["shared.people-global-section"],
+    widgets_response:
+      WIDGETS_RESPONSES["shared.people-global-section--leadership"],
     used_in_pages: ["leadership", "board-of-directors"],
   },
   {
@@ -1436,7 +1440,7 @@ export const WIDGETS_LIST: FlatWidget[] = [
       mobile: "/images/leadership/sub-page-cta/sub-page-cta-mobile.png",
     },
     strapi_image: "/images/strapi-widgets/leadership/sub-page-cta.png",
-    widgets_response: WIDGETS_RESPONSES["shared.global-cta"],
+    widgets_response: WIDGETS_RESPONSES["shared.global-cta--leadership"],
     used_in_pages: [
       "leadership",
       "private-venues",
@@ -1477,7 +1481,8 @@ export const WIDGETS_LIST: FlatWidget[] = [
         "/images/board-of-directors/sub-page-hero/sub-page-hero-mobile.png",
     },
     strapi_image: "/images/strapi-widgets/board-of-directors/sub-page-hero.png",
-    widgets_response: WIDGETS_RESPONSES["shared.sub-page-hero"],
+    widgets_response:
+      WIDGETS_RESPONSES["shared.sub-page-hero--board-of-directors"],
     used_in_pages: [
       "board-of-directors",
       "private-venues",
@@ -1511,7 +1516,8 @@ export const WIDGETS_LIST: FlatWidget[] = [
     },
     strapi_image:
       "/images/strapi-widgets/board-of-directors/people-global-section.png",
-    widgets_response: WIDGETS_RESPONSES["shared.people-global-section"],
+    widgets_response:
+      WIDGETS_RESPONSES["shared.people-global-section--board-of-directors"],
     used_in_pages: ["board-of-directors", "leadership"],
   },
   {
@@ -1541,7 +1547,8 @@ export const WIDGETS_LIST: FlatWidget[] = [
       mobile: "/images/board-of-directors/sub-page-cta/sub-page-cta-mobile.png",
     },
     strapi_image: "/images/strapi-widgets/board-of-directors/sub-page-cta.png",
-    widgets_response: WIDGETS_RESPONSES["shared.global-cta"],
+    widgets_response:
+      WIDGETS_RESPONSES["shared.global-cta--board-of-directors"],
     used_in_pages: [
       "board-of-directors",
       "private-venues",
@@ -1580,7 +1587,7 @@ export const WIDGETS_LIST: FlatWidget[] = [
       mobile: "/images/contact/sub-page-hero/sub-page-hero-mobile.png",
     },
     strapi_image: "/images/strapi-widgets/contact/sub-page-hero.png",
-    widgets_response: WIDGETS_RESPONSES["shared.sub-page-hero"],
+    widgets_response: WIDGETS_RESPONSES["shared.sub-page-hero--contact"],
     used_in_pages: [
       "contact",
       "private-venues",
@@ -1645,7 +1652,7 @@ export const WIDGETS_LIST: FlatWidget[] = [
       mobile: "/images/dynamic-slug/hero-banner/hero-banner-mobile.png",
     },
     strapi_image: "/images/strapi-widgets/dynamic-slug/hero-banner.png",
-    widgets_response: WIDGETS_RESPONSES["shared.hero-banner"],
+    widgets_response: WIDGETS_RESPONSES["shared.hero-banner--dynamic-slug"],
     used_in_pages: [
       "[slug]",
       "about",
