@@ -42,14 +42,9 @@ export default function StartPage() {
         widget_key: "shared.main-hero",
         widgets_title: "Home Main Hero Banner",
         widgets_label: "Hero Banner",
-        component_name: "HomeHero",
-        component_tag: "<HomeHero />",
-        renderer: "HomeHeroRenderer",
-        source_location: "@ui-component/home/HomeHero",
         category: "hero",
         description:
           "Full-bleed canvas hero displaying the primary value proposition, background video or image, and dual CTAs.",
-        fallback_key: "main-hero",
         key_props: ["title", "description", "font_color", "background_color"],
       }
     );

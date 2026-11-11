@@ -168,7 +168,7 @@ export function PageSidebar({
           (w) =>
             w.widgets_title.toLowerCase().includes(query) ||
             w.widgets_label.toLowerCase().includes(query) ||
-            w.component_name.toLowerCase().includes(query) ||
+            w.widget_key.toLowerCase().includes(query) ||
             w.category.toLowerCase().includes(query),
         );
         if (pageMatches || matchingWidgets.length > 0) {
@@ -189,7 +189,7 @@ export function PageSidebar({
       (w) =>
         w.widgets_title.toLowerCase().includes(query) ||
         w.widgets_label.toLowerCase().includes(query) ||
-        w.component_name.toLowerCase().includes(query) ||
+        w.widget_key.toLowerCase().includes(query) ||
         w.category.toLowerCase().includes(query),
     );
   }, [flatWidgets, searchQuery]);
@@ -305,7 +305,7 @@ export function PageSidebar({
                       return (
                         <SidebarWidgetItem
                           key={widget.id}
-                          label={widget.widgets_label || widget.component_name}
+                          label={widget.widgets_label || widget.widget_key}
                           category={widget.category}
                           isActive={isActive}
                           onClick={() => onSelectWidget(page.id, widget.id)}
@@ -333,7 +333,6 @@ export function PageSidebar({
                 (cw) =>
                   cw.id === flat.id ||
                   (cw.widget_key === flat.widget_key &&
-                    cw.component_name === flat.component_name &&
                     cw.position === flat.position) ||
                   cw.widget_key === flat.widget_key,
               );
@@ -345,7 +344,7 @@ export function PageSidebar({
                 <SidebarWidgetItem
                   key={flat.id}
                   index={index}
-                  label={flat.widgets_label || flat.component_name}
+                  label={flat.widgets_label || flat.widget_key}
                   category={flat.category}
                   isActive={isSelected}
                   onClick={() => {

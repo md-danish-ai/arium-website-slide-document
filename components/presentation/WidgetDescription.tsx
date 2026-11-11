@@ -39,14 +39,14 @@ export function WidgetDescription({
           </button>
           <span className="text-slate-300">/</span>
           <span className="text-slate-800 font-semibold">
-            {widget.widgets_label || widget.component_name}
+            {widget.widgets_label || widget.widget_key}
           </span>
         </div>
         <Badge
           variant="glass"
           className="text-[11px] font-mono px-2.5 py-0.5 rounded-md text-slate-600"
         >
-          {widget.component_tag}
+          {widget.widget_key}
         </Badge>
       </div>
 

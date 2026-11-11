@@ -36,12 +36,21 @@ export const WIDGET_CATEGORY_BADGE_VARIANT: Record<
   shared: "glassCyan",
 };
 
+function toPascalIdentifier(widgetKey: string): string {
+  const suffix = widgetKey.includes(".") ? widgetKey.split(".").pop() || widgetKey : widgetKey;
+  return suffix
+    .split(/[^a-zA-Z0-9]+/)
+    .filter(Boolean)
+    .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+    .join("");
+}
+
 function resolveWidgetVisualBase(widget: ChildWidget) {
-  const comp = widget.component_name;
-  const key = widget.widget_key;
+  const key = widget.widget_key.toLowerCase();
+  const label = widget.widgets_label.toLowerCase();
   const cat = widget.category;
 
-  if (comp.includes("Hero") || key.includes("hero")) {
+  if (key.includes("hero") || label.includes("hero") || cat === "hero") {
     return {
       svg: "/assets/connection-globe.svg",
       secondarySvg: "/assets/shape-teal.svg",
@@ -54,14 +63,16 @@ function resolveWidgetVisualBase(widget: ChildWidget) {
   }
 
   if (
-    comp.includes("Illustration") ||
-    comp.includes("SmallCells") ||
-    comp.includes("Das") ||
-    key.includes("illustration")
+    key.includes("small-cells") ||
+    key.includes("das") ||
+    key.includes("illustration") ||
+    label.includes("small cells") ||
+    label.includes("das") ||
+    label.includes("illustration")
   ) {
     return {
       svg:
-        key.includes("das") || comp.includes("Das")
+        key.includes("das") || label.includes("das")
           ? "/assets/das-illustration.svg"
           : "/assets/small-cells-illustration.svg",
       secondarySvg: "/assets/shape-teal.svg",
@@ -73,7 +84,7 @@ function resolveWidgetVisualBase(widget: ChildWidget) {
     };
   }
 
-  if (comp.includes("Stats") || key.includes("stats")) {
+  if (key.includes("stats") || label.includes("stats") || cat === "stats") {
     return {
       svg: "/assets/us-dot-map.svg",
       secondarySvg: "/assets/us-dot-map-faint.svg",
@@ -86,9 +97,10 @@ function resolveWidgetVisualBase(widget: ChildWidget) {
   }
 
   if (
-    comp.includes("CardGrid") ||
-    comp.includes("DetailedCard") ||
-    comp.includes("Benefits")
+    key.includes("card-grid") ||
+    key.includes("benefits") ||
+    label.includes("card grid") ||
+    label.includes("benefits")
   ) {
     return {
       svg: "/assets/innovation-illustration.svg",
@@ -101,7 +113,7 @@ function resolveWidgetVisualBase(widget: ChildWidget) {
     };
   }
 
-  if (comp.includes("Cta") || comp.includes("CTA")) {
+  if (key.includes("cta") || label.includes("cta") || cat === "cta") {
     return {
       svg: "/assets/connection-cta.svg",
       secondarySvg: "/assets/connection-cta-mobile.svg",
@@ -114,9 +126,11 @@ function resolveWidgetVisualBase(widget: ChildWidget) {
   }
 
   if (
-    comp.includes("Industries") ||
-    comp.includes("Venues") ||
-    comp.includes("Communities")
+    key.includes("industry") ||
+    key.includes("venues") ||
+    key.includes("communities") ||
+    label.includes("venues") ||
+    label.includes("communities")
   ) {
     return {
       svg: "/assets/commercial-real-estate.svg",
@@ -130,9 +144,10 @@ function resolveWidgetVisualBase(widget: ChildWidget) {
   }
 
   if (
-    comp.includes("Journey") ||
-    comp.includes("Timeline") ||
-    comp.includes("Process") ||
+    key.includes("timeline") ||
+    key.includes("process") ||
+    label.includes("journey") ||
+    label.includes("process") ||
     cat === "flow"
   ) {
     return {
@@ -147,7 +162,11 @@ function resolveWidgetVisualBase(widget: ChildWidget) {
     };
   }
 
-  if (comp.includes("Testimonial") || key.includes("testimonial")) {
+  if (
+    key.includes("testimon") ||
+    label.includes("testimonial") ||
+    cat === "testimonials"
+  ) {
     return {
       svg: "/assets/headline-bg.svg",
       secondarySvg: "/assets/shape-teal.svg",
@@ -171,17 +190,14 @@ function resolveWidgetVisualBase(widget: ChildWidget) {
 }
 
 /**
- * Maps component names and widget categories to authentic SVG graphics, data-driven preview screenshots, and visual metadata.
+ * Maps `widget_key`, labels, categories, preview screenshots, and Strapi images for a widget.
  */
 export function getWidgetVisualMeta(widget: ChildWidget) {
   const base = resolveWidgetVisualBase(widget);
   const matchingFlat =
     !widget.preview_images || !widget.strapi_image
       ? WIDGETS_LIST.find(
-          (fw) =>
-            (fw.widget_key === widget.widget_key &&
-              fw.component_name === widget.component_name) ||
-            fw.id === widget.id,
+          (fw) => fw.id === widget.id || fw.widget_key === widget.widget_key,
         )
       : undefined;
   const screenshots: WidgetPreviewImages | undefined =
@@ -198,7 +214,7 @@ export function getWidgetVisualMeta(widget: ChildWidget) {
 }
 
 /**
- * Computes all pages where a given widget or component is utilized across the whole platform
+ * Computes all pages where a given Strapi `widget_key` is utilized across the platform.
  */
 export function getWidgetUsageAcrossPages(
   widget: ChildWidget,
@@ -211,11 +227,8 @@ export function getWidgetUsageAcrossPages(
   }[] = [];
   const seenIds = new Set<string>();
 
-  // Check from WIDGETS_LIST used_in_pages if available
   const flat = WIDGETS_LIST.find(
-    (w) =>
-      w.widget_key === widget.widget_key ||
-      w.component_name === widget.component_name,
+    (w) => w.id === widget.id || w.widget_key === widget.widget_key,
   );
   if (flat && Array.isArray(flat.used_in_pages)) {
     for (const pageSlug of flat.used_in_pages) {
@@ -234,14 +247,10 @@ export function getWidgetUsageAcrossPages(
     }
   }
 
-  // Also scan all PAGE_WIDGETS directly to ensure complete fidelity
   for (const page of PAGE_WIDGETS) {
     if (seenIds.has(page.id)) continue;
     const hasWidget = page.child_widgets?.some(
-      (cw) =>
-        cw.widget_key === widget.widget_key ||
-        cw.component_name === widget.component_name ||
-        (cw.fallback_key && cw.fallback_key === widget.fallback_key),
+      (cw) => cw.widget_key === widget.widget_key,
     );
     if (hasWidget) {
       seenIds.add(page.id);
@@ -258,106 +267,16 @@ export function getWidgetUsageAcrossPages(
 }
 
 /**
- * Generates production-ready TypeScript, React TSX, Strapi Schema, and Mapper code for any widget
+ * Generates Strapi schema JSON and canonical TypeScript contracts from `widget_key` and `key_props`.
  */
 export function generateWidgetCode(widget: ChildWidget) {
-  const compName = widget.component_name;
+  const compName = toPascalIdentifier(widget.widget_key) || "StrapiWidget";
   const key = widget.widget_key;
   const propsList =
     widget.key_props && widget.key_props.length > 0
       ? widget.key_props
       : ["title", "description", "cards", "cta_text", "cta_url"];
 
-  // 1. React Component TSX
-  const reactComponentCode = `// ${widget.source_location}.tsx
-import React from "react";
-import Image from "next/image";
-import { cn } from "@lib/utils";
-
-export interface ${compName}Props {
-${propsList
-  .map(
-    (p) =>
-      `  ${p}?: ${
-        p.includes("cards") || p.includes("items") || p.includes("stats")
-          ? "any[]"
-          : p.includes("image")
-            ? "string | { url: string; alt?: string }"
-            : "string"
-      };`,
-  )
-  .join("\n")}
-  className?: string;
-}
-
-export function ${compName}({
-${propsList.map((p) => `  ${p},`).join("\n")}
-  className,
-}: ${compName}Props) {
-  return (
-    <section 
-      data-strapi-component="${key}"
-      className={cn(
-        "relative w-full py-16 px-6 lg:px-12 bg-midnight text-white overflow-hidden",
-        className
-      )}
-    >
-      {/* Background radial glow */}
-      <div className="absolute -top-32 -left-32 w-80 h-80 bg-teal/10 rounded-full blur-3xl pointer-events-none" />
-      
-      <div className="relative z-10 max-w-7xl mx-auto flex flex-col items-center">
-        {title && (
-          <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight text-white mb-4">
-            {title}
-          </h2>
-        )}
-        {description && (
-          <p className="text-slate-300 text-lg md:text-xl max-w-3xl text-center leading-relaxed mb-10">
-            {description}
-          </p>
-        )}
-
-        {/* Dynamic content slot for ${compName} */}
-        <div className="w-full mt-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {/* Canonical child renderer */}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-export default ${compName};`;
-
-  // 2. TypeScript Props Interface
-  const tsInterfaceCode = `// types/widgets/${widget.component_name.toLowerCase()}.types.ts
-/**
- * Canonical Type Definitions for ${compName} (${key})
- * Source: ${widget.source_location}
- */
-
-export interface ${compName}Props {
-${propsList
-  .map(
-    (p) =>
-      `  /** ${p} mapped from Strapi CMS Dynamic Zone attribute */\n  ${p}?: ${
-        p.includes("cards") ||
-        p.includes("stats") ||
-        p.includes("milestones") ||
-        p.includes("items")
-          ? "Array<Record<string, unknown>>"
-          : p.includes("image") || p.includes("icon")
-            ? "string | { url: string; alternativeText?: string }"
-            : "string"
-      };`,
-  )
-  .join("\n")}
-  /** Optional custom CSS classes */
-  className?: string;
-  /** Strapi component identifier */
-  __component?: "${key}";
-}`;
-
-  // 3. Strapi Schema JSON
   const strapiSchemaCode = `{
   "collectionName": "components_${key.replace(/[^a-zA-Z0-9]/g, "_")}",
   "info": {
@@ -386,34 +305,30 @@ ${propsList
   }
 }`;
 
-  // 4. Canonical Mapper
-  const mapperCode = `// lib/mappers/${widget.component_name.toLowerCase()}.mapper.ts
-import { ${compName}Props } from "@types";
-
-/**
- * 4-Layer Canonical Data Contract Mapper
- * Transforms raw Strapi API dynamic zone payload into sanitized ${compName}Props
+  const tsInterfaceCode = `/**
+ * Strapi Dynamic Zone Contract for ${compName} (${key})
  */
-export function map${compName}Data(raw: Record<string, any>): ${compName}Props {
-  return {
+export interface ${compName}Props {
 ${propsList
-  .map((p) => {
-    if (p.includes("cards") || p.includes("stats")) {
-      return `    ${p}: Array.isArray(raw?.${p}) ? raw.${p}.map(sanitizeItem) : [],`;
-    }
-    if (p.includes("image")) {
-      return `    ${p}: raw?.${p}?.data?.attributes?.url ?? raw?.${p} ?? null,`;
-    }
-    return `    ${p}: raw?.${p} ?? "",`;
-  })
+  .map(
+    (p) =>
+      `  ${p}?: ${
+        p.includes("cards") ||
+        p.includes("stats") ||
+        p.includes("milestones") ||
+        p.includes("items")
+          ? "Array<Record<string, unknown>>"
+          : p.includes("image") || p.includes("icon")
+            ? "string | { url: string; alternativeText?: string }"
+            : "string"
+      };`,
+  )
   .join("\n")}
-  };
+  __component?: "${key}";
 }`;
 
   return {
-    reactComponentCode,
     tsInterfaceCode,
     strapiSchemaCode,
-    mapperCode,
   };
 }

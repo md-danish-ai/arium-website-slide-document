@@ -58,7 +58,7 @@ export function WebsitePreviewCard({
     title ??
     (variant === "blueprint"
       ? "Widget Image"
-      : widget?.widgets_label || widget?.component_name || resolvedHeadline);
+      : widget?.widgets_label || widget?.widget_key || resolvedHeadline);
 
   const resolvedPreviewImage =
     variant === "blueprint"

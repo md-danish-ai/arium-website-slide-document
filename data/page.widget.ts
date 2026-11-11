@@ -2,8 +2,8 @@ import { PageWithWidgets, ChildWidget } from "@/types/widget.types";
 
 /**
  * 1. PAGES BY WIDGETS ARRAY
- * Contains complete page-by-page mapping with collapsible section items
- * and nested child widgets used in each respective page.
+ * Contains complete page-by-page Strapi mapping and nested child widgets
+ * used in each respective page.
  */
 export const PAGE_WIDGETS: PageWithWidgets[] = [
   // ── 1. HOME PAGE ────────────────────────────────────────────────────────
@@ -16,86 +16,6 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
     category: "Corporate",
     description:
       "Flagship entrance for Arium Networks. Orchestrates 7 modular sections and background particle physics to showcase high-density cellular infrastructure, small cells, and municipal partnerships.",
-    widget_count: 7,
-    items: [
-      {
-        id: "sec-home-0",
-        title: "Main Display Hero Banner",
-        label: "Hero Section",
-        position: 0,
-        description:
-          "Full-screen dark midnight canvas with custom headline line breaks, dynamic sub-heading, and primary/secondary interactive CTAs.",
-        component_tag: "<HomeHero />",
-        source_location: "@ui-component/home/HomeHero",
-        strapi_section_key: "heroMedia",
-      },
-      {
-        id: "sec-home-1",
-        title: "Network Challenges & Mission Overview",
-        label: "What We Do",
-        position: 1,
-        description:
-          "Two-column split detailing the surging wireless demand, network densification pain points, and Arium's comprehensive response.",
-        component_tag: "<BackgroundFeatureSection />",
-        source_location: "@ui-component/home/BackgroundFeatureSection",
-        strapi_section_key: "What we do",
-      },
-      {
-        id: "sec-home-2",
-        title: "Three-Pillar Infrastructure Architecture Grid",
-        label: "Our Infrastructure",
-        position: 2,
-        description:
-          "High-contrast 3-card grid covering the complete lifecycle: Network Architecture, Turnkey Deployment, and Long-Term Operations.",
-        component_tag: "<DetailedCardGrid />",
-        source_location: "@ui-component/home/DetailedCardGrid",
-        strapi_section_key: "Our Infrastructure",
-      },
-      {
-        id: "sec-home-3",
-        title: "National Deployment Scale & Metrics",
-        label: "Scale & Experience",
-        position: 3,
-        description:
-          "Highlighting 50,000+ deployed nodes, 99.999% network reliability, and nationwide coverage with side infrastructure photography.",
-        component_tag: "<StatsWithImage />",
-        source_location: "@ui-component/home/StatsWithImage",
-        strapi_section_key: "Scale and experience",
-      },
-      {
-        id: "sec-home-4",
-        title: "Community Partnership & Impact Split",
-        label: "Community Impact",
-        position: 4,
-        description:
-          "Editorial split block emphasizing non-intrusive public right-of-way design and municipal aesthetic harmony.",
-        component_tag: "<ImageGradientSplit />",
-        source_location: "@ui-common/ImageGradientSplit",
-        strapi_section_key: "Community Impact",
-      },
-      {
-        id: "sec-home-5",
-        title: "Talent Acquisition & Careers Callout",
-        label: "Join Us",
-        position: 5,
-        description:
-          "Full-width visual hiring banner directing engineers, field technicians, and telecom project managers to open career opportunities.",
-        component_tag: "<CenteredImageCTA />",
-        source_location: "@ui-common/CenteredImageCTA",
-        strapi_section_key: "Join Us",
-      },
-      {
-        id: "sec-home-6",
-        title: "Closing Contact CTA Banner with Vector Graphic Loop",
-        label: "Contact Us",
-        position: 6,
-        description:
-          "High-conversion footer anchor featuring the brand signature circular vector graphic and dual action buttons.",
-        component_tag: "<CtaWithGraphic />",
-        source_location: "@ui-common/CtaWithGraphic",
-        strapi_section_key: "Contact Us",
-      },
-    ],
     child_widgets: [
       {
         id: "w-home-0",
@@ -103,14 +23,9 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
         widget_key: "shared.main-hero",
         widgets_title: "Home Main Hero Banner",
         widgets_label: "Hero Banner",
-        component_name: "HomeHero",
-        component_tag: "<HomeHero />",
-        renderer: "HomeHeroRenderer",
-        source_location: "@ui-component/home/HomeHero",
         category: "hero",
         description:
           "Full-bleed canvas hero displaying the primary value proposition, background video or image, and dual CTAs.",
-        fallback_key: "main-hero",
         key_props: [
           "title",
           "description",
@@ -131,14 +46,9 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
         widget_key: "shared.background-feature-section",
         widgets_title: "Network Challenges & Solutions Overview",
         widgets_label: "Background Feature",
-        component_name: "BackgroundFeatureSection",
-        component_tag: "<BackgroundFeatureSection />",
-        renderer: "BackgroundFeatureRenderer",
-        source_location: "@ui-component/home/BackgroundFeatureSection",
         category: "feature",
         description:
           "Section framing telecom bandwidth challenges with high-contrast text and glowing infrastructure background graphics.",
-        fallback_key: "background-feature-section",
         key_props: ["title", "description", "cards", "cta_text", "cta_url"],
         preview_images: {
           desktop: "/images/home/background-feature/background-feature.png",
@@ -155,14 +65,9 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
         widget_key: "shared.detailed-card-grid",
         widgets_title: "3-Pillar Infrastructure Architecture Grid",
         widgets_label: "Detailed Card Grid",
-        component_name: "DetailedCardGrid",
-        component_tag: "<DetailedCardGrid />",
-        renderer: "DetailedCardGridRenderer",
-        source_location: "@ui-component/home/DetailedCardGrid",
         category: "content",
         description:
           "Tri-card interactive layout detailing Design, Deployment, and Operations services with custom hover elevation.",
-        fallback_key: "detailed-card-grid",
         key_props: ["title", "description", "cards", "columns"],
         preview_images: {
           desktop: "/images/home/detailed-card-grid/detailed-card-grid.png",
@@ -179,14 +84,9 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
         widget_key: "shared.stats-with-image",
         widgets_title: "Scale & Experience Deployment Metrics",
         widgets_label: "Stats With Image",
-        component_name: "StatsWithImage",
-        component_tag: "<StatsWithImage />",
-        renderer: "StatsWithImageRenderer",
-        source_location: "@ui-component/home/StatsWithImage",
         category: "stats",
         description:
           "Key performance indicators (50K+ Nodes, 99.999% Uptime) alongside high-resolution field photography.",
-        fallback_key: "stats-with-image",
         key_props: ["title", "description", "stats", "image"],
         preview_images: {
           desktop: "/images/home/stats-with-image/stats-with-image.png",
@@ -201,14 +101,9 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
         widget_key: "shared.image-gradient-split",
         widgets_title: "Community Partnership Impact Split",
         widgets_label: "Image Gradient Split",
-        component_name: "ImageGradientSplit",
-        component_tag: "<ImageGradientSplit />",
-        renderer: "CommunityImpactRenderer",
-        source_location: "@ui-common/ImageGradientSplit",
         category: "content",
         description:
           "Editorial 50/50 block balancing community aesthetic considerations with wireless capacity enhancements.",
-        fallback_key: "image-gradient-split",
         key_props: ["title", "description", "image", "cta_text", "cta_url"],
         preview_images: {
           desktop: "/images/home/image-gradient-split/image-gradient-split.png",
@@ -225,14 +120,9 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
         widget_key: "shared.centered-image-cta",
         widgets_title: "High-Contrast Hiring Callout",
         widgets_label: "Centered Image CTA",
-        component_name: "CenteredImageCTA",
-        component_tag: "<CenteredImageCTA />",
-        renderer: "CenteredImageCTARenderer",
-        source_location: "@ui-common/CenteredImageCTA",
         category: "cta",
         description:
           "Centered callout card targeting prospective telecom professionals with background imagery and direct apply link.",
-        fallback_key: "centered-image-cta",
         key_props: [
           "title",
           "description",
@@ -255,14 +145,9 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
         widget_key: "shared.cta-with-graphic",
         widgets_title: "Closing Brand CTA with Circular Graphic Loop",
         widgets_label: "CTA With Graphic",
-        component_name: "CtaWithGraphic",
-        component_tag: "<CtaWithGraphic />",
-        renderer: "CtaWithGraphicRenderer",
-        source_location: "@ui-common/CtaWithGraphic",
         category: "cta",
         description:
           "Signature conversion unit incorporating Arium's circular orbital vector graphics, badge, and dual CTAs.",
-        fallback_key: "cta-with-graphic",
         key_props: [
           "title",
           "description",
@@ -290,55 +175,6 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
     category: "Corporate",
     description:
       "Narrative corporate storytelling page implementing the Storyteller Flow. Binds 3 distinct Strapi dynamic zone blocks under a single continuous FlowBackground canvas with vector line art.",
-    widget_count: 6,
-    items: [
-      {
-        id: "sec-about-0",
-        title: "Corporate Mission Hero Banner",
-        label: "Hero Section",
-        position: 0,
-        description:
-          "Full-bleed subpage hero banner with custom headline width, subtitle, and dark midnight gradient overlay.",
-        component_tag: "<HeroBanner />",
-        source_location: "@ui-common/HeroBanner",
-        strapi_section_key: "heroMedia",
-      },
-      {
-        id: "sec-about-1",
-        title: "Foundational Story with Vector Wireframe Graphic",
-        label: "Our Story",
-        position: 1,
-        description:
-          "Two-column split detailing Arium's founding vision alongside an intricate 3D vector wireframe torus graphic.",
-        component_tag: "<AboutContentWithSideGraphic />",
-        source_location: "@ui-component/about/AboutContentWithSideGraphic",
-        strapi_section_key: "Story",
-      },
-      {
-        id: "sec-about-2",
-        title: "Storyteller Flow Container (3 Connected Blocks)",
-        label: "Storyteller Flow",
-        position: 2,
-        is_flow_container: true,
-        child_count: 3,
-        description:
-          "Seamless curved vector line art container dynamically grouping the Journey Timeline, Trust Stats, and Corporate Commitments.",
-        component_tag: "<FlowBackground /> (wrapping 3 blocks)",
-        source_location: "@ui-animations/FlowBackground",
-        strapi_section_key: "Journey + Why our infrastructure + Values",
-      },
-      {
-        id: "sec-about-3",
-        title: "Culture & Engineering Recruitment Split",
-        label: "We're Hiring",
-        position: 3,
-        description:
-          "Culture spotlight encouraging infrastructure specialists to join Arium's engineering teams.",
-        component_tag: "<ImageGradientSplit />",
-        source_location: "@ui-common/ImageGradientSplit",
-        strapi_section_key: "We're Hiring",
-      },
-    ],
     child_widgets: [
       {
         id: "w-about-0",
@@ -346,14 +182,9 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
         widget_key: "shared.hero-banner",
         widgets_title: "About Brand Hero Banner",
         widgets_label: "Hero Banner",
-        component_name: "HeroBanner",
-        component_tag: "<HeroBanner />",
-        renderer: "HeroBannerRenderer",
-        source_location: "@ui-common/HeroBanner",
         category: "hero",
         description:
           "Full-bleed subpage hero with responsive typography, dark gradient overlay, and optional CTA button.",
-        fallback_key: "hero-banner",
         key_props: [
           "title",
           "description",
@@ -374,14 +205,9 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
         widget_key: "shared.content-with-side-graphic",
         widgets_title: "Our Story with Vector Wireframe Torus Graphic",
         widgets_label: "Content With Side Graphic",
-        component_name: "AboutContentWithSideGraphic",
-        component_tag: "<AboutContentWithSideGraphic />",
-        renderer: "AboutStoryRenderer",
-        source_location: "@ui-component/about/AboutContentWithSideGraphic",
         category: "content",
         description:
           "Two-column narrative block displaying corporate history alongside vector technical graphics.",
-        fallback_key: "content-with-side-graphic",
         key_props: ["title", "subtitle", "content", "graphic_type", "image"],
         preview_images: {
           desktop:
@@ -400,15 +226,9 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
         widget_key: "shared.timeline",
         widgets_title: "Chronological Milestones Journey",
         widgets_label: "Journey Timeline",
-        component_name: "AboutJourney",
-        component_tag: "<AboutJourney />",
-        renderer: "AboutJourneyRenderer",
-        source_location: "@ui-component/about/AboutJourney",
         category: "flow",
-        is_flow_grouped: true,
         description:
           "Interactive chronological timeline showcasing key milestones, carrier deployments, and company growth.",
-        fallback_key: "storyteller-flow",
         key_props: ["heading", "subheading", "milestones"],
         preview_images: {
           desktop: "/images/about/journey-timeline/journey-timeline.png",
@@ -423,15 +243,9 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
         widget_key: "shared.stats-cards",
         widgets_title: "Why Our Infrastructure Trust Stats Cards",
         widgets_label: "Stats Cards",
-        component_name: "AboutStatsCards",
-        component_tag: "<AboutStatsCards />",
-        renderer: "AboutStatsCardsRenderer",
-        source_location: "@ui-component/about/AboutStatsCards",
         category: "flow",
-        is_flow_grouped: true,
         description:
           "Grid of 4 trust metrics highlighting carrier compliance, uptime standards, and safety certifications.",
-        fallback_key: "storyteller-flow",
         key_props: ["title", "description", "cards"],
         preview_images: {
           desktop: "/images/about/stats-cards/stats-cards.png",
@@ -446,15 +260,9 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
         widget_key: "shared.commitments",
         widgets_title: "Values & Standards Commitments",
         widgets_label: "Commitments",
-        component_name: "AboutCommitments",
-        component_tag: "<AboutCommitments />",
-        renderer: "AboutCommitmentsRenderer",
-        source_location: "@ui-component/about/AboutCommitments",
         category: "flow",
-        is_flow_grouped: true,
         description:
           "Four core corporate commitments: Community Trust, Aesthetic Harmony, Environmental Responsibility, Safety.",
-        fallback_key: "storyteller-flow",
         key_props: ["heading", "description", "commitments_list"],
         preview_images: {
           desktop: "/images/about/commitments/commitments.png",
@@ -469,14 +277,9 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
         widget_key: "shared.image-gradient-split",
         widgets_title: "We're Hiring Culture Split",
         widgets_label: "Image Gradient Split",
-        component_name: "ImageGradientSplit",
-        component_tag: "<ImageGradientSplit />",
-        renderer: "CommunityImpactRenderer",
-        source_location: "@ui-common/ImageGradientSplit",
         category: "content",
         description:
           "Split promotional section highlighting workplace culture, engineering values, and career entryways.",
-        fallback_key: "image-gradient-split",
         key_props: ["title", "description", "image", "cta_text", "cta_url"],
         preview_images: {
           desktop:
@@ -501,75 +304,6 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
     category: "Corporate",
     description:
       "Recruitment and culture hub presenting employee value proposition, active hiring disciplines, comprehensive benefits, and diversity statements with deduplicated shared components.",
-    widget_count: 6,
-    items: [
-      {
-        id: "sec-careers-0",
-        title: "Careers Exploration Hero Banner",
-        label: "Hero Section",
-        position: 0,
-        description:
-          "High-impact subpage hero highlighting team culture with secondary teal CTA button.",
-        component_tag: "<HeroBanner />",
-        source_location: "@ui-common/HeroBanner",
-        strapi_section_key: "heroMedia",
-      },
-      {
-        id: "sec-careers-1",
-        title: "Workplace Culture Accordion Split",
-        label: "Why Join",
-        position: 1,
-        description:
-          "Interactive accordion displaying work philosophy, professional growth, and engineering autonomy.",
-        component_tag: "<CareersCultureAccordion />",
-        source_location: "@ui-component/careers/CareersCultureAccordion",
-        strapi_section_key: "Why Join",
-      },
-      {
-        id: "sec-careers-2",
-        title: "Employee Testimonials Carousel",
-        label: "Team Testimonials",
-        position: 2,
-        description:
-          "Canonical reusable testimonials component sharing authentic stories from RF engineers and project managers.",
-        component_tag: "<SharedTestimonials />",
-        source_location: "@ui-common/SharedTestimonials",
-        strapi_section_key: "Arium Networks Team",
-      },
-      {
-        id: "sec-careers-3",
-        title: "Functional Job Disciplines & Roles",
-        label: "Job Areas",
-        position: 3,
-        description:
-          "Grid highlighting core career tracks: RF Engineering, Field Operations, Municipal Permitting, Corporate.",
-        component_tag: "<CareersJobAreas />",
-        source_location: "@ui-component/careers/CareersJobAreas",
-        strapi_section_key: "Job Areas",
-      },
-      {
-        id: "sec-careers-4",
-        title: "Comprehensive Benefits & Perks Grid",
-        label: "Benefits",
-        position: 4,
-        description:
-          "Reusable 6-card benefits grid detailing healthcare, retirement match, PTO, and continuous learning funds.",
-        component_tag: "<BenefitsGrid />",
-        source_location: "@ui-common/BenefitsGrid",
-        strapi_section_key: "Benefits",
-      },
-      {
-        id: "sec-careers-5",
-        title: "Equal Opportunity Employer (EEO) Statement",
-        label: "EEO Policy",
-        position: 5,
-        description:
-          "Legal and corporate commitment to inclusive, non-discriminatory hiring and workplace equity.",
-        component_tag: "<CareersEEO />",
-        source_location: "@ui-component/careers/CareersEEO",
-        strapi_section_key: "Message",
-      },
-    ],
     child_widgets: [
       {
         id: "w-car-0",
@@ -577,14 +311,9 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
         widget_key: "shared.hero-banner",
         widgets_title: "Careers Value Proposition Hero Banner",
         widgets_label: "Hero Banner",
-        component_name: "HeroBanner",
-        component_tag: "<HeroBanner />",
-        renderer: "HeroBannerRenderer",
-        source_location: "@ui-common/HeroBanner",
         category: "hero",
         description:
           "Subpage hero showcasing team energy and careers value proposition.",
-        fallback_key: "hero-banner",
         key_props: [
           "title",
           "description",
@@ -605,14 +334,9 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
         widget_key: "shared.accordion-split",
         widgets_title: "Why Join Culture Accordion",
         widgets_label: "Culture Accordion",
-        component_name: "CareersCultureAccordion",
-        component_tag: "<CareersCultureAccordion />",
-        renderer: "AccordionSplitRenderer",
-        source_location: "@ui-component/careers/CareersCultureAccordion",
         category: "content",
         description:
           "Split layout pairing photographic showcase with interactive expandable culture values.",
-        fallback_key: "accordion-split",
         key_props: ["title", "description", "items", "image"],
         preview_images: {
           desktop: "/images/careers/culture-accordion/culture-accordion.png",
@@ -629,14 +353,9 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
         widget_key: "shared.gloabl-testimonails",
         widgets_title: "Employee Testimonials Carousel",
         widgets_label: "Global Testimonials",
-        component_name: "SharedTestimonials",
-        component_tag: "<SharedTestimonials />",
-        renderer: "GlobalTestimonialsRenderer",
-        source_location: "@ui-common/SharedTestimonials",
         category: "testimonials",
         description:
           "Canonical reusable testimonial slider used across Careers, Community, and Venues.",
-        fallback_key: "gloabl-testimonails",
         key_props: ["title", "subtitle", "testimonials_list"],
         preview_images: {
           desktop:
@@ -654,14 +373,9 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
         widget_key: "shared.highlight-list",
         widgets_title: "Functional Job Disciplines & Career Tracks",
         widgets_label: "Job Areas",
-        component_name: "CareersJobAreas",
-        component_tag: "<CareersJobAreas />",
-        renderer: "CareersJobAreasRenderer",
-        source_location: "@ui-component/careers/CareersJobAreas",
         category: "content",
         description:
           "Interactive list or cards detailing active engineering tracks and openings.",
-        fallback_key: "highlight-list",
         key_props: ["title", "description", "job_disciplines"],
         preview_images: {
           desktop: "/images/careers/job-areas/job-areas.png",
@@ -676,14 +390,9 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
         widget_key: "shared.benefits",
         widgets_title: "Comprehensive Employee Benefits Grid",
         widgets_label: "Benefits Grid",
-        component_name: "BenefitsGrid",
-        component_tag: "<BenefitsGrid />",
-        renderer: "BenefitsGridRenderer",
-        source_location: "@ui-common/BenefitsGrid",
         category: "feature",
         description:
           "Modular 6-tile grid highlighting health, financial security, time off, and tuition aid.",
-        fallback_key: "benefits",
         key_props: ["title", "description", "cards"],
         preview_images: {
           desktop: "/images/careers/benefits-grid/benefits-grid.png",
@@ -698,14 +407,9 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
         widget_key: "shared.eeo",
         widgets_title: "Equal Employment Opportunity Statement",
         widgets_label: "EEO Statement",
-        component_name: "CareersEEO",
-        component_tag: "<CareersEEO />",
-        renderer: "CareersJobAreasRenderer",
-        source_location: "@ui-component/careers/CareersEEO",
         category: "content",
         description:
           "Formal corporate diversity pledge ensuring barrier-free career advancement.",
-        fallback_key: "eeo",
         key_props: ["title", "content"],
         preview_images: {
           desktop: "/images/careers/eeo-statement/eeo-statement.png",
@@ -727,75 +431,6 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
     category: "Corporate",
     description:
       "Municipal and civic stakeholder education page. Explains unobtrusive small-cell aesthetics, local permitting processes, and long-term public right-of-way stewardship.",
-    widget_count: 6,
-    items: [
-      {
-        id: "sec-comm-0",
-        title: "Community Partnership Hero Banner",
-        label: "Hero Section",
-        position: 0,
-        description:
-          "Hero banner emphasizing respectful municipal integration and community connectivity.",
-        component_tag: "<HeroBanner />",
-        source_location: "@ui-common/HeroBanner",
-        strapi_section_key: "Community banner",
-      },
-      {
-        id: "sec-comm-1",
-        title: "Small Cells Technology & Design Split",
-        label: "Small Cells",
-        position: 1,
-        description:
-          "Vector illustration showcasing small cell utility pole integration and low visual impact.",
-        component_tag: "<IllustrationSplit />",
-        source_location: "@ui-common/IllustrationSplit",
-        strapi_section_key: "Small cell",
-      },
-      {
-        id: "sec-comm-2",
-        title: "Why Small Cells Matter to Cities",
-        label: "Why Small Cells Matter",
-        position: 2,
-        description:
-          "Visual card grid detailing 911 emergency reliability, digital equity, and economic development.",
-        component_tag: "<BenefitsGrid />",
-        source_location: "@ui-common/BenefitsGrid",
-        strapi_section_key: "Small cells matter",
-      },
-      {
-        id: "sec-comm-3",
-        title: "How We Work with Municipalities",
-        label: "How We Work",
-        position: 3,
-        description:
-          "Interactive stage-by-stage guide to municipal permitting, RF compliance, and community meetings.",
-        component_tag: "<CommunityHowWeWork />",
-        source_location: "@ui-component/community/CommunityHowWeWork",
-        strapi_section_key: "How we work",
-      },
-      {
-        id: "sec-comm-4",
-        title: "Civic Leaders & Municipal Testimonials",
-        label: "City Testimonials",
-        position: 4,
-        description:
-          "Reusable testimonials slider featuring mayor and city planner feedback on Arium installations.",
-        component_tag: "<SharedTestimonials />",
-        source_location: "@ui-common/SharedTestimonials",
-        strapi_section_key: "Communities support",
-      },
-      {
-        id: "sec-comm-5",
-        title: "Community Frequently Asked Questions",
-        label: "FAQ Accordion",
-        position: 5,
-        description:
-          "Accordion addressing RF safety, FCC guidelines, power draw, and pole maintenance protocols.",
-        component_tag: "<CommunityFAQ />",
-        source_location: "@ui-component/community/CommunityFAQ",
-        strapi_section_key: "FAQ",
-      },
-    ],
     child_widgets: [
       {
         id: "w-com-0",
@@ -803,14 +438,9 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
         widget_key: "shared.hero-banner",
         widgets_title: "Community Hero Banner",
         widgets_label: "Hero Banner",
-        component_name: "HeroBanner",
-        component_tag: "<HeroBanner />",
-        renderer: "HeroBannerRenderer",
-        source_location: "@ui-common/HeroBanner",
         category: "hero",
         description:
           "Community subpage hero with municipality-oriented messaging.",
-        fallback_key: "hero-banner",
         key_props: ["title", "description", "background_image"],
         preview_images: {
           desktop: "/images/community/hero-banner/hero-banner.png",
@@ -825,14 +455,9 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
         widget_key: "shared.illustration-split",
         widgets_title: "Small Cells Municipal Technology Split",
         widgets_label: "Illustration Split",
-        component_name: "IllustrationSplit",
-        component_tag: "<IllustrationSplit />",
-        renderer: "IllustrationSplitRenderer",
-        source_location: "@ui-common/IllustrationSplit",
         category: "content",
         description:
           "Unified illustration component displaying small-cells-illustration.svg and technical specs.",
-        fallback_key: "illustration-split",
         key_props: [
           "title",
           "description",
@@ -856,14 +481,9 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
         widget_key: "shared.image-card-grid",
         widgets_title: "Why Small Cells Matter Card Grid",
         widgets_label: "Image Card Grid",
-        component_name: "BenefitsGrid",
-        component_tag: "<BenefitsGrid />",
-        renderer: "BenefitsGridRenderer",
-        source_location: "@ui-common/BenefitsGrid",
         category: "feature",
         description:
           "Card grid exploring public safety, emergency dispatch, and economic growth.",
-        fallback_key: "image-card-grid",
         key_props: ["title", "description", "cards"],
         preview_images: {
           desktop: "/images/community/image-card-grid/image-card-grid.png",
@@ -880,14 +500,9 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
         widget_key: "shared.background-feature-section",
         widgets_title: "How We Work with Municipalities",
         widgets_label: "How We Work",
-        component_name: "CommunityHowWeWork",
-        component_tag: "<CommunityHowWeWork />",
-        renderer: "CommunityHowWeWorkRenderer",
-        source_location: "@ui-component/community/CommunityHowWeWork",
         category: "feature",
         description:
           "Municipal collaboration workflow highlighting transparency and safety codes.",
-        fallback_key: "background-feature-section",
         key_props: ["title", "description", "steps"],
         preview_images: {
           desktop: "/images/community/how-we-work/how-we-work.png",
@@ -902,14 +517,9 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
         widget_key: "shared.gloabl-testimonails",
         widgets_title: "Civic Leaders & Municipal Testimonials",
         widgets_label: "Global Testimonials",
-        component_name: "SharedTestimonials",
-        component_tag: "<SharedTestimonials />",
-        renderer: "GlobalTestimonialsRenderer",
-        source_location: "@ui-common/SharedTestimonials",
         category: "testimonials",
         description:
           "Verified testimonials from city managers, utilities, and civic engineers.",
-        fallback_key: "gloabl-testimonails",
         key_props: ["title", "subtitle", "testimonials_list"],
         preview_images: {
           desktop:
@@ -928,14 +538,9 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
         widget_key: "shared.faq",
         widgets_title: "Community Frequently Asked Questions",
         widgets_label: "FAQ Accordion",
-        component_name: "CommunityFAQ",
-        component_tag: "<CommunityFAQ />",
-        renderer: "CommunityFAQRenderer",
-        source_location: "@ui-component/community/CommunityFAQ",
         category: "content",
         description:
           "Accordion addressing RF emissions compliance, pole permits, and maintenance SLAs.",
-        fallback_key: "faq",
         key_props: ["title", "description", "faqs"],
         preview_images: {
           desktop: "/images/community/faq-accordion/faq-accordion.png",
@@ -957,56 +562,6 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
     category: "Solutions",
     description:
       "Deep technical walkthrough of Arium's core infrastructure offerings: Small Cells Densification, Distributed Antenna Systems (DAS), and industry-specific private wireless architectures.",
-    widget_count: 5,
-    items: [
-      {
-        id: "sec-sol-0",
-        title: "Telecom Solutions Hero Banner",
-        label: "Hero Section",
-        position: 0,
-        description:
-          "Full-bleed hero introducing carrier-grade connectivity, capacity offload, and multi-operator support.",
-        component_tag: "<HeroBanner />",
-        source_location: "@ui-common/HeroBanner",
-        strapi_section_key: "heroMedia",
-      },
-      {
-        id: "sec-sol-1",
-        title: "Radial Flow Container: Dual Technical Splits",
-        label: "Radial Flow",
-        position: 1,
-        is_flow_container: true,
-        child_count: 2,
-        description:
-          "Single continuous gradient canvas dynamically rendering two unified IllustrationSplit blocks for Small Cells and DAS.",
-        component_tag:
-          "<FlowBackground /> (wrapping dual <IllustrationSplit />)",
-        source_location: "@ui-common/IllustrationSplit",
-        strapi_section_key: "Small Cells + Distributed Antenna Systems",
-      },
-      {
-        id: "sec-sol-2",
-        title: "Multi-Industry Infrastructure Accordion",
-        label: "Industries",
-        position: 3,
-        description:
-          "Interactive industry selector detailing specialized deployments in Airports, Stadiums, Healthcare, and CRE.",
-        component_tag: "<SolutionsIndustries />",
-        source_location: "@ui-component/solutions/SolutionsIndustries",
-        strapi_section_key: "Industries",
-      },
-      {
-        id: "sec-sol-3",
-        title: "A Balanced Approach Solutions Closing CTA",
-        label: "Solutions CTA",
-        position: 99,
-        description:
-          "Closing conversion block inviting venue managers and mobile operators to schedule technical consultations.",
-        component_tag: "<CtaWithGraphic />",
-        source_location: "@ui-common/CtaWithGraphic",
-        strapi_section_key: "A Balanced Approach",
-      },
-    ],
     child_widgets: [
       {
         id: "w-sol-0",
@@ -1014,14 +569,9 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
         widget_key: "shared.hero-banner",
         widgets_title: "Solutions Overview Hero Banner",
         widgets_label: "Hero Banner",
-        component_name: "HeroBanner",
-        component_tag: "<HeroBanner />",
-        renderer: "HeroBannerRenderer",
-        source_location: "@ui-common/HeroBanner",
         category: "hero",
         description:
           "Solutions hero communicating multi-carrier and high-density capabilities.",
-        fallback_key: "hero-banner",
         key_props: [
           "title",
           "description",
@@ -1042,15 +592,9 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
         widget_key: "shared.small-cells",
         widgets_title: "Small Cells Densification Technical Split",
         widgets_label: "Small Cells Split",
-        component_name: "IllustrationSplit",
-        component_tag: "<IllustrationSplit />",
-        renderer: "SolutionsSmallCellsRenderer",
-        source_location: "@ui-common/IllustrationSplit",
         category: "flow",
-        is_flow_grouped: true,
         description:
           "Technical architecture for 5G mmWave/sub-6GHz densification using small-cells-illustration.svg.",
-        fallback_key: "illustration-split",
         key_props: [
           "title",
           "description",
@@ -1073,15 +617,9 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
         widget_key: "shared.das",
         widgets_title: "Distributed Antenna Systems (DAS) In-Building Split",
         widgets_label: "DAS Split",
-        component_name: "IllustrationSplit",
-        component_tag: "<IllustrationSplit />",
-        renderer: "SolutionsDasRenderer",
-        source_location: "@ui-common/IllustrationSplit",
         category: "flow",
-        is_flow_grouped: true,
         description:
           "High-capacity in-building coverage architecture using das-illustration.svg with optical remotes.",
-        fallback_key: "illustration-split",
         key_props: [
           "title",
           "description",
@@ -1102,14 +640,9 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
         widget_key: "shared.industry",
         widgets_title: "Multi-Industry Infrastructure Accordion",
         widgets_label: "Industries Accordion",
-        component_name: "SolutionsIndustries",
-        component_tag: "<SolutionsIndustries />",
-        renderer: "SolutionsIndustriesRenderer",
-        source_location: "@ui-component/solutions/SolutionsIndustries",
         category: "content",
         description:
           "Accordion tabs detailing tailored engineering for Airports, Venues, Healthcare, and Commercial Real Estate.",
-        fallback_key: "accordion-split",
         key_props: ["title", "description", "industries"],
         preview_images: {
           desktop:
@@ -1128,14 +661,9 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
         widget_key: "shared.cta-with-graphic",
         widgets_title: "A Balanced Approach Solutions CTA",
         widgets_label: "CTA With Graphic",
-        component_name: "CtaWithGraphic",
-        component_tag: "<CtaWithGraphic />",
-        renderer: "CtaWithGraphicRenderer",
-        source_location: "@ui-common/CtaWithGraphic",
         category: "cta",
         description:
           "Closing conversion block with orbital graphics and CTA consultation buttons.",
-        fallback_key: "cta-with-graphic",
         key_props: ["title", "description", "button_text", "button_link"],
         preview_images: {
           desktop: "/images/solutions/cta-with-graphic/cta-with-graphic.png",
@@ -1159,53 +687,6 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
     category: "Solutions",
     description:
       "Enterprise venue solution page illustrating turn-key in-building wireless connectivity, carrier funding models, and end-to-end service delivery processes.",
-    widget_count: 4,
-    items: [
-      {
-        id: "sec-pv-0",
-        title: "Private Venues Subpage Hero",
-        label: "Sub-Page Hero",
-        position: 0,
-        description:
-          "Subpage hero introducing private venue networks, neutral host architecture, and zero-capex financing.",
-        component_tag: "<SubPageHeroBanner />",
-        source_location: "@ui-common/SubPageHeroBanner",
-        strapi_section_key: "heroCtas",
-      },
-      {
-        id: "sec-pv-1",
-        title: "4-Stage Service Delivery Process Timeline",
-        label: "Process Timeline",
-        position: 1,
-        description:
-          "Step-by-step roadmap: 1. Assessment, 2. Engineering Design, 3. Deployment, 4. 24/7 Monitoring.",
-        component_tag: "<ProcessSection />",
-        source_location: "@ui-common/ProcessSection",
-        strapi_section_key: "Service delivery process",
-      },
-      {
-        id: "sec-pv-2",
-        title: "Commercial Venue Operator Testimonials",
-        label: "Operator Testimonials",
-        position: 2,
-        description:
-          "Testimonials from stadium operations directors and hospital CTOs praising uninterrupted coverage.",
-        component_tag: "<SharedTestimonials />",
-        source_location: "@ui-common/SharedTestimonials",
-        strapi_section_key: "Venue operators",
-      },
-      {
-        id: "sec-pv-3",
-        title: "Venue Partnership Consultation CTA",
-        label: "Sub-Page CTA",
-        position: 99,
-        description:
-          "Direct callout for property managers to initiate complimentary wireless venue assessments.",
-        component_tag: "<SubPageCTA />",
-        source_location: "@ui-common/SubPageCTA",
-        strapi_section_key: "Contact Us",
-      },
-    ],
     child_widgets: [
       {
         id: "w-pv-0",
@@ -1213,14 +694,9 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
         widget_key: "shared.sub-page-hero",
         widgets_title: "Private Venues Sub-Page Hero Banner",
         widgets_label: "Sub-Page Hero",
-        component_name: "SubPageHeroBanner",
-        component_tag: "<SubPageHeroBanner />",
-        renderer: "SubPageHeroRenderer",
-        source_location: "@ui-common/SubPageHeroBanner",
         category: "hero",
         description:
           "Compact subpage header with background gradient and prominent venue qualification CTA.",
-        fallback_key: "sub-page-hero",
         key_props: [
           "title",
           "description",
@@ -1243,14 +719,9 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
         widget_key: "shared.process",
         widgets_title: "4-Stage Service Delivery Process Timeline",
         widgets_label: "Process Section",
-        component_name: "ProcessSection",
-        component_tag: "<ProcessSection />",
-        renderer: "ProcessRenderer",
-        source_location: "@ui-common/ProcessSection",
         category: "content",
         description:
           "Four-step progression outlining RF audit, design, commissioning, and NOC monitoring.",
-        fallback_key: "process",
         key_props: ["title", "description", "steps"],
         preview_images: {
           desktop: "/images/private-venues/process-section/process-section.png",
@@ -1267,15 +738,10 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
         widget_key: "shared.gloabl-testimonails",
         widgets_title: "Commercial Venue Operator Testimonials",
         widgets_label: "Global Testimonials",
-        component_name: "SharedTestimonials",
-        component_tag: "<SharedTestimonials />",
-        renderer: "GlobalTestimonialsRenderer",
-        source_location: "@ui-common/SharedTestimonials",
         position: 2,
         category: "testimonials",
         description:
           "Canonical testimonials slider highlighting venue operator and asset manager experiences.",
-        fallback_key: "gloabl-testimonails",
         key_props: ["title", "subtitle", "testimonials_list"],
         preview_images: {
           desktop:
@@ -1294,14 +760,9 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
         widget_key: "shared.global-cta",
         widgets_title: "Private Venues Partnership CTA Banner",
         widgets_label: "Sub-Page CTA",
-        component_name: "SubPageCTA",
-        component_tag: "<SubPageCTA />",
-        renderer: "SubPageCTARenderer",
-        source_location: "@ui-common/SubPageCTA",
         category: "cta",
         description:
           "Shared CTA banner inviting property managers to request an infrastructure assessment.",
-        fallback_key: "global-cta",
         key_props: ["title", "description", "button_text", "button_url"],
         preview_images: {
           desktop: "/images/private-venues/sub-page-cta/sub-page-cta.png",
@@ -1323,53 +784,6 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
     category: "Operations",
     description:
       "Municipal right-of-way deployment guide showcasing aesthetic street furniture, utility pole colocation, and standardized city permitting agreements.",
-    widget_count: 4,
-    items: [
-      {
-        id: "sec-row-0",
-        title: "Right of Ways Subpage Hero",
-        label: "Sub-Page Hero",
-        position: 1,
-        description:
-          "Subpage header explaining municipal right-of-way colocation and carrier neutral-host advantages.",
-        component_tag: "<SubPageHeroBanner />",
-        source_location: "@ui-common/SubPageHeroBanner",
-        strapi_section_key: "heroCtas",
-      },
-      {
-        id: "sec-row-1",
-        title: "Structured Municipal Permitting & Deployment Process",
-        label: "Structured Process",
-        position: 2,
-        description:
-          "Step-by-step roadmap: Master License Agreements, Site Audits, Construction, and Preservation.",
-        component_tag: "<ProcessSection />",
-        source_location: "@ui-common/ProcessSection",
-        strapi_section_key: "Structured process",
-      },
-      {
-        id: "sec-row-2",
-        title: "City & Utility Partner Feedback Testimonials",
-        label: "City Feedback",
-        position: 3,
-        description:
-          "Testimonials from municipal engineers praising clean shroud designs and zero sidewalk disruption.",
-        component_tag: "<SharedTestimonials />",
-        source_location: "@ui-common/SharedTestimonials",
-        strapi_section_key: "Feedback",
-      },
-      {
-        id: "sec-row-3",
-        title: "Right of Ways Partnership CTA Banner",
-        label: "Sub-Page CTA",
-        position: 4,
-        description:
-          "Conversion banner urging city planners and public works officials to begin right-of-way consultations.",
-        component_tag: "<SubPageCTA />",
-        source_location: "@ui-common/SubPageCTA",
-        strapi_section_key: "Contact Us",
-      },
-    ],
     child_widgets: [
       {
         id: "w-row-0",
@@ -1377,14 +791,9 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
         widget_key: "shared.sub-page-hero",
         widgets_title: "Right of Ways Sub-Page Hero Banner",
         widgets_label: "Sub-Page Hero",
-        component_name: "SubPageHeroBanner",
-        component_tag: "<SubPageHeroBanner />",
-        renderer: "SubPageHeroRenderer",
-        source_location: "@ui-common/SubPageHeroBanner",
         category: "hero",
         description:
           "Subpage hero introducing municipal right-of-way co-location and utility agreements.",
-        fallback_key: "sub-page-hero",
         key_props: [
           "title",
           "description",
@@ -1407,14 +816,9 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
         widget_key: "shared.process",
         widgets_title: "Structured Municipal Permitting & Deployment Process",
         widgets_label: "Process Section",
-        component_name: "ProcessSection",
-        component_tag: "<ProcessSection />",
-        renderer: "ProcessRenderer",
-        source_location: "@ui-common/ProcessSection",
         category: "content",
         description:
           "Four-step municipal timeline: Site Survey, Master Lease Agreement, Construction, Ongoing Maintenance.",
-        fallback_key: "process",
         key_props: ["title", "description", "steps"],
         preview_images: {
           desktop: "/images/right-of-ways/process-section/process-section.png",
@@ -1432,14 +836,9 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
         widget_key: "shared.gloabl-testimonails",
         widgets_title: "City & Utility Partner Feedback Testimonials",
         widgets_label: "Global Testimonials",
-        component_name: "SharedTestimonials",
-        component_tag: "<SharedTestimonials />",
-        renderer: "GlobalTestimonialsRenderer",
-        source_location: "@ui-common/SharedTestimonials",
         category: "testimonials",
         description:
           "Canonical testimonials slider with direct quotes from city engineers and utility managers.",
-        fallback_key: "gloabl-testimonails",
         key_props: ["title", "subtitle", "testimonials_list"],
         preview_images: {
           desktop:
@@ -1458,14 +857,9 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
         widget_key: "shared.global-cta",
         widgets_title: "Right of Ways Consultation CTA Banner",
         widgets_label: "Sub-Page CTA",
-        component_name: "SubPageCTA",
-        component_tag: "<SubPageCTA />",
-        renderer: "SubPageCTARenderer",
-        source_location: "@ui-common/SubPageCTA",
         category: "cta",
         description:
           "Shared CTA banner encouraging city officials to connect for master leasing agreements.",
-        fallback_key: "global-cta",
         key_props: ["title", "description", "button_text", "button_url"],
         preview_images: {
           desktop: "/images/right-of-ways/sub-page-cta/sub-page-cta.png",
@@ -1487,42 +881,6 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
     category: "Operations",
     description:
       "National footprint showcase pairing high-contrast interactive US dot map illustrations with breakdowns of community streetscapes and high-density commercial venue deployments.",
-    widget_count: 3,
-    items: [
-      {
-        id: "sec-where-0",
-        title: "National Coverage & Footprint Hero",
-        label: "Hero Section",
-        position: 0,
-        description:
-          "Full-bleed subpage hero establishing nationwide scale across major Tier-1 and Tier-2 metropolitan markets.",
-        component_tag: "<HeroBanner />",
-        source_location: "@ui-common/HeroBanner",
-        strapi_section_key: "heroMedia",
-      },
-      {
-        id: "sec-where-1",
-        title: "Municipal Communities Footprint with US Dot Map",
-        label: "Communities Footprint",
-        position: 1,
-        description:
-          "Split feature combining the us-dot-map.svg visual graphic with metropolitan node distribution numbers.",
-        component_tag: "<WhereCommunities />",
-        source_location: "@ui-component/where-we-build/WhereCommunities",
-        strapi_section_key: "Communities",
-      },
-      {
-        id: "sec-where-2",
-        title: "Commercial Buildings & High-Traffic Venues Footprint",
-        label: "Venues Footprint",
-        position: 2,
-        description:
-          "Split feature highlighting deployments in commercial towers, airports, transit hubs, and sports complexes.",
-        component_tag: "<WhereVenues />",
-        source_location: "@ui-component/where-we-build/WhereVenues",
-        strapi_section_key: "Buildings and Venues",
-      },
-    ],
     child_widgets: [
       {
         id: "w-where-0",
@@ -1530,14 +888,9 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
         widget_key: "shared.hero-banner",
         widgets_title: "National Footprint Hero Banner",
         widgets_label: "Hero Banner",
-        component_name: "HeroBanner",
-        component_tag: "<HeroBanner />",
-        renderer: "HeroBannerRenderer",
-        source_location: "@ui-common/HeroBanner",
         category: "hero",
         description:
           "National footprint hero displaying scale across nationwide markets.",
-        fallback_key: "hero-banner",
         key_props: ["title", "description", "background_image"],
         preview_images: {
           desktop: "/images/where-we-build/hero-banner/hero-banner.png",
@@ -1552,14 +905,9 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
         widget_key: "shared.communities",
         widgets_title: "Municipal Communities Footprint with US Dot Map",
         widgets_label: "Where Communities",
-        component_name: "WhereCommunities",
-        component_tag: "<WhereCommunities />",
-        renderer: "WhereCommunitiesRenderer",
-        source_location: "@ui-component/where-we-build/WhereCommunities",
         category: "content",
         description:
           "Split layout pairing us-dot-map.svg vector illustration with community deployment data.",
-        fallback_key: "communities",
         key_props: ["title", "description", "dot_map", "stats"],
         preview_images: {
           desktop:
@@ -1578,14 +926,9 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
         widget_key: "shared.venues",
         widgets_title: "Commercial Buildings & High-Traffic Venues Footprint",
         widgets_label: "Where Venues",
-        component_name: "WhereVenues",
-        component_tag: "<WhereVenues />",
-        renderer: "WhereVenuesRenderer",
-        source_location: "@ui-component/where-we-build/WhereVenues",
         category: "content",
         description:
           "Split layout highlighting enterprise venues, real estate portfolios, and coverage footprint.",
-        fallback_key: "venues",
         key_props: ["title", "description", "image", "venue_types"],
         preview_images: {
           desktop: "/images/where-we-build/where-venues/where-venues.png",
@@ -1607,42 +950,6 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
     category: "Team",
     description:
       "Executive committee presentation utilizing the unified PeopleGlobalSection. Implements interactive modal/drawer bio views with zero code duplication between teams.",
-    widget_count: 3,
-    items: [
-      {
-        id: "sec-lead-0",
-        title: "Executive Leadership Subpage Hero",
-        label: "Sub-Page Hero",
-        position: 0,
-        description:
-          "Clean subpage header establishing executive vision and telecom industry leadership experience.",
-        component_tag: "<SubPageHeroBanner />",
-        source_location: "@ui-common/SubPageHeroBanner",
-        strapi_section_key: "heroCtas",
-      },
-      {
-        id: "sec-lead-1",
-        title: "Executive Committee People Grid & Bio Modal Drawer",
-        label: "Executive Grid",
-        position: 1,
-        description:
-          "Responsive cards with hover states, executive portrait photography, role titles, and click-to-expand bio drawer.",
-        component_tag: "<PeopleGlobalSection />",
-        source_location: "@ui-common/PeopleGlobalSection",
-        strapi_section_key: "Leaders",
-      },
-      {
-        id: "sec-lead-2",
-        title: "Explore Careers Leadership Callout",
-        label: "Sub-Page CTA",
-        position: 99,
-        description:
-          "Conversion banner connecting visitors with open opportunities to work alongside executive leaders.",
-        component_tag: "<SubPageCTA />",
-        source_location: "@ui-common/SubPageCTA",
-        strapi_section_key: "Explore Careers",
-      },
-    ],
     child_widgets: [
       {
         id: "w-lead-0",
@@ -1650,14 +957,9 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
         widget_key: "shared.sub-page-hero",
         widgets_title: "Executive Leadership Sub-Page Hero Banner",
         widgets_label: "Sub-Page Hero",
-        component_name: "SubPageHeroBanner",
-        component_tag: "<SubPageHeroBanner />",
-        renderer: "SubPageHeroRenderer",
-        source_location: "@ui-common/SubPageHeroBanner",
         category: "hero",
         description:
           "Subpage hero introducing executive management and corporate stewardship.",
-        fallback_key: "sub-page-hero",
         key_props: ["title", "description", "background_gradient"],
         preview_images: {
           desktop: "/images/leadership/sub-page-hero/sub-page-hero.png",
@@ -1673,14 +975,9 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
         widgets_title:
           "Executive Management & Leadership Grid with Bio Drawers",
         widgets_label: "People Global Section",
-        component_name: "PeopleGlobalSection",
-        component_tag: "<PeopleGlobalSection />",
-        renderer: "PeopleGlobalRenderer",
-        source_location: "@ui-common/PeopleGlobalSection",
         category: "people",
         description:
           "Canonical team grid component supporting executive profiles and full-screen modal bio drawers.",
-        fallback_key: "people-global-section",
         key_props: ["members", "background_gradient", "columns"],
         preview_images: {
           desktop:
@@ -1699,14 +996,9 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
         widget_key: "shared.global-cta",
         widgets_title: "Explore Careers Leadership Callout Banner",
         widgets_label: "Sub-Page CTA",
-        component_name: "SubPageCTA",
-        component_tag: "<SubPageCTA />",
-        renderer: "SubPageCTARenderer",
-        source_location: "@ui-common/SubPageCTA",
         category: "cta",
         description:
           "Shared CTA banner pointing prospective talent to open roles.",
-        fallback_key: "global-cta",
         key_props: ["title", "description", "button_text", "button_url"],
         preview_images: {
           desktop: "/images/leadership/sub-page-cta/sub-page-cta.png",
@@ -1728,42 +1020,6 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
     category: "Team",
     description:
       "Governance and fiduciary leadership roster reusing PeopleGlobalSection with board member profiles, committee appointments, and credentials.",
-    widget_count: 3,
-    items: [
-      {
-        id: "sec-board-0",
-        title: "Board Governance Subpage Hero",
-        label: "Sub-Page Hero",
-        position: 0,
-        description:
-          "Subpage header introducing governance, industry veterans, and strategic institutional leadership.",
-        component_tag: "<SubPageHeroBanner />",
-        source_location: "@ui-common/SubPageHeroBanner",
-        strapi_section_key: "heroCtas",
-      },
-      {
-        id: "sec-board-1",
-        title: "Board of Directors Governance Grid & Bio Modal Drawer",
-        label: "Board Grid",
-        position: 1,
-        description:
-          "Responsive grid presenting board chair and directors with click-to-expand background modal drawers.",
-        component_tag: "<PeopleGlobalSection />",
-        source_location: "@ui-common/PeopleGlobalSection",
-        strapi_section_key: "Directors",
-      },
-      {
-        id: "sec-board-2",
-        title: "Meet the Full Leadership Team CTA",
-        label: "Sub-Page CTA",
-        position: 99,
-        description:
-          "Cross-navigation banner inviting visitors to review executive committee profiles and company history.",
-        component_tag: "<SubPageCTA />",
-        source_location: "@ui-common/SubPageCTA",
-        strapi_section_key: "Leadership Meet",
-      },
-    ],
     child_widgets: [
       {
         id: "w-board-0",
@@ -1771,14 +1027,9 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
         widget_key: "shared.sub-page-hero",
         widgets_title: "Board Governance Sub-Page Hero Banner",
         widgets_label: "Sub-Page Hero",
-        component_name: "SubPageHeroBanner",
-        component_tag: "<SubPageHeroBanner />",
-        renderer: "SubPageHeroRenderer",
-        source_location: "@ui-common/SubPageHeroBanner",
         category: "hero",
         description:
           "Subpage hero introducing board governance and strategic advisory.",
-        fallback_key: "sub-page-hero",
         key_props: ["title", "description", "background_gradient"],
         preview_images: {
           desktop: "/images/board-of-directors/sub-page-hero/sub-page-hero.png",
@@ -1796,14 +1047,9 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
         widget_key: "shared.people-global-section",
         widgets_title: "Board of Directors Governance Grid with Bio Drawers",
         widgets_label: "People Global Section",
-        component_name: "PeopleGlobalSection",
-        component_tag: "<PeopleGlobalSection />",
-        renderer: "PeopleGlobalRenderer",
-        source_location: "@ui-common/PeopleGlobalSection",
         category: "people",
         description:
           "Shared canonical people section rendering board members and advisors with interactive bio drawer.",
-        fallback_key: "people-global-section",
         key_props: ["members", "background_gradient", "columns"],
         preview_images: {
           desktop:
@@ -1822,14 +1068,9 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
         widget_key: "shared.global-cta",
         widgets_title: "Meet the Full Leadership Team CTA Banner",
         widgets_label: "Sub-Page CTA",
-        component_name: "SubPageCTA",
-        component_tag: "<SubPageCTA />",
-        renderer: "SubPageCTARenderer",
-        source_location: "@ui-common/SubPageCTA",
         category: "cta",
         description:
           "Shared CTA banner guiding visitors back to the executive leadership team view.",
-        fallback_key: "global-cta",
         key_props: ["title", "description", "button_text", "button_url"],
         preview_images: {
           desktop: "/images/board-of-directors/sub-page-cta/sub-page-cta.png",
@@ -1854,31 +1095,6 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
     category: "Corporate",
     description:
       "Interactive consultation and inquiries portal with dynamic carrier interest routing, form validation, and direct Strapi submission endpoints.",
-    widget_count: 2,
-    items: [
-      {
-        id: "sec-contact-0",
-        title: "Contact Us Subpage Hero Banner",
-        label: "Sub-Page Hero",
-        position: 1,
-        description:
-          "Header introducing carrier partnerships, municipal questions, and customer support channels.",
-        component_tag: "<SubPageHeroBanner />",
-        source_location: "@ui-common/SubPageHeroBanner",
-        strapi_section_key: "heroTitle",
-      },
-      {
-        id: "sec-contact-1",
-        title: "Interactive Inquiry & Carrier Interest Form",
-        label: "Contact Form",
-        position: 2,
-        description:
-          "Dynamic form with custom dropdown topics (Small Cells, Private Venues, Careers, Press) and API submission handling.",
-        component_tag: "<ContactForm />",
-        source_location: "@ui-component/contact/ContactForm",
-        strapi_section_key: "contact-form",
-      },
-    ],
     child_widgets: [
       {
         id: "w-contact-0",
@@ -1886,14 +1102,9 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
         widget_key: "shared.sub-page-hero",
         widgets_title: "Contact Us Sub-Page Hero Banner",
         widgets_label: "Sub-Page Hero",
-        component_name: "SubPageHeroBanner",
-        component_tag: "<SubPageHeroBanner />",
-        renderer: "SubPageHeroRenderer",
-        source_location: "@ui-common/SubPageHeroBanner",
         category: "hero",
         description:
           "Subpage hero introducing contact and partnership channels.",
-        fallback_key: "sub-page-hero",
         key_props: ["title", "description", "background_gradient"],
         preview_images: {
           desktop: "/images/contact/sub-page-hero/sub-page-hero.png",
@@ -1908,14 +1119,9 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
         widget_key: "contact-form",
         widgets_title: "Multi-Topic Inquiry & Carrier Interest Form",
         widgets_label: "Contact Form",
-        component_name: "ContactForm",
-        component_tag: "<ContactForm />",
-        renderer: "ContactForm",
-        source_location: "@ui-component/contact/ContactForm",
         category: "form",
         description:
           "Interactive form with topic selection, input validation, and submission handler.",
-        fallback_key: "contact-form",
         key_props: ["topicOptions", "onSubmit", "isSubmitting"],
         preview_images: {
           desktop: "/images/contact/contact-form/contact-form.png",
@@ -1937,31 +1143,6 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
     category: "Dynamic",
     description:
       "Catch-all Next.js route demonstrating editorial freedom. Marketing teams can assemble entirely custom pages from Strapi Dynamic Zones using combinePageSections() and WIDGET_REGISTRY.",
-    widget_count: 2,
-    items: [
-      {
-        id: "sec-dyn-0",
-        title: "Dynamic Slug Hero Banner",
-        label: "Hero Banner",
-        position: 0,
-        description:
-          "Configurable hero automatically pulling page title and hero media from Strapi dynamic page entry.",
-        component_tag: "<HeroBanner />",
-        source_location: "@ui-common/HeroBanner",
-        strapi_section_key: "heroMedia",
-      },
-      {
-        id: "sec-dyn-1",
-        title: "Dynamic Zone Runtime Injection & Numerical Ordering",
-        label: "Dynamic Zones",
-        position: 1,
-        description:
-          "Arbitrary collection of modular widgets ordered by editorial PositionNumber from Strapi CMS.",
-        component_tag: "<GlobalWidgetRenderer /> (WIDGET_REGISTRY)",
-        source_location: "components/ui-widget/GlobalWidgetRenderer.tsx",
-        strapi_section_key: "widgets / dynamic_zone",
-      },
-    ],
     child_widgets: [
       {
         id: "w-dyn-0",
@@ -1969,13 +1150,8 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
         widget_key: "shared.hero-banner",
         widgets_title: "Dynamic Page Hero Banner",
         widgets_label: "Hero Banner",
-        component_name: "HeroBanner",
-        component_tag: "<HeroBanner />",
-        renderer: "HeroBannerRenderer",
-        source_location: "@ui-common/HeroBanner",
         category: "hero",
         description: "Dynamic page header populated from Strapi slug query.",
-        fallback_key: "hero-banner",
         key_props: ["title", "description", "background_image"],
         preview_images: {
           desktop: "/images/dynamic-slug/hero-banner/hero-banner.png",
@@ -1990,14 +1166,9 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
         widget_key: "shared.dynamic-zone",
         widgets_title: "Dynamic Zone Injected Widgets (WIDGET_REGISTRY)",
         widgets_label: "Dynamic Zone",
-        component_name: "GlobalWidgetRenderer",
-        component_tag: "<GlobalWidgetRenderer />",
-        renderer: "WIDGET_REGISTRY",
-        source_location: "components/ui-widget/registry.ts",
         category: "shared",
         description:
           "Modular dynamic blocks resolved dynamically through the global WIDGET_REGISTRY.",
-        fallback_key: "dynamic-zone",
         key_props: ["__component", "PositionNumber", "data"],
         preview_images: {
           desktop: "/images/dynamic-slug/dynamic-zone/dynamic-zone.png",
