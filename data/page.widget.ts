@@ -123,6 +123,7 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
           tablet: "/images/home/home-hero/home-hero-tablet.png",
           mobile: "/images/home/home-hero/home-hero-mobile.png",
         },
+        strapi_image: "/images/strapi-widgets/home/home-hero.png",
       },
       {
         id: "w-home-1",
@@ -146,6 +147,7 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
           mobile:
             "/images/home/background-feature/background-feature-mobile.png",
         },
+        strapi_image: "/images/strapi-widgets/home/background-feature.png",
       },
       {
         id: "w-home-2",
@@ -169,6 +171,7 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
           mobile:
             "/images/home/detailed-card-grid/detailed-card-grid-mobile.png",
         },
+        strapi_image: "/images/strapi-widgets/home/detailed-card-grid.png",
       },
       {
         id: "w-home-3",
@@ -190,6 +193,7 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
           tablet: "/images/home/stats-with-image/stats-with-image-tablet.png",
           mobile: "/images/home/stats-with-image/stats-with-image-mobile.png",
         },
+        strapi_image: "/images/strapi-widgets/home/stats-with-image.png",
       },
       {
         id: "w-home-4",
@@ -213,6 +217,7 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
           mobile:
             "/images/home/image-gradient-split/image-gradient-split-mobile.png",
         },
+        strapi_image: "/images/strapi-widgets/home/image-gradient-split.png",
       },
       {
         id: "w-home-5",
@@ -242,6 +247,7 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
           mobile:
             "/images/home/centered-image-cta/centered-image-cta-mobile.png",
         },
+        strapi_image: "/images/strapi-widgets/home/centered-image-cta.png",
       },
       {
         id: "w-home-6",
@@ -269,6 +275,7 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
           tablet: "/images/home/cta-with-graphic/cta-with-graphic-tablet.png",
           mobile: "/images/home/cta-with-graphic/cta-with-graphic-mobile.png",
         },
+        strapi_image: "/images/strapi-widgets/home/cta-with-graphic.png",
       },
     ],
   },
@@ -359,6 +366,7 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
           tablet: "/images/about/hero-banner/hero-banner-tablet.png",
           mobile: "/images/about/hero-banner/hero-banner-mobile.png",
         },
+        strapi_image: "/images/strapi-widgets/about/hero-banner.png",
       },
       {
         id: "w-about-1",
@@ -383,6 +391,8 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
           mobile:
             "/images/about/content-with-side-graphic/content-with-side-graphic-mobile.png",
         },
+        strapi_image:
+          "/images/strapi-widgets/about/content-with-side-graphic.png",
       },
       {
         id: "w-about-2",
@@ -405,6 +415,7 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
           tablet: "/images/about/journey-timeline/journey-timeline-tablet.png",
           mobile: "/images/about/journey-timeline/journey-timeline-mobile.png",
         },
+        strapi_image: "/images/strapi-widgets/about/journey-timeline.png",
       },
       {
         id: "w-about-3",
@@ -427,6 +438,7 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
           tablet: "/images/about/stats-cards/stats-cards-tablet.png",
           mobile: "/images/about/stats-cards/stats-cards-mobile.png",
         },
+        strapi_image: "/images/strapi-widgets/about/stats-cards.png",
       },
       {
         id: "w-about-4",
@@ -449,6 +461,7 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
           tablet: "/images/about/commitments/commitments-tablet.png",
           mobile: "/images/about/commitments/commitments-mobile.png",
         },
+        strapi_image: "/images/strapi-widgets/about/commitments.png",
       },
       {
         id: "w-about-5",
@@ -473,6 +486,7 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
           mobile:
             "/images/about/image-gradient-split/image-gradient-split-mobile.png",
         },
+        strapi_image: "/images/strapi-widgets/about/image-gradient-split.png",
       },
     ],
   },
@@ -583,6 +597,7 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
           tablet: "/images/careers/hero-banner/hero-banner-tablet.png",
           mobile: "/images/careers/hero-banner/hero-banner-mobile.png",
         },
+        strapi_image: "/images/strapi-widgets/careers/hero-banner.png",
       },
       {
         id: "w-car-1",
@@ -606,6 +621,7 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
           mobile:
             "/images/careers/culture-accordion/culture-accordion-mobile.png",
         },
+        strapi_image: "/images/strapi-widgets/careers/culture-accordion.png",
       },
       {
         id: "w-car-2",
@@ -630,6 +646,7 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
           mobile:
             "/images/careers/global-testimonials/global-testimonials-mobile.png",
         },
+        strapi_image: "/images/strapi-widgets/careers/global-testimonials.png",
       },
       {
         id: "w-car-3",
@@ -651,6 +668,7 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
           tablet: "/images/careers/job-areas/job-areas-tablet.png",
           mobile: "/images/careers/job-areas/job-areas-mobile.png",
         },
+        strapi_image: "/images/strapi-widgets/careers/job-areas.png",
       },
       {
         id: "w-car-4",
@@ -672,6 +690,7 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
           tablet: "/images/careers/benefits-grid/benefits-grid-tablet.png",
           mobile: "/images/careers/benefits-grid/benefits-grid-mobile.png",
         },
+        strapi_image: "/images/strapi-widgets/careers/benefits-grid.png",
       },
       {
         id: "w-car-5",
@@ -693,6 +712,7 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
           tablet: "/images/careers/eeo-statement/eeo-statement-tablet.png",
           mobile: "/images/careers/eeo-statement/eeo-statement-mobile.png",
         },
+        strapi_image: "/images/strapi-widgets/careers/eeo-statement.png",
       },
     ],
   },
@@ -797,6 +817,7 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
           tablet: "/images/community/hero-banner/hero-banner-tablet.png",
           mobile: "/images/community/hero-banner/hero-banner-mobile.png",
         },
+        strapi_image: "/images/strapi-widgets/community/hero-banner.png",
       },
       {
         id: "w-com-1",
@@ -827,6 +848,7 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
           mobile:
             "/images/community/illustration-split/illustration-split-mobile.png",
         },
+        strapi_image: "/images/strapi-widgets/community/illustration-split.png",
       },
       {
         id: "w-com-2",
@@ -850,6 +872,7 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
           mobile:
             "/images/community/image-card-grid/image-card-grid-mobile.png",
         },
+        strapi_image: "/images/strapi-widgets/community/image-card-grid.png",
       },
       {
         id: "w-com-3",
@@ -871,6 +894,7 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
           tablet: "/images/community/how-we-work/how-we-work-tablet.png",
           mobile: "/images/community/how-we-work/how-we-work-mobile.png",
         },
+        strapi_image: "/images/strapi-widgets/community/how-we-work.png",
       },
       {
         id: "w-com-4",
@@ -895,6 +919,8 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
           mobile:
             "/images/community/global-testimonials/global-testimonials-mobile.png",
         },
+        strapi_image:
+          "/images/strapi-widgets/community/global-testimonials.png",
       },
       {
         id: "w-com-5",
@@ -916,6 +942,7 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
           tablet: "/images/community/faq-accordion/faq-accordion-tablet.png",
           mobile: "/images/community/faq-accordion/faq-accordion-mobile.png",
         },
+        strapi_image: "/images/strapi-widgets/community/faq-accordion.png",
       },
     ],
   },
@@ -1007,6 +1034,7 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
           tablet: "/images/solutions/hero-banner/hero-banner-tablet.png",
           mobile: "/images/solutions/hero-banner/hero-banner-mobile.png",
         },
+        strapi_image: "/images/strapi-widgets/solutions/hero-banner.png",
       },
       {
         id: "w-sol-1",
@@ -1037,6 +1065,7 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
           mobile:
             "/images/solutions/small-cells-split/small-cells-split-mobile.png",
         },
+        strapi_image: "/images/strapi-widgets/solutions/small-cells-split.png",
       },
       {
         id: "w-sol-2",
@@ -1065,6 +1094,7 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
           tablet: "/images/solutions/das-split/das-split-tablet.png",
           mobile: "/images/solutions/das-split/das-split-mobile.png",
         },
+        strapi_image: "/images/strapi-widgets/solutions/das-split.png",
       },
       {
         id: "w-sol-3",
@@ -1089,6 +1119,8 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
           mobile:
             "/images/solutions/industries-accordion/industries-accordion-mobile.png",
         },
+        strapi_image:
+          "/images/strapi-widgets/solutions/industries-accordion.png",
       },
       {
         id: "w-sol-4",
@@ -1112,6 +1144,7 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
           mobile:
             "/images/solutions/cta-with-graphic/cta-with-graphic-mobile.png",
         },
+        strapi_image: "/images/strapi-widgets/solutions/cta-with-graphic.png",
       },
     ],
   },
@@ -1202,6 +1235,7 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
           mobile:
             "/images/private-venues/sub-page-hero/sub-page-hero-mobile.png",
         },
+        strapi_image: "/images/strapi-widgets/private-venues/sub-page-hero.png",
       },
       {
         id: "w-pv-1",
@@ -1225,6 +1259,8 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
           mobile:
             "/images/private-venues/process-section/process-section-mobile.png",
         },
+        strapi_image:
+          "/images/strapi-widgets/private-venues/process-section.png",
       },
       {
         id: "w-pv-2",
@@ -1249,6 +1285,8 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
           mobile:
             "/images/private-venues/global-testimonials/global-testimonials-mobile.png",
         },
+        strapi_image:
+          "/images/strapi-widgets/private-venues/global-testimonials.png",
       },
       {
         id: "w-pv-3",
@@ -1270,6 +1308,7 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
           tablet: "/images/private-venues/sub-page-cta/sub-page-cta-tablet.png",
           mobile: "/images/private-venues/sub-page-cta/sub-page-cta-mobile.png",
         },
+        strapi_image: "/images/strapi-widgets/private-venues/sub-page-cta.png",
       },
     ],
   },
@@ -1360,6 +1399,7 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
           mobile:
             "/images/right-of-ways/sub-page-hero/sub-page-hero-mobile.png",
         },
+        strapi_image: "/images/strapi-widgets/right-of-ways/sub-page-hero.png",
       },
       {
         id: "w-row-1",
@@ -1383,6 +1423,8 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
           mobile:
             "/images/right-of-ways/process-section/process-section-mobile.png",
         },
+        strapi_image:
+          "/images/strapi-widgets/right-of-ways/process-section.png",
       },
       {
         id: "w-row-2",
@@ -1407,6 +1449,8 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
           mobile:
             "/images/right-of-ways/global-testimonials/global-testimonials-mobile.png",
         },
+        strapi_image:
+          "/images/strapi-widgets/right-of-ways/global-testimonials.png",
       },
       {
         id: "w-row-3",
@@ -1428,6 +1472,7 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
           tablet: "/images/right-of-ways/sub-page-cta/sub-page-cta-tablet.png",
           mobile: "/images/right-of-ways/sub-page-cta/sub-page-cta-mobile.png",
         },
+        strapi_image: "/images/strapi-widgets/right-of-ways/sub-page-cta.png",
       },
     ],
   },
@@ -1499,6 +1544,7 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
           tablet: "/images/where-we-build/hero-banner/hero-banner-tablet.png",
           mobile: "/images/where-we-build/hero-banner/hero-banner-mobile.png",
         },
+        strapi_image: "/images/strapi-widgets/where-we-build/hero-banner.png",
       },
       {
         id: "w-where-1",
@@ -1523,6 +1569,8 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
           mobile:
             "/images/where-we-build/where-communities/where-communities-mobile.png",
         },
+        strapi_image:
+          "/images/strapi-widgets/where-we-build/where-communities.png",
       },
       {
         id: "w-where-2",
@@ -1544,6 +1592,7 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
           tablet: "/images/where-we-build/where-venues/where-venues-tablet.png",
           mobile: "/images/where-we-build/where-venues/where-venues-mobile.png",
         },
+        strapi_image: "/images/strapi-widgets/where-we-build/where-venues.png",
       },
     ],
   },
@@ -1615,6 +1664,7 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
           tablet: "/images/leadership/sub-page-hero/sub-page-hero-tablet.png",
           mobile: "/images/leadership/sub-page-hero/sub-page-hero-mobile.png",
         },
+        strapi_image: "/images/strapi-widgets/leadership/sub-page-hero.png",
       },
       {
         id: "w-lead-1",
@@ -1640,6 +1690,8 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
           mobile:
             "/images/leadership/people-global-section/people-global-section-mobile.png",
         },
+        strapi_image:
+          "/images/strapi-widgets/leadership/people-global-section.png",
       },
       {
         id: "w-lead-2",
@@ -1661,6 +1713,7 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
           tablet: "/images/leadership/sub-page-cta/sub-page-cta-tablet.png",
           mobile: "/images/leadership/sub-page-cta/sub-page-cta-mobile.png",
         },
+        strapi_image: "/images/strapi-widgets/leadership/sub-page-cta.png",
       },
     ],
   },
@@ -1734,6 +1787,8 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
           mobile:
             "/images/board-of-directors/sub-page-hero/sub-page-hero-mobile.png",
         },
+        strapi_image:
+          "/images/strapi-widgets/board-of-directors/sub-page-hero.png",
       },
       {
         id: "w-board-1",
@@ -1758,6 +1813,8 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
           mobile:
             "/images/board-of-directors/people-global-section/people-global-section-mobile.png",
         },
+        strapi_image:
+          "/images/strapi-widgets/board-of-directors/people-global-section.png",
       },
       {
         id: "w-board-2",
@@ -1781,6 +1838,8 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
           mobile:
             "/images/board-of-directors/sub-page-cta/sub-page-cta-mobile.png",
         },
+        strapi_image:
+          "/images/strapi-widgets/board-of-directors/sub-page-cta.png",
       },
     ],
   },
@@ -1841,6 +1900,7 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
           tablet: "/images/contact/sub-page-hero/sub-page-hero-tablet.png",
           mobile: "/images/contact/sub-page-hero/sub-page-hero-mobile.png",
         },
+        strapi_image: "/images/strapi-widgets/contact/sub-page-hero.png",
       },
       {
         id: "w-contact-1",
@@ -1862,6 +1922,7 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
           tablet: "/images/contact/contact-form/contact-form-tablet.png",
           mobile: "/images/contact/contact-form/contact-form-mobile.png",
         },
+        strapi_image: "/images/strapi-widgets/contact/contact-form.png",
       },
     ],
   },
@@ -1921,6 +1982,7 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
           tablet: "/images/dynamic-slug/hero-banner/hero-banner-tablet.png",
           mobile: "/images/dynamic-slug/hero-banner/hero-banner-mobile.png",
         },
+        strapi_image: "/images/strapi-widgets/dynamic-slug/hero-banner.png",
       },
       {
         id: "w-dyn-1",
@@ -1942,6 +2004,7 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
           tablet: "/images/dynamic-slug/dynamic-zone/dynamic-zone-tablet.png",
           mobile: "/images/dynamic-slug/dynamic-zone/dynamic-zone-mobile.png",
         },
+        strapi_image: "/images/strapi-widgets/dynamic-slug/dynamic-zone.png",
       },
     ],
   },

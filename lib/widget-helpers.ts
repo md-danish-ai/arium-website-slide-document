@@ -175,21 +175,25 @@ function resolveWidgetVisualBase(widget: ChildWidget) {
  */
 export function getWidgetVisualMeta(widget: ChildWidget) {
   const base = resolveWidgetVisualBase(widget);
-  const matchingFlat = !widget.preview_images
-    ? WIDGETS_LIST.find(
-        (fw) =>
-          (fw.widget_key === widget.widget_key &&
-            fw.component_name === widget.component_name) ||
-          fw.id === widget.id,
-      )
-    : undefined;
+  const matchingFlat =
+    !widget.preview_images || !widget.strapi_image
+      ? WIDGETS_LIST.find(
+          (fw) =>
+            (fw.widget_key === widget.widget_key &&
+              fw.component_name === widget.component_name) ||
+            fw.id === widget.id,
+        )
+      : undefined;
   const screenshots: WidgetPreviewImages | undefined =
     widget.preview_images ?? matchingFlat?.preview_images;
+  const strapiImage: string | undefined =
+    widget.strapi_image ?? matchingFlat?.strapi_image;
 
   return {
     ...base,
     screenshot: screenshots?.desktop,
     screenshots,
+    strapiImage,
   };
 }
 

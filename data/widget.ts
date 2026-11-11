@@ -38,6 +38,7 @@ export const WIDGETS_LIST: FlatWidget[] = [
       tablet: "/images/home/home-hero/home-hero-tablet.png",
       mobile: "/images/home/home-hero/home-hero-mobile.png",
     },
+    strapi_image: "/images/strapi-widgets/home/home-hero.png",
     used_in_pages: ["home"],
   },
   {
@@ -64,6 +65,7 @@ export const WIDGETS_LIST: FlatWidget[] = [
       tablet: "/images/home/background-feature/background-feature-tablet.png",
       mobile: "/images/home/background-feature/background-feature-mobile.png",
     },
+    strapi_image: "/images/strapi-widgets/home/background-feature.png",
     used_in_pages: ["home", "community"],
   },
   {
@@ -90,6 +92,7 @@ export const WIDGETS_LIST: FlatWidget[] = [
       tablet: "/images/home/detailed-card-grid/detailed-card-grid-tablet.png",
       mobile: "/images/home/detailed-card-grid/detailed-card-grid-mobile.png",
     },
+    strapi_image: "/images/strapi-widgets/home/detailed-card-grid.png",
     used_in_pages: ["home"],
   },
   {
@@ -116,6 +119,7 @@ export const WIDGETS_LIST: FlatWidget[] = [
       tablet: "/images/home/stats-with-image/stats-with-image-tablet.png",
       mobile: "/images/home/stats-with-image/stats-with-image-mobile.png",
     },
+    strapi_image: "/images/strapi-widgets/home/stats-with-image.png",
     used_in_pages: ["home"],
   },
   {
@@ -144,6 +148,7 @@ export const WIDGETS_LIST: FlatWidget[] = [
       mobile:
         "/images/home/image-gradient-split/image-gradient-split-mobile.png",
     },
+    strapi_image: "/images/strapi-widgets/home/image-gradient-split.png",
     used_in_pages: ["home", "about"],
   },
   {
@@ -176,6 +181,7 @@ export const WIDGETS_LIST: FlatWidget[] = [
       tablet: "/images/home/centered-image-cta/centered-image-cta-tablet.png",
       mobile: "/images/home/centered-image-cta/centered-image-cta-mobile.png",
     },
+    strapi_image: "/images/strapi-widgets/home/centered-image-cta.png",
     used_in_pages: ["home"],
   },
   {
@@ -208,6 +214,7 @@ export const WIDGETS_LIST: FlatWidget[] = [
       tablet: "/images/home/cta-with-graphic/cta-with-graphic-tablet.png",
       mobile: "/images/home/cta-with-graphic/cta-with-graphic-mobile.png",
     },
+    strapi_image: "/images/strapi-widgets/home/cta-with-graphic.png",
     used_in_pages: ["home", "solutions"],
   },
 
@@ -242,6 +249,7 @@ export const WIDGETS_LIST: FlatWidget[] = [
       tablet: "/images/about/hero-banner/hero-banner-tablet.png",
       mobile: "/images/about/hero-banner/hero-banner-mobile.png",
     },
+    strapi_image: "/images/strapi-widgets/about/hero-banner.png",
     used_in_pages: [
       "about",
       "careers",
@@ -278,6 +286,7 @@ export const WIDGETS_LIST: FlatWidget[] = [
       mobile:
         "/images/about/content-with-side-graphic/content-with-side-graphic-mobile.png",
     },
+    strapi_image: "/images/strapi-widgets/about/content-with-side-graphic.png",
     used_in_pages: ["about"],
   },
   {
@@ -305,6 +314,7 @@ export const WIDGETS_LIST: FlatWidget[] = [
       tablet: "/images/about/journey-timeline/journey-timeline-tablet.png",
       mobile: "/images/about/journey-timeline/journey-timeline-mobile.png",
     },
+    strapi_image: "/images/strapi-widgets/about/journey-timeline.png",
     used_in_pages: ["about"],
   },
   {
@@ -332,6 +342,7 @@ export const WIDGETS_LIST: FlatWidget[] = [
       tablet: "/images/about/stats-cards/stats-cards-tablet.png",
       mobile: "/images/about/stats-cards/stats-cards-mobile.png",
     },
+    strapi_image: "/images/strapi-widgets/about/stats-cards.png",
     used_in_pages: ["about"],
   },
   {
@@ -359,6 +370,7 @@ export const WIDGETS_LIST: FlatWidget[] = [
       tablet: "/images/about/commitments/commitments-tablet.png",
       mobile: "/images/about/commitments/commitments-mobile.png",
     },
+    strapi_image: "/images/strapi-widgets/about/commitments.png",
     used_in_pages: ["about"],
   },
   {
@@ -387,6 +399,7 @@ export const WIDGETS_LIST: FlatWidget[] = [
       mobile:
         "/images/about/image-gradient-split/image-gradient-split-mobile.png",
     },
+    strapi_image: "/images/strapi-widgets/about/image-gradient-split.png",
     used_in_pages: ["about", "home"],
   },
 
@@ -421,6 +434,7 @@ export const WIDGETS_LIST: FlatWidget[] = [
       tablet: "/images/careers/hero-banner/hero-banner-tablet.png",
       mobile: "/images/careers/hero-banner/hero-banner-mobile.png",
     },
+    strapi_image: "/images/strapi-widgets/careers/hero-banner.png",
     used_in_pages: [
       "careers",
       "about",
@@ -454,6 +468,7 @@ export const WIDGETS_LIST: FlatWidget[] = [
       tablet: "/images/careers/culture-accordion/culture-accordion-tablet.png",
       mobile: "/images/careers/culture-accordion/culture-accordion-mobile.png",
     },
+    strapi_image: "/images/strapi-widgets/careers/culture-accordion.png",
     used_in_pages: ["careers", "solutions"],
   },
   {
@@ -482,6 +497,7 @@ export const WIDGETS_LIST: FlatWidget[] = [
       mobile:
         "/images/careers/global-testimonials/global-testimonials-mobile.png",
     },
+    strapi_image: "/images/strapi-widgets/careers/global-testimonials.png",
     used_in_pages: ["careers", "community", "private-venues", "right-of-ways"],
   },
   {
@@ -508,6 +524,7 @@ export const WIDGETS_LIST: FlatWidget[] = [
       tablet: "/images/careers/job-areas/job-areas-tablet.png",
       mobile: "/images/careers/job-areas/job-areas-mobile.png",
     },
+    strapi_image: "/images/strapi-widgets/careers/job-areas.png",
     used_in_pages: ["careers"],
   },
   {
@@ -534,6 +551,7 @@ export const WIDGETS_LIST: FlatWidget[] = [
       tablet: "/images/careers/benefits-grid/benefits-grid-tablet.png",
       mobile: "/images/careers/benefits-grid/benefits-grid-mobile.png",
     },
+    strapi_image: "/images/strapi-widgets/careers/benefits-grid.png",
     used_in_pages: ["careers", "community"],
   },
   {
@@ -560,6 +578,7 @@ export const WIDGETS_LIST: FlatWidget[] = [
       tablet: "/images/careers/eeo-statement/eeo-statement-tablet.png",
       mobile: "/images/careers/eeo-statement/eeo-statement-mobile.png",
     },
+    strapi_image: "/images/strapi-widgets/careers/eeo-statement.png",
     used_in_pages: ["careers"],
   },
 
@@ -587,6 +606,7 @@ export const WIDGETS_LIST: FlatWidget[] = [
       tablet: "/images/community/hero-banner/hero-banner-tablet.png",
       mobile: "/images/community/hero-banner/hero-banner-mobile.png",
     },
+    strapi_image: "/images/strapi-widgets/community/hero-banner.png",
     used_in_pages: [
       "community",
       "about",
@@ -622,6 +642,7 @@ export const WIDGETS_LIST: FlatWidget[] = [
       mobile:
         "/images/community/illustration-split/illustration-split-mobile.png",
     },
+    strapi_image: "/images/strapi-widgets/community/illustration-split.png",
     used_in_pages: ["community", "solutions"],
   },
   {
@@ -648,6 +669,7 @@ export const WIDGETS_LIST: FlatWidget[] = [
       tablet: "/images/community/image-card-grid/image-card-grid-tablet.png",
       mobile: "/images/community/image-card-grid/image-card-grid-mobile.png",
     },
+    strapi_image: "/images/strapi-widgets/community/image-card-grid.png",
     used_in_pages: ["community", "careers"],
   },
   {
@@ -674,6 +696,7 @@ export const WIDGETS_LIST: FlatWidget[] = [
       tablet: "/images/community/how-we-work/how-we-work-tablet.png",
       mobile: "/images/community/how-we-work/how-we-work-mobile.png",
     },
+    strapi_image: "/images/strapi-widgets/community/how-we-work.png",
     used_in_pages: ["community", "home"],
   },
   {
@@ -702,6 +725,7 @@ export const WIDGETS_LIST: FlatWidget[] = [
       mobile:
         "/images/community/global-testimonials/global-testimonials-mobile.png",
     },
+    strapi_image: "/images/strapi-widgets/community/global-testimonials.png",
     used_in_pages: ["community", "careers", "private-venues", "right-of-ways"],
   },
   {
@@ -728,6 +752,7 @@ export const WIDGETS_LIST: FlatWidget[] = [
       tablet: "/images/community/faq-accordion/faq-accordion-tablet.png",
       mobile: "/images/community/faq-accordion/faq-accordion-mobile.png",
     },
+    strapi_image: "/images/strapi-widgets/community/faq-accordion.png",
     used_in_pages: ["community"],
   },
 
@@ -762,6 +787,7 @@ export const WIDGETS_LIST: FlatWidget[] = [
       tablet: "/images/solutions/hero-banner/hero-banner-tablet.png",
       mobile: "/images/solutions/hero-banner/hero-banner-mobile.png",
     },
+    strapi_image: "/images/strapi-widgets/solutions/hero-banner.png",
     used_in_pages: [
       "solutions",
       "about",
@@ -798,6 +824,7 @@ export const WIDGETS_LIST: FlatWidget[] = [
       mobile:
         "/images/solutions/small-cells-split/small-cells-split-mobile.png",
     },
+    strapi_image: "/images/strapi-widgets/solutions/small-cells-split.png",
     used_in_pages: ["solutions", "community"],
   },
   {
@@ -825,6 +852,7 @@ export const WIDGETS_LIST: FlatWidget[] = [
       tablet: "/images/solutions/das-split/das-split-tablet.png",
       mobile: "/images/solutions/das-split/das-split-mobile.png",
     },
+    strapi_image: "/images/strapi-widgets/solutions/das-split.png",
     used_in_pages: ["solutions"],
   },
   {
@@ -854,6 +882,7 @@ export const WIDGETS_LIST: FlatWidget[] = [
       mobile:
         "/images/solutions/industries-accordion/industries-accordion-mobile.png",
     },
+    strapi_image: "/images/strapi-widgets/solutions/industries-accordion.png",
     used_in_pages: ["solutions"],
   },
   {
@@ -880,6 +909,7 @@ export const WIDGETS_LIST: FlatWidget[] = [
       tablet: "/images/solutions/cta-with-graphic/cta-with-graphic-tablet.png",
       mobile: "/images/solutions/cta-with-graphic/cta-with-graphic-mobile.png",
     },
+    strapi_image: "/images/strapi-widgets/solutions/cta-with-graphic.png",
     used_in_pages: ["solutions", "home"],
   },
 
@@ -914,6 +944,7 @@ export const WIDGETS_LIST: FlatWidget[] = [
       tablet: "/images/private-venues/sub-page-hero/sub-page-hero-tablet.png",
       mobile: "/images/private-venues/sub-page-hero/sub-page-hero-mobile.png",
     },
+    strapi_image: "/images/strapi-widgets/private-venues/sub-page-hero.png",
     used_in_pages: [
       "private-venues",
       "right-of-ways",
@@ -948,6 +979,7 @@ export const WIDGETS_LIST: FlatWidget[] = [
       mobile:
         "/images/private-venues/process-section/process-section-mobile.png",
     },
+    strapi_image: "/images/strapi-widgets/private-venues/process-section.png",
     used_in_pages: ["private-venues", "right-of-ways"],
   },
   {
@@ -977,6 +1009,8 @@ export const WIDGETS_LIST: FlatWidget[] = [
       mobile:
         "/images/private-venues/global-testimonials/global-testimonials-mobile.png",
     },
+    strapi_image:
+      "/images/strapi-widgets/private-venues/global-testimonials.png",
     used_in_pages: ["private-venues", "careers", "community", "right-of-ways"],
   },
   {
@@ -1003,6 +1037,7 @@ export const WIDGETS_LIST: FlatWidget[] = [
       tablet: "/images/private-venues/sub-page-cta/sub-page-cta-tablet.png",
       mobile: "/images/private-venues/sub-page-cta/sub-page-cta-mobile.png",
     },
+    strapi_image: "/images/strapi-widgets/private-venues/sub-page-cta.png",
     used_in_pages: [
       "private-venues",
       "right-of-ways",
@@ -1042,6 +1077,7 @@ export const WIDGETS_LIST: FlatWidget[] = [
       tablet: "/images/right-of-ways/sub-page-hero/sub-page-hero-tablet.png",
       mobile: "/images/right-of-ways/sub-page-hero/sub-page-hero-mobile.png",
     },
+    strapi_image: "/images/strapi-widgets/right-of-ways/sub-page-hero.png",
     used_in_pages: [
       "right-of-ways",
       "private-venues",
@@ -1076,6 +1112,7 @@ export const WIDGETS_LIST: FlatWidget[] = [
       mobile:
         "/images/right-of-ways/process-section/process-section-mobile.png",
     },
+    strapi_image: "/images/strapi-widgets/right-of-ways/process-section.png",
     used_in_pages: ["right-of-ways", "private-venues"],
   },
   {
@@ -1105,6 +1142,8 @@ export const WIDGETS_LIST: FlatWidget[] = [
       mobile:
         "/images/right-of-ways/global-testimonials/global-testimonials-mobile.png",
     },
+    strapi_image:
+      "/images/strapi-widgets/right-of-ways/global-testimonials.png",
     used_in_pages: ["right-of-ways", "careers", "community", "private-venues"],
   },
   {
@@ -1131,6 +1170,7 @@ export const WIDGETS_LIST: FlatWidget[] = [
       tablet: "/images/right-of-ways/sub-page-cta/sub-page-cta-tablet.png",
       mobile: "/images/right-of-ways/sub-page-cta/sub-page-cta-mobile.png",
     },
+    strapi_image: "/images/strapi-widgets/right-of-ways/sub-page-cta.png",
     used_in_pages: [
       "right-of-ways",
       "private-venues",
@@ -1164,6 +1204,7 @@ export const WIDGETS_LIST: FlatWidget[] = [
       tablet: "/images/where-we-build/hero-banner/hero-banner-tablet.png",
       mobile: "/images/where-we-build/hero-banner/hero-banner-mobile.png",
     },
+    strapi_image: "/images/strapi-widgets/where-we-build/hero-banner.png",
     used_in_pages: [
       "where-we-build",
       "about",
@@ -1199,6 +1240,7 @@ export const WIDGETS_LIST: FlatWidget[] = [
       mobile:
         "/images/where-we-build/where-communities/where-communities-mobile.png",
     },
+    strapi_image: "/images/strapi-widgets/where-we-build/where-communities.png",
     used_in_pages: ["where-we-build"],
   },
   {
@@ -1225,6 +1267,7 @@ export const WIDGETS_LIST: FlatWidget[] = [
       tablet: "/images/where-we-build/where-venues/where-venues-tablet.png",
       mobile: "/images/where-we-build/where-venues/where-venues-mobile.png",
     },
+    strapi_image: "/images/strapi-widgets/where-we-build/where-venues.png",
     used_in_pages: ["where-we-build"],
   },
 
@@ -1253,6 +1296,7 @@ export const WIDGETS_LIST: FlatWidget[] = [
       tablet: "/images/leadership/sub-page-hero/sub-page-hero-tablet.png",
       mobile: "/images/leadership/sub-page-hero/sub-page-hero-mobile.png",
     },
+    strapi_image: "/images/strapi-widgets/leadership/sub-page-hero.png",
     used_in_pages: [
       "leadership",
       "private-venues",
@@ -1288,6 +1332,7 @@ export const WIDGETS_LIST: FlatWidget[] = [
       mobile:
         "/images/leadership/people-global-section/people-global-section-mobile.png",
     },
+    strapi_image: "/images/strapi-widgets/leadership/people-global-section.png",
     used_in_pages: ["leadership", "board-of-directors"],
   },
   {
@@ -1313,6 +1358,7 @@ export const WIDGETS_LIST: FlatWidget[] = [
       tablet: "/images/leadership/sub-page-cta/sub-page-cta-tablet.png",
       mobile: "/images/leadership/sub-page-cta/sub-page-cta-mobile.png",
     },
+    strapi_image: "/images/strapi-widgets/leadership/sub-page-cta.png",
     used_in_pages: [
       "leadership",
       "private-venues",
@@ -1348,6 +1394,7 @@ export const WIDGETS_LIST: FlatWidget[] = [
       mobile:
         "/images/board-of-directors/sub-page-hero/sub-page-hero-mobile.png",
     },
+    strapi_image: "/images/strapi-widgets/board-of-directors/sub-page-hero.png",
     used_in_pages: [
       "board-of-directors",
       "private-venues",
@@ -1383,6 +1430,8 @@ export const WIDGETS_LIST: FlatWidget[] = [
       mobile:
         "/images/board-of-directors/people-global-section/people-global-section-mobile.png",
     },
+    strapi_image:
+      "/images/strapi-widgets/board-of-directors/people-global-section.png",
     used_in_pages: ["board-of-directors", "leadership"],
   },
   {
@@ -1409,6 +1458,7 @@ export const WIDGETS_LIST: FlatWidget[] = [
       tablet: "/images/board-of-directors/sub-page-cta/sub-page-cta-tablet.png",
       mobile: "/images/board-of-directors/sub-page-cta/sub-page-cta-mobile.png",
     },
+    strapi_image: "/images/strapi-widgets/board-of-directors/sub-page-cta.png",
     used_in_pages: [
       "board-of-directors",
       "private-venues",
@@ -1441,6 +1491,7 @@ export const WIDGETS_LIST: FlatWidget[] = [
       tablet: "/images/contact/sub-page-hero/sub-page-hero-tablet.png",
       mobile: "/images/contact/sub-page-hero/sub-page-hero-mobile.png",
     },
+    strapi_image: "/images/strapi-widgets/contact/sub-page-hero.png",
     used_in_pages: [
       "contact",
       "private-venues",
@@ -1473,6 +1524,7 @@ export const WIDGETS_LIST: FlatWidget[] = [
       tablet: "/images/contact/contact-form/contact-form-tablet.png",
       mobile: "/images/contact/contact-form/contact-form-mobile.png",
     },
+    strapi_image: "/images/strapi-widgets/contact/contact-form.png",
     used_in_pages: ["contact"],
   },
 
@@ -1500,6 +1552,7 @@ export const WIDGETS_LIST: FlatWidget[] = [
       tablet: "/images/dynamic-slug/hero-banner/hero-banner-tablet.png",
       mobile: "/images/dynamic-slug/hero-banner/hero-banner-mobile.png",
     },
+    strapi_image: "/images/strapi-widgets/dynamic-slug/hero-banner.png",
     used_in_pages: [
       "[slug]",
       "about",
@@ -1533,6 +1586,7 @@ export const WIDGETS_LIST: FlatWidget[] = [
       tablet: "/images/dynamic-slug/dynamic-zone/dynamic-zone-tablet.png",
       mobile: "/images/dynamic-slug/dynamic-zone/dynamic-zone-mobile.png",
     },
+    strapi_image: "/images/strapi-widgets/dynamic-slug/dynamic-zone.png",
     used_in_pages: ["[slug]"],
   },
 ];

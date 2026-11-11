@@ -59,6 +59,7 @@ export interface ChildWidget {
   key_props?: string[];
   fallback_key?: string;
   preview_images?: WidgetPreviewImages;
+  strapi_image?: string;
 }
 
 /**
@@ -101,5 +102,6 @@ export interface FlatWidget {
   key_props?: string[];
   fallback_key?: string;
   preview_images?: WidgetPreviewImages;
+  strapi_image?: string;
   used_in_pages: string[];
 }
