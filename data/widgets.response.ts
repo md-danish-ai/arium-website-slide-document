@@ -30,7 +30,6 @@ const CAREERS_TESTIMONIALS_PAYLOAD: StrapiWidgetPayload = {
   title: "Meet the Arium Networks Team ",
   cards: [
     {
-      id: 1,
       person_name: "Gabe Villalobos",
       person_designation: "Project Manager",
       person_message:
@@ -38,7 +37,6 @@ const CAREERS_TESTIMONIALS_PAYLOAD: StrapiWidgetPayload = {
       card_footer_bg: "#bcf6f2",
     },
     {
-      id: 2,
       person_name: "Emily Cates",
       person_designation: "Permitting Specialist",
       person_message:
@@ -46,7 +44,6 @@ const CAREERS_TESTIMONIALS_PAYLOAD: StrapiWidgetPayload = {
       card_footer_bg: "#d2c7ff",
     },
     {
-      id: 3,
       person_name: "Anthony Price",
       person_designation: "Client Services Manager",
       person_message:
@@ -54,7 +51,6 @@ const CAREERS_TESTIMONIALS_PAYLOAD: StrapiWidgetPayload = {
       card_footer_bg: "#ffdac8",
     },
     {
-      id: 4,
       person_name: "Jessica Fernandez",
       person_designation: "Senior External Affairs Manager",
       person_message:
@@ -85,9 +81,9 @@ const PRIVATE_VENUES_PROCESS_PAYLOAD: StrapiWidgetPayload = {
   description:
     "Whether you operate a large stadium, commercial building, theme park, campus, or other private venue, we can work with you to design a distributed antenna system (DAS) or small cell network (SCN) that meets your unique connectivity needs.",
   process_stage: [
-    { id: 113, stage_name: "Design", stage_icon_svg: null },
-    { id: 114, stage_name: "Construction", stage_icon_svg: null },
-    { id: 115, stage_name: "Optimization", stage_icon_svg: null },
+    { stage_name: "Design", stage_icon_svg: null },
+    { stage_name: "Construction", stage_icon_svg: null },
+    { stage_name: "Optimization", stage_icon_svg: null },
   ],
   __component: "shared.process",
 };
@@ -175,7 +171,6 @@ export const WIDGETS_RESPONSES = {
     },
     FeatureCards: [
       {
-        id: 45,
         title: "Design",
         description:
           "We identify the best network technology, equipment, and architecture designs based on a careful assessment of structure and required capacity.",
@@ -183,7 +178,6 @@ export const WIDGETS_RESPONSES = {
         description_color: null,
       },
       {
-        id: 46,
         title: "Implement",
         description:
           "We bring together the right partners—coordinating and collaborating to deploy the necessary infrastructure.",
@@ -191,7 +185,6 @@ export const WIDGETS_RESPONSES = {
         description_color: null,
       },
       {
-        id: 47,
         title: "Optimize",
         description:
           "We partner with leading firms to conduct radio frequency (RF) testing and optimization, ensuring the network continues to perform as expected.",
@@ -210,7 +203,6 @@ export const WIDGETS_RESPONSES = {
     background_color: null,
     panel_cards: [
       {
-        id: 43,
         title: "Small Cells",
         description:
           "Small cells are discreet, low-powered, fiber-connected antennas that enhance connectivity by providing targeted wireless coverage and capacity in public spaces—especially in dense populations or high-traffic areas like cities and suburbs.",
@@ -220,7 +212,6 @@ export const WIDGETS_RESPONSES = {
         svg_code: "<svg ... inline SVG animation markup ...></svg>",
       },
       {
-        id: 44,
         title: "Distributed Antenna Systems",
         description:
           "Distributed antenna systems (DAS) use small, strategically placed connection points, also called nodes, to meet the unique coverage and capacity needs of venues and indoor spaces like high-rises, hospitals, campuses, stadiums, resorts, and theme parks.",
@@ -245,7 +236,6 @@ export const WIDGETS_RESPONSES = {
     },
     stats_card: [
       {
-        id: 88,
         stat: "100K+",
         stat_color: "#162047",
         description: "Small cells on air or under contract",
@@ -253,7 +243,6 @@ export const WIDGETS_RESPONSES = {
         background_color: "#898cf3",
       },
       {
-        id: 89,
         stat: "300+",
         stat_color: null,
         description: "DAS-connected venues and buildings",
@@ -261,7 +250,6 @@ export const WIDGETS_RESPONSES = {
         background_color: "#bcf6f2",
       },
       {
-        id: 90,
         stat: "700+",
         stat_color: null,
         description: "Supported municipal networks",
@@ -269,7 +257,6 @@ export const WIDGETS_RESPONSES = {
         background_color: "#ffffff",
       },
       {
-        id: 91,
         stat: "15+",
         stat_color: null,
         description: "Years of expertise",
@@ -277,7 +264,6 @@ export const WIDGETS_RESPONSES = {
         background_color: "#ffffca",
       },
       {
-        id: 92,
         stat: "24/7",
         stat_color: null,
         description: "Monitoring via the NOC",
@@ -311,7 +297,6 @@ export const WIDGETS_RESPONSES = {
     },
     section_pointers: [
       {
-        id: 55,
         title: "Reliability",
         title_color: "#00e8d9",
         description:
@@ -319,7 +304,6 @@ export const WIDGETS_RESPONSES = {
         description_color: null,
       },
       {
-        id: 56,
         title: "Opportunity",
         title_color: "#00e8d9",
         description:
@@ -327,7 +311,6 @@ export const WIDGETS_RESPONSES = {
         description_color: null,
       },
       {
-        id: 57,
         title: "Safety",
         title_color: "#00e8d9",
         description:
@@ -413,7 +396,6 @@ export const WIDGETS_RESPONSES = {
       "We've been building small cell and DAS networks since the technology's inception, giving us a deep expertise that is embedded throughout our organization.\n",
     timeline_cards: [
       {
-        id: 133,
         year_range: "2010-2011",
         year_range_color: "#009e94",
         badge_text: null,
@@ -421,7 +403,6 @@ export const WIDGETS_RESPONSES = {
           "Acquisition of NewPath and NextG establishes early leadership in DAS and small cell infrastructure.\n\n",
       },
       {
-        id: 134,
         year_range: "2011-2020",
         year_range_color: "#7b6ab8",
         badge_text: null,
@@ -429,7 +410,6 @@ export const WIDGETS_RESPONSES = {
           "Platform expansion and operational integration across thousands of deployed nodes.",
       },
       {
-        id: 135,
         year_range: "2020-2022",
         year_range_color: "#c48e68",
         badge_text: null,
@@ -437,7 +417,6 @@ export const WIDGETS_RESPONSES = {
           "Long-term carrier commitments add 50,000 small cells over five years.",
       },
       {
-        id: 136,
         year_range: "2026",
         year_range_color: "#009e94",
         badge_text: "Live",
@@ -454,7 +433,6 @@ export const WIDGETS_RESPONSES = {
     description: null,
     cards: [
       {
-        id: 62,
         stats: "39 B",
         description: "Expected number of IoT devices by 2030",
         badge: "IoT Analytics, 2025",
@@ -462,7 +440,6 @@ export const WIDGETS_RESPONSES = {
           "linear-gradient(145deg, #e6faf8 0%, #d0f5f1 40%, #c2f0eb 100%) !important",
       },
       {
-        id: 63,
         stats: "21 GB",
         description: "Average monthly mobile data consumption per capita",
         badge: "Ericsson, 2025",
@@ -470,7 +447,6 @@ export const WIDGETS_RESPONSES = {
           "linear-gradient(145deg, #eeeafc 0%, #e2dbf8 40%, #d8d0f4 100%) !important",
       },
       {
-        id: 64,
         stats: "89 %",
         description:
           "Expected share of 5G mobile connections in North America by 2030",
@@ -502,21 +478,18 @@ export const WIDGETS_RESPONSES = {
     },
     commitment_cards: [
       {
-        id: 51,
         title: "We are customer-first",
         description:
           "We put customers at the center of every decision, delivering value through innovation, investment, and purpose-build network solutions.",
         top_line_color: "#00b4a0",
       },
       {
-        id: 52,
         title: "We are nimble and ready to invest",
         description:
           "We operate with speed and flexibility, putting capital to work where it can drive the most impact.",
         top_line_color: "#d4882e",
       },
       {
-        id: 53,
         title: "We are built for the long haul",
         description:
           "We're committed to long-term ownership and lasting partnerships, investing in the infrastructure that will power the future of connectivity.",
@@ -537,7 +510,6 @@ export const WIDGETS_RESPONSES = {
     CTA_url: "/careers",
     section_pointers: [
       {
-        id: 67,
         title: "Leadership",
         title_color: "#00e8d9",
         description:
@@ -545,7 +517,6 @@ export const WIDGETS_RESPONSES = {
         description_color: null,
       },
       {
-        id: 68,
         title: "Passion",
         title_color: "#00e8d9",
         description:
@@ -553,7 +524,6 @@ export const WIDGETS_RESPONSES = {
         description_color: null,
       },
       {
-        id: 69,
         title: "Optimism",
         title_color: "#00e8d9",
         description:
@@ -604,7 +574,6 @@ export const WIDGETS_RESPONSES = {
     template_grid_columns: "b. 1.35fr 1fr",
     accordian_cards: [
       {
-        id: 1,
         title: "Be Part of a Team",
         description:
           "We're building more than networks: we're building a team that takes pride and ownership in what we create together. As we grow, every teammate helps shape how we work, collaborate, and succeed. Here, culture isn't handed down—it's shaped by the people who live it every day.",
@@ -615,7 +584,6 @@ export const WIDGETS_RESPONSES = {
         svg_code: null,
       },
       {
-        id: 2,
         title: "Shape the Future",
         description:
           "We're at a pivotal moment in the evolution of wireless infrastructure. New technologies are increasing demands on networks, coverage, and capacity. As part of our team, you'll help design and deliver solutions that meet these challenges while influencing how we work, innovate, and grow as an organization.",
@@ -626,7 +594,6 @@ export const WIDGETS_RESPONSES = {
         svg_code: null,
       },
       {
-        id: 3,
         title: "Make an Impact",
         description:
           "As a fast-growing, privately held company, we move with purpose and make decisions focused on long-term success. Our teammates are trusted to take ownership, contribute ideas, and turn plans into execution.",
@@ -637,7 +604,6 @@ export const WIDGETS_RESPONSES = {
         svg_code: null,
       },
       {
-        id: 4,
         title: "Advance Your Career",
         description:
           "Backed by EQT, a leading private equity firm, we combine the momentum of a growing organization with strong financial support. We invest in our people, systems, and infrastructure to support sustainable growth—creating opportunities for you to develop new skills, assume greater responsibility, and grow your career.",
@@ -648,7 +614,6 @@ export const WIDGETS_RESPONSES = {
         svg_code: null,
       },
       {
-        id: 5,
         title: "Improve Everyday Connections",
         description:
           "Our infrastructure supports how people live, work, and stay connected. We take that responsibility seriously. Your expertise and perspective will contribute to the reliability, safety and reach of the networks communities and businesses depend on every day.",
@@ -677,11 +642,11 @@ export const WIDGETS_RESPONSES = {
       alternativeText: "Arium Networks team collaborating in a modern office",
     },
     items: [
-      { id: 1, title: "Network Engineering & Deployment" },
-      { id: 2, title: "Construction & Field Operations" },
-      { id: 3, title: "Technology, Systems & Data" },
-      { id: 4, title: "Corporate & Shared Services" },
-      { id: 5, title: "Commercial, Strategy & Project Management" },
+      { title: "Network Engineering & Deployment" },
+      { title: "Construction & Field Operations" },
+      { title: "Technology, Systems & Data" },
+      { title: "Corporate & Shared Services" },
+      { title: "Commercial, Strategy & Project Management" },
     ],
     __component: "shared.highlight-list",
   },
@@ -694,7 +659,6 @@ export const WIDGETS_RESPONSES = {
       "We are an equal opportunity employer. We recruit, hire and promote without regard to race, color, religion, creed, national origin or ancestry, ethnicity, sex (including pregnancy or pregnancy related conditions), gender (including gender identity and expression, and status as a transgender individual), sexual orientation, age, physical or mental disability, citizenship, past, current or prospective service in the uniformed services, genetic information, marital status or any other characteristic protected under applicable federal, state or local law.",
     benefits_card: [
       {
-        id: 1,
         title: "Healthcare",
         description:
           "Full medical coverage, including dental and vision plans and telehealth",
@@ -702,7 +666,6 @@ export const WIDGETS_RESPONSES = {
         icon: "/images/svg-images/healthcare-benefit.svg",
       },
       {
-        id: 2,
         title: "Financial Security",
         description:
           "Competitive 401(k), tuition reimbursement, financial counseling and funded healthcare savings accounts",
@@ -710,7 +673,6 @@ export const WIDGETS_RESPONSES = {
         icon: "/images/svg-images/financial-security.svg",
       },
       {
-        id: 3,
         title: "Time Off",
         description:
           "Flexible paid time off for vacations, holidays, leaves of absence, or personal needs",
@@ -718,7 +680,6 @@ export const WIDGETS_RESPONSES = {
         icon: "/images/svg-images/time-off.svg",
       },
       {
-        id: 4,
         title: "Family Support",
         description:
           "Paid maternity and paternity leave, adoption benefits, and milk shipping",
@@ -777,7 +738,6 @@ export const WIDGETS_RESPONSES = {
     title_color: null,
     icon_card: [
       {
-        id: 1,
         title: "Reliability",
         description:
           "More targeted coverage in hard-to-reach areas minimizes dead spots and ensures consistent connectivity across your community.",
@@ -786,7 +746,6 @@ export const WIDGETS_RESPONSES = {
         description_color: null,
       },
       {
-        id: 2,
         title: "Innovation",
         description:
           "Increased speeds and capacity ensure people get the most from the latest wireless devices and technologies.",
@@ -795,7 +754,6 @@ export const WIDGETS_RESPONSES = {
         description_color: null,
       },
       {
-        id: 3,
         title: "Safety",
         description:
           "Stronger coverage keeps first responders connected to critical information and increases 911 call availability.",
@@ -828,7 +786,6 @@ export const WIDGETS_RESPONSES = {
     title: "Communities support advanced connectivity",
     cards: [
       {
-        id: 1,
         person_name: "Dewitt",
         person_designation: "President & CEO, Downtown Austin Alliance",
         person_message:
@@ -836,7 +793,6 @@ export const WIDGETS_RESPONSES = {
         card_footer_bg: "#bcf6f2",
       },
       {
-        id: 2,
         person_name: "Rob",
         person_designation: "City Sustainability Director",
         person_message:
@@ -844,7 +800,6 @@ export const WIDGETS_RESPONSES = {
         card_footer_bg: "#ffdac8",
       },
       {
-        id: 3,
         person_name: "Kari",
         person_designation: "Real Estate Agent",
         person_message: 'I use my phone as my lifeline to get my job done."',
@@ -859,7 +814,6 @@ export const WIDGETS_RESPONSES = {
     title_color: null,
     faq_data: [
       {
-        id: 1,
         question: "Why is Arium Networks building in my neighborhood?",
         answer:
           "When a road gets too congested, you can't just keep adding cars — you have to add more lanes. Similarly, when there are too many wireless devices in an area, the existing network gets overloaded. Small cells add more capacity and bandwidth to support the growing demand for wireless connectivity in your neighborhood.",
@@ -868,7 +822,6 @@ export const WIDGETS_RESPONSES = {
         question_color_hover: null,
       },
       {
-        id: 2,
         question:
           "I have full bars on my mobile phone. Why do we need more infrastructure?",
         answer:
@@ -878,7 +831,6 @@ export const WIDGETS_RESPONSES = {
         question_color_hover: null,
       },
       {
-        id: 3,
         question: "Why is Arium permitted in the public right of way?",
         answer:
           "Arium Networks holds CLEC (Competitive Local Exchange Carrier) status in most states, which provides us with the legal right to install telecommunications equipment on existing infrastructure in the public right of way, such as utility poles and streetlights.",
@@ -887,7 +839,6 @@ export const WIDGETS_RESPONSES = {
         question_color_hover: null,
       },
       {
-        id: 4,
         question:
           "How does Arium Networks get approval to work in my community?",
         answer:
@@ -897,7 +848,6 @@ export const WIDGETS_RESPONSES = {
         question_color_hover: null,
       },
       {
-        id: 5,
         question: "What are the RF emission levels of your equipment?",
         answer:
           "Our equipment operates well within the safety limits established by the FCC. Small cells emit significantly lower RF energy than traditional cell towers because they cover smaller areas and use less power.",
@@ -906,7 +856,6 @@ export const WIDGETS_RESPONSES = {
         question_color_hover: null,
       },
       {
-        id: 6,
         question: "Should I be worried about RF emissions?",
         answer:
           "Small cells comply with all FCC regulations for radio frequency emissions. The FCC's safety standards incorporate significant safety margins and are based on decades of research. Small cells operate at a fraction of the power levels used by traditional cell towers.",
@@ -960,13 +909,11 @@ export const WIDGETS_RESPONSES = {
     },
     statistics: [
       {
-        id: 66,
         stat: "100K+",
         description: "small cells on air or under contract",
         stat_color: "#7c5cbf",
       },
       {
-        id: 67,
         stat: "700+",
         description: "municipalities served",
         stat_color: "#7c5cbf",
@@ -994,7 +941,6 @@ export const WIDGETS_RESPONSES = {
     },
     statistics: [
       {
-        id: 68,
         stat: "300+",
         description: "premier venues across the country",
         stat_color: "#7c5cbf",
@@ -1015,7 +961,6 @@ export const WIDGETS_RESPONSES = {
     template_grid_columns: "a. 1.4fr .9fr",
     accordian_cards: [
       {
-        id: 216,
         title: "Stadiums & Arenas",
         description:
           "We enable reliable wireless service for a better guest experience including enhanced fan engagement, public safety, mobile ticketing, concessions, and event operations.",
@@ -1026,7 +971,6 @@ export const WIDGETS_RESPONSES = {
         svg_code: '<svg viewBox="0 0 288 288" class="ind-icon-svg">...</svg>',
       },
       {
-        id: 217,
         title: "Amusement Parks, Hospitality & Entertainment",
         description:
           "Our solutions provide high-quality wireless coverage for your guests, improving experience satisfaction, operational efficiency, and smart property technologies.",
@@ -1037,7 +981,6 @@ export const WIDGETS_RESPONSES = {
         svg_code: '<svg viewBox="0 0 288 288" class="ind-icon-svg">...</svg>',
       },
       {
-        id: 218,
         title: "Higher Education",
         description:
           "Our solutions enable digital learning and enhance campus safety by keeping faculty and students connected.",
@@ -1048,7 +991,6 @@ export const WIDGETS_RESPONSES = {
         svg_code: '<svg viewBox="0 0 288 288" class="ind-icon-svg">...</svg>',
       },
       {
-        id: 219,
         title: "Commercial Real Estate",
         description:
           "We can help you improve connectivity on your property while accommodating the technologies that make your building more functional, efficient, and tenant friendly.",
@@ -1059,7 +1001,6 @@ export const WIDGETS_RESPONSES = {
         svg_code: '<svg viewBox="0 0 288 288" class="ind-icon-svg">...</svg>',
       },
       {
-        id: 220,
         title: "Healthcare",
         description:
           "Our solutions improve connectivity for staff, patients, and medical professionals.",
@@ -1070,7 +1011,6 @@ export const WIDGETS_RESPONSES = {
         svg_code: '<svg viewBox="0 0 288 288" class="ind-icon-svg">...</svg>',
       },
       {
-        id: 221,
         title: "State & Local Government",
         description:
           "Municipalities can improve connectivity for their constituents and help agencies better serve their residents and first responders.",
@@ -1081,7 +1021,6 @@ export const WIDGETS_RESPONSES = {
         svg_code: '<svg viewBox="0 0 288 288" class="ind-icon-svg">...</svg>',
       },
       {
-        id: 222,
         title: "Airports",
         description:
           "We enable connectivity that supports the high data demand for travelers, busy staff and back-of-house operations, and mobile ticketing, providing a better guest experience and enhanced safety.",
@@ -1136,7 +1075,6 @@ export const WIDGETS_RESPONSES = {
     title: "What venue operators are saying",
     cards: [
       {
-        id: 183,
         person_name: "David L.",
         person_message:
           "Fans today want to share their experiences in real-time. Without reliable in-building connectivity, it doesn't matter how great the event is; they feel disconnected. Adding a dedicated small cell network transformed our venue.",
@@ -1144,7 +1082,6 @@ export const WIDGETS_RESPONSES = {
         card_footer_bg: null,
       },
       {
-        id: 184,
         person_name: "Maria C.",
         person_message:
           "Our property is a mixed-use development, and tenants expect seamless cellular coverage from the parking garage to the top floor. Custom wireless solutions proved to be the key differentiator for leasing.",
@@ -1179,9 +1116,9 @@ export const WIDGETS_RESPONSES = {
     description:
       "Every community is different, but we have a proven process for navigating complexities and designing infrastructure to meet your wireless connectivity needs.",
     process_stage: [
-      { id: 107, stage_name: "Assessment", stage_icon_svg: null },
-      { id: 108, stage_name: "Planning", stage_icon_svg: null },
-      { id: 109, stage_name: "Construction", stage_icon_svg: null },
+      { stage_name: "Assessment", stage_icon_svg: null },
+      { stage_name: "Planning", stage_icon_svg: null },
+      { stage_name: "Construction", stage_icon_svg: null },
     ],
     __component: "shared.process",
   },
@@ -1191,7 +1128,6 @@ export const WIDGETS_RESPONSES = {
     title: "What community leaders are saying",
     cards: [
       {
-        id: 1,
         person_name: "Kurt Woehr",
         person_message:
           'Arium Networks has been a great partner. They understand how important it is to be collaborative and get the right inputs, so that we have a great design."',
@@ -1199,7 +1135,6 @@ export const WIDGETS_RESPONSES = {
         card_footer_bg: "#bcf6f2",
       },
       {
-        id: 2,
         person_name: "Joe Slowik",
         person_message:
           'Arium Networks has the skills and the techniques to work hand-in-hand with the city and implement a project of this scale."',
@@ -1433,21 +1368,18 @@ export const WIDGETS_RESPONSES = {
     CustomCssClass: "",
     Sections: [
       {
-        id: 110,
         __component: "shared.hero-banner",
         title: "Dynamic Zone Hero Banner",
         description:
           "Modular page section composed in Strapi Dynamic Zones and resolved via WIDGET_REGISTRY.",
       },
       {
-        id: 32,
         __component: "shared.timeline",
         title: "Contiguous Storyteller Flow",
         description:
           "Contiguous timeline, stats-cards, commitments, and illustration-split sections are grouped inside <FlowBackground />.",
       },
       {
-        id: 12,
         __component: "shared.cta-with-graphic",
         title: "Where can we take your network?",
         CTA_text: "Contact Us",
