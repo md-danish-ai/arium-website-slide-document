@@ -13,6 +13,34 @@ interface WidgetCodeCardProps {
   widget: ChildWidget;
 }
 
+function renderJsonValue(value: string) {
+  const trimmed = value.trim();
+  if (trimmed.startsWith('"')) {
+    return <span className="text-emerald-700">{value}</span>;
+  }
+  if (trimmed === "true" || trimmed === "false" || trimmed === "true," || trimmed === "false,") {
+    return <span className="text-violet-700 font-medium">{value}</span>;
+  }
+  return <span className="text-slate-600">{value}</span>;
+}
+
+function renderJsonLine(line: string) {
+  const match = line.match(/^(\s*)("[^"]+")(\s*:\s*)(.*)$/);
+  if (!match) {
+    return <span className="text-slate-500">{line}</span>;
+  }
+
+  const [, indent, keyToken, separator, valuePart] = match;
+  return (
+    <>
+      <span>{indent}</span>
+      <span className="text-cyan-700 font-medium">{keyToken}</span>
+      <span className="text-slate-400">{separator}</span>
+      {renderJsonValue(valuePart)}
+    </>
+  );
+}
+
 export function WidgetCodeCard({ widget }: WidgetCodeCardProps) {
   const [copied, setCopied] = useState(false);
 
@@ -75,28 +103,19 @@ export function WidgetCodeCard({ widget }: WidgetCodeCardProps) {
         </Button>
       </div>
 
-      {/* Code Body — word-wrapped JSON viewer without horizontal scroll */}
-      <div className="flex-1 overflow-y-auto overflow-x-hidden bg-[#0f172a] font-mono text-[11px] leading-relaxed p-3 glass-scrollbar">
-        <pre className="w-full space-y-0.5 text-slate-100 m-0">
-          {lines.map((line: string, i: number) => {
-            const trimmed = line.trim();
-            const isJsonKey = trimmed.startsWith('"') && line.includes('":');
-
-            return (
-              <div key={i} className="flex items-start w-full min-w-0">
-                <span className="select-none text-right w-7 pr-2.5 text-slate-500 border-r border-slate-700/60 shrink-0 leading-5 text-[10px] tabular-nums">
-                  {i + 1}
-                </span>
-                <code className="pl-3 flex-1 min-w-0 leading-5 whitespace-pre-wrap break-words [overflow-wrap:anywhere]">
-                  {isJsonKey ? (
-                    <span className="text-amber-200">{line}</span>
-                  ) : (
-                    line
-                  )}
-                </code>
-              </div>
-            );
-          })}
+      {/* Code Body — clean white surface with word-wrapped JSON */}
+      <div className="flex-1 overflow-y-auto overflow-x-hidden bg-white font-mono text-[11px] leading-relaxed p-3 glass-scrollbar">
+        <pre className="w-full space-y-0.5 text-slate-700 m-0">
+          {lines.map((line: string, i: number) => (
+            <div key={i} className="flex items-start w-full min-w-0">
+              <span className="select-none text-right w-7 pr-2.5 text-slate-400 border-r border-slate-200/80 shrink-0 leading-5 text-[10px] tabular-nums">
+                {i + 1}
+              </span>
+              <code className="pl-3 flex-1 min-w-0 leading-5 whitespace-pre-wrap break-words [overflow-wrap:anywhere]">
+                {renderJsonLine(line)}
+              </code>
+            </div>
+          ))}
         </pre>
       </div>
     </Card>
