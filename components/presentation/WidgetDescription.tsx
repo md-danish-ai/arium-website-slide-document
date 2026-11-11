@@ -11,6 +11,7 @@ import { WIDGETS_LIST } from "@data/widget";
 import { Card } from "@components/ui/card";
 import { Badge } from "@components/ui/badge";
 import { Separator } from "@components/ui/separator";
+import { ArrowUpRight, PanelTop } from "lucide-react";
 
 interface WidgetDescriptionProps {
   widget: ChildWidget;
@@ -131,8 +132,8 @@ export function WidgetDescription({
             {keyProps.map((prop) => (
               <Badge
                 key={prop}
-                variant="glass"
-                className="rounded-md px-2 py-0.5 font-mono text-[11px] font-normal text-slate-600 shadow-none"
+                variant="outline"
+                className="rounded-md px-2 py-0.5 font-mono text-[11px] font-medium border-cyan-500 ring-1 ring-cyan-500/35 bg-gradient-to-r from-cyan-500/14 via-cyan-50 to-teal-500/10 text-slate-900 shadow-[0_2px_10px_-3px_rgba(6,182,212,0.22)]"
               >
                 {prop}
               </Badge>
@@ -149,7 +150,10 @@ export function WidgetDescription({
           <h4 className="text-[11px] font-bold text-slate-500 uppercase tracking-wider">
             Usage — Where Widgets Are Used
           </h4>
-          <Badge variant="glass" className="text-[10px] font-mono px-2 py-0">
+          <Badge
+            variant="glass"
+            className="rounded-md text-[10px] font-mono px-2 py-0.5"
+          >
             {usedInPages.length} {usedInPages.length === 1 ? "page" : "pages"}
           </Badge>
         </div>
@@ -160,10 +164,11 @@ export function WidgetDescription({
               key={targetPage.id}
               type="button"
               onClick={() => handleUsageClick(targetPage)}
-              className="inline-flex items-center gap-1.5 rounded-full border border-slate-200/85 bg-white/90 px-3 py-1 text-xs font-medium text-slate-700 transition-colors hover:border-cyan-300 hover:bg-cyan-50/60 hover:text-cyan-700 cursor-pointer"
+              className="group inline-flex items-center gap-1.5 rounded-md border border-slate-200/90 border-l-2 border-l-cyan-500/75 bg-slate-50/85 px-2.5 py-1 text-xs font-medium text-slate-700 shadow-[0_1px_2px_rgba(15,23,42,0.03)] transition-all duration-150 hover:border-cyan-400 hover:border-l-cyan-500 hover:bg-white hover:text-slate-900 hover:shadow-xs cursor-pointer"
             >
-              <span className="w-1.5 h-1.5 rounded-full bg-slate-400" />
+              <PanelTop className="w-3 h-3 text-slate-400 group-hover:text-cyan-600 transition-colors shrink-0" />
               <span>{targetPage.label} Page</span>
+              <ArrowUpRight className="w-3 h-3 text-slate-300 group-hover:text-cyan-600 transition-colors shrink-0" />
             </button>
           ))}
         </div>

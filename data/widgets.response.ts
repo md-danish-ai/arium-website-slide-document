@@ -80,7 +80,9 @@ const PRIVATE_VENUES_PROCESS_PAYLOAD: StrapiWidgetPayload = {
   title: "Our proven service delivery process",
   description:
     "Whether you operate a large stadium, commercial building, theme park, campus, or other private venue, we can work with you to design a distributed antenna system (DAS) or small cell network (SCN) that meets your unique connectivity needs.",
-  process_stage: [
+  background_color: null,
+  maxWidthTitle: null,
+  pillars: [
     { stage_name: "Design", stage_icon_svg: null },
     { stage_name: "Construction", stage_icon_svg: null },
     { stage_name: "Optimization", stage_icon_svg: null },
@@ -104,28 +106,34 @@ const PRIVATE_VENUES_CTA_PAYLOAD: StrapiWidgetPayload = {
 
 const LEADERSHIP_PEOPLE_PAYLOAD: StrapiWidgetPayload = {
   id: 60,
-  name: "Laurent “LT” Therivel",
-  designation: "Chief Executive Officer",
-  description:
-    "Laurent Therivel is a seasoned industry executive with a proven track record of driving strategic growth, operational excellence, and shareholder value. As previous President and CEO of UScellular, he led with a strong focus on customer experience and financial results.\nBefore joining UScellular, LT served as CEO of AT&T Mexico and CFO of AT&T Business. Over his 12-year career at AT&T, he advanced through key leadership roles spanning commercial operations, corporate strategy, and general management.\n\nHis leadership journey began in the United States Marine Corps, where he served as a Communications Officer in Southeast Asia, earning the Naval Commendation Medal for leadership. LT left the Marines after achieving the rank of Captain.\nHe is committed to leadership development and co-founded Horizons, a program designed to prepare Texas A&M students for careers in professional services. LT holds a bachelor’s degree in Marketing from Texas A&M University and an MBA from Harvard Business School.",
-  modal_upper_section_background: null,
-  image: {
-    id: 111,
-    documentId: "rjxhx6jqcq4fcapuz2yms6w9",
-    name: "Therivel_Laurent.jpg",
-    alternativeText: null,
-    width: 800,
-    height: 640,
-    formats: {
-      small: {
-        ext: ".jpg",
-        url: "https://d2919ce8l80osk.cloudfront.net/small_Therivel_Laurent_3863d0127f.jpg",
-        width: 500,
-        height: 400,
+  background_gradient:
+    "linear-gradient(135deg, rgb(245, 240, 255) 0%, rgb(237, 229, 255) 40%, rgb(221, 211, 255) 100%)",
+  members: [
+    {
+      name: "Laurent “LT” Therivel",
+      designation: "Chief Executive Officer",
+      description:
+        "Laurent Therivel is a seasoned industry executive with a proven track record of driving strategic growth, operational excellence, and shareholder value. As previous President and CEO of UScellular, he led with a strong focus on customer experience and financial results.\nBefore joining UScellular, LT served as CEO of AT&T Mexico and CFO of AT&T Business. Over his 12-year career at AT&T, he advanced through key leadership roles spanning commercial operations, corporate strategy, and general management.\n\nHis leadership journey began in the United States Marine Corps, where he served as a Communications Officer in Southeast Asia, earning the Naval Commendation Medal for leadership. LT left the Marines after achieving the rank of Captain.\nHe is committed to leadership development and co-founded Horizons, a program designed to prepare Texas A&M students for careers in professional services. LT holds a bachelor’s degree in Marketing from Texas A&M University and an MBA from Harvard Business School.",
+      modal_upper_section_background: null,
+      image: {
+        id: 111,
+        documentId: "rjxhx6jqcq4fcapuz2yms6w9",
+        name: "Therivel_Laurent.jpg",
+        alternativeText: null,
+        width: 800,
+        height: 640,
+        formats: {
+          small: {
+            ext: ".jpg",
+            url: "https://d2919ce8l80osk.cloudfront.net/small_Therivel_Laurent_3863d0127f.jpg",
+            width: 500,
+            height: 400,
+          },
+        },
+        url: "https://d2919ce8l80osk.cloudfront.net/Therivel_Laurent_3863d0127f.jpg",
       },
     },
-    url: "https://d2919ce8l80osk.cloudfront.net/Therivel_Laurent_3863d0127f.jpg",
-  },
+  ],
   __component: "shared.people-global-section",
 };
 
@@ -169,7 +177,7 @@ export const WIDGETS_RESPONSES = {
       width: 1080,
       height: 1888,
     },
-    FeatureCards: [
+    feature_cards: [
       {
         title: "Design",
         description:
@@ -377,7 +385,7 @@ export const WIDGETS_RESPONSES = {
     description_color: null,
     background_color:
       "linear-gradient(135deg, rgb(245, 240, 255) 0%, rgb(237, 229, 255) 40%, rgb(221, 211, 255) 100%)",
-    globe_illustration: {
+    image: {
       id: 51,
       name: "live_connection-illustration.svg",
       alternativeText: null,
@@ -465,7 +473,7 @@ export const WIDGETS_RESPONSES = {
       "As part of EQT's Active Core Infrastructure fund, we have the support and financial capacity to invest with conviction. As opposed to many other private equity backed companies, we do not have any timeframe for liquidity, so we can invest and operate for the long term.",
     commitment_statement:
       "We are guided by a clear set of commitments that shape how we partner and deliver value:",
-    background_overaly:
+    background_overlay:
       "linear-gradient(90deg, #101830eb 0%, #10183099 30%, #1018301a 60%)",
     background_image: {
       id: 15,
@@ -657,7 +665,7 @@ export const WIDGETS_RESPONSES = {
       "We offer competitive compensation and benefits designed to support you at work and in life. Full-time team members are eligible for a comprehensive benefits package that includes:",
     bottom_message:
       "We are an equal opportunity employer. We recruit, hire and promote without regard to race, color, religion, creed, national origin or ancestry, ethnicity, sex (including pregnancy or pregnancy related conditions), gender (including gender identity and expression, and status as a transgender individual), sexual orientation, age, physical or mental disability, citizenship, past, current or prospective service in the uniformed services, genetic information, marital status or any other characteristic protected under applicable federal, state or local law.",
-    benefits_card: [
+    cards: [
       {
         title: "Healthcare",
         description:
@@ -693,6 +701,8 @@ export const WIDGETS_RESPONSES = {
   "shared.eeo": {
     bottom_message:
       "We are an equal opportunity employer. We recruit, hire and promote without regard to race, color, religion, creed, national origin or ancestry, ethnicity, sex (including pregnancy or pregnancy related conditions), gender (including gender identity and expression, and status as a transgender individual), sexual orientation, age, physical or mental disability, citizenship, past, current or prospective service in the uniformed services, genetic information, marital status or any other characteristic protected under applicable federal, state or local law.",
+    statementText: null,
+    contentHtml: null,
     __component: "shared.eeo",
   },
 
@@ -736,7 +746,7 @@ export const WIDGETS_RESPONSES = {
   "shared.image-card-grid": {
     title: "Why small cells matter",
     title_color: null,
-    icon_card: [
+    cards: [
       {
         title: "Reliability",
         description:
@@ -778,7 +788,7 @@ export const WIDGETS_RESPONSES = {
       name: "how-we-work.png",
     },
     background_image_mobile: null,
-    FeatureCards: [],
+    feature_cards: [],
     __component: "shared.background-feature-section",
   },
 
@@ -920,6 +930,7 @@ export const WIDGETS_RESPONSES = {
       },
     ],
     show_bottom_divider: true,
+    background: null,
     __component: "shared.illustration-split",
   },
 
@@ -947,6 +958,7 @@ export const WIDGETS_RESPONSES = {
       },
     ],
     show_bottom_divider: true,
+    background: null,
     __component: "shared.illustration-split",
   },
 
@@ -1115,7 +1127,9 @@ export const WIDGETS_RESPONSES = {
     title: "Our structured process for building small cells",
     description:
       "Every community is different, but we have a proven process for navigating complexities and designing infrastructure to meet your wireless connectivity needs.",
-    process_stage: [
+    background_color: null,
+    maxWidthTitle: null,
+    pillars: [
       { stage_name: "Assessment", stage_icon_svg: null },
       { stage_name: "Planning", stage_icon_svg: null },
       { stage_name: "Construction", stage_icon_svg: null },
@@ -1270,28 +1284,34 @@ export const WIDGETS_RESPONSES = {
 
   "shared.people-global-section--board-of-directors": {
     id: 72,
-    name: "Marni M. Walden",
-    designation: "Board Member & Chair",
-    description:
-      "Marni M. Walden brings more than 25 years of leadership experience driving innovation, operational excellence, and large-scale transformation across global technology, telecom, and media organizations. Widely recognized as one of the most influential women in wireless and a trailblazer in the digital ecosystem, she has held senior operating roles at Verizon Communications, served as an executive management member of the board for Verizon Communications, and now serves as a public and private company board director, strategic advisor, and investor.\n\nThroughout her tenure, she led several of Verizon's most significant acquisitions and integrations, including Yahoo, AOL, Fleetmatics, Telogis, Alltel, and RCC. Her leadership earned her numerous accolades, including recognition as one of the Most Powerful Women in Wireless, a place on Fortune's Most Powerful Women list, and Working Mother of the Year.\n\nShe currently serves on the public board of DraftKings, where she sits on the Transaction Committee and chairs both the Nominating & Governance Committee and the Compliance Committee. Her additional board experience spans both public and private companies, including Airlinq, Persado, DeepSig, and prior service on the boards of Alphabet's Loon, ironSource, and 4C Insights.\n\nMs. Walden also advises leading global investment firms — including New Mountain Capital, EQT, and Goldman Sachs — as well as a portfolio of technology and digital disruptors.",
-    modal_upper_section_background: null,
-    image: {
-      id: 44,
-      documentId: "tfe09m1cbf5g9u87x1974l48",
-      name: "Walden_Marni.jpg",
-      alternativeText: null,
-      width: 800,
-      height: 640,
-      formats: {
-        small: {
-          ext: ".jpg",
-          url: "https://d2919ce8l80osk.cloudfront.net/small_Walden_Marni_1f08bea163.jpg",
-          width: 500,
-          height: 400,
+    background_gradient:
+      "linear-gradient(135deg, rgb(255, 245, 238) 0%, rgb(255, 232, 214) 40%, rgb(255, 218, 200) 100%)",
+    members: [
+      {
+        name: "Marni M. Walden",
+        designation: "Board Member & Chair",
+        description:
+          "Marni M. Walden brings more than 25 years of leadership experience driving innovation, operational excellence, and large-scale transformation across global technology, telecom, and media organizations. Widely recognized as one of the most influential women in wireless and a trailblazer in the digital ecosystem, she has held senior operating roles at Verizon Communications, served as an executive management member of the board for Verizon Communications, and now serves as a public and private company board director, strategic advisor, and investor.\n\nThroughout her tenure, she led several of Verizon's most significant acquisitions and integrations, including Yahoo, AOL, Fleetmatics, Telogis, Alltel, and RCC. Her leadership earned her numerous accolades, including recognition as one of the Most Powerful Women in Wireless, a place on Fortune's Most Powerful Women list, and Working Mother of the Year.\n\nShe currently serves on the public board of DraftKings, where she sits on the Transaction Committee and chairs both the Nominating & Governance Committee and the Compliance Committee. Her additional board experience spans both public and private companies, including Airlinq, Persado, DeepSig, and prior service on the boards of Alphabet's Loon, ironSource, and 4C Insights.\n\nMs. Walden also advises leading global investment firms — including New Mountain Capital, EQT, and Goldman Sachs — as well as a portfolio of technology and digital disruptors.",
+        modal_upper_section_background: null,
+        image: {
+          id: 44,
+          documentId: "tfe09m1cbf5g9u87x1974l48",
+          name: "Walden_Marni.jpg",
+          alternativeText: null,
+          width: 800,
+          height: 640,
+          formats: {
+            small: {
+              ext: ".jpg",
+              url: "https://d2919ce8l80osk.cloudfront.net/small_Walden_Marni_1f08bea163.jpg",
+              width: 500,
+              height: 400,
+            },
+          },
+          url: "https://d2919ce8l80osk.cloudfront.net/Walden_Marni_1f08bea163.jpg",
         },
       },
-      url: "https://d2919ce8l80osk.cloudfront.net/Walden_Marni_1f08bea163.jpg",
-    },
+    ],
     __component: "shared.people-global-section",
   },
 
