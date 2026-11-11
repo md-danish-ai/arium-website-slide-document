@@ -2,7 +2,7 @@
 
 import React from "react";
 import { ChildWidget, PageWithWidgets } from "@/types/widget.types";
-import { getWidgetVisualMeta } from "@lib/widget-helpers";
+import { WIDGETS_LIST } from "@data/widget";
 import { ImagePreviewer } from "@components/presentation/ImagePreviewer";
 
 export type PreviewVariant = "browser" | "blueprint" | "media";
@@ -46,7 +46,31 @@ export function WebsitePreviewCard({
   modalContent,
   onClick,
 }: WebsitePreviewCardProps) {
-  const visualMeta = widget ? getWidgetVisualMeta(widget) : null;
+  const visualMeta = widget
+    ? (() => {
+        const flatMatch =
+          WIDGETS_LIST.find(
+            (item) =>
+              item.id === widget.id ||
+              (item.widget_key === widget.widget_key &&
+                item.position === widget.position),
+          ) ??
+          WIDGETS_LIST.find((item) => item.widget_key === widget.widget_key);
+        const screenshots = widget.preview_images ?? flatMatch?.preview_images;
+        const strapiImage = widget.strapi_image ?? flatMatch?.strapi_image;
+        const svg =
+          widget.category === "flow" ||
+          widget.widget_key.includes("small-cells")
+            ? "/assets/small-cells-illustration.svg"
+            : "/assets/connection-globe.svg";
+        return {
+          screenshots,
+          screenshot: screenshots?.desktop,
+          strapiImage,
+          svg,
+        };
+      })()
+    : null;
 
   const resolvedHeadline =
     headline ??

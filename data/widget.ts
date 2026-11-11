@@ -1,4 +1,5 @@
 import { FlatWidget, WidgetCategory } from "@/types/widget.types";
+import { WIDGETS_RESPONSES } from "./widgets.response";
 
 /**
  * 2. MASTER FLAT WIDGETS LIST
@@ -20,7 +21,7 @@ export const WIDGETS_LIST: FlatWidget[] = [
     source_location: "@ui-component/home/HomeHero",
     category: "hero",
     description:
-      "Full-bleed canvas hero displaying the primary value proposition, background video or image, and dual CTAs.",
+      "Full-bleed hero canvas featuring spring-animated breathing vector shapes (shape-teal.svg, shape-white.svg), headline typography, and a scroll-down indicator.",
     fallback_key: "main-hero",
     key_props: [
       "title",
@@ -35,6 +36,7 @@ export const WIDGETS_LIST: FlatWidget[] = [
       mobile: "/images/home/home-hero/home-hero-mobile.png",
     },
     strapi_image: "/images/strapi-widgets/home/home-hero.png",
+    widgets_response: WIDGETS_RESPONSES["shared.main-hero"],
     used_in_pages: ["home"],
   },
   {
@@ -49,15 +51,26 @@ export const WIDGETS_LIST: FlatWidget[] = [
     source_location: "@ui-component/home/BackgroundFeatureSection",
     category: "feature",
     description:
-      "Section framing telecom bandwidth challenges with high-contrast text and glowing infrastructure background graphics.",
+      "Full-bleed background feature section framing wireless coverage challenges alongside 3 capability pillars (Design, Implement, Optimize) and optional CTA.",
     fallback_key: "background-feature-section",
-    key_props: ["title", "description", "cards", "cta_text", "cta_url"],
+    key_props: [
+      "title",
+      "title_color",
+      "description",
+      "description_color",
+      "background_image_desktop",
+      "background_image_mobile",
+      "CTA_text",
+      "CTA_url",
+      "feature_cards",
+    ],
     preview_images: {
       desktop: "/images/home/background-feature/background-feature.png",
       tablet: "/images/home/background-feature/background-feature-tablet.png",
       mobile: "/images/home/background-feature/background-feature-mobile.png",
     },
     strapi_image: "/images/strapi-widgets/home/background-feature.png",
+    widgets_response: WIDGETS_RESPONSES["shared.background-feature-section"],
     used_in_pages: ["home", "community"],
   },
   {
@@ -65,22 +78,23 @@ export const WIDGETS_LIST: FlatWidget[] = [
     page_id: "home",
     position: 2,
     widget_key: "shared.detailed-card-grid",
-    widgets_title: "3-Pillar Infrastructure Architecture Grid",
+    widgets_title: "2-Card Infrastructure Architecture Grid",
     widgets_label: "Detailed Card Grid",
     component_name: "DetailedCardGrid",
     component_tag: "<DetailedCardGrid />",
     source_location: "@ui-component/home/DetailedCardGrid",
     category: "content",
     description:
-      "Tri-card interactive layout detailing Design, Deployment, and Operations services with custom hover elevation.",
+      "Two-column interactive card grid highlighting Small Cells and Distributed Antenna Systems (DAS) with animated SVG line illustrations and solution links.",
     fallback_key: "detailed-card-grid",
-    key_props: ["title", "description", "cards", "columns"],
+    key_props: ["title", "description", "background_color", "panel_cards"],
     preview_images: {
       desktop: "/images/home/detailed-card-grid/detailed-card-grid.png",
       tablet: "/images/home/detailed-card-grid/detailed-card-grid-tablet.png",
       mobile: "/images/home/detailed-card-grid/detailed-card-grid-mobile.png",
     },
     strapi_image: "/images/strapi-widgets/home/detailed-card-grid.png",
+    widgets_response: WIDGETS_RESPONSES["shared.detailed-card-grid"],
     used_in_pages: ["home"],
   },
   {
@@ -95,15 +109,16 @@ export const WIDGETS_LIST: FlatWidget[] = [
     source_location: "@ui-component/home/StatsWithImage",
     category: "stats",
     description:
-      "Key performance indicators (50K+ Nodes, 99.999% Uptime) alongside high-resolution field photography.",
+      "Animated 5-card KPI grid (100K+ Small Cells, 300+ DAS Venues, 700+ Municipal Networks, 15+ Years, 24/7 NOC) paired with the US dot-map SVG illustration.",
     fallback_key: "stats-with-image",
-    key_props: ["title", "description", "stats", "image"],
+    key_props: ["title", "title_color", "stat_illustration", "stats_card"],
     preview_images: {
       desktop: "/images/home/stats-with-image/stats-with-image.png",
       tablet: "/images/home/stats-with-image/stats-with-image-tablet.png",
       mobile: "/images/home/stats-with-image/stats-with-image-mobile.png",
     },
     strapi_image: "/images/strapi-widgets/home/stats-with-image.png",
+    widgets_response: WIDGETS_RESPONSES["shared.stats-with-image"],
     used_in_pages: ["home"],
   },
   {
@@ -118,9 +133,19 @@ export const WIDGETS_LIST: FlatWidget[] = [
     source_location: "@ui-common/ImageGradientSplit",
     category: "content",
     description:
-      "Editorial 50/50 block balancing community aesthetic considerations with wireless capacity enhancements.",
+      "Gradient-masked split section presenting community connectivity highlights (Reliability, Opportunity, Safety) with responsive background imagery and Learn More link.",
     fallback_key: "image-gradient-split",
-    key_props: ["title", "description", "image", "cta_text", "cta_url"],
+    key_props: [
+      "title",
+      "title_color",
+      "description",
+      "description_color",
+      "background_image_desktop",
+      "background_image_mobile",
+      "section_pointers",
+      "CTA_text",
+      "CTA_url",
+    ],
     preview_images: {
       desktop: "/images/home/image-gradient-split/image-gradient-split.png",
       tablet:
@@ -129,6 +154,7 @@ export const WIDGETS_LIST: FlatWidget[] = [
         "/images/home/image-gradient-split/image-gradient-split-mobile.png",
     },
     strapi_image: "/images/strapi-widgets/home/image-gradient-split.png",
+    widgets_response: WIDGETS_RESPONSES["shared.image-gradient-split"],
     used_in_pages: ["home", "about"],
   },
   {
@@ -143,14 +169,16 @@ export const WIDGETS_LIST: FlatWidget[] = [
     source_location: "@ui-common/CenteredImageCTA",
     category: "cta",
     description:
-      "Centered callout card targeting prospective telecom professionals with background imagery and direct apply link.",
+      "Full-bleed centered callout with radial contrast overlay, background photography, and action button linking to Careers.",
     fallback_key: "centered-image-cta",
     key_props: [
       "title",
+      "title_color",
       "description",
-      "button_text",
-      "button_url",
+      "description_color",
       "background_image",
+      "CTA_text",
+      "CTA_url",
     ],
     preview_images: {
       desktop: "/images/home/centered-image-cta/centered-image-cta.png",
@@ -158,6 +186,7 @@ export const WIDGETS_LIST: FlatWidget[] = [
       mobile: "/images/home/centered-image-cta/centered-image-cta-mobile.png",
     },
     strapi_image: "/images/strapi-widgets/home/centered-image-cta.png",
+    widgets_response: WIDGETS_RESPONSES["shared.centered-image-cta"],
     used_in_pages: ["home"],
   },
   {
@@ -172,14 +201,18 @@ export const WIDGETS_LIST: FlatWidget[] = [
     source_location: "@ui-common/CtaWithGraphic",
     category: "cta",
     description:
-      "Signature conversion unit incorporating Arium's circular orbital vector graphics, badge, and dual CTAs.",
+      "Signature conversion banner pairing Arium's circular orbital vector illustration (connection-cta.svg) with a primary CTA button.",
     fallback_key: "cta-with-graphic",
     key_props: [
       "title",
+      "title_color",
       "description",
-      "button_text",
-      "button_link",
-      "secondary_button_text",
+      "description_color",
+      "CTA_text",
+      "CTA_url",
+      "globe_illustration_desktop",
+      "globe_illustration_mobile",
+      "background_color",
     ],
     preview_images: {
       desktop: "/images/home/cta-with-graphic/cta-with-graphic.png",
@@ -187,6 +220,7 @@ export const WIDGETS_LIST: FlatWidget[] = [
       mobile: "/images/home/cta-with-graphic/cta-with-graphic-mobile.png",
     },
     strapi_image: "/images/strapi-widgets/home/cta-with-graphic.png",
+    widgets_response: WIDGETS_RESPONSES["shared.cta-with-graphic"],
     used_in_pages: ["home", "solutions"],
   },
 
@@ -203,14 +237,17 @@ export const WIDGETS_LIST: FlatWidget[] = [
     source_location: "@ui-common/HeroBanner",
     category: "hero",
     description:
-      "Full-bleed subpage hero with responsive typography, dark gradient overlay, and optional CTA button.",
+      "Full-bleed subpage hero with responsive typography, dark gradient overlay, background image/video support, and optional CTA button.",
     fallback_key: "hero-banner",
     key_props: [
       "title",
       "description",
       "background_image",
+      "background_image_position",
       "CTA_text",
       "CTA_url",
+      "max_width_title",
+      "max_width_description",
     ],
     preview_images: {
       desktop: "/images/about/hero-banner/hero-banner.png",
@@ -218,6 +255,7 @@ export const WIDGETS_LIST: FlatWidget[] = [
       mobile: "/images/about/hero-banner/hero-banner-mobile.png",
     },
     strapi_image: "/images/strapi-widgets/about/hero-banner.png",
+    widgets_response: WIDGETS_RESPONSES["shared.hero-banner"],
     used_in_pages: [
       "about",
       "careers",
@@ -232,16 +270,23 @@ export const WIDGETS_LIST: FlatWidget[] = [
     page_id: "about",
     position: 1,
     widget_key: "shared.content-with-side-graphic",
-    widgets_title: "Our Story with Vector Wireframe Torus Graphic",
+    widgets_title: "Our Story with Connection Illustration Graphic",
     widgets_label: "Content With Side Graphic",
     component_name: "AboutContentWithSideGraphic",
     component_tag: "<AboutContentWithSideGraphic />",
     source_location: "@ui-component/about/AboutContentWithSideGraphic",
     category: "content",
     description:
-      "Two-column narrative block displaying corporate history alongside vector technical graphics.",
+      "Narrative block displaying corporate history on a soft purple gradient alongside a right-aligned connection-illustration.svg side graphic.",
     fallback_key: "content-with-side-graphic",
-    key_props: ["title", "subtitle", "content", "graphic_type", "image"],
+    key_props: [
+      "title",
+      "title_color",
+      "description",
+      "description_color",
+      "background_color",
+      "image",
+    ],
     preview_images: {
       desktop:
         "/images/about/content-with-side-graphic/content-with-side-graphic.png",
@@ -251,6 +296,7 @@ export const WIDGETS_LIST: FlatWidget[] = [
         "/images/about/content-with-side-graphic/content-with-side-graphic-mobile.png",
     },
     strapi_image: "/images/strapi-widgets/about/content-with-side-graphic.png",
+    widgets_response: WIDGETS_RESPONSES["shared.content-with-side-graphic"],
     used_in_pages: ["about"],
   },
   {
@@ -265,15 +311,16 @@ export const WIDGETS_LIST: FlatWidget[] = [
     source_location: "@ui-component/about/AboutJourney",
     category: "flow",
     description:
-      "Interactive chronological timeline showcasing key milestones, carrier deployments, and company growth.",
+      "Interactive 4-milestone chronological timeline (2010–2026) inside Storyteller Flow showcasing NewPath/NextG roots, platform scale, and Arium Networks formation.",
     fallback_key: "storyteller-flow",
-    key_props: ["heading", "subheading", "milestones"],
+    key_props: ["title", "description", "timeline_cards"],
     preview_images: {
       desktop: "/images/about/journey-timeline/journey-timeline.png",
       tablet: "/images/about/journey-timeline/journey-timeline-tablet.png",
       mobile: "/images/about/journey-timeline/journey-timeline-mobile.png",
     },
     strapi_image: "/images/strapi-widgets/about/journey-timeline.png",
+    widgets_response: WIDGETS_RESPONSES["shared.timeline"],
     used_in_pages: ["about"],
   },
   {
@@ -281,14 +328,14 @@ export const WIDGETS_LIST: FlatWidget[] = [
     page_id: "about",
     position: 2,
     widget_key: "shared.stats-cards",
-    widgets_title: "Why Our Infrastructure Trust Stats Cards",
+    widgets_title: "Why Our Infrastructure Matters Stats Cards",
     widgets_label: "Stats Cards",
     component_name: "AboutStatsCards",
     component_tag: "<AboutStatsCards />",
     source_location: "@ui-component/about/AboutStatsCards",
     category: "flow",
     description:
-      "Grid of 4 trust metrics highlighting carrier compliance, uptime standards, and safety certifications.",
+      "3-card industry demand grid highlighting 39B IoT devices, 21GB monthly mobile data consumption, and 89% North America 5G share by 2030.",
     fallback_key: "storyteller-flow",
     key_props: ["title", "description", "cards"],
     preview_images: {
@@ -297,6 +344,7 @@ export const WIDGETS_LIST: FlatWidget[] = [
       mobile: "/images/about/stats-cards/stats-cards-mobile.png",
     },
     strapi_image: "/images/strapi-widgets/about/stats-cards.png",
+    widgets_response: WIDGETS_RESPONSES["shared.stats-cards"],
     used_in_pages: ["about"],
   },
   {
@@ -311,15 +359,23 @@ export const WIDGETS_LIST: FlatWidget[] = [
     source_location: "@ui-component/about/AboutCommitments",
     category: "flow",
     description:
-      "Four core corporate commitments: Community Trust, Aesthetic Harmony, Environmental Responsibility, Safety.",
+      "Panoramic EQT-backed banner and 3 corporate commitment pillars: customer-first focus, nimble readiness to invest, and long-haul ownership.",
     fallback_key: "storyteller-flow",
-    key_props: ["heading", "description", "commitments_list"],
+    key_props: [
+      "title",
+      "description",
+      "background_overlay",
+      "commitment_statement",
+      "background_image",
+      "commitment_cards",
+    ],
     preview_images: {
       desktop: "/images/about/commitments/commitments.png",
       tablet: "/images/about/commitments/commitments-tablet.png",
       mobile: "/images/about/commitments/commitments-mobile.png",
     },
     strapi_image: "/images/strapi-widgets/about/commitments.png",
+    widgets_response: WIDGETS_RESPONSES["shared.commitments"],
     used_in_pages: ["about"],
   },
   {
@@ -334,9 +390,19 @@ export const WIDGETS_LIST: FlatWidget[] = [
     source_location: "@ui-common/ImageGradientSplit",
     category: "content",
     description:
-      "Split promotional section highlighting workplace culture, engineering values, and career entryways.",
+      "Split promotional section highlighting workplace culture pillars (Leadership, Passion, Optimism) with gradient-masked imagery and Careers CTA.",
     fallback_key: "image-gradient-split",
-    key_props: ["title", "description", "image", "cta_text", "cta_url"],
+    key_props: [
+      "title",
+      "title_color",
+      "description",
+      "description_color",
+      "background_image_desktop",
+      "background_image_mobile",
+      "section_pointers",
+      "CTA_text",
+      "CTA_url",
+    ],
     preview_images: {
       desktop: "/images/about/image-gradient-split/image-gradient-split.png",
       tablet:
@@ -345,6 +411,7 @@ export const WIDGETS_LIST: FlatWidget[] = [
         "/images/about/image-gradient-split/image-gradient-split-mobile.png",
     },
     strapi_image: "/images/strapi-widgets/about/image-gradient-split.png",
+    widgets_response: WIDGETS_RESPONSES["shared.image-gradient-split"],
     used_in_pages: ["about", "home"],
   },
 
@@ -361,14 +428,17 @@ export const WIDGETS_LIST: FlatWidget[] = [
     source_location: "@ui-common/HeroBanner",
     category: "hero",
     description:
-      "Subpage hero showcasing team energy and careers value proposition.",
+      "Subpage hero showcasing team collaboration photography and external Dayforce careers portal CTA.",
     fallback_key: "hero-banner",
     key_props: [
       "title",
       "description",
       "background_image",
+      "background_image_position",
       "CTA_text",
       "CTA_url",
+      "max_width_title",
+      "max_width_description",
     ],
     preview_images: {
       desktop: "/images/careers/hero-banner/hero-banner.png",
@@ -376,6 +446,7 @@ export const WIDGETS_LIST: FlatWidget[] = [
       mobile: "/images/careers/hero-banner/hero-banner-mobile.png",
     },
     strapi_image: "/images/strapi-widgets/careers/hero-banner.png",
+    widgets_response: WIDGETS_RESPONSES["shared.hero-banner"],
     used_in_pages: [
       "careers",
       "about",
@@ -397,15 +468,24 @@ export const WIDGETS_LIST: FlatWidget[] = [
     source_location: "@ui-component/careers/CareersCultureAccordion",
     category: "content",
     description:
-      "Split layout pairing photographic showcase with interactive expandable culture values.",
+      "Split layout pairing narrative copy on a purple gradient with 5 interactive expandable culture cards via AccordionSplit.",
     fallback_key: "accordion-split",
-    key_props: ["title", "description", "items", "image"],
+    key_props: [
+      "title",
+      "title_color",
+      "description",
+      "description_color",
+      "background_color",
+      "template_grid_columns",
+      "accordian_cards",
+    ],
     preview_images: {
       desktop: "/images/careers/culture-accordion/culture-accordion.png",
       tablet: "/images/careers/culture-accordion/culture-accordion-tablet.png",
       mobile: "/images/careers/culture-accordion/culture-accordion-mobile.png",
     },
     strapi_image: "/images/strapi-widgets/careers/culture-accordion.png",
+    widgets_response: WIDGETS_RESPONSES["shared.accordion-split"],
     used_in_pages: ["careers", "solutions"],
   },
   {
@@ -413,16 +493,16 @@ export const WIDGETS_LIST: FlatWidget[] = [
     page_id: "careers",
     position: 2,
     widget_key: "shared.gloabl-testimonails",
-    widgets_title: "Employee Testimonials Carousel",
+    widgets_title: "Employee Testimonials Grid",
     widgets_label: "Global Testimonials",
     component_name: "SharedTestimonials",
     component_tag: "<SharedTestimonials />",
     source_location: "@ui-common/SharedTestimonials",
     category: "testimonials",
     description:
-      "Canonical reusable testimonial slider used across Careers, Community, and Venues.",
+      "Canonical reusable 4-card employee testimonial grid (horizontal scroll on mobile, 4-column on desktop) shared across Careers, Community, and Venues.",
     fallback_key: "gloabl-testimonails",
-    key_props: ["title", "subtitle", "testimonials_list"],
+    key_props: ["title", "cards"],
     preview_images: {
       desktop: "/images/careers/global-testimonials/global-testimonials.png",
       tablet:
@@ -431,6 +511,7 @@ export const WIDGETS_LIST: FlatWidget[] = [
         "/images/careers/global-testimonials/global-testimonials-mobile.png",
     },
     strapi_image: "/images/strapi-widgets/careers/global-testimonials.png",
+    widgets_response: WIDGETS_RESPONSES["shared.gloabl-testimonails"],
     used_in_pages: ["careers", "community", "private-venues", "right-of-ways"],
   },
   {
@@ -445,15 +526,23 @@ export const WIDGETS_LIST: FlatWidget[] = [
     source_location: "@ui-component/careers/CareersJobAreas",
     category: "content",
     description:
-      "Interactive list or cards detailing active engineering tracks and openings.",
+      "Two-column list detailing 5 core functional career disciplines alongside office team photography and Dayforce application CTA.",
     fallback_key: "highlight-list",
-    key_props: ["title", "description", "job_disciplines"],
+    key_props: [
+      "title",
+      "description",
+      "CTA_text",
+      "CTA_url",
+      "image",
+      "items",
+    ],
     preview_images: {
       desktop: "/images/careers/job-areas/job-areas.png",
       tablet: "/images/careers/job-areas/job-areas-tablet.png",
       mobile: "/images/careers/job-areas/job-areas-mobile.png",
     },
     strapi_image: "/images/strapi-widgets/careers/job-areas.png",
+    widgets_response: WIDGETS_RESPONSES["shared.highlight-list"],
     used_in_pages: ["careers"],
   },
   {
@@ -468,15 +557,16 @@ export const WIDGETS_LIST: FlatWidget[] = [
     source_location: "@ui-common/BenefitsGrid",
     category: "feature",
     description:
-      "Modular 6-tile grid highlighting health, financial security, time off, and tuition aid.",
+      "Modular 4-column grid highlighting Healthcare, Financial Security, Time Off, and Family Support (also renders EEO bottom_message when supplied via CMS).",
     fallback_key: "benefits",
-    key_props: ["title", "description", "cards"],
+    key_props: ["title", "description", "cards", "bottom_message"],
     preview_images: {
       desktop: "/images/careers/benefits-grid/benefits-grid.png",
       tablet: "/images/careers/benefits-grid/benefits-grid-tablet.png",
       mobile: "/images/careers/benefits-grid/benefits-grid-mobile.png",
     },
     strapi_image: "/images/strapi-widgets/careers/benefits-grid.png",
+    widgets_response: WIDGETS_RESPONSES["shared.benefits"],
     used_in_pages: ["careers", "community"],
   },
   {
@@ -491,15 +581,16 @@ export const WIDGETS_LIST: FlatWidget[] = [
     source_location: "@ui-component/careers/CareersEEO",
     category: "content",
     description:
-      "Formal corporate diversity pledge ensuring barrier-free career advancement.",
+      "Formal equal opportunity employer disclaimer rendered at the bottom of Careers (and via BenefitsGridRenderer when bottom_message is set in CMS).",
     fallback_key: "eeo",
-    key_props: ["title", "content"],
+    key_props: ["bottom_message", "statementText", "contentHtml"],
     preview_images: {
       desktop: "/images/careers/eeo-statement/eeo-statement.png",
       tablet: "/images/careers/eeo-statement/eeo-statement-tablet.png",
       mobile: "/images/careers/eeo-statement/eeo-statement-mobile.png",
     },
     strapi_image: "/images/strapi-widgets/careers/eeo-statement.png",
+    widgets_response: WIDGETS_RESPONSES["shared.eeo"],
     used_in_pages: ["careers"],
   },
 
@@ -515,15 +606,26 @@ export const WIDGETS_LIST: FlatWidget[] = [
     component_tag: "<HeroBanner />",
     source_location: "@ui-common/HeroBanner",
     category: "hero",
-    description: "Community subpage hero with municipality-oriented messaging.",
+    description:
+      "Community subpage hero with municipality-oriented messaging and full-bleed background photography.",
     fallback_key: "hero-banner",
-    key_props: ["title", "description", "background_image"],
+    key_props: [
+      "title",
+      "description",
+      "background_image",
+      "background_image_position",
+      "CTA_text",
+      "CTA_url",
+      "max_width_title",
+      "max_width_description",
+    ],
     preview_images: {
       desktop: "/images/community/hero-banner/hero-banner.png",
       tablet: "/images/community/hero-banner/hero-banner-tablet.png",
       mobile: "/images/community/hero-banner/hero-banner-mobile.png",
     },
     strapi_image: "/images/strapi-widgets/community/hero-banner.png",
+    widgets_response: WIDGETS_RESPONSES["shared.hero-banner"],
     used_in_pages: [
       "community",
       "about",
@@ -545,9 +647,19 @@ export const WIDGETS_LIST: FlatWidget[] = [
     source_location: "@ui-common/IllustrationSplit",
     category: "content",
     description:
-      "Unified illustration component displaying small-cells-illustration.svg and technical specs.",
+      "Unified illustration split displaying small-cells-illustration.svg alongside educational copy explaining how small cells relieve network congestion.",
     fallback_key: "illustration-split",
-    key_props: ["title", "description", "illustration", "stats", "features"],
+    key_props: [
+      "title",
+      "title_color",
+      "description",
+      "description_color",
+      "illustration_image",
+      "illustration_image_alignment",
+      "show_bottom_divider",
+      "statistics",
+      "background",
+    ],
     preview_images: {
       desktop: "/images/community/illustration-split/illustration-split.png",
       tablet:
@@ -556,6 +668,7 @@ export const WIDGETS_LIST: FlatWidget[] = [
         "/images/community/illustration-split/illustration-split-mobile.png",
     },
     strapi_image: "/images/strapi-widgets/community/illustration-split.png",
+    widgets_response: WIDGETS_RESPONSES["shared.illustration-split"],
     used_in_pages: ["community", "solutions"],
   },
   {
@@ -570,15 +683,16 @@ export const WIDGETS_LIST: FlatWidget[] = [
     source_location: "@ui-common/BenefitsGrid",
     category: "feature",
     description:
-      "Card grid exploring public safety, emergency dispatch, and economic growth.",
+      "3-column dark-themed card grid with particle background exploring Reliability, Innovation, and Safety benefits of small cells.",
     fallback_key: "image-card-grid",
-    key_props: ["title", "description", "cards"],
+    key_props: ["title", "title_color", "cards"],
     preview_images: {
       desktop: "/images/community/image-card-grid/image-card-grid.png",
       tablet: "/images/community/image-card-grid/image-card-grid-tablet.png",
       mobile: "/images/community/image-card-grid/image-card-grid-mobile.png",
     },
     strapi_image: "/images/strapi-widgets/community/image-card-grid.png",
+    widgets_response: WIDGETS_RESPONSES["shared.image-card-grid"],
     used_in_pages: ["community", "careers"],
   },
   {
@@ -593,15 +707,26 @@ export const WIDGETS_LIST: FlatWidget[] = [
     source_location: "@ui-component/community/CommunityHowWeWork",
     category: "feature",
     description:
-      "Municipal collaboration workflow highlighting transparency and safety codes.",
+      "Full-bleed background feature section highlighting collaborative municipal deployment across major U.S. markets with CTA linking to Right of Ways (also aliased as shared.how-we-work).",
     fallback_key: "background-feature-section",
-    key_props: ["title", "description", "steps"],
+    key_props: [
+      "title",
+      "title_color",
+      "description",
+      "description_color",
+      "CTA_text",
+      "CTA_url",
+      "background_image_desktop",
+      "background_image_mobile",
+    ],
     preview_images: {
       desktop: "/images/community/how-we-work/how-we-work.png",
       tablet: "/images/community/how-we-work/how-we-work-tablet.png",
       mobile: "/images/community/how-we-work/how-we-work-mobile.png",
     },
     strapi_image: "/images/strapi-widgets/community/how-we-work.png",
+    widgets_response:
+      WIDGETS_RESPONSES["shared.background-feature-section--community"],
     used_in_pages: ["community", "home"],
   },
   {
@@ -616,9 +741,9 @@ export const WIDGETS_LIST: FlatWidget[] = [
     source_location: "@ui-common/SharedTestimonials",
     category: "testimonials",
     description:
-      "Verified testimonials from city managers, utilities, and civic engineers.",
+      "3-column testimonial grid featuring verified quotes from civic, sustainability, and real estate community stakeholders.",
     fallback_key: "gloabl-testimonails",
-    key_props: ["title", "subtitle", "testimonials_list"],
+    key_props: ["title", "cards"],
     preview_images: {
       desktop: "/images/community/global-testimonials/global-testimonials.png",
       tablet:
@@ -627,6 +752,7 @@ export const WIDGETS_LIST: FlatWidget[] = [
         "/images/community/global-testimonials/global-testimonials-mobile.png",
     },
     strapi_image: "/images/strapi-widgets/community/global-testimonials.png",
+    widgets_response: WIDGETS_RESPONSES["shared.gloabl-testimonails"],
     used_in_pages: ["community", "careers", "private-venues", "right-of-ways"],
   },
   {
@@ -641,15 +767,16 @@ export const WIDGETS_LIST: FlatWidget[] = [
     source_location: "@ui-component/community/CommunityFAQ",
     category: "content",
     description:
-      "Accordion addressing RF emissions compliance, pole permits, and maintenance SLAs.",
+      "Interactive 6-item accordion on a radial FlowBackground canvas addressing neighborhood deployments, CLEC right-of-way access, municipal approvals, and FCC RF emission limits.",
     fallback_key: "faq",
-    key_props: ["title", "description", "faqs"],
+    key_props: ["title", "title_color", "faq_data"],
     preview_images: {
       desktop: "/images/community/faq-accordion/faq-accordion.png",
       tablet: "/images/community/faq-accordion/faq-accordion-tablet.png",
       mobile: "/images/community/faq-accordion/faq-accordion-mobile.png",
     },
     strapi_image: "/images/strapi-widgets/community/faq-accordion.png",
+    widgets_response: WIDGETS_RESPONSES["shared.faq"],
     used_in_pages: ["community"],
   },
 
@@ -666,14 +793,17 @@ export const WIDGETS_LIST: FlatWidget[] = [
     source_location: "@ui-common/HeroBanner",
     category: "hero",
     description:
-      "Solutions hero communicating multi-carrier and high-density capabilities.",
+      "Solutions hero communicating scalable wireless infrastructure with Contact Us CTA button.",
     fallback_key: "hero-banner",
     key_props: [
       "title",
       "description",
       "background_image",
+      "background_image_position",
       "CTA_text",
       "CTA_url",
+      "max_width_title",
+      "max_width_description",
     ],
     preview_images: {
       desktop: "/images/solutions/hero-banner/hero-banner.png",
@@ -681,6 +811,7 @@ export const WIDGETS_LIST: FlatWidget[] = [
       mobile: "/images/solutions/hero-banner/hero-banner-mobile.png",
     },
     strapi_image: "/images/strapi-widgets/solutions/hero-banner.png",
+    widgets_response: WIDGETS_RESPONSES["shared.hero-banner"],
     used_in_pages: [
       "solutions",
       "about",
@@ -702,9 +833,19 @@ export const WIDGETS_LIST: FlatWidget[] = [
     source_location: "@ui-common/IllustrationSplit",
     category: "flow",
     description:
-      "Technical architecture for 5G mmWave/sub-6GHz densification using small-cells-illustration.svg.",
+      "Right-aligned small-cells-illustration.svg split paired with MNO deployment copy and KPIs (100K+ small cells, 700+ municipalities served).",
     fallback_key: "illustration-split",
-    key_props: ["title", "description", "illustration", "stats", "features"],
+    key_props: [
+      "title",
+      "title_color",
+      "description",
+      "description_color",
+      "illustration_image",
+      "illustration_image_alignment",
+      "show_bottom_divider",
+      "statistics",
+      "background",
+    ],
     preview_images: {
       desktop: "/images/solutions/small-cells-split/small-cells-split.png",
       tablet:
@@ -713,6 +854,7 @@ export const WIDGETS_LIST: FlatWidget[] = [
         "/images/solutions/small-cells-split/small-cells-split-mobile.png",
     },
     strapi_image: "/images/strapi-widgets/solutions/small-cells-split.png",
+    widgets_response: WIDGETS_RESPONSES["shared.small-cells"],
     used_in_pages: ["solutions", "community"],
   },
   {
@@ -727,15 +869,26 @@ export const WIDGETS_LIST: FlatWidget[] = [
     source_location: "@ui-common/IllustrationSplit",
     category: "flow",
     description:
-      "High-capacity in-building coverage architecture using das-illustration.svg with optical remotes.",
+      "Left-aligned das-illustration.svg split covering indoor and venue deployments (300+ premier venues across the country) with bottom divider.",
     fallback_key: "illustration-split",
-    key_props: ["title", "description", "illustration", "stats", "features"],
+    key_props: [
+      "title",
+      "title_color",
+      "description",
+      "description_color",
+      "illustration_image",
+      "illustration_image_alignment",
+      "show_bottom_divider",
+      "statistics",
+      "background",
+    ],
     preview_images: {
       desktop: "/images/solutions/das-split/das-split.png",
       tablet: "/images/solutions/das-split/das-split-tablet.png",
       mobile: "/images/solutions/das-split/das-split-mobile.png",
     },
     strapi_image: "/images/strapi-widgets/solutions/das-split.png",
+    widgets_response: WIDGETS_RESPONSES["shared.das"],
     used_in_pages: ["solutions"],
   },
   {
@@ -750,9 +903,17 @@ export const WIDGETS_LIST: FlatWidget[] = [
     source_location: "@ui-component/solutions/SolutionsIndustries",
     category: "content",
     description:
-      "Accordion tabs detailing tailored engineering for Airports, Venues, Healthcare, and Commercial Real Estate.",
+      "Interactive 7-industry auto-rotating accordion (Stadiums & Arenas, Amusement & Hospitality, Higher Education, Commercial Real Estate, Healthcare, State & Local Government, Airports) with cross-fading photography and SVG icons.",
     fallback_key: "accordion-split",
-    key_props: ["title", "description", "industries"],
+    key_props: [
+      "title",
+      "title_color",
+      "description",
+      "description_color",
+      "background_color",
+      "template_grid_columns",
+      "accordian_cards",
+    ],
     preview_images: {
       desktop:
         "/images/solutions/industries-accordion/industries-accordion.png",
@@ -762,6 +923,7 @@ export const WIDGETS_LIST: FlatWidget[] = [
         "/images/solutions/industries-accordion/industries-accordion-mobile.png",
     },
     strapi_image: "/images/strapi-widgets/solutions/industries-accordion.png",
+    widgets_response: WIDGETS_RESPONSES["shared.industry"],
     used_in_pages: ["solutions"],
   },
   {
@@ -776,15 +938,26 @@ export const WIDGETS_LIST: FlatWidget[] = [
     source_location: "@ui-common/CtaWithGraphic",
     category: "cta",
     description:
-      "Closing conversion block with orbital graphics and CTA consultation buttons.",
+      "Closing conversion block pairing connection-cta.svg orbital graphics with a Learn more CTA linking to Where We Build.",
     fallback_key: "cta-with-graphic",
-    key_props: ["title", "description", "button_text", "button_link"],
+    key_props: [
+      "title",
+      "title_color",
+      "description",
+      "description_color",
+      "CTA_text",
+      "CTA_url",
+      "globe_illustration_desktop",
+      "globe_illustration_mobile",
+      "background_color",
+    ],
     preview_images: {
       desktop: "/images/solutions/cta-with-graphic/cta-with-graphic.png",
       tablet: "/images/solutions/cta-with-graphic/cta-with-graphic-tablet.png",
       mobile: "/images/solutions/cta-with-graphic/cta-with-graphic-mobile.png",
     },
     strapi_image: "/images/strapi-widgets/solutions/cta-with-graphic.png",
+    widgets_response: WIDGETS_RESPONSES["shared.cta-with-graphic"],
     used_in_pages: ["solutions", "home"],
   },
 
@@ -801,14 +974,16 @@ export const WIDGETS_LIST: FlatWidget[] = [
     source_location: "@ui-common/SubPageHeroBanner",
     category: "hero",
     description:
-      "Compact subpage header with background gradient and prominent venue qualification CTA.",
+      "Compact subpage header with automatic breadcrumbs, purple gradient backdrop, and Contact Us CTA.",
     fallback_key: "sub-page-hero",
     key_props: [
+      "tag",
       "title",
       "description",
+      "CTA_text",
+      "CTA_url",
       "background_gradient",
-      "cta_text",
-      "cta_url",
+      "content_max_width",
     ],
     preview_images: {
       desktop: "/images/private-venues/sub-page-hero/sub-page-hero.png",
@@ -816,6 +991,7 @@ export const WIDGETS_LIST: FlatWidget[] = [
       mobile: "/images/private-venues/sub-page-hero/sub-page-hero-mobile.png",
     },
     strapi_image: "/images/strapi-widgets/private-venues/sub-page-hero.png",
+    widgets_response: WIDGETS_RESPONSES["shared.sub-page-hero"],
     used_in_pages: [
       "private-venues",
       "right-of-ways",
@@ -829,16 +1005,22 @@ export const WIDGETS_LIST: FlatWidget[] = [
     page_id: "private-venues",
     position: 1,
     widget_key: "shared.process",
-    widgets_title: "4-Stage Service Delivery Process Timeline",
+    widgets_title: "3-Stage Service Delivery Process Timeline",
     widgets_label: "Process Section",
     component_name: "ProcessSection",
     component_tag: "<ProcessSection />",
     source_location: "@ui-common/ProcessSection",
     category: "content",
     description:
-      "Four-step progression outlining RF audit, design, commissioning, and NOC monitoring.",
+      "Three-stage interactive pillar process (Design, Construction, Optimization) detailing partner selection, architectural integration, RF design, contractor management, testing, and fine tuning.",
     fallback_key: "process",
-    key_props: ["title", "description", "steps"],
+    key_props: [
+      "title",
+      "description",
+      "background_color",
+      "pillars",
+      "maxWidthTitle",
+    ],
     preview_images: {
       desktop: "/images/private-venues/process-section/process-section.png",
       tablet:
@@ -847,6 +1029,7 @@ export const WIDGETS_LIST: FlatWidget[] = [
         "/images/private-venues/process-section/process-section-mobile.png",
     },
     strapi_image: "/images/strapi-widgets/private-venues/process-section.png",
+    widgets_response: WIDGETS_RESPONSES["shared.process"],
     used_in_pages: ["private-venues", "right-of-ways"],
   },
   {
@@ -861,9 +1044,9 @@ export const WIDGETS_LIST: FlatWidget[] = [
     source_location: "@ui-common/SharedTestimonials",
     category: "testimonials",
     description:
-      "Canonical testimonials slider highlighting venue operator and asset manager experiences.",
+      "2-column wide testimonial grid highlighting commercial real estate and major sports arena operator experiences.",
     fallback_key: "gloabl-testimonails",
-    key_props: ["title", "subtitle", "testimonials_list"],
+    key_props: ["title", "cards"],
     preview_images: {
       desktop:
         "/images/private-venues/global-testimonials/global-testimonials.png",
@@ -874,6 +1057,7 @@ export const WIDGETS_LIST: FlatWidget[] = [
     },
     strapi_image:
       "/images/strapi-widgets/private-venues/global-testimonials.png",
+    widgets_response: WIDGETS_RESPONSES["shared.gloabl-testimonails"],
     used_in_pages: ["private-venues", "careers", "community", "right-of-ways"],
   },
   {
@@ -888,15 +1072,22 @@ export const WIDGETS_LIST: FlatWidget[] = [
     source_location: "@ui-common/SubPageCTA",
     category: "cta",
     description:
-      "Shared CTA banner inviting property managers to request an infrastructure assessment.",
+      "Shared CTA banner with rotated connection-globe.svg illustration inviting property operators to contact the venues team.",
     fallback_key: "global-cta",
-    key_props: ["title", "description", "button_text", "button_url"],
+    key_props: [
+      "prompt_to_cta",
+      "CTA_text",
+      "CTA_url",
+      "background_gradient",
+      "globe_illustration",
+    ],
     preview_images: {
       desktop: "/images/private-venues/sub-page-cta/sub-page-cta.png",
       tablet: "/images/private-venues/sub-page-cta/sub-page-cta-tablet.png",
       mobile: "/images/private-venues/sub-page-cta/sub-page-cta-mobile.png",
     },
     strapi_image: "/images/strapi-widgets/private-venues/sub-page-cta.png",
+    widgets_response: WIDGETS_RESPONSES["shared.global-cta"],
     used_in_pages: [
       "private-venues",
       "right-of-ways",
@@ -918,14 +1109,16 @@ export const WIDGETS_LIST: FlatWidget[] = [
     source_location: "@ui-common/SubPageHeroBanner",
     category: "hero",
     description:
-      "Subpage hero introducing municipal right-of-way co-location and utility agreements.",
+      "Subpage hero with automatic breadcrumbs, warm peach gradient, and Contact Us CTA for municipal partnerships.",
     fallback_key: "sub-page-hero",
     key_props: [
+      "tag",
       "title",
       "description",
+      "CTA_text",
+      "CTA_url",
       "background_gradient",
-      "cta_text",
-      "cta_url",
+      "content_max_width",
     ],
     preview_images: {
       desktop: "/images/right-of-ways/sub-page-hero/sub-page-hero.png",
@@ -933,6 +1126,7 @@ export const WIDGETS_LIST: FlatWidget[] = [
       mobile: "/images/right-of-ways/sub-page-hero/sub-page-hero-mobile.png",
     },
     strapi_image: "/images/strapi-widgets/right-of-ways/sub-page-hero.png",
+    widgets_response: WIDGETS_RESPONSES["shared.sub-page-hero"],
     used_in_pages: [
       "right-of-ways",
       "private-venues",
@@ -953,9 +1147,15 @@ export const WIDGETS_LIST: FlatWidget[] = [
     source_location: "@ui-common/ProcessSection",
     category: "content",
     description:
-      "Four-step municipal timeline: Site Survey, Master Lease Agreement, Construction, Ongoing Maintenance.",
+      "Three-stage municipal deployment process (Assessment, Planning, Construction) covering site identification, CLEC right-of-way assessment, permit applications, and code-compliant installation.",
     fallback_key: "process",
-    key_props: ["title", "description", "steps"],
+    key_props: [
+      "title",
+      "description",
+      "background_color",
+      "pillars",
+      "maxWidthTitle",
+    ],
     preview_images: {
       desktop: "/images/right-of-ways/process-section/process-section.png",
       tablet:
@@ -964,6 +1164,7 @@ export const WIDGETS_LIST: FlatWidget[] = [
         "/images/right-of-ways/process-section/process-section-mobile.png",
     },
     strapi_image: "/images/strapi-widgets/right-of-ways/process-section.png",
+    widgets_response: WIDGETS_RESPONSES["shared.process"],
     used_in_pages: ["right-of-ways", "private-venues"],
   },
   {
@@ -978,9 +1179,9 @@ export const WIDGETS_LIST: FlatWidget[] = [
     source_location: "@ui-common/SharedTestimonials",
     category: "testimonials",
     description:
-      "Canonical testimonials slider with direct quotes from city engineers and utility managers.",
+      "2-column wide testimonial grid featuring quotes from wireless carrier engineering and operations leaders (AT&T, Verizon) on municipal project collaboration.",
     fallback_key: "gloabl-testimonails",
-    key_props: ["title", "subtitle", "testimonials_list"],
+    key_props: ["title", "cards"],
     preview_images: {
       desktop:
         "/images/right-of-ways/global-testimonials/global-testimonials.png",
@@ -991,6 +1192,7 @@ export const WIDGETS_LIST: FlatWidget[] = [
     },
     strapi_image:
       "/images/strapi-widgets/right-of-ways/global-testimonials.png",
+    widgets_response: WIDGETS_RESPONSES["shared.gloabl-testimonails"],
     used_in_pages: ["right-of-ways", "careers", "community", "private-venues"],
   },
   {
@@ -1005,15 +1207,22 @@ export const WIDGETS_LIST: FlatWidget[] = [
     source_location: "@ui-common/SubPageCTA",
     category: "cta",
     description:
-      "Shared CTA banner encouraging city officials to connect for master leasing agreements.",
+      "Shared CTA banner with rotated connection-globe.svg inviting municipal stakeholders to connect with the municipal team.",
     fallback_key: "global-cta",
-    key_props: ["title", "description", "button_text", "button_url"],
+    key_props: [
+      "prompt_to_cta",
+      "CTA_text",
+      "CTA_url",
+      "background_gradient",
+      "globe_illustration",
+    ],
     preview_images: {
       desktop: "/images/right-of-ways/sub-page-cta/sub-page-cta.png",
       tablet: "/images/right-of-ways/sub-page-cta/sub-page-cta-tablet.png",
       mobile: "/images/right-of-ways/sub-page-cta/sub-page-cta-mobile.png",
     },
     strapi_image: "/images/strapi-widgets/right-of-ways/sub-page-cta.png",
+    widgets_response: WIDGETS_RESPONSES["shared.global-cta"],
     used_in_pages: [
       "right-of-ways",
       "private-venues",
@@ -1035,15 +1244,25 @@ export const WIDGETS_LIST: FlatWidget[] = [
     source_location: "@ui-common/HeroBanner",
     category: "hero",
     description:
-      "National footprint hero displaying scale across nationwide markets.",
+      "Where We Build hero banner introducing wireless infrastructure deployments in communities and inside buildings and venues.",
     fallback_key: "hero-banner",
-    key_props: ["title", "description", "background_image"],
+    key_props: [
+      "title",
+      "description",
+      "background_image",
+      "background_image_position",
+      "CTA_text",
+      "CTA_url",
+      "max_width_title",
+      "max_width_description",
+    ],
     preview_images: {
       desktop: "/images/where-we-build/hero-banner/hero-banner.png",
       tablet: "/images/where-we-build/hero-banner/hero-banner-tablet.png",
       mobile: "/images/where-we-build/hero-banner/hero-banner-mobile.png",
     },
     strapi_image: "/images/strapi-widgets/where-we-build/hero-banner.png",
+    widgets_response: WIDGETS_RESPONSES["shared.hero-banner"],
     used_in_pages: [
       "where-we-build",
       "about",
@@ -1058,16 +1277,26 @@ export const WIDGETS_LIST: FlatWidget[] = [
     page_id: "where-we-build",
     position: 1,
     widget_key: "shared.communities",
-    widgets_title: "Municipal Communities Footprint with US Dot Map",
+    widgets_title: "Communities Public Right-of-Way Split",
     widgets_label: "Where Communities",
     component_name: "WhereCommunities",
     component_tag: "<WhereCommunities />",
     source_location: "@ui-component/where-we-build/WhereCommunities",
     category: "content",
     description:
-      "Split layout pairing us-dot-map.svg vector illustration with community deployment data.",
+      "Split layout on a warm peach gradient pairing community-hero.png photography with public right-of-way copy and Learn more CTA linking to /right-of-ways.",
     fallback_key: "communities",
-    key_props: ["title", "description", "dot_map", "stats"],
+    key_props: [
+      "title",
+      "title_color",
+      "description",
+      "description_color",
+      "image",
+      "image_alignment",
+      "background_color",
+      "CTA_text",
+      "CTA_url",
+    ],
     preview_images: {
       desktop: "/images/where-we-build/where-communities/where-communities.png",
       tablet:
@@ -1076,6 +1305,7 @@ export const WIDGETS_LIST: FlatWidget[] = [
         "/images/where-we-build/where-communities/where-communities-mobile.png",
     },
     strapi_image: "/images/strapi-widgets/where-we-build/where-communities.png",
+    widgets_response: WIDGETS_RESPONSES["shared.communities"],
     used_in_pages: ["where-we-build"],
   },
   {
@@ -1090,15 +1320,26 @@ export const WIDGETS_LIST: FlatWidget[] = [
     source_location: "@ui-component/where-we-build/WhereVenues",
     category: "content",
     description:
-      "Split layout highlighting enterprise venues, real estate portfolios, and coverage footprint.",
+      "Split layout on a mint-teal gradient pairing venue-hero.png photography (left-aligned on desktop) with indoor DAS/small cell copy and CTA linking to /private-venues.",
     fallback_key: "venues",
-    key_props: ["title", "description", "image", "venue_types"],
+    key_props: [
+      "title",
+      "title_color",
+      "description",
+      "description_color",
+      "image",
+      "image_alignment",
+      "background_color",
+      "CTA_text",
+      "CTA_url",
+    ],
     preview_images: {
       desktop: "/images/where-we-build/where-venues/where-venues.png",
       tablet: "/images/where-we-build/where-venues/where-venues-tablet.png",
       mobile: "/images/where-we-build/where-venues/where-venues-mobile.png",
     },
     strapi_image: "/images/strapi-widgets/where-we-build/where-venues.png",
+    widgets_response: WIDGETS_RESPONSES["shared.venues"],
     used_in_pages: ["where-we-build"],
   },
 
@@ -1115,15 +1356,24 @@ export const WIDGETS_LIST: FlatWidget[] = [
     source_location: "@ui-common/SubPageHeroBanner",
     category: "hero",
     description:
-      "Subpage hero introducing executive management and corporate stewardship.",
+      "Subpage hero with automatic breadcrumbs and purple gradient introducing Arium's executive leadership team.",
     fallback_key: "sub-page-hero",
-    key_props: ["title", "description", "background_gradient"],
+    key_props: [
+      "tag",
+      "title",
+      "description",
+      "CTA_text",
+      "CTA_url",
+      "background_gradient",
+      "content_max_width",
+    ],
     preview_images: {
       desktop: "/images/leadership/sub-page-hero/sub-page-hero.png",
       tablet: "/images/leadership/sub-page-hero/sub-page-hero-tablet.png",
       mobile: "/images/leadership/sub-page-hero/sub-page-hero-mobile.png",
     },
     strapi_image: "/images/strapi-widgets/leadership/sub-page-hero.png",
+    widgets_response: WIDGETS_RESPONSES["shared.sub-page-hero"],
     used_in_pages: [
       "leadership",
       "private-venues",
@@ -1144,9 +1394,9 @@ export const WIDGETS_LIST: FlatWidget[] = [
     source_location: "@ui-common/PeopleGlobalSection",
     category: "people",
     description:
-      "Canonical team grid component supporting executive profiles and full-screen modal bio drawers.",
+      "Canonical responsive team grid rendering 7 executive leaders with interactive MemberModal bio views.",
     fallback_key: "people-global-section",
-    key_props: ["members", "background_gradient", "columns"],
+    key_props: ["members", "background_gradient"],
     preview_images: {
       desktop:
         "/images/leadership/people-global-section/people-global-section.png",
@@ -1156,6 +1406,7 @@ export const WIDGETS_LIST: FlatWidget[] = [
         "/images/leadership/people-global-section/people-global-section-mobile.png",
     },
     strapi_image: "/images/strapi-widgets/leadership/people-global-section.png",
+    widgets_response: WIDGETS_RESPONSES["shared.people-global-section"],
     used_in_pages: ["leadership", "board-of-directors"],
   },
   {
@@ -1169,15 +1420,23 @@ export const WIDGETS_LIST: FlatWidget[] = [
     component_tag: "<SubPageCTA />",
     source_location: "@ui-common/SubPageCTA",
     category: "cta",
-    description: "Shared CTA banner pointing prospective talent to open roles.",
+    description:
+      "Shared CTA banner with rotated connection-globe.svg pointing prospective talent to /careers.",
     fallback_key: "global-cta",
-    key_props: ["title", "description", "button_text", "button_url"],
+    key_props: [
+      "prompt_to_cta",
+      "CTA_text",
+      "CTA_url",
+      "background_gradient",
+      "globe_illustration",
+    ],
     preview_images: {
       desktop: "/images/leadership/sub-page-cta/sub-page-cta.png",
       tablet: "/images/leadership/sub-page-cta/sub-page-cta-tablet.png",
       mobile: "/images/leadership/sub-page-cta/sub-page-cta-mobile.png",
     },
     strapi_image: "/images/strapi-widgets/leadership/sub-page-cta.png",
+    widgets_response: WIDGETS_RESPONSES["shared.global-cta"],
     used_in_pages: [
       "leadership",
       "private-venues",
@@ -1199,9 +1458,17 @@ export const WIDGETS_LIST: FlatWidget[] = [
     source_location: "@ui-common/SubPageHeroBanner",
     category: "hero",
     description:
-      "Subpage hero introducing board governance and strategic advisory.",
+      "Subpage hero with automatic breadcrumbs and warm peach gradient introducing the Board of Directors.",
     fallback_key: "sub-page-hero",
-    key_props: ["title", "description", "background_gradient"],
+    key_props: [
+      "tag",
+      "title",
+      "description",
+      "CTA_text",
+      "CTA_url",
+      "background_gradient",
+      "content_max_width",
+    ],
     preview_images: {
       desktop: "/images/board-of-directors/sub-page-hero/sub-page-hero.png",
       tablet:
@@ -1210,6 +1477,7 @@ export const WIDGETS_LIST: FlatWidget[] = [
         "/images/board-of-directors/sub-page-hero/sub-page-hero-mobile.png",
     },
     strapi_image: "/images/strapi-widgets/board-of-directors/sub-page-hero.png",
+    widgets_response: WIDGETS_RESPONSES["shared.sub-page-hero"],
     used_in_pages: [
       "board-of-directors",
       "private-venues",
@@ -1230,9 +1498,9 @@ export const WIDGETS_LIST: FlatWidget[] = [
     source_location: "@ui-common/PeopleGlobalSection",
     category: "people",
     description:
-      "Shared canonical people section rendering board members and advisors with interactive bio drawer.",
+      "Shared canonical people section rendering 6 board members with interactive MemberModal bio views.",
     fallback_key: "people-global-section",
-    key_props: ["members", "background_gradient", "columns"],
+    key_props: ["members", "background_gradient"],
     preview_images: {
       desktop:
         "/images/board-of-directors/people-global-section/people-global-section.png",
@@ -1243,6 +1511,7 @@ export const WIDGETS_LIST: FlatWidget[] = [
     },
     strapi_image:
       "/images/strapi-widgets/board-of-directors/people-global-section.png",
+    widgets_response: WIDGETS_RESPONSES["shared.people-global-section"],
     used_in_pages: ["board-of-directors", "leadership"],
   },
   {
@@ -1257,15 +1526,22 @@ export const WIDGETS_LIST: FlatWidget[] = [
     source_location: "@ui-common/SubPageCTA",
     category: "cta",
     description:
-      "Shared CTA banner guiding visitors back to the executive leadership team view.",
+      "Shared CTA banner with rotated connection-globe.svg guiding visitors to the executive leadership page (/leadership).",
     fallback_key: "global-cta",
-    key_props: ["title", "description", "button_text", "button_url"],
+    key_props: [
+      "prompt_to_cta",
+      "CTA_text",
+      "CTA_url",
+      "background_gradient",
+      "globe_illustration",
+    ],
     preview_images: {
       desktop: "/images/board-of-directors/sub-page-cta/sub-page-cta.png",
       tablet: "/images/board-of-directors/sub-page-cta/sub-page-cta-tablet.png",
       mobile: "/images/board-of-directors/sub-page-cta/sub-page-cta-mobile.png",
     },
     strapi_image: "/images/strapi-widgets/board-of-directors/sub-page-cta.png",
+    widgets_response: WIDGETS_RESPONSES["shared.global-cta"],
     used_in_pages: [
       "board-of-directors",
       "private-venues",
@@ -1286,15 +1562,25 @@ export const WIDGETS_LIST: FlatWidget[] = [
     component_tag: "<SubPageHeroBanner />",
     source_location: "@ui-common/SubPageHeroBanner",
     category: "hero",
-    description: "Subpage hero introducing contact and partnership channels.",
+    description:
+      "Subpage hero introducing contact and partnership inquiry channels.",
     fallback_key: "sub-page-hero",
-    key_props: ["title", "description", "background_gradient"],
+    key_props: [
+      "tag",
+      "title",
+      "description",
+      "CTA_text",
+      "CTA_url",
+      "background_gradient",
+      "content_max_width",
+    ],
     preview_images: {
       desktop: "/images/contact/sub-page-hero/sub-page-hero.png",
       tablet: "/images/contact/sub-page-hero/sub-page-hero-tablet.png",
       mobile: "/images/contact/sub-page-hero/sub-page-hero-mobile.png",
     },
     strapi_image: "/images/strapi-widgets/contact/sub-page-hero.png",
+    widgets_response: WIDGETS_RESPONSES["shared.sub-page-hero"],
     used_in_pages: [
       "contact",
       "private-venues",
@@ -1315,15 +1601,16 @@ export const WIDGETS_LIST: FlatWidget[] = [
     source_location: "@ui-component/contact/ContactForm",
     category: "form",
     description:
-      "Interactive form with topic selection, input validation, and submission handler.",
+      "Interactive inquiry form powered by React Hook Form + Zod validation, 9 topic interest options, and POST /api/contact email delivery via Resend API.",
     fallback_key: "contact-form",
-    key_props: ["topicOptions", "onSubmit", "isSubmitting"],
+    key_props: ["topicOptions"],
     preview_images: {
       desktop: "/images/contact/contact-form/contact-form.png",
       tablet: "/images/contact/contact-form/contact-form-tablet.png",
       mobile: "/images/contact/contact-form/contact-form-mobile.png",
     },
     strapi_image: "/images/strapi-widgets/contact/contact-form.png",
+    widgets_response: WIDGETS_RESPONSES["contact-form"],
     used_in_pages: ["contact"],
   },
 
@@ -1339,15 +1626,26 @@ export const WIDGETS_LIST: FlatWidget[] = [
     component_tag: "<HeroBanner />",
     source_location: "@ui-common/HeroBanner",
     category: "hero",
-    description: "Dynamic page header populated from Strapi slug query.",
+    description:
+      "Fallback dynamic page header populated from Strapi slug query (heroTitle, heroDescription, heroMedia) when no hero widget is supplied.",
     fallback_key: "hero-banner",
-    key_props: ["title", "description", "background_image"],
+    key_props: [
+      "title",
+      "description",
+      "background_image",
+      "background_image_position",
+      "CTA_text",
+      "CTA_url",
+      "max_width_title",
+      "max_width_description",
+    ],
     preview_images: {
       desktop: "/images/dynamic-slug/hero-banner/hero-banner.png",
       tablet: "/images/dynamic-slug/hero-banner/hero-banner-tablet.png",
       mobile: "/images/dynamic-slug/hero-banner/hero-banner-mobile.png",
     },
     strapi_image: "/images/strapi-widgets/dynamic-slug/hero-banner.png",
+    widgets_response: WIDGETS_RESPONSES["shared.hero-banner"],
     used_in_pages: [
       "[slug]",
       "about",
@@ -1366,18 +1664,19 @@ export const WIDGETS_LIST: FlatWidget[] = [
     widgets_label: "Dynamic Zone",
     component_name: "GlobalWidgetRenderer",
     component_tag: "<GlobalWidgetRenderer />",
-    source_location: "components/ui-widget/registry.ts",
+    source_location: "@ui-widget/GlobalWidgetRenderer",
     category: "shared",
     description:
-      "Modular dynamic blocks resolved dynamically through the global WIDGET_REGISTRY.",
+      "Modular dynamic blocks resolved through WIDGET_REGISTRY via GlobalWidgetRenderer, automatically grouping contiguous storyteller-flow and people-global-section items.",
     fallback_key: "dynamic-zone",
-    key_props: ["__component", "PositionNumber", "data"],
+    key_props: ["PositionNumber", "CustomCssClass", "Sections", "__component"],
     preview_images: {
       desktop: "/images/dynamic-slug/dynamic-zone/dynamic-zone.png",
       tablet: "/images/dynamic-slug/dynamic-zone/dynamic-zone-tablet.png",
       mobile: "/images/dynamic-slug/dynamic-zone/dynamic-zone-mobile.png",
     },
     strapi_image: "/images/strapi-widgets/dynamic-slug/dynamic-zone.png",
+    widgets_response: WIDGETS_RESPONSES["shared.dynamic-zone"],
     used_in_pages: ["[slug]"],
   },
 ];

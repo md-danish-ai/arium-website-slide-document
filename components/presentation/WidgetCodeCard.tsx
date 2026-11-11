@@ -1,8 +1,9 @@
 "use client";
 
 import React, { useState } from "react";
-import { ChildWidget } from "@/types/widget.types";
-import { generateWidgetCode } from "@lib/widget-helpers";
+import { ChildWidget, WidgetResponseSchema } from "@/types/widget.types";
+import { WIDGETS_LIST } from "@data/widget";
+import { WIDGETS_RESPONSES } from "@data/widgets.response";
 import { Card } from "@components/ui/card";
 import { Badge } from "@components/ui/badge";
 import { Button } from "@components/ui/button";
@@ -11,6 +12,7 @@ import { cn } from "@lib/utils";
 
 interface WidgetCodeCardProps {
   widget: ChildWidget;
+  widgetsResponse?: WidgetResponseSchema;
 }
 
 function renderJsonValue(value: string) {
@@ -46,10 +48,40 @@ function renderJsonLine(line: string) {
   );
 }
 
-export function WidgetCodeCard({ widget }: WidgetCodeCardProps) {
+export function WidgetCodeCard({
+  widget,
+  widgetsResponse,
+}: WidgetCodeCardProps) {
   const [copied, setCopied] = useState(false);
 
-  const { strapiSchemaCode } = generateWidgetCode(widget);
+  const resolvedResponse =
+    widget.widgets_response ??
+    widgetsResponse ??
+    WIDGETS_LIST.find(
+      (item) =>
+        item.id === widget.id ||
+        (item.widget_key === widget.widget_key &&
+          item.position === widget.position),
+    )?.widgets_response ??
+    WIDGETS_RESPONSES[widget.widget_key as keyof typeof WIDGETS_RESPONSES];
+
+  const strapiSchemaCode = resolvedResponse
+    ? JSON.stringify(resolvedResponse, null, 2)
+    : JSON.stringify(
+        {
+          collectionName: `components_${widget.widget_key.replace(/[^a-zA-Z0-9]+/g, "_")}`,
+          info: {
+            displayName: widget.widgets_label,
+            icon: "layer",
+            category: widget.category,
+            description: widget.description,
+          },
+          options: { timestamps: true },
+          attributes: {},
+        },
+        null,
+        2,
+      );
 
   const handleCopy = async () => {
     try {

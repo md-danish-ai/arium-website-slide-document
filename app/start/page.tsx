@@ -3,7 +3,11 @@
 import React, { useState, useMemo, useCallback } from "react";
 import { PAGE_WIDGETS } from "@data/page.widget";
 import { WIDGETS_LIST } from "@data/widget";
-import { ChildWidget, PageWithWidgets } from "@/types/widget.types";
+import {
+  ChildWidget,
+  PageWithWidgets,
+  WidgetUsagePage,
+} from "@/types/widget.types";
 import { StartHeader, PageSidebar } from "@components/navigation";
 import {
   WebsitePreviewCard,
@@ -11,7 +15,6 @@ import {
   WidgetBlueprintCard,
   WidgetCodeCard,
 } from "@components/presentation";
-import { getWidgetUsageAcrossPages } from "@lib/widget-helpers";
 
 export default function StartPage() {
   const [selectedPageId, setSelectedPageId] = useState<string>("home");
@@ -50,9 +53,100 @@ export default function StartPage() {
     );
   }, [activePage, selectedWidgetId]);
 
-  const usedInPages = useMemo(() => {
-    return getWidgetUsageAcrossPages(activeWidget, activePage.id);
-  }, [activeWidget, activePage.id]);
+  const activeFlatWidget = useMemo(() => {
+    return (
+      WIDGETS_LIST.find((item) => item.id === activeWidget.id) ??
+      WIDGETS_LIST.find(
+        (item) =>
+          item.page_id === activePage.id &&
+          item.widget_key === activeWidget.widget_key &&
+          item.position === activeWidget.position,
+      ) ??
+      WIDGETS_LIST.find((item) => item.widget_key === activeWidget.widget_key)
+    );
+  }, [
+    activeWidget.id,
+    activeWidget.widget_key,
+    activeWidget.position,
+    activePage.id,
+  ]);
+
+  const usedInPages = useMemo<WidgetUsagePage[]>(() => {
+    const pages: WidgetUsagePage[] = [];
+    const seenPageIds = new Set<string>();
+
+    const matchesSlug = (
+      pId: string,
+      pSlug: string,
+      pRoute: string,
+      target: string,
+    ) =>
+      pId === target ||
+      pSlug === target ||
+      pRoute === target ||
+      (target === "[slug]" && pId === "dynamic-slug");
+
+    for (const p of PAGE_WIDGETS) {
+      const matchingWidget = p.child_widgets.find(
+        (cw) => cw.widget_key === activeWidget.widget_key,
+      );
+      if (matchingWidget && !seenPageIds.has(p.id)) {
+        seenPageIds.add(p.id);
+        pages.push({
+          id: p.id,
+          title: p.title,
+          label: p.label,
+          route: p.route,
+          strapiSlug: p.strapi_slug,
+          pageCategory: p.category,
+          matchingWidgetId: matchingWidget.id,
+          matchingWidgetLabel: matchingWidget.widgets_label,
+          matchingPosition: matchingWidget.position,
+        });
+      }
+    }
+
+    if (activeFlatWidget) {
+      for (const slug of activeFlatWidget.used_in_pages) {
+        const matchedPage = PAGE_WIDGETS.find((p) =>
+          matchesSlug(p.id, p.strapi_slug, p.route, slug),
+        );
+        if (matchedPage && !seenPageIds.has(matchedPage.id)) {
+          seenPageIds.add(matchedPage.id);
+          const matchingWidget = matchedPage.child_widgets.find(
+            (cw) => cw.widget_key === activeWidget.widget_key,
+          );
+          pages.push({
+            id: matchedPage.id,
+            title: matchedPage.title,
+            label: matchedPage.label,
+            route: matchedPage.route,
+            strapiSlug: matchedPage.strapi_slug,
+            pageCategory: matchedPage.category,
+            matchingWidgetId: matchingWidget?.id,
+            matchingWidgetLabel: matchingWidget?.widgets_label,
+            matchingPosition: matchingWidget?.position,
+          });
+        }
+      }
+    }
+
+    if (!seenPageIds.has(activePage.id)) {
+      pages.unshift({
+        id: activePage.id,
+        title: activePage.title,
+        label: activePage.label,
+        route: activePage.route,
+        strapiSlug: activePage.strapi_slug,
+        pageCategory: activePage.category,
+        matchingWidgetId: activeWidget.id,
+        matchingWidgetLabel: activeWidget.widgets_label,
+        matchingPosition: activeWidget.position,
+      });
+    }
+
+    return pages;
+  }, [activeWidget, activePage, activeFlatWidget]);
 
   const handleSelectWidget = useCallback((pageId: string, widgetId: string) => {
     setSelectedPageId(pageId);
@@ -128,6 +222,7 @@ export default function StartPage() {
                 widget={activeWidget}
                 page={activePage}
                 usedInPages={usedInPages}
+                flatWidget={activeFlatWidget}
                 onNavigateToPage={handleSelectPage}
                 onSelectWidget={handleSelectWidget}
               />
@@ -146,7 +241,10 @@ export default function StartPage() {
             </div>
             {/* Code — fills rest of column */}
             <div className="flex-1 min-h-0 flex flex-col">
-              <WidgetCodeCard widget={activeWidget} />
+              <WidgetCodeCard
+                widget={activeWidget}
+                widgetsResponse={activeFlatWidget?.widgets_response}
+              />
             </div>
           </div>
         </div>

@@ -23,6 +23,30 @@ export interface WidgetPreviewImages {
   mobile?: string;
 }
 
+export interface WidgetResponseSchema {
+  collectionName: string;
+  info: {
+    displayName: string;
+    icon: string;
+    category: WidgetCategory;
+    description: string;
+  };
+  options: Record<string, unknown>;
+  attributes: Record<string, Record<string, unknown>>;
+}
+
+export interface WidgetUsagePage {
+  id: string;
+  title: string;
+  label: string;
+  route: string;
+  strapiSlug: string;
+  pageCategory: string;
+  matchingWidgetId?: string;
+  matchingWidgetLabel?: string;
+  matchingPosition?: number;
+}
+
 /**
  * Strapi Dynamic Zone widget entry nested inside a page (`data/page.widget.ts`).
  */
@@ -37,6 +61,7 @@ export interface ChildWidget {
   key_props?: string[];
   preview_images?: WidgetPreviewImages;
   strapi_image?: string;
+  widgets_response?: WidgetResponseSchema;
 }
 
 /**
@@ -72,5 +97,6 @@ export interface FlatWidget {
   key_props?: string[];
   preview_images?: WidgetPreviewImages;
   strapi_image?: string;
+  widgets_response: WidgetResponseSchema;
   used_in_pages: string[];
 }

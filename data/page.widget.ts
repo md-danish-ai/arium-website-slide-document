@@ -15,7 +15,7 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
     strapi_slug: "home",
     category: "Corporate",
     description:
-      "Flagship entrance for Arium Networks. Orchestrates 7 modular sections and background particle physics to showcase high-density cellular infrastructure, small cells, and municipal partnerships.",
+      "Flagship entrance for Arium Networks. Orchestrates 7 modular sections and background particle physics to showcase high-density cellular infrastructure, small cells, DAS, and municipal partnerships.",
     child_widgets: [
       {
         id: "w-home-0",
@@ -25,7 +25,7 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
         widgets_label: "Hero Banner",
         category: "hero",
         description:
-          "Full-bleed canvas hero displaying the primary value proposition, background video or image, and dual CTAs.",
+          "Full-bleed hero canvas featuring spring-animated breathing vector shapes (shape-teal.svg, shape-white.svg), headline typography, and a scroll-down indicator.",
         key_props: [
           "title",
           "description",
@@ -48,8 +48,18 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
         widgets_label: "Background Feature",
         category: "feature",
         description:
-          "Section framing telecom bandwidth challenges with high-contrast text and glowing infrastructure background graphics.",
-        key_props: ["title", "description", "cards", "cta_text", "cta_url"],
+          "Full-bleed background feature section framing wireless coverage challenges alongside 3 capability pillars (Design, Implement, Optimize) and optional CTA.",
+        key_props: [
+          "title",
+          "title_color",
+          "description",
+          "description_color",
+          "background_image_desktop",
+          "background_image_mobile",
+          "CTA_text",
+          "CTA_url",
+          "feature_cards",
+        ],
         preview_images: {
           desktop: "/images/home/background-feature/background-feature.png",
           tablet:
@@ -63,12 +73,12 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
         id: "w-home-2",
         position: 2,
         widget_key: "shared.detailed-card-grid",
-        widgets_title: "3-Pillar Infrastructure Architecture Grid",
+        widgets_title: "2-Card Infrastructure Architecture Grid",
         widgets_label: "Detailed Card Grid",
         category: "content",
         description:
-          "Tri-card interactive layout detailing Design, Deployment, and Operations services with custom hover elevation.",
-        key_props: ["title", "description", "cards", "columns"],
+          "Two-column interactive card grid highlighting Small Cells and Distributed Antenna Systems (DAS) with animated SVG line illustrations and solution links.",
+        key_props: ["title", "description", "background_color", "panel_cards"],
         preview_images: {
           desktop: "/images/home/detailed-card-grid/detailed-card-grid.png",
           tablet:
@@ -86,8 +96,8 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
         widgets_label: "Stats With Image",
         category: "stats",
         description:
-          "Key performance indicators (50K+ Nodes, 99.999% Uptime) alongside high-resolution field photography.",
-        key_props: ["title", "description", "stats", "image"],
+          "Animated 5-card KPI grid (100K+ Small Cells, 300+ DAS Venues, 700+ Municipal Networks, 15+ Years, 24/7 NOC) paired with the US dot-map SVG illustration.",
+        key_props: ["title", "title_color", "stat_illustration", "stats_card"],
         preview_images: {
           desktop: "/images/home/stats-with-image/stats-with-image.png",
           tablet: "/images/home/stats-with-image/stats-with-image-tablet.png",
@@ -103,8 +113,18 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
         widgets_label: "Image Gradient Split",
         category: "content",
         description:
-          "Editorial 50/50 block balancing community aesthetic considerations with wireless capacity enhancements.",
-        key_props: ["title", "description", "image", "cta_text", "cta_url"],
+          "Gradient-masked split section presenting community connectivity highlights (Reliability, Opportunity, Safety) with responsive background imagery and Learn More link.",
+        key_props: [
+          "title",
+          "title_color",
+          "description",
+          "description_color",
+          "background_image_desktop",
+          "background_image_mobile",
+          "section_pointers",
+          "CTA_text",
+          "CTA_url",
+        ],
         preview_images: {
           desktop: "/images/home/image-gradient-split/image-gradient-split.png",
           tablet:
@@ -122,13 +142,15 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
         widgets_label: "Centered Image CTA",
         category: "cta",
         description:
-          "Centered callout card targeting prospective telecom professionals with background imagery and direct apply link.",
+          "Full-bleed centered callout with radial contrast overlay, background photography, and action button linking to Careers.",
         key_props: [
           "title",
+          "title_color",
           "description",
-          "button_text",
-          "button_url",
+          "description_color",
           "background_image",
+          "CTA_text",
+          "CTA_url",
         ],
         preview_images: {
           desktop: "/images/home/centered-image-cta/centered-image-cta.png",
@@ -147,13 +169,17 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
         widgets_label: "CTA With Graphic",
         category: "cta",
         description:
-          "Signature conversion unit incorporating Arium's circular orbital vector graphics, badge, and dual CTAs.",
+          "Signature conversion banner pairing Arium's circular orbital vector illustration (connection-cta.svg) with a primary CTA button.",
         key_props: [
           "title",
+          "title_color",
           "description",
-          "button_text",
-          "button_link",
-          "secondary_button_text",
+          "description_color",
+          "CTA_text",
+          "CTA_url",
+          "globe_illustration_desktop",
+          "globe_illustration_mobile",
+          "background_color",
         ],
         preview_images: {
           desktop: "/images/home/cta-with-graphic/cta-with-graphic.png",
@@ -184,13 +210,16 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
         widgets_label: "Hero Banner",
         category: "hero",
         description:
-          "Full-bleed subpage hero with responsive typography, dark gradient overlay, and optional CTA button.",
+          "Full-bleed subpage hero with responsive typography, dark gradient overlay, background image/video support, and optional CTA button.",
         key_props: [
           "title",
           "description",
           "background_image",
+          "background_image_position",
           "CTA_text",
           "CTA_url",
+          "max_width_title",
+          "max_width_description",
         ],
         preview_images: {
           desktop: "/images/about/hero-banner/hero-banner.png",
@@ -203,12 +232,19 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
         id: "w-about-1",
         position: 1,
         widget_key: "shared.content-with-side-graphic",
-        widgets_title: "Our Story with Vector Wireframe Torus Graphic",
+        widgets_title: "Our Story with Connection Illustration Graphic",
         widgets_label: "Content With Side Graphic",
         category: "content",
         description:
-          "Two-column narrative block displaying corporate history alongside vector technical graphics.",
-        key_props: ["title", "subtitle", "content", "graphic_type", "image"],
+          "Narrative block displaying corporate history on a soft purple gradient alongside a right-aligned connection-illustration.svg side graphic.",
+        key_props: [
+          "title",
+          "title_color",
+          "description",
+          "description_color",
+          "background_color",
+          "image",
+        ],
         preview_images: {
           desktop:
             "/images/about/content-with-side-graphic/content-with-side-graphic.png",
@@ -228,8 +264,8 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
         widgets_label: "Journey Timeline",
         category: "flow",
         description:
-          "Interactive chronological timeline showcasing key milestones, carrier deployments, and company growth.",
-        key_props: ["heading", "subheading", "milestones"],
+          "Interactive 4-milestone chronological timeline (2010–2026) inside Storyteller Flow showcasing NewPath/NextG roots, platform scale, and Arium Networks formation.",
+        key_props: ["title", "description", "timeline_cards"],
         preview_images: {
           desktop: "/images/about/journey-timeline/journey-timeline.png",
           tablet: "/images/about/journey-timeline/journey-timeline-tablet.png",
@@ -241,11 +277,11 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
         id: "w-about-3",
         position: 2,
         widget_key: "shared.stats-cards",
-        widgets_title: "Why Our Infrastructure Trust Stats Cards",
+        widgets_title: "Why Our Infrastructure Matters Stats Cards",
         widgets_label: "Stats Cards",
         category: "flow",
         description:
-          "Grid of 4 trust metrics highlighting carrier compliance, uptime standards, and safety certifications.",
+          "3-card industry demand grid highlighting 39B IoT devices, 21GB monthly mobile data consumption, and 89% North America 5G share by 2030.",
         key_props: ["title", "description", "cards"],
         preview_images: {
           desktop: "/images/about/stats-cards/stats-cards.png",
@@ -262,8 +298,15 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
         widgets_label: "Commitments",
         category: "flow",
         description:
-          "Four core corporate commitments: Community Trust, Aesthetic Harmony, Environmental Responsibility, Safety.",
-        key_props: ["heading", "description", "commitments_list"],
+          "Panoramic EQT-backed banner and 3 corporate commitment pillars: customer-first focus, nimble readiness to invest, and long-haul ownership.",
+        key_props: [
+          "title",
+          "description",
+          "background_overlay",
+          "commitment_statement",
+          "background_image",
+          "commitment_cards",
+        ],
         preview_images: {
           desktop: "/images/about/commitments/commitments.png",
           tablet: "/images/about/commitments/commitments-tablet.png",
@@ -279,8 +322,18 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
         widgets_label: "Image Gradient Split",
         category: "content",
         description:
-          "Split promotional section highlighting workplace culture, engineering values, and career entryways.",
-        key_props: ["title", "description", "image", "cta_text", "cta_url"],
+          "Split promotional section highlighting workplace culture pillars (Leadership, Passion, Optimism) with gradient-masked imagery and Careers CTA.",
+        key_props: [
+          "title",
+          "title_color",
+          "description",
+          "description_color",
+          "background_image_desktop",
+          "background_image_mobile",
+          "section_pointers",
+          "CTA_text",
+          "CTA_url",
+        ],
         preview_images: {
           desktop:
             "/images/about/image-gradient-split/image-gradient-split.png",
@@ -303,7 +356,7 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
     strapi_slug: "careers",
     category: "Corporate",
     description:
-      "Recruitment and culture hub presenting employee value proposition, active hiring disciplines, comprehensive benefits, and diversity statements with deduplicated shared components.",
+      "Recruitment and culture hub presenting employee value proposition, 5 core job disciplines, 4-column benefits grid, employee testimonials, and EEO statement with deduplicated shared components.",
     child_widgets: [
       {
         id: "w-car-0",
@@ -313,13 +366,16 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
         widgets_label: "Hero Banner",
         category: "hero",
         description:
-          "Subpage hero showcasing team energy and careers value proposition.",
+          "Subpage hero showcasing team collaboration photography and external Dayforce careers portal CTA.",
         key_props: [
           "title",
           "description",
           "background_image",
+          "background_image_position",
           "CTA_text",
           "CTA_url",
+          "max_width_title",
+          "max_width_description",
         ],
         preview_images: {
           desktop: "/images/careers/hero-banner/hero-banner.png",
@@ -336,8 +392,16 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
         widgets_label: "Culture Accordion",
         category: "content",
         description:
-          "Split layout pairing photographic showcase with interactive expandable culture values.",
-        key_props: ["title", "description", "items", "image"],
+          "Split layout pairing narrative copy on a purple gradient with 5 interactive expandable culture cards via AccordionSplit.",
+        key_props: [
+          "title",
+          "title_color",
+          "description",
+          "description_color",
+          "background_color",
+          "template_grid_columns",
+          "accordian_cards",
+        ],
         preview_images: {
           desktop: "/images/careers/culture-accordion/culture-accordion.png",
           tablet:
@@ -351,12 +415,12 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
         id: "w-car-2",
         position: 2,
         widget_key: "shared.gloabl-testimonails",
-        widgets_title: "Employee Testimonials Carousel",
+        widgets_title: "Employee Testimonials Grid",
         widgets_label: "Global Testimonials",
         category: "testimonials",
         description:
-          "Canonical reusable testimonial slider used across Careers, Community, and Venues.",
-        key_props: ["title", "subtitle", "testimonials_list"],
+          "Canonical reusable 4-card employee testimonial grid (horizontal scroll on mobile, 4-column on desktop) shared across Careers, Community, and Venues.",
+        key_props: ["title", "cards"],
         preview_images: {
           desktop:
             "/images/careers/global-testimonials/global-testimonials.png",
@@ -375,8 +439,15 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
         widgets_label: "Job Areas",
         category: "content",
         description:
-          "Interactive list or cards detailing active engineering tracks and openings.",
-        key_props: ["title", "description", "job_disciplines"],
+          "Two-column list detailing 5 core functional career disciplines alongside office team photography and Dayforce application CTA.",
+        key_props: [
+          "title",
+          "description",
+          "CTA_text",
+          "CTA_url",
+          "image",
+          "items",
+        ],
         preview_images: {
           desktop: "/images/careers/job-areas/job-areas.png",
           tablet: "/images/careers/job-areas/job-areas-tablet.png",
@@ -392,8 +463,8 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
         widgets_label: "Benefits Grid",
         category: "feature",
         description:
-          "Modular 6-tile grid highlighting health, financial security, time off, and tuition aid.",
-        key_props: ["title", "description", "cards"],
+          "Modular 4-column grid highlighting Healthcare, Financial Security, Time Off, and Family Support (also renders EEO bottom_message when supplied via CMS).",
+        key_props: ["title", "description", "cards", "bottom_message"],
         preview_images: {
           desktop: "/images/careers/benefits-grid/benefits-grid.png",
           tablet: "/images/careers/benefits-grid/benefits-grid-tablet.png",
@@ -409,8 +480,8 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
         widgets_label: "EEO Statement",
         category: "content",
         description:
-          "Formal corporate diversity pledge ensuring barrier-free career advancement.",
-        key_props: ["title", "content"],
+          "Formal equal opportunity employer disclaimer rendered at the bottom of Careers (and via BenefitsGridRenderer when bottom_message is set in CMS).",
+        key_props: ["bottom_message", "statementText", "contentHtml"],
         preview_images: {
           desktop: "/images/careers/eeo-statement/eeo-statement.png",
           tablet: "/images/careers/eeo-statement/eeo-statement-tablet.png",
@@ -430,7 +501,7 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
     strapi_slug: "community",
     category: "Corporate",
     description:
-      "Municipal and civic stakeholder education page. Explains unobtrusive small-cell aesthetics, local permitting processes, and long-term public right-of-way stewardship.",
+      "Municipal and civic stakeholder education page explaining what small cells are, why they matter (Reliability, Innovation, Safety), how Arium works in communities, civic testimonials, and a 6-item RF/permitting FAQ.",
     child_widgets: [
       {
         id: "w-com-0",
@@ -440,8 +511,17 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
         widgets_label: "Hero Banner",
         category: "hero",
         description:
-          "Community subpage hero with municipality-oriented messaging.",
-        key_props: ["title", "description", "background_image"],
+          "Community subpage hero with municipality-oriented messaging and full-bleed background photography.",
+        key_props: [
+          "title",
+          "description",
+          "background_image",
+          "background_image_position",
+          "CTA_text",
+          "CTA_url",
+          "max_width_title",
+          "max_width_description",
+        ],
         preview_images: {
           desktop: "/images/community/hero-banner/hero-banner.png",
           tablet: "/images/community/hero-banner/hero-banner-tablet.png",
@@ -457,13 +537,17 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
         widgets_label: "Illustration Split",
         category: "content",
         description:
-          "Unified illustration component displaying small-cells-illustration.svg and technical specs.",
+          "Unified illustration split displaying small-cells-illustration.svg alongside educational copy explaining how small cells relieve network congestion.",
         key_props: [
           "title",
+          "title_color",
           "description",
-          "illustration",
-          "stats",
-          "features",
+          "description_color",
+          "illustration_image",
+          "illustration_image_alignment",
+          "show_bottom_divider",
+          "statistics",
+          "background",
         ],
         preview_images: {
           desktop:
@@ -483,8 +567,8 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
         widgets_label: "Image Card Grid",
         category: "feature",
         description:
-          "Card grid exploring public safety, emergency dispatch, and economic growth.",
-        key_props: ["title", "description", "cards"],
+          "3-column dark-themed card grid with particle background exploring Reliability, Innovation, and Safety benefits of small cells.",
+        key_props: ["title", "title_color", "cards"],
         preview_images: {
           desktop: "/images/community/image-card-grid/image-card-grid.png",
           tablet:
@@ -502,8 +586,17 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
         widgets_label: "How We Work",
         category: "feature",
         description:
-          "Municipal collaboration workflow highlighting transparency and safety codes.",
-        key_props: ["title", "description", "steps"],
+          "Full-bleed background feature section highlighting collaborative municipal deployment across major U.S. markets with CTA linking to Right of Ways (also aliased as shared.how-we-work).",
+        key_props: [
+          "title",
+          "title_color",
+          "description",
+          "description_color",
+          "CTA_text",
+          "CTA_url",
+          "background_image_desktop",
+          "background_image_mobile",
+        ],
         preview_images: {
           desktop: "/images/community/how-we-work/how-we-work.png",
           tablet: "/images/community/how-we-work/how-we-work-tablet.png",
@@ -519,8 +612,8 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
         widgets_label: "Global Testimonials",
         category: "testimonials",
         description:
-          "Verified testimonials from city managers, utilities, and civic engineers.",
-        key_props: ["title", "subtitle", "testimonials_list"],
+          "3-column testimonial grid featuring verified quotes from civic, sustainability, and real estate community stakeholders.",
+        key_props: ["title", "cards"],
         preview_images: {
           desktop:
             "/images/community/global-testimonials/global-testimonials.png",
@@ -540,8 +633,8 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
         widgets_label: "FAQ Accordion",
         category: "content",
         description:
-          "Accordion addressing RF emissions compliance, pole permits, and maintenance SLAs.",
-        key_props: ["title", "description", "faqs"],
+          "Interactive 6-item accordion on a radial FlowBackground canvas addressing neighborhood deployments, CLEC right-of-way access, municipal approvals, and FCC RF emission limits.",
+        key_props: ["title", "title_color", "faq_data"],
         preview_images: {
           desktop: "/images/community/faq-accordion/faq-accordion.png",
           tablet: "/images/community/faq-accordion/faq-accordion-tablet.png",
@@ -561,7 +654,7 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
     strapi_slug: "solutions",
     category: "Solutions",
     description:
-      "Deep technical walkthrough of Arium's core infrastructure offerings: Small Cells Densification, Distributed Antenna Systems (DAS), and industry-specific private wireless architectures.",
+      "Deep technical walkthrough of Arium's core infrastructure offerings: Small Cells (100K+ nodes, 700+ municipalities), Distributed Antenna Systems (DAS, 300+ venues), 7-industry vertical accordion, and balanced approach CTA.",
     child_widgets: [
       {
         id: "w-sol-0",
@@ -571,13 +664,16 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
         widgets_label: "Hero Banner",
         category: "hero",
         description:
-          "Solutions hero communicating multi-carrier and high-density capabilities.",
+          "Solutions hero communicating scalable wireless infrastructure with Contact Us CTA button.",
         key_props: [
           "title",
           "description",
           "background_image",
+          "background_image_position",
           "CTA_text",
           "CTA_url",
+          "max_width_title",
+          "max_width_description",
         ],
         preview_images: {
           desktop: "/images/solutions/hero-banner/hero-banner.png",
@@ -594,13 +690,17 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
         widgets_label: "Small Cells Split",
         category: "flow",
         description:
-          "Technical architecture for 5G mmWave/sub-6GHz densification using small-cells-illustration.svg.",
+          "Right-aligned small-cells-illustration.svg split paired with MNO deployment copy and KPIs (100K+ small cells, 700+ municipalities served).",
         key_props: [
           "title",
+          "title_color",
           "description",
-          "illustration",
-          "stats",
-          "features",
+          "description_color",
+          "illustration_image",
+          "illustration_image_alignment",
+          "show_bottom_divider",
+          "statistics",
+          "background",
         ],
         preview_images: {
           desktop: "/images/solutions/small-cells-split/small-cells-split.png",
@@ -619,13 +719,17 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
         widgets_label: "DAS Split",
         category: "flow",
         description:
-          "High-capacity in-building coverage architecture using das-illustration.svg with optical remotes.",
+          "Left-aligned das-illustration.svg split covering indoor and venue deployments (300+ premier venues across the country) with bottom divider.",
         key_props: [
           "title",
+          "title_color",
           "description",
-          "illustration",
-          "stats",
-          "features",
+          "description_color",
+          "illustration_image",
+          "illustration_image_alignment",
+          "show_bottom_divider",
+          "statistics",
+          "background",
         ],
         preview_images: {
           desktop: "/images/solutions/das-split/das-split.png",
@@ -642,8 +746,16 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
         widgets_label: "Industries Accordion",
         category: "content",
         description:
-          "Accordion tabs detailing tailored engineering for Airports, Venues, Healthcare, and Commercial Real Estate.",
-        key_props: ["title", "description", "industries"],
+          "Interactive 7-industry auto-rotating accordion (Stadiums & Arenas, Amusement & Hospitality, Higher Education, Commercial Real Estate, Healthcare, State & Local Government, Airports) with cross-fading photography and SVG icons.",
+        key_props: [
+          "title",
+          "title_color",
+          "description",
+          "description_color",
+          "background_color",
+          "template_grid_columns",
+          "accordian_cards",
+        ],
         preview_images: {
           desktop:
             "/images/solutions/industries-accordion/industries-accordion.png",
@@ -663,8 +775,18 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
         widgets_label: "CTA With Graphic",
         category: "cta",
         description:
-          "Closing conversion block with orbital graphics and CTA consultation buttons.",
-        key_props: ["title", "description", "button_text", "button_link"],
+          "Closing conversion block pairing connection-cta.svg orbital graphics with a Learn more CTA linking to Where We Build.",
+        key_props: [
+          "title",
+          "title_color",
+          "description",
+          "description_color",
+          "CTA_text",
+          "CTA_url",
+          "globe_illustration_desktop",
+          "globe_illustration_mobile",
+          "background_color",
+        ],
         preview_images: {
           desktop: "/images/solutions/cta-with-graphic/cta-with-graphic.png",
           tablet:
@@ -686,7 +808,7 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
     strapi_slug: "private-venues",
     category: "Solutions",
     description:
-      "Enterprise venue solution page illustrating turn-key in-building wireless connectivity, carrier funding models, and end-to-end service delivery processes.",
+      "Enterprise venue solution page illustrating in-building wireless connectivity (DAS and small cells), a 3-stage service delivery process (Design, Construction, Optimization), venue operator testimonials, and dedicated venues outreach.",
     child_widgets: [
       {
         id: "w-pv-0",
@@ -696,13 +818,15 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
         widgets_label: "Sub-Page Hero",
         category: "hero",
         description:
-          "Compact subpage header with background gradient and prominent venue qualification CTA.",
+          "Compact subpage header with automatic breadcrumbs, purple gradient backdrop, and Contact Us CTA.",
         key_props: [
+          "tag",
           "title",
           "description",
+          "CTA_text",
+          "CTA_url",
           "background_gradient",
-          "cta_text",
-          "cta_url",
+          "content_max_width",
         ],
         preview_images: {
           desktop: "/images/private-venues/sub-page-hero/sub-page-hero.png",
@@ -717,12 +841,18 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
         id: "w-pv-1",
         position: 1,
         widget_key: "shared.process",
-        widgets_title: "4-Stage Service Delivery Process Timeline",
+        widgets_title: "3-Stage Service Delivery Process Timeline",
         widgets_label: "Process Section",
         category: "content",
         description:
-          "Four-step progression outlining RF audit, design, commissioning, and NOC monitoring.",
-        key_props: ["title", "description", "steps"],
+          "Three-stage interactive pillar process (Design, Construction, Optimization) detailing partner selection, architectural integration, RF design, contractor management, testing, and fine tuning.",
+        key_props: [
+          "title",
+          "description",
+          "background_color",
+          "pillars",
+          "maxWidthTitle",
+        ],
         preview_images: {
           desktop: "/images/private-venues/process-section/process-section.png",
           tablet:
@@ -735,14 +865,14 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
       },
       {
         id: "w-pv-2",
+        position: 2,
         widget_key: "shared.gloabl-testimonails",
         widgets_title: "Commercial Venue Operator Testimonials",
         widgets_label: "Global Testimonials",
-        position: 2,
         category: "testimonials",
         description:
-          "Canonical testimonials slider highlighting venue operator and asset manager experiences.",
-        key_props: ["title", "subtitle", "testimonials_list"],
+          "2-column wide testimonial grid highlighting commercial real estate and major sports arena operator experiences.",
+        key_props: ["title", "cards"],
         preview_images: {
           desktop:
             "/images/private-venues/global-testimonials/global-testimonials.png",
@@ -762,8 +892,14 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
         widgets_label: "Sub-Page CTA",
         category: "cta",
         description:
-          "Shared CTA banner inviting property managers to request an infrastructure assessment.",
-        key_props: ["title", "description", "button_text", "button_url"],
+          "Shared CTA banner with rotated connection-globe.svg illustration inviting property operators to contact the venues team.",
+        key_props: [
+          "prompt_to_cta",
+          "CTA_text",
+          "CTA_url",
+          "background_gradient",
+          "globe_illustration",
+        ],
         preview_images: {
           desktop: "/images/private-venues/sub-page-cta/sub-page-cta.png",
           tablet: "/images/private-venues/sub-page-cta/sub-page-cta-tablet.png",
@@ -783,7 +919,7 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
     strapi_slug: "right-of-ways",
     category: "Operations",
     description:
-      "Municipal right-of-way deployment guide showcasing aesthetic street furniture, utility pole colocation, and standardized city permitting agreements.",
+      "Municipal right-of-way deployment guide showcasing small cell connectivity, a 3-stage structured deployment process (Assessment, Planning, Construction) utilizing CLEC utility-pole and streetlight colocation, carrier/community testimonials, and municipal outreach.",
     child_widgets: [
       {
         id: "w-row-0",
@@ -793,13 +929,15 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
         widgets_label: "Sub-Page Hero",
         category: "hero",
         description:
-          "Subpage hero introducing municipal right-of-way co-location and utility agreements.",
+          "Subpage hero with automatic breadcrumbs, warm peach gradient, and Contact Us CTA for municipal partnerships.",
         key_props: [
+          "tag",
           "title",
           "description",
+          "CTA_text",
+          "CTA_url",
           "background_gradient",
-          "cta_text",
-          "cta_url",
+          "content_max_width",
         ],
         preview_images: {
           desktop: "/images/right-of-ways/sub-page-hero/sub-page-hero.png",
@@ -818,8 +956,14 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
         widgets_label: "Process Section",
         category: "content",
         description:
-          "Four-step municipal timeline: Site Survey, Master Lease Agreement, Construction, Ongoing Maintenance.",
-        key_props: ["title", "description", "steps"],
+          "Three-stage municipal deployment process (Assessment, Planning, Construction) covering site identification, CLEC right-of-way assessment, permit applications, and code-compliant installation.",
+        key_props: [
+          "title",
+          "description",
+          "background_color",
+          "pillars",
+          "maxWidthTitle",
+        ],
         preview_images: {
           desktop: "/images/right-of-ways/process-section/process-section.png",
           tablet:
@@ -838,8 +982,8 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
         widgets_label: "Global Testimonials",
         category: "testimonials",
         description:
-          "Canonical testimonials slider with direct quotes from city engineers and utility managers.",
-        key_props: ["title", "subtitle", "testimonials_list"],
+          "2-column wide testimonial grid featuring quotes from wireless carrier engineering and operations leaders (AT&T, Verizon) on municipal project collaboration.",
+        key_props: ["title", "cards"],
         preview_images: {
           desktop:
             "/images/right-of-ways/global-testimonials/global-testimonials.png",
@@ -859,8 +1003,14 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
         widgets_label: "Sub-Page CTA",
         category: "cta",
         description:
-          "Shared CTA banner encouraging city officials to connect for master leasing agreements.",
-        key_props: ["title", "description", "button_text", "button_url"],
+          "Shared CTA banner with rotated connection-globe.svg inviting municipal stakeholders to connect with the municipal team.",
+        key_props: [
+          "prompt_to_cta",
+          "CTA_text",
+          "CTA_url",
+          "background_gradient",
+          "globe_illustration",
+        ],
         preview_images: {
           desktop: "/images/right-of-ways/sub-page-cta/sub-page-cta.png",
           tablet: "/images/right-of-ways/sub-page-cta/sub-page-cta-tablet.png",
@@ -880,7 +1030,7 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
     strapi_slug: "where-we-build",
     category: "Operations",
     description:
-      "National footprint showcase pairing high-contrast interactive US dot map illustrations with breakdowns of community streetscapes and high-density commercial venue deployments.",
+      "Deployment environments overview pairing a full-bleed HeroBanner with two photo-backed split sections detailing public right-of-way Communities (/right-of-ways) and indoor Buildings & Venues (/private-venues).",
     child_widgets: [
       {
         id: "w-where-0",
@@ -890,8 +1040,17 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
         widgets_label: "Hero Banner",
         category: "hero",
         description:
-          "National footprint hero displaying scale across nationwide markets.",
-        key_props: ["title", "description", "background_image"],
+          "Where We Build hero banner introducing wireless infrastructure deployments in communities and inside buildings and venues.",
+        key_props: [
+          "title",
+          "description",
+          "background_image",
+          "background_image_position",
+          "CTA_text",
+          "CTA_url",
+          "max_width_title",
+          "max_width_description",
+        ],
         preview_images: {
           desktop: "/images/where-we-build/hero-banner/hero-banner.png",
           tablet: "/images/where-we-build/hero-banner/hero-banner-tablet.png",
@@ -903,12 +1062,22 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
         id: "w-where-1",
         position: 1,
         widget_key: "shared.communities",
-        widgets_title: "Municipal Communities Footprint with US Dot Map",
+        widgets_title: "Communities Public Right-of-Way Split",
         widgets_label: "Where Communities",
         category: "content",
         description:
-          "Split layout pairing us-dot-map.svg vector illustration with community deployment data.",
-        key_props: ["title", "description", "dot_map", "stats"],
+          "Split layout on a warm peach gradient pairing community-hero.png photography with public right-of-way copy and Learn more CTA linking to /right-of-ways.",
+        key_props: [
+          "title",
+          "title_color",
+          "description",
+          "description_color",
+          "image",
+          "image_alignment",
+          "background_color",
+          "CTA_text",
+          "CTA_url",
+        ],
         preview_images: {
           desktop:
             "/images/where-we-build/where-communities/where-communities.png",
@@ -928,8 +1097,18 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
         widgets_label: "Where Venues",
         category: "content",
         description:
-          "Split layout highlighting enterprise venues, real estate portfolios, and coverage footprint.",
-        key_props: ["title", "description", "image", "venue_types"],
+          "Split layout on a mint-teal gradient pairing venue-hero.png photography (left-aligned on desktop) with indoor DAS/small cell copy and CTA linking to /private-venues.",
+        key_props: [
+          "title",
+          "title_color",
+          "description",
+          "description_color",
+          "image",
+          "image_alignment",
+          "background_color",
+          "CTA_text",
+          "CTA_url",
+        ],
         preview_images: {
           desktop: "/images/where-we-build/where-venues/where-venues.png",
           tablet: "/images/where-we-build/where-venues/where-venues-tablet.png",
@@ -949,7 +1128,7 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
     strapi_slug: "leadership",
     category: "Team",
     description:
-      "Executive committee presentation utilizing the unified PeopleGlobalSection. Implements interactive modal/drawer bio views with zero code duplication between teams.",
+      "Executive leadership roster utilizing the unified PeopleGlobalSection across 7 leaders with interactive MemberModal bio views and zero code duplication.",
     child_widgets: [
       {
         id: "w-lead-0",
@@ -959,8 +1138,16 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
         widgets_label: "Sub-Page Hero",
         category: "hero",
         description:
-          "Subpage hero introducing executive management and corporate stewardship.",
-        key_props: ["title", "description", "background_gradient"],
+          "Subpage hero with automatic breadcrumbs and purple gradient introducing Arium's executive leadership team.",
+        key_props: [
+          "tag",
+          "title",
+          "description",
+          "CTA_text",
+          "CTA_url",
+          "background_gradient",
+          "content_max_width",
+        ],
         preview_images: {
           desktop: "/images/leadership/sub-page-hero/sub-page-hero.png",
           tablet: "/images/leadership/sub-page-hero/sub-page-hero-tablet.png",
@@ -977,8 +1164,8 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
         widgets_label: "People Global Section",
         category: "people",
         description:
-          "Canonical team grid component supporting executive profiles and full-screen modal bio drawers.",
-        key_props: ["members", "background_gradient", "columns"],
+          "Canonical responsive team grid rendering 7 executive leaders with interactive MemberModal bio views.",
+        key_props: ["members", "background_gradient"],
         preview_images: {
           desktop:
             "/images/leadership/people-global-section/people-global-section.png",
@@ -998,8 +1185,14 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
         widgets_label: "Sub-Page CTA",
         category: "cta",
         description:
-          "Shared CTA banner pointing prospective talent to open roles.",
-        key_props: ["title", "description", "button_text", "button_url"],
+          "Shared CTA banner with rotated connection-globe.svg pointing prospective talent to /careers.",
+        key_props: [
+          "prompt_to_cta",
+          "CTA_text",
+          "CTA_url",
+          "background_gradient",
+          "globe_illustration",
+        ],
         preview_images: {
           desktop: "/images/leadership/sub-page-cta/sub-page-cta.png",
           tablet: "/images/leadership/sub-page-cta/sub-page-cta-tablet.png",
@@ -1019,7 +1212,7 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
     strapi_slug: "board-of-directors",
     category: "Team",
     description:
-      "Governance and fiduciary leadership roster reusing PeopleGlobalSection with board member profiles, committee appointments, and credentials.",
+      "Governance and board leadership roster reusing PeopleGlobalSection across 6 board members with interactive MemberModal bio views and a link to Leadership.",
     child_widgets: [
       {
         id: "w-board-0",
@@ -1029,8 +1222,16 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
         widgets_label: "Sub-Page Hero",
         category: "hero",
         description:
-          "Subpage hero introducing board governance and strategic advisory.",
-        key_props: ["title", "description", "background_gradient"],
+          "Subpage hero with automatic breadcrumbs and warm peach gradient introducing the Board of Directors.",
+        key_props: [
+          "tag",
+          "title",
+          "description",
+          "CTA_text",
+          "CTA_url",
+          "background_gradient",
+          "content_max_width",
+        ],
         preview_images: {
           desktop: "/images/board-of-directors/sub-page-hero/sub-page-hero.png",
           tablet:
@@ -1049,8 +1250,8 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
         widgets_label: "People Global Section",
         category: "people",
         description:
-          "Shared canonical people section rendering board members and advisors with interactive bio drawer.",
-        key_props: ["members", "background_gradient", "columns"],
+          "Shared canonical people section rendering 6 board members with interactive MemberModal bio views.",
+        key_props: ["members", "background_gradient"],
         preview_images: {
           desktop:
             "/images/board-of-directors/people-global-section/people-global-section.png",
@@ -1070,8 +1271,14 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
         widgets_label: "Sub-Page CTA",
         category: "cta",
         description:
-          "Shared CTA banner guiding visitors back to the executive leadership team view.",
-        key_props: ["title", "description", "button_text", "button_url"],
+          "Shared CTA banner with rotated connection-globe.svg guiding visitors to the executive leadership page (/leadership).",
+        key_props: [
+          "prompt_to_cta",
+          "CTA_text",
+          "CTA_url",
+          "background_gradient",
+          "globe_illustration",
+        ],
         preview_images: {
           desktop: "/images/board-of-directors/sub-page-cta/sub-page-cta.png",
           tablet:
@@ -1094,7 +1301,7 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
     strapi_slug: "contact",
     category: "Corporate",
     description:
-      "Interactive consultation and inquiries portal with dynamic carrier interest routing, form validation, and direct Strapi submission endpoints.",
+      "Interactive inquiry portal with 9 topic interest options, React Hook Form + Zod schema validation, and POST /api/contact email delivery via Resend API.",
     child_widgets: [
       {
         id: "w-contact-0",
@@ -1104,8 +1311,16 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
         widgets_label: "Sub-Page Hero",
         category: "hero",
         description:
-          "Subpage hero introducing contact and partnership channels.",
-        key_props: ["title", "description", "background_gradient"],
+          "Subpage hero introducing contact and partnership inquiry channels.",
+        key_props: [
+          "tag",
+          "title",
+          "description",
+          "CTA_text",
+          "CTA_url",
+          "background_gradient",
+          "content_max_width",
+        ],
         preview_images: {
           desktop: "/images/contact/sub-page-hero/sub-page-hero.png",
           tablet: "/images/contact/sub-page-hero/sub-page-hero-tablet.png",
@@ -1121,8 +1336,8 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
         widgets_label: "Contact Form",
         category: "form",
         description:
-          "Interactive form with topic selection, input validation, and submission handler.",
-        key_props: ["topicOptions", "onSubmit", "isSubmitting"],
+          "Interactive inquiry form powered by React Hook Form + Zod validation, 9 topic interest options, and POST /api/contact email delivery via Resend API.",
+        key_props: ["topicOptions"],
         preview_images: {
           desktop: "/images/contact/contact-form/contact-form.png",
           tablet: "/images/contact/contact-form/contact-form-tablet.png",
@@ -1142,7 +1357,7 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
     strapi_slug: "[slug]",
     category: "Dynamic",
     description:
-      "Catch-all Next.js route demonstrating editorial freedom. Marketing teams can assemble entirely custom pages from Strapi Dynamic Zones using combinePageSections() and WIDGET_REGISTRY.",
+      "Catch-all Next.js route demonstrating editorial freedom. Marketing teams can assemble custom pages from Strapi Dynamic Zones using combinePageSections() and WIDGET_REGISTRY via GlobalWidgetRenderer.",
     child_widgets: [
       {
         id: "w-dyn-0",
@@ -1151,8 +1366,18 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
         widgets_title: "Dynamic Page Hero Banner",
         widgets_label: "Hero Banner",
         category: "hero",
-        description: "Dynamic page header populated from Strapi slug query.",
-        key_props: ["title", "description", "background_image"],
+        description:
+          "Fallback dynamic page header populated from Strapi slug query (heroTitle, heroDescription, heroMedia) when no hero widget is supplied.",
+        key_props: [
+          "title",
+          "description",
+          "background_image",
+          "background_image_position",
+          "CTA_text",
+          "CTA_url",
+          "max_width_title",
+          "max_width_description",
+        ],
         preview_images: {
           desktop: "/images/dynamic-slug/hero-banner/hero-banner.png",
           tablet: "/images/dynamic-slug/hero-banner/hero-banner-tablet.png",
@@ -1168,8 +1393,13 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
         widgets_label: "Dynamic Zone",
         category: "shared",
         description:
-          "Modular dynamic blocks resolved dynamically through the global WIDGET_REGISTRY.",
-        key_props: ["__component", "PositionNumber", "data"],
+          "Modular dynamic blocks resolved through WIDGET_REGISTRY via GlobalWidgetRenderer, automatically grouping contiguous storyteller-flow and people-global-section items.",
+        key_props: [
+          "PositionNumber",
+          "CustomCssClass",
+          "Sections",
+          "__component",
+        ],
         preview_images: {
           desktop: "/images/dynamic-slug/dynamic-zone/dynamic-zone.png",
           tablet: "/images/dynamic-slug/dynamic-zone/dynamic-zone-tablet.png",

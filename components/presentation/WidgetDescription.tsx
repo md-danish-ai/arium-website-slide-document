@@ -1,8 +1,13 @@
 "use client";
 
 import React from "react";
-import { ChildWidget, PageWithWidgets } from "@/types/widget.types";
-import { getFlatWidgetMeta, WidgetUsagePage } from "@lib/widget-helpers";
+import {
+  ChildWidget,
+  FlatWidget,
+  PageWithWidgets,
+  WidgetUsagePage,
+} from "@/types/widget.types";
+import { WIDGETS_LIST } from "@data/widget";
 import { Card } from "@components/ui/card";
 import { Badge } from "@components/ui/badge";
 import { Separator } from "@components/ui/separator";
@@ -11,6 +16,7 @@ interface WidgetDescriptionProps {
   widget: ChildWidget;
   page: PageWithWidgets;
   usedInPages: WidgetUsagePage[];
+  flatWidget?: FlatWidget;
   onNavigateToPage: (pageId: string) => void;
   onSelectWidget?: (pageId: string, widgetId: string) => void;
 }
@@ -23,10 +29,20 @@ export function WidgetDescription({
   widget,
   page,
   usedInPages,
+  flatWidget,
   onNavigateToPage,
   onSelectWidget,
 }: WidgetDescriptionProps) {
-  const flatMeta = getFlatWidgetMeta(widget, page.id);
+  const flatMeta =
+    flatWidget ??
+    WIDGETS_LIST.find((item) => item.id === widget.id) ??
+    WIDGETS_LIST.find(
+      (item) =>
+        item.page_id === page.id &&
+        item.widget_key === widget.widget_key &&
+        item.position === widget.position,
+    ) ??
+    WIDGETS_LIST.find((item) => item.widget_key === widget.widget_key);
   const keyProps = flatMeta?.key_props ?? widget.key_props ?? [];
 
   const specs = [
