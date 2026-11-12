@@ -25,7 +25,9 @@ import {
   Smartphone,
   ChevronLeft,
   ChevronRight,
+  Image as ImageIcon,
 } from "lucide-react";
+import { Skeleton } from "@components/ui/skeleton";
 import { PreviewImageSource } from "@/types/widget.types";
 import { cn } from "@lib/utils";
 
@@ -70,6 +72,53 @@ function wrapSlideIndex(index: number, total: number): number {
   return ((index % total) + total) % total;
 }
 
+function PreviewLoadingSkeleton({ variant }: { variant: "card" | "modal" }) {
+  const isModal = variant === "modal";
+  return (
+    <div
+      aria-hidden="true"
+      className={cn(
+        "absolute inset-0 z-10 flex flex-col justify-between pointer-events-none select-none",
+        isModal
+          ? "p-6 rounded-xl bg-slate-100/95 dark:bg-midnight-lighter/95 border border-slate-200/80 dark:border-midnight-lightest gap-4"
+          : "p-3.5 bg-slate-100/95 dark:bg-midnight-lighter/95 gap-2.5",
+      )}
+    >
+      <div className="flex items-center justify-between gap-3">
+        <Skeleton className={isModal ? "h-3.5 w-40" : "h-2.5 w-28"} />
+        <Skeleton className={isModal ? "h-3.5 w-20" : "h-2.5 w-12"} />
+      </div>
+
+      <div className="relative flex-1 min-h-0 flex items-center justify-center">
+        <Skeleton className="w-full h-full rounded-xl" />
+        <div className="absolute inset-0 flex flex-col items-center justify-center gap-1.5 text-slate-400 dark:text-slate-400">
+          <ImageIcon
+            className={cn(
+              "animate-pulse",
+              isModal
+                ? "w-7 h-7 text-cyan-600/70 dark:text-teal/70"
+                : "w-5 h-5",
+            )}
+          />
+          <span
+            className={cn(
+              "font-medium tracking-wide",
+              isModal ? "text-xs" : "text-[11px]",
+            )}
+          >
+            {isModal ? "Loading preview..." : "Loading..."}
+          </span>
+        </div>
+      </div>
+
+      <div className="flex items-center gap-2">
+        <Skeleton className={isModal ? "h-3 w-2/3" : "h-2 w-3/5"} />
+        <Skeleton className={isModal ? "h-3 w-1/4" : "h-2 w-1/5"} />
+      </div>
+    </div>
+  );
+}
+
 const VIEWPORT_OPTIONS: {
   value: PreviewViewport;
   label: string;
@@ -111,7 +160,7 @@ export function ImagePreviewer({
   slideLabels,
   description,
   tagText,
-  showViewportSwitcher = true,
+  showViewportSwitcher = false,
   objectFit = "contain",
   heightClass = "h-56 md:h-60",
   className,
@@ -122,6 +171,7 @@ export function ImagePreviewer({
 }: ImagePreviewerProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [viewport, setViewport] = useState<PreviewViewport>("desktop");
+  const [loadedSrcs, setLoadedSrcs] = useState<Record<string, boolean>>({});
   const [failedSrcs, setFailedSrcs] = useState<Record<string, boolean>>({});
   const [slideIndices, setSlideIndices] = useState<Record<string, number>>({});
   const [slideDirections, setSlideDirections] = useState<
@@ -145,12 +195,20 @@ export function ImagePreviewer({
   const resolveSafeSrc = (candidate: string) =>
     failedSrcs[candidate] && fallbackSrc ? fallbackSrc : candidate;
 
-  const markSrcFailed = (candidate: string) => {
+  const markSrcLoaded = (loadKey: string) => {
+    setLoadedSrcs((prev) =>
+      prev[loadKey] ? prev : { ...prev, [loadKey]: true },
+    );
+  };
+
+  const markSrcFailed = (candidate: string, loadKey?: string) => {
     if (fallbackSrc && candidate !== fallbackSrc) {
       setFailedSrcs((prev) =>
         prev[candidate] ? prev : { ...prev, [candidate]: true },
       );
+      return;
     }
+    markSrcLoaded(loadKey ?? candidate);
   };
 
   const baseImages = normalizeImageSource(images, [src]);
@@ -280,10 +338,17 @@ export function ImagePreviewer({
   };
 
   const isCardSvg = cardSrc.toLowerCase().endsWith(".svg");
+  const cardLoadKey = `card:${cardSrc}`;
+  const isCardLoaded = Boolean(loadedSrcs[cardLoadKey]);
   const isActiveModalSvg = activeModalSrc.toLowerCase().endsWith(".svg");
+  const modalSvgLoadKey = `modal-svg:${activeModalSrc}`;
+  const isModalSvgLoaded = Boolean(loadedSrcs[modalSvgLoadKey]);
   const currentViewport =
     VIEWPORT_OPTIONS.find((opt) => opt.value === viewport) ??
     VIEWPORT_OPTIONS[0];
+  const renderedViewports = showViewportSwitcher
+    ? VIEWPORT_OPTIONS
+    : VIEWPORT_OPTIONS.filter((opt) => opt.value === viewport);
 
   const isFullBleedScreenshot = !previewContent && objectFit === "cover";
 
@@ -318,32 +383,38 @@ export function ImagePreviewer({
                 {previewContent ? (
                   previewContent
                 ) : (
-                  <div
-                    key={`${slideScopeKey}-${cardSlideIndex}`}
-                    className={cn(
-                      "relative w-full h-full",
-                      getSlideAnimClass(slideScopeKey),
-                    )}
-                  >
-                    <Image
-                      src={cardSrc}
-                      alt={
-                        cardImages.length > 1 && activeCardLabel
-                          ? `${alt} — ${activeCardLabel}`
-                          : alt
-                      }
-                      fill
-                      unoptimized={isCardSvg}
-                      sizes="(max-width: 1024px) 100vw, 45vw"
-                      onError={() => markSrcFailed(cardRawSrc)}
+                  <>
+                    {!isCardLoaded && <PreviewLoadingSkeleton variant="card" />}
+                    <div
+                      key={`${slideScopeKey}-${cardSlideIndex}`}
                       className={cn(
-                        "w-full h-full transition-transform duration-300 group-hover:scale-[1.015]",
-                        objectFit === "cover"
-                          ? "object-cover object-top"
-                          : "object-contain p-4",
+                        "relative w-full h-full",
+                        isCardLoaded && getSlideAnimClass(slideScopeKey),
                       )}
-                    />
-                  </div>
+                    >
+                      <Image
+                        key={cardSrc}
+                        src={cardSrc}
+                        alt={
+                          cardImages.length > 1 && activeCardLabel
+                            ? `${alt} — ${activeCardLabel}`
+                            : alt
+                        }
+                        fill
+                        unoptimized={isCardSvg}
+                        sizes="(max-width: 1024px) 100vw, 45vw"
+                        onLoad={() => markSrcLoaded(cardLoadKey)}
+                        onError={() => markSrcFailed(cardRawSrc, cardLoadKey)}
+                        className={cn(
+                          "w-full h-full transition-[opacity,transform] duration-300 ease-out group-hover:scale-[1.015]",
+                          isCardLoaded ? "opacity-100" : "opacity-0",
+                          objectFit === "cover"
+                            ? "object-cover object-top"
+                            : "object-contain p-4",
+                        )}
+                      />
+                    </div>
+                  </>
                 )}
 
                 {/* Subtle Hover Expand Pill */}
@@ -523,21 +594,31 @@ export function ImagePreviewer({
                       key={`${slideScopeKey}-${activeModalIndex}`}
                       className={cn(
                         "relative w-full h-[65vh] min-h-[320px] max-h-[620px] flex items-center justify-center bg-white dark:bg-midnight-lighter rounded-xl",
-                        getSlideAnimClass(slideScopeKey),
+                        isModalSvgLoaded && getSlideAnimClass(slideScopeKey),
                       )}
                     >
+                      {!isModalSvgLoaded && (
+                        <PreviewLoadingSkeleton variant="modal" />
+                      )}
                       <Image
+                        key={activeModalSrc}
                         src={activeModalSrc}
                         alt={alt}
                         fill
                         unoptimized
                         sizes="(max-width: 768px) 95vw, 90vw"
-                        onError={() => markSrcFailed(activeModalRawSrc)}
-                        className="w-full h-full object-contain p-6"
+                        onLoad={() => markSrcLoaded(modalSvgLoadKey)}
+                        onError={() =>
+                          markSrcFailed(activeModalRawSrc, modalSvgLoadKey)
+                        }
+                        className={cn(
+                          "w-full h-full object-contain p-6 transition-opacity duration-300 ease-out",
+                          isModalSvgLoaded ? "opacity-100" : "opacity-0",
+                        )}
                       />
                     </div>
                   ) : (
-                    VIEWPORT_OPTIONS.map(({ value }) => {
+                    renderedViewports.map(({ value }) => {
                       const vpList = viewportImagesByKey[value];
                       const vpIdx = getViewportSlideIndex(value);
                       const rawSrc = vpList[vpIdx] ?? src;
@@ -546,21 +627,31 @@ export function ImagePreviewer({
                         .toLowerCase()
                         .endsWith(".svg");
                       const isActive = viewport === value;
+                      const layerLoadKey = `modal:${value}:${resolvedSrc}`;
+                      const isLayerLoaded = Boolean(loadedSrcs[layerLoadKey]);
 
                       return (
                         <div
                           key={`${value}-${vpIdx}`}
                           className={cn(
                             "flex items-center justify-center transition-all duration-200 ease-out",
+                            isActive &&
+                              !isLayerLoaded &&
+                              "relative w-[min(86vw,1080px)] h-[65vh] min-h-[340px]",
                             isActive
                               ? cn(
                                   "relative z-10 w-full opacity-100 scale-100",
-                                  getSlideAnimClass(slideScopeKey),
+                                  isLayerLoaded &&
+                                    getSlideAnimClass(slideScopeKey),
                                 )
                               : "absolute inset-0 m-auto w-full h-full opacity-0 scale-[0.985] pointer-events-none",
                           )}
                         >
+                          {isActive && !isLayerLoaded && (
+                            <PreviewLoadingSkeleton variant="modal" />
+                          )}
                           <Image
+                            key={resolvedSrc}
                             src={resolvedSrc}
                             alt={
                               vpList.length > 1 && slideLabels?.[vpIdx]
@@ -578,9 +669,11 @@ export function ImagePreviewer({
                                   ? "576px"
                                   : "320px"
                             }
-                            onError={() => markSrcFailed(rawSrc)}
+                            onLoad={() => markSrcLoaded(layerLoadKey)}
+                            onError={() => markSrcFailed(rawSrc, layerLoadKey)}
                             className={cn(
-                              "block mx-auto w-auto max-w-full h-auto object-contain",
+                              "block mx-auto w-auto max-w-full h-auto object-contain transition-opacity duration-300 ease-out",
+                              isLayerLoaded ? "opacity-100" : "opacity-0",
                               value === "desktop"
                                 ? "max-h-[78vh]"
                                 : "max-h-[74vh]",

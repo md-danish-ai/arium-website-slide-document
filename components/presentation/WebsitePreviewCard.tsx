@@ -59,7 +59,7 @@ export function WebsitePreviewCard({
   imageAlt,
   heightClass = "h-56 md:h-60",
   className,
-  showViewportSwitcher = true,
+  showViewportSwitcher = false,
   children,
   modalContent,
   onClick,
