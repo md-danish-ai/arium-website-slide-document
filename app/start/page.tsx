@@ -45,12 +45,18 @@ export default function StartPage() {
         id: "w-home-0",
         position: 0,
         widget_key: "shared.main-hero",
-        widgets_title: "Home Main Hero Banner",
+        widgets_title: "Main Hero-Home — <HomeHero />",
         widgets_label: "Home Hero",
         category: "hero",
         description:
-          "Full-bleed canvas hero displaying the primary value proposition, background video or image, and dual CTAs.",
-        key_props: ["title", "description", "font_color", "background_color"],
+          "Full-bleed hero canvas rendering the main title, description, font_color, background_color, animated breathing SVG shapes (shape-teal.svg, shape-white.svg), and a scroll_text scroll indicator.",
+        key_props: [
+          "title",
+          "description",
+          "font_color",
+          "background_color",
+          "scroll_text",
+        ],
       }
     );
   }, [activePage, selectedWidgetId]);

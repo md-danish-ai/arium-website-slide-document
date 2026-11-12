@@ -56,6 +56,11 @@ export interface ChildWidget {
   widget_key: string;
   widgets_title: string;
   widgets_label: string;
+  component_name?: string;
+  component_tag?: string;
+  source_location?: string;
+  renderer_name?: string;
+  fallback_key?: string;
   category: WidgetCategory;
   description: string;
   key_props?: string[];
@@ -91,6 +96,7 @@ export interface FlatWidget {
   component_name: string;
   component_tag: string;
   source_location: string;
+  renderer_name?: string;
   category: WidgetCategory;
   description: string;
   fallback_key?: string;
