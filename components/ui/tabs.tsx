@@ -16,7 +16,7 @@ const tabsListVariants = cva(
         default:
           "h-10 bg-midnight-lighter text-slate-400 border-midnight-lightest",
         glass:
-          "h-8 bg-slate-100/85 backdrop-blur-md text-slate-500 border-slate-200/80",
+          "h-8 bg-slate-100/85 backdrop-blur-md text-slate-500 border-slate-200/80 dark:bg-[#0f1738]/90 dark:text-slate-400 dark:border-midnight-lightest",
       },
     },
     defaultVariants: {
@@ -33,7 +33,7 @@ const tabsTriggerVariants = cva(
         default:
           "text-sm data-[state=active]:bg-midnight data-[state=active]:text-teal data-[state=active]:shadow-sm",
         glass:
-          "text-xs font-semibold py-1 text-slate-500 hover:text-slate-800 data-[state=active]:bg-white data-[state=active]:text-slate-900 data-[state=active]:shadow-xs",
+          "text-xs font-semibold py-1 text-slate-500 hover:text-slate-800 data-[state=active]:bg-white data-[state=active]:text-slate-900 data-[state=active]:shadow-xs dark:text-slate-400 dark:hover:text-slate-100 dark:data-[state=active]:bg-midnight-lighter dark:data-[state=active]:text-white",
       },
     },
     defaultVariants: {

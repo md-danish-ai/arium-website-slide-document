@@ -209,7 +209,11 @@ export function WebsitePreviewCard({
       objectFit={isScreenshot ? "cover" : "contain"}
       heightClass={heightClass}
       className={className}
-      canvasClassName={isScreenshot ? "bg-transparent p-0" : "bg-white/90"}
+      canvasClassName={
+        isScreenshot
+          ? "bg-transparent p-0"
+          : "bg-white/90 dark:bg-midnight-lighter/90"
+      }
       previewContent={children}
       modalContent={modalContent}
       onClick={onClick}

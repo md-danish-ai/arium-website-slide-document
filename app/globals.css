@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
   /* ── Arium Core Brand Palette ── */
   --color-midnight: #162047; /* Main slide canvas background */
@@ -158,6 +160,27 @@ body {
   border: 1px solid rgba(226, 232, 240, 0.88);
 }
 
+/* ── Midnight Frosted Dark Glass Surface System ── */
+.dark .glass-surface {
+  background: rgba(22, 32, 71, 0.86);
+  border: 1px solid rgba(46, 65, 126, 0.72);
+  box-shadow:
+    0 12px 32px -12px rgba(4, 8, 24, 0.65),
+    0 1px 2px rgba(4, 8, 24, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+.dark .glass-header-light {
+  background: rgba(16, 24, 56, 0.9);
+  border-bottom: 1px solid rgba(46, 65, 126, 0.75);
+  box-shadow: 0 4px 20px -6px rgba(4, 8, 24, 0.55);
+}
+
+.dark .glass-inset {
+  background: rgba(15, 23, 56, 0.88);
+  border: 1px solid rgba(46, 65, 126, 0.75);
+}
+
 /* ── Subtle Glass Scrollbars ── */
 .glass-scrollbar {
   scroll-behavior: smooth;
@@ -180,6 +203,14 @@ body {
 
 .glass-scrollbar::-webkit-scrollbar-thumb:hover {
   background: rgba(6, 182, 212, 0.5);
+}
+
+.dark .glass-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.24);
+}
+
+.dark .glass-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 232, 217, 0.45);
 }
 
 /* ── Hidden Scrollbar with Contained Smooth Scrolling ── */

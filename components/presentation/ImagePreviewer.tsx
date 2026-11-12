@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import {
   Dialog,
@@ -127,6 +127,20 @@ export function ImagePreviewer({
   const [slideDirections, setSlideDirections] = useState<
     Record<string, "next" | "prev">
   >({});
+  const closeResetTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const clearCloseResetTimer = () => {
+    if (closeResetTimerRef.current !== null) {
+      clearTimeout(closeResetTimerRef.current);
+      closeResetTimerRef.current = null;
+    }
+  };
+
+  useEffect(() => {
+    return () => {
+      clearCloseResetTimer();
+    };
+  }, []);
 
   const resolveSafeSrc = (candidate: string) =>
     failedSrcs[candidate] && fallbackSrc ? fallbackSrc : candidate;
@@ -224,8 +238,27 @@ export function ImagePreviewer({
   };
 
   const handleOpen = () => {
+    clearCloseResetTimer();
+    setViewport("desktop");
     onClick?.();
     setIsOpen(true);
+  };
+
+  const handleDialogOpenChange = (open: boolean) => {
+    if (open) {
+      clearCloseResetTimer();
+      setViewport("desktop");
+      setIsOpen(true);
+      return;
+    }
+
+    setIsOpen(false);
+    clearCloseResetTimer();
+    closeResetTimerRef.current = setTimeout(() => {
+      setViewport("desktop");
+      setSlideDirections({});
+      closeResetTimerRef.current = null;
+    }, 220);
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
@@ -276,7 +309,9 @@ export function ImagePreviewer({
               <div
                 className={cn(
                   "relative flex-1 w-full h-full overflow-hidden flex items-center justify-center",
-                  isFullBleedScreenshot ? "bg-transparent" : "bg-white/80",
+                  isFullBleedScreenshot
+                    ? "bg-transparent"
+                    : "bg-white/80 dark:bg-midnight-lighter/85",
                   canvasClassName,
                 )}
               >
@@ -312,12 +347,12 @@ export function ImagePreviewer({
                 )}
 
                 {/* Subtle Hover Expand Pill */}
-                <div className="absolute inset-0 bg-white/25 backdrop-blur-[1.5px] opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-center justify-center pointer-events-none z-20">
+                <div className="absolute inset-0 bg-white/25 dark:bg-midnight/45 backdrop-blur-[1.5px] opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-center justify-center pointer-events-none z-20">
                   <Badge
                     variant="glass"
-                    className="px-3.5 py-1.5 rounded-xl bg-white/95 border-cyan-200 text-slate-800 shadow-md flex items-center gap-2 text-xs font-semibold group-hover:scale-105 transition-transform"
+                    className="px-3.5 py-1.5 rounded-xl bg-white/95 border-cyan-200 text-slate-800 dark:bg-midnight/95 dark:border-cyan-400/45 dark:text-slate-100 shadow-md flex items-center gap-2 text-xs font-semibold group-hover:scale-105 transition-transform"
                   >
-                    <Maximize2 className="w-3.5 h-3.5 text-cyan-600" />
+                    <Maximize2 className="w-3.5 h-3.5 text-cyan-600 dark:text-teal" />
                     <span>
                       {resolvedCardSubtitle
                         ? `${resolvedCardSubtitle} / ${title}`
@@ -339,7 +374,7 @@ export function ImagePreviewer({
                   e.stopPropagation();
                   stepSlide(slideScopeKey, cardImages.length, -1);
                 }}
-                className="absolute left-2.5 top-1/2 -translate-y-1/2 z-30 w-8 h-8 rounded-full bg-white/95 backdrop-blur-md border border-slate-200/90 text-slate-700 shadow-md flex items-center justify-center opacity-85 md:opacity-0 md:group-hover:opacity-100 focus-visible:opacity-100 transition-all duration-150 hover:border-cyan-500 hover:text-cyan-700 hover:scale-105 active:scale-95 cursor-pointer"
+                className="absolute left-2.5 top-1/2 -translate-y-1/2 z-30 w-8 h-8 rounded-full bg-white/95 backdrop-blur-md border border-slate-200/90 text-slate-700 shadow-md flex items-center justify-center opacity-85 md:opacity-0 md:group-hover:opacity-100 focus-visible:opacity-100 transition-all duration-150 hover:border-cyan-500 hover:text-cyan-700 hover:scale-105 active:scale-95 dark:bg-midnight/90 dark:border-midnight-lightest dark:text-slate-200 dark:hover:border-cyan-400/70 dark:hover:text-teal cursor-pointer"
               >
                 <ChevronLeft className="w-4 h-4" />
               </button>
@@ -350,17 +385,17 @@ export function ImagePreviewer({
                   e.stopPropagation();
                   stepSlide(slideScopeKey, cardImages.length, 1);
                 }}
-                className="absolute right-2.5 top-1/2 -translate-y-1/2 z-30 w-8 h-8 rounded-full bg-white/95 backdrop-blur-md border border-slate-200/90 text-slate-700 shadow-md flex items-center justify-center opacity-85 md:opacity-0 md:group-hover:opacity-100 focus-visible:opacity-100 transition-all duration-150 hover:border-cyan-500 hover:text-cyan-700 hover:scale-105 active:scale-95 cursor-pointer"
+                className="absolute right-2.5 top-1/2 -translate-y-1/2 z-30 w-8 h-8 rounded-full bg-white/95 backdrop-blur-md border border-slate-200/90 text-slate-700 shadow-md flex items-center justify-center opacity-85 md:opacity-0 md:group-hover:opacity-100 focus-visible:opacity-100 transition-all duration-150 hover:border-cyan-500 hover:text-cyan-700 hover:scale-105 active:scale-95 dark:bg-midnight/90 dark:border-midnight-lightest dark:text-slate-200 dark:hover:border-cyan-400/70 dark:hover:text-teal cursor-pointer"
               >
                 <ChevronRight className="w-4 h-4" />
               </button>
 
               <div
                 onClick={(e) => e.stopPropagation()}
-                className="absolute bottom-2.5 right-2.5 z-30 inline-flex items-center gap-1.5 rounded-lg bg-white/95 backdrop-blur-md border border-slate-200/90 px-2.5 py-1 shadow-sm"
+                className="absolute bottom-2.5 right-2.5 z-30 inline-flex items-center gap-1.5 rounded-lg bg-white/95 backdrop-blur-md border border-slate-200/90 px-2.5 py-1 shadow-sm dark:bg-midnight/90 dark:border-midnight-lightest"
               >
                 {activeCardLabel && (
-                  <span className="text-[10px] font-semibold text-slate-700 pr-0.5 whitespace-nowrap">
+                  <span className="text-[10px] font-semibold text-slate-700 dark:text-slate-200 pr-0.5 whitespace-nowrap">
                     {activeCardLabel}
                   </span>
                 )}
@@ -380,8 +415,8 @@ export function ImagePreviewer({
                       className={cn(
                         "h-1.5 rounded-full transition-all duration-150 cursor-pointer",
                         idx === cardSlideIndex
-                          ? "w-4 bg-cyan-500"
-                          : "w-1.5 bg-slate-300 hover:bg-slate-400",
+                          ? "w-4 bg-cyan-500 dark:bg-teal"
+                          : "w-1.5 bg-slate-300 hover:bg-slate-400 dark:bg-slate-600 dark:hover:bg-slate-500",
                       )}
                     />
                   ))}
@@ -392,32 +427,36 @@ export function ImagePreviewer({
         </div>
         <TooltipContent
           side="bottom"
-          className="bg-white/95 backdrop-blur-md border-slate-200 text-slate-700 text-xs shadow-md"
+          className="bg-white/95 backdrop-blur-md border-slate-200 text-slate-700 text-xs shadow-md dark:bg-midnight dark:border-midnight-lightest dark:text-slate-200"
         >
           Click to preview{" "}
           {resolvedCardSubtitle ? `${resolvedCardSubtitle} / ${title}` : title}
         </TooltipContent>
       </Tooltip>
 
-      {/* Shadcn White Dialog Lightbox */}
-      <Dialog open={isOpen} onOpenChange={setIsOpen}>
+      {/* Shadcn Responsive Dialog Lightbox */}
+      <Dialog open={isOpen} onOpenChange={handleDialogOpenChange}>
         <DialogContent
           variant="glass"
           onKeyDown={handleModalKeyDown}
-          className="max-w-[1400px] w-[94vw] max-h-[92vh] p-0 overflow-hidden flex flex-col gap-0 border-0 bg-white shadow-2xl"
+          className="max-w-[1400px] w-[94vw] max-h-[92vh] p-0 overflow-hidden flex flex-col gap-0 border-0 bg-white dark:bg-midnight shadow-2xl"
         >
-          <DialogHeader className="shrink-0 px-5 py-3.5 bg-white/95 backdrop-blur-md border-b border-slate-200/80 flex flex-row items-center justify-between gap-4 space-y-0 pr-12">
+          <DialogHeader className="shrink-0 px-5 py-3.5 bg-white/95 dark:bg-midnight/95 backdrop-blur-md border-b border-slate-200/80 dark:border-midnight-lightest flex flex-row items-center justify-between gap-4 space-y-0 pr-12">
             <div className="min-w-0 flex items-center gap-2">
-              <DialogTitle className="text-sm md:text-base font-bold text-slate-900 flex items-center gap-1.5 truncate">
+              <DialogTitle className="text-sm md:text-base font-bold text-slate-900 dark:text-white flex items-center gap-1.5 truncate">
                 {resolvedModalSubtitle && (
                   <>
-                    <span className="text-slate-500 font-medium">
+                    <span className="text-slate-500 dark:text-slate-400 font-medium">
                       {resolvedModalSubtitle}
                     </span>
-                    <span className="text-slate-300">/</span>
+                    <span className="text-slate-300 dark:text-slate-600">
+                      /
+                    </span>
                   </>
                 )}
-                <span className="text-cyan-700 truncate">{title}</span>
+                <span className="text-cyan-700 dark:text-teal truncate">
+                  {title}
+                </span>
               </DialogTitle>
               {tagText && (
                 <Badge
@@ -441,13 +480,13 @@ export function ImagePreviewer({
               >
                 <TabsList
                   variant="glass"
-                  className="h-auto p-1 gap-1 rounded-lg bg-slate-100/90 border border-slate-200/80"
+                  className="h-auto p-1 gap-1 rounded-lg bg-slate-100/90 border border-slate-200/80 dark:bg-[#0f1738] dark:border-midnight-lightest"
                 >
                   {VIEWPORT_OPTIONS.map(({ value, label, Icon }) => (
                     <TabsTrigger
                       key={value}
                       value={value}
-                      className="h-7 px-2.5 py-1 text-xs gap-1.5 rounded-md border border-transparent text-slate-600 hover:text-slate-900 hover:bg-white/70 transition-all duration-200 data-[state=active]:bg-gradient-to-r data-[state=active]:from-cyan-500/15 data-[state=active]:via-cyan-50 data-[state=active]:to-teal-500/10 data-[state=active]:text-slate-900 data-[state=active]:border-cyan-500 data-[state=active]:ring-1 data-[state=active]:ring-cyan-500/35 data-[state=active]:shadow-[0_2px_10px_-3px_rgba(6,182,212,0.3)] [&_svg]:transition-colors data-[state=active]:[&_svg]:text-cyan-600"
+                      className="h-7 px-2.5 py-1 text-xs gap-1.5 rounded-md border border-transparent text-slate-600 hover:text-slate-900 hover:bg-white/70 transition-all duration-200 data-[state=active]:bg-gradient-to-r data-[state=active]:from-cyan-500/15 data-[state=active]:via-cyan-50 data-[state=active]:to-teal-500/10 data-[state=active]:text-slate-900 data-[state=active]:border-cyan-500 data-[state=active]:ring-1 data-[state=active]:ring-cyan-500/35 data-[state=active]:shadow-[0_2px_10px_-3px_rgba(6,182,212,0.3)] [&_svg]:transition-colors data-[state=active]:[&_svg]:text-cyan-600 dark:text-slate-300 dark:hover:text-white dark:hover:bg-midnight-lighter/70 dark:data-[state=active]:from-cyan-500/20 dark:data-[state=active]:via-[#17305e] dark:data-[state=active]:to-teal-500/15 dark:data-[state=active]:text-white dark:data-[state=active]:border-cyan-400/80 dark:data-[state=active]:ring-cyan-400/30 dark:data-[state=active]:[&_svg]:text-teal"
                     >
                       <Icon className="w-3.5 h-3.5" />
                       <span>{label}</span>
@@ -458,16 +497,16 @@ export function ImagePreviewer({
             )}
           </DialogHeader>
 
-          {/* Modal Body — White standard stage with preloaded smooth cross-fade + Prev/Next */}
+          {/* Modal Body — Theme-aware stage with preloaded smooth cross-fade + Prev/Next */}
           <div className="relative flex-1 min-h-0 flex flex-col">
             <div
               className={cn(
                 "flex-1 min-h-0 overflow-auto flex items-center justify-center glass-scrollbar transition-[padding] duration-300",
                 modalContent || isActiveModalSvg
-                  ? "p-4 md:p-6 bg-slate-50"
+                  ? "p-4 md:p-6 bg-slate-50 dark:bg-[#0d1430]"
                   : viewport === "desktop"
-                    ? "p-0 bg-white"
-                    : "p-4 md:p-6 bg-slate-50",
+                    ? "p-0 bg-white dark:bg-[#0d1430]"
+                    : "p-4 md:p-6 bg-slate-50 dark:bg-[#0d1430]",
               )}
             >
               {modalContent ? (
@@ -483,7 +522,7 @@ export function ImagePreviewer({
                     <div
                       key={`${slideScopeKey}-${activeModalIndex}`}
                       className={cn(
-                        "relative w-full h-[65vh] min-h-[320px] max-h-[620px] flex items-center justify-center bg-white rounded-xl",
+                        "relative w-full h-[65vh] min-h-[320px] max-h-[620px] flex items-center justify-center bg-white dark:bg-midnight-lighter rounded-xl",
                         getSlideAnimClass(slideScopeKey),
                       )}
                     >
@@ -563,7 +602,7 @@ export function ImagePreviewer({
                   onClick={() =>
                     stepSlide(slideScopeKey, activeModalImages.length, -1)
                   }
-                  className="absolute left-3 md:left-4 top-1/2 -translate-y-1/2 z-30 w-9 h-9 md:w-10 md:h-10 rounded-full bg-white/95 backdrop-blur-md border border-slate-200/90 text-slate-700 shadow-lg flex items-center justify-center transition-all duration-150 hover:border-cyan-500 hover:text-cyan-700 hover:scale-105 active:scale-95 cursor-pointer"
+                  className="absolute left-3 md:left-4 top-1/2 -translate-y-1/2 z-30 w-9 h-9 md:w-10 md:h-10 rounded-full bg-white/95 backdrop-blur-md border border-slate-200/90 text-slate-700 shadow-lg flex items-center justify-center transition-all duration-150 hover:border-cyan-500 hover:text-cyan-700 hover:scale-105 active:scale-95 dark:bg-midnight/90 dark:border-midnight-lightest dark:text-slate-200 dark:hover:border-cyan-400/70 dark:hover:text-teal cursor-pointer"
                 >
                   <ChevronLeft className="w-5 h-5" />
                 </button>
@@ -573,7 +612,7 @@ export function ImagePreviewer({
                   onClick={() =>
                     stepSlide(slideScopeKey, activeModalImages.length, 1)
                   }
-                  className="absolute right-3 md:right-4 top-1/2 -translate-y-1/2 z-30 w-9 h-9 md:w-10 md:h-10 rounded-full bg-white/95 backdrop-blur-md border border-slate-200/90 text-slate-700 shadow-lg flex items-center justify-center transition-all duration-150 hover:border-cyan-500 hover:text-cyan-700 hover:scale-105 active:scale-95 cursor-pointer"
+                  className="absolute right-3 md:right-4 top-1/2 -translate-y-1/2 z-30 w-9 h-9 md:w-10 md:h-10 rounded-full bg-white/95 backdrop-blur-md border border-slate-200/90 text-slate-700 shadow-lg flex items-center justify-center transition-all duration-150 hover:border-cyan-500 hover:text-cyan-700 hover:scale-105 active:scale-95 dark:bg-midnight/90 dark:border-midnight-lightest dark:text-slate-200 dark:hover:border-cyan-400/70 dark:hover:text-teal cursor-pointer"
                 >
                   <ChevronRight className="w-5 h-5" />
                 </button>
@@ -582,18 +621,18 @@ export function ImagePreviewer({
           </div>
 
           {activeModalImages.length > 1 && !modalContent && (
-            <div className="shrink-0 px-4 py-2.5 bg-white/95 backdrop-blur-md border-t border-slate-200/80 flex items-center justify-between gap-3">
-              <div className="flex items-center gap-2 text-xs text-slate-500 font-medium min-w-[90px]">
+            <div className="shrink-0 px-4 py-2.5 bg-white/95 dark:bg-midnight/95 backdrop-blur-md border-t border-slate-200/80 dark:border-midnight-lightest flex items-center justify-between gap-3">
+              <div className="flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400 font-medium min-w-[90px]">
                 {showViewportSwitcher && (
-                  <span className="capitalize text-slate-700 font-semibold">
+                  <span className="capitalize text-slate-700 dark:text-slate-200 font-semibold">
                     {viewport}
                   </span>
                 )}
                 {showViewportSwitcher && resolvedModalSubtitle && (
-                  <span className="text-slate-300">·</span>
+                  <span className="text-slate-300 dark:text-slate-600">·</span>
                 )}
                 {resolvedModalSubtitle && (
-                  <span className="text-slate-700 font-medium truncate max-w-[180px]">
+                  <span className="text-slate-700 dark:text-slate-200 font-medium truncate max-w-[180px]">
                     {resolvedModalSubtitle}
                   </span>
                 )}
@@ -619,8 +658,8 @@ export function ImagePreviewer({
                     className={cn(
                       "h-2 rounded-full transition-all duration-150 cursor-pointer",
                       idx === activeModalIndex
-                        ? "w-6 bg-cyan-500 shadow-[0_0_8px_rgba(6,182,212,0.4)]"
-                        : "w-2 bg-slate-200 hover:bg-slate-300",
+                        ? "w-6 bg-cyan-500 dark:bg-teal shadow-[0_0_8px_rgba(6,182,212,0.4)]"
+                        : "w-2 bg-slate-200 hover:bg-slate-300 dark:bg-midnight-lightest dark:hover:bg-slate-600",
                     )}
                   />
                 ))}
@@ -632,7 +671,7 @@ export function ImagePreviewer({
                   onClick={() =>
                     stepSlide(slideScopeKey, activeModalImages.length, -1)
                   }
-                  className="inline-flex items-center gap-1 rounded-md border border-slate-200/90 bg-white px-2.5 py-1 text-xs font-medium text-slate-700 transition-colors hover:border-cyan-500 hover:text-cyan-700 cursor-pointer"
+                  className="inline-flex items-center gap-1 rounded-md border border-slate-200/90 bg-white px-2.5 py-1 text-xs font-medium text-slate-700 transition-colors hover:border-cyan-500 hover:text-cyan-700 dark:border-midnight-lightest dark:bg-midnight-lighter dark:text-slate-200 dark:hover:border-cyan-400/70 dark:hover:text-teal cursor-pointer"
                 >
                   <ChevronLeft className="w-3.5 h-3.5" />
                   <span>Prev</span>
@@ -642,7 +681,7 @@ export function ImagePreviewer({
                   onClick={() =>
                     stepSlide(slideScopeKey, activeModalImages.length, 1)
                   }
-                  className="inline-flex items-center gap-1 rounded-md border border-slate-200/90 bg-white px-2.5 py-1 text-xs font-medium text-slate-700 transition-colors hover:border-cyan-500 hover:text-cyan-700 cursor-pointer"
+                  className="inline-flex items-center gap-1 rounded-md border border-slate-200/90 bg-white px-2.5 py-1 text-xs font-medium text-slate-700 transition-colors hover:border-cyan-500 hover:text-cyan-700 dark:border-midnight-lightest dark:bg-midnight-lighter dark:text-slate-200 dark:hover:border-cyan-400/70 dark:hover:text-teal cursor-pointer"
                 >
                   <span>Next</span>
                   <ChevronRight className="w-3.5 h-3.5" />

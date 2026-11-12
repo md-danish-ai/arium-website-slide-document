@@ -218,7 +218,7 @@ export function PageSidebar({
               <span
                 aria-hidden="true"
                 className={cn(
-                  "pointer-events-none absolute top-1 bottom-1 left-1 w-[calc(50%-4px)] rounded-md bg-gradient-to-r from-[#162047] via-[#1c2a55] to-[#134e6f] shadow-sm ring-1 ring-cyan-400/30 transition-transform duration-200 ease-out",
+                  "pointer-events-none absolute top-1 bottom-1 left-1 w-[calc(50%-4px)] rounded-md bg-gradient-to-r from-[#162047] via-[#1c2a55] to-[#134e6f] shadow-sm ring-1 ring-cyan-400/30 dark:ring-cyan-400/45 transition-transform duration-200 ease-out",
                   activeMode === "all-widgets"
                     ? "translate-x-full"
                     : "translate-x-0",
@@ -231,7 +231,7 @@ export function PageSidebar({
                 <TabsTrigger
                   key={value}
                   value={value}
-                  className="relative z-10 gap-1.5 py-2 rounded-md text-xs font-semibold tracking-wide cursor-pointer transition-all duration-200 ease-out transform-gpu hover:scale-[1.02] active:scale-[0.98] data-[state=active]:bg-transparent data-[state=active]:text-white data-[state=active]:shadow-none"
+                  className="relative z-10 gap-1.5 py-2 rounded-md text-xs font-semibold tracking-wide cursor-pointer transition-all duration-200 ease-out transform-gpu hover:scale-[1.02] active:scale-[0.98] dark:text-slate-300 dark:hover:text-white data-[state=active]:bg-transparent data-[state=active]:text-white dark:data-[state=active]:bg-transparent dark:data-[state=active]:text-white data-[state=active]:shadow-none"
                 >
                   <Icon className="w-3.5 h-3.5 shrink-0" />
                   <span>{label}</span>
@@ -264,14 +264,14 @@ export function PageSidebar({
             size="xs"
             aria-label="Clear filter"
             onClick={() => setSearchQuery("")}
-            className="absolute right-1 top-1/2 -translate-y-1/2 h-6 w-6 p-0 text-slate-400 hover:text-slate-700 hover:bg-transparent"
+            className="absolute right-1 top-1/2 -translate-y-1/2 h-6 w-6 p-0 text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 hover:bg-transparent"
           >
             <X className="w-3.5 h-3.5" />
           </Button>
         )}
       </div>
 
-      <Separator className="mb-2 bg-slate-200/70" />
+      <Separator className="mb-2 bg-slate-200/70 dark:bg-midnight-lightest" />
 
       {/* Reusable List Container */}
       <div

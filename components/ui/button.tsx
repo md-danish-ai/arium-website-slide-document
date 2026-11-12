@@ -22,7 +22,7 @@ const buttonVariants = cva(
         midnight:
           "bg-midnight-lighter border border-midnight-lightest text-white hover:border-teal/40 hover:bg-midnight-lightest",
         glass:
-          "bg-white/85 backdrop-blur-md border border-slate-200/85 text-slate-700 hover:bg-white hover:border-slate-300 hover:text-slate-900 shadow-xs",
+          "bg-white/85 backdrop-blur-md border border-slate-200/85 text-slate-700 hover:bg-white hover:border-slate-300 hover:text-slate-900 shadow-xs dark:bg-midnight-lighter/85 dark:border-midnight-lightest dark:text-slate-200 dark:hover:bg-midnight-lightest dark:hover:border-cyan-400/50 dark:hover:text-white",
         glassActive:
           "bg-cyan-500 text-white border border-cyan-400/60 hover:bg-cyan-600 shadow-sm shadow-cyan-500/20",
       },

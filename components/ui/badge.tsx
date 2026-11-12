@@ -24,19 +24,19 @@ const badgeVariants = cva(
           "border-secondary-peach/30 bg-secondary-peach/10 text-orange-200",
         midnight: "border-midnight-lightest bg-midnight-lighter text-slate-300",
         glass:
-          "border-slate-200/85 bg-white/85 backdrop-blur-md text-slate-600 shadow-xs",
+          "border-slate-200/85 bg-white/85 backdrop-blur-md text-slate-600 shadow-xs dark:border-midnight-lightest dark:bg-midnight-lighter/85 dark:text-slate-200",
         glassCyan:
-          "border-cyan-200/80 bg-cyan-50/85 backdrop-blur-md text-cyan-700",
+          "border-cyan-200/80 bg-cyan-50/85 backdrop-blur-md text-cyan-700 dark:border-cyan-400/35 dark:bg-cyan-500/15 dark:text-teal",
         glassPurple:
-          "border-purple-200/80 bg-purple-50/85 backdrop-blur-md text-purple-700",
+          "border-purple-200/80 bg-purple-50/85 backdrop-blur-md text-purple-700 dark:border-purple-400/35 dark:bg-purple-500/15 dark:text-purple-200",
         glassEmerald:
-          "border-emerald-200/80 bg-emerald-50/85 backdrop-blur-md text-emerald-700",
+          "border-emerald-200/80 bg-emerald-50/85 backdrop-blur-md text-emerald-700 dark:border-emerald-400/35 dark:bg-emerald-500/15 dark:text-emerald-300",
         glassViolet:
-          "border-violet-200/80 bg-violet-50/85 backdrop-blur-md text-violet-700",
+          "border-violet-200/80 bg-violet-50/85 backdrop-blur-md text-violet-700 dark:border-violet-400/35 dark:bg-violet-500/15 dark:text-violet-200",
         glassAmber:
-          "border-amber-200/80 bg-amber-50/85 backdrop-blur-md text-amber-700",
+          "border-amber-200/80 bg-amber-50/85 backdrop-blur-md text-amber-700 dark:border-amber-400/35 dark:bg-amber-500/15 dark:text-amber-200",
         glassRose:
-          "border-rose-200/80 bg-rose-50/85 backdrop-blur-md text-rose-700",
+          "border-rose-200/80 bg-rose-50/85 backdrop-blur-md text-rose-700 dark:border-rose-400/35 dark:bg-rose-500/15 dark:text-rose-200",
       },
     },
     defaultVariants: {

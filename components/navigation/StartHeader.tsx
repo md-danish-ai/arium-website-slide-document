@@ -4,8 +4,16 @@ import React from "react";
 import Link from "next/link";
 import { Button } from "@components/ui/button";
 import { Badge } from "@components/ui/badge";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Moon, Sun } from "lucide-react";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@components/ui/tooltip";
 import type { SidebarMode } from "./PageSidebar";
+
+export type StartTheme = "light" | "dark";
 
 interface StartHeaderProps {
   mode: SidebarMode;
@@ -14,6 +22,8 @@ interface StartHeaderProps {
   pageWidgetCount: number;
   activePageLabel?: string;
   activeWidgetName?: string;
+  theme?: StartTheme;
+  onToggleTheme?: () => void;
 }
 
 export function StartHeader({
@@ -23,9 +33,13 @@ export function StartHeader({
   pageWidgetCount,
   activePageLabel,
   activeWidgetName,
+  theme = "light",
+  onToggleTheme,
 }: StartHeaderProps) {
+  const isDark = theme === "dark";
+
   return (
-    <header className="w-full glass-header-light px-5 py-3 mb-3 flex items-center justify-between gap-4">
+    <header className="w-full glass-header-light px-5 py-3 mb-3 flex items-center justify-between gap-4 transition-colors duration-200">
       {/* Left: Brand */}
       <div className="flex items-center gap-3 shrink-0">
         <div className="flex items-center justify-center w-8 h-8 rounded-xl bg-gradient-to-br from-cyan-400 to-teal-500 shadow-sm shadow-cyan-500/25">
@@ -44,7 +58,7 @@ export function StartHeader({
           </svg>
         </div>
         <div className="flex items-center gap-2">
-          <span className="font-bold text-slate-900 text-sm tracking-wide">
+          <span className="font-bold text-slate-900 dark:text-white text-sm tracking-wide transition-colors duration-200">
             Arium Networks
           </span>
           <Badge
@@ -57,25 +71,27 @@ export function StartHeader({
       </div>
 
       {/* Center: Mode-Aware Actual Page / Widget Details */}
-      <div className="hidden md:flex items-center gap-2 min-w-0 text-xs text-slate-500 font-medium px-3.5 py-1.5 rounded-full glass-inset">
+      <div className="hidden md:flex items-center gap-2 min-w-0 text-xs text-slate-500 dark:text-slate-400 font-medium px-3.5 py-1.5 rounded-full glass-inset transition-colors duration-200">
         {mode === "by-page" ? (
           <>
-            <span className="font-semibold text-slate-700 shrink-0 tabular-nums">
+            <span className="font-semibold text-slate-700 dark:text-slate-200 shrink-0 tabular-nums">
               {totalPages} {totalPages === 1 ? "Page" : "Pages"}
             </span>
-            <span className="text-slate-300">·</span>
-            <span className="font-semibold text-slate-700 shrink-0 tabular-nums">
+            <span className="text-slate-300 dark:text-slate-600">·</span>
+            <span className="font-semibold text-slate-700 dark:text-slate-200 shrink-0 tabular-nums">
               {pageWidgetCount} {pageWidgetCount === 1 ? "Widget" : "Widgets"}
             </span>
             {activePageLabel && activeWidgetName && (
               <>
-                <span className="h-3.5 w-px bg-slate-200/90 mx-0.5 shrink-0" />
+                <span className="h-3.5 w-px bg-slate-200/90 dark:bg-midnight-lightest mx-0.5 shrink-0" />
                 <div className="flex items-center gap-1.5 min-w-0">
-                  <span className="text-slate-700 font-medium max-w-[160px] truncate">
+                  <span className="text-slate-700 dark:text-slate-200 font-medium max-w-[160px] truncate">
                     {activePageLabel}
                   </span>
-                  <span className="text-slate-300 shrink-0">/</span>
-                  <span className="text-cyan-700 font-semibold max-w-[220px] truncate">
+                  <span className="text-slate-300 dark:text-slate-600 shrink-0">
+                    /
+                  </span>
+                  <span className="text-cyan-700 dark:text-teal font-semibold max-w-[220px] truncate">
                     {activeWidgetName}
                   </span>
                 </div>
@@ -84,13 +100,13 @@ export function StartHeader({
           </>
         ) : (
           <>
-            <span className="font-semibold text-slate-700 shrink-0 tabular-nums">
+            <span className="font-semibold text-slate-700 dark:text-slate-200 shrink-0 tabular-nums">
               {totalWidgets} {totalWidgets === 1 ? "Widget" : "Widgets"}
             </span>
             {activeWidgetName && (
               <>
-                <span className="h-3.5 w-px bg-slate-200/90 mx-0.5 shrink-0" />
-                <span className="text-cyan-700 font-semibold max-w-[260px] truncate">
+                <span className="h-3.5 w-px bg-slate-200/90 dark:bg-midnight-lightest mx-0.5 shrink-0" />
+                <span className="text-cyan-700 dark:text-teal font-semibold max-w-[260px] truncate">
                   {activeWidgetName}
                 </span>
               </>
@@ -101,6 +117,34 @@ export function StartHeader({
 
       {/* Right: Actions */}
       <div className="flex items-center gap-2 shrink-0">
+        {onToggleTheme && (
+          <TooltipProvider delayDuration={200}>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button
+                  type="button"
+                  variant="glass"
+                  size="sm"
+                  onClick={onToggleTheme}
+                  aria-label={
+                    isDark ? "Switch to Light Mode" : "Switch to Dark Mode"
+                  }
+                  className="group h-8 w-8 p-0 rounded-lg border-slate-200/90 bg-white/85 text-slate-700 hover:border-cyan-400 hover:text-cyan-700 dark:border-midnight-lightest dark:bg-midnight-lighter/90 dark:text-teal dark:hover:border-cyan-400/70 dark:hover:bg-midnight-lightest dark:hover:text-cyan-300 shadow-xs transition-all duration-200 ease-out transform-gpu hover:scale-[1.04] active:scale-[0.96]"
+                >
+                  {isDark ? (
+                    <Sun className="w-3.5 h-3.5 transition-transform duration-200 group-hover:rotate-12" />
+                  ) : (
+                    <Moon className="w-3.5 h-3.5 transition-transform duration-200 group-hover:-rotate-12" />
+                  )}
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent side="bottom" className="text-xs">
+                {isDark ? "Switch to Light Mode" : "Switch to Dark Mode"}
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
+        )}
+
         <Button
           variant="midnight"
           size="sm"

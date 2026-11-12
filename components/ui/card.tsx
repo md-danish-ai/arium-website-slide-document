@@ -7,7 +7,7 @@ const cardVariants = cva("rounded-xl border shadow-sm transition-all", {
   variants: {
     variant: {
       default: "border-midnight-lightest bg-card text-card-foreground",
-      glass: "rounded-2xl glass-surface text-slate-900",
+      glass: "rounded-2xl glass-surface text-slate-900 dark:text-slate-100",
     },
   },
   defaultVariants: {
@@ -61,7 +61,10 @@ const CardDescription = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <p
     ref={ref}
-    className={cn("text-sm text-slate-500 leading-relaxed", className)}
+    className={cn(
+      "text-sm text-slate-500 dark:text-slate-400 leading-relaxed",
+      className,
+    )}
     {...props}
   />
 ));

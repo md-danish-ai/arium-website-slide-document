@@ -1,6 +1,12 @@
 "use client";
 
-import React, { useState, useMemo, useCallback } from "react";
+import React, {
+  useState,
+  useMemo,
+  useCallback,
+  useEffect,
+  useSyncExternalStore,
+} from "react";
 import { PAGE_WIDGETS } from "@data/page.widget";
 import { UNIQUE_WIDGETS_LIST, WIDGETS_LIST } from "@data/widget";
 import {
@@ -10,6 +16,7 @@ import {
 } from "@/types/widget.types";
 import { StartHeader, PageSidebar } from "@components/navigation";
 import type { SidebarMode } from "@components/navigation/PageSidebar";
+import type { StartTheme } from "@components/navigation/StartHeader";
 import {
   WebsitePreviewCard,
   WidgetDescription,
@@ -17,10 +24,60 @@ import {
   WidgetCodeCard,
 } from "@components/presentation";
 
+const START_THEME_KEY = "arium-start-theme";
+const START_THEME_EVENT = "arium-start-theme-change";
+
+function subscribeToStartTheme(callback: () => void) {
+  window.addEventListener("storage", callback);
+  window.addEventListener(START_THEME_EVENT, callback);
+  return () => {
+    window.removeEventListener("storage", callback);
+    window.removeEventListener(START_THEME_EVENT, callback);
+  };
+}
+
+function getStartThemeSnapshot(): StartTheme {
+  try {
+    return window.localStorage.getItem(START_THEME_KEY) === "dark"
+      ? "dark"
+      : "light";
+  } catch {
+    return "light";
+  }
+}
+
+function getStartThemeServerSnapshot(): StartTheme {
+  return "light";
+}
+
 export default function StartPage() {
   const [sidebarMode, setSidebarMode] = useState<SidebarMode>("by-page");
   const [selectedPageId, setSelectedPageId] = useState<string>("home");
   const [selectedWidgetId, setSelectedWidgetId] = useState<string>("w-home-0");
+
+  const theme = useSyncExternalStore(
+    subscribeToStartTheme,
+    getStartThemeSnapshot,
+    getStartThemeServerSnapshot,
+  );
+
+  useEffect(() => {
+    const root = document.documentElement;
+    root.classList.toggle("dark", theme === "dark");
+    return () => {
+      root.classList.remove("dark");
+    };
+  }, [theme]);
+
+  const handleToggleTheme = useCallback(() => {
+    const next: StartTheme = theme === "dark" ? "light" : "dark";
+    try {
+      window.localStorage.setItem(START_THEME_KEY, next);
+      window.dispatchEvent(new Event(START_THEME_EVENT));
+    } catch {
+      document.documentElement.classList.toggle("dark", next === "dark");
+    }
+  }, [theme]);
 
   const activePage: PageWithWidgets = useMemo(() => {
     return PAGE_WIDGETS.find((p) => p.id === selectedPageId) || PAGE_WIDGETS[0];
@@ -198,12 +255,12 @@ export default function StartPage() {
   const pageWidgetCount = activePage.child_widgets?.length ?? 0;
 
   return (
-    <main className="relative w-screen h-screen bg-slate-50 text-slate-900 flex flex-col overflow-hidden font-body select-none">
-      {/* Subtle White-Light Frosted Ambient Glow */}
+    <main className="relative w-screen h-screen bg-slate-50 text-slate-900 dark:bg-[#0d1430] dark:text-slate-100 flex flex-col overflow-hidden font-body select-none transition-colors duration-200">
+      {/* Subtle Theme-Aware Frosted Ambient Glow */}
       <div className="pointer-events-none fixed inset-0 overflow-hidden z-0">
-        <div className="absolute -top-32 -left-24 w-[480px] h-[480px] rounded-full bg-cyan-100/70 blur-3xl" />
-        <div className="absolute top-1/3 right-[-8%] w-[440px] h-[440px] rounded-full bg-indigo-100/50 blur-3xl" />
-        <div className="absolute -bottom-36 left-1/3 w-[520px] h-[520px] rounded-full bg-teal-100/55 blur-3xl" />
+        <div className="absolute -top-32 -left-24 w-[480px] h-[480px] rounded-full bg-cyan-100/70 dark:bg-cyan-500/10 blur-3xl transition-colors duration-300" />
+        <div className="absolute top-1/3 right-[-8%] w-[440px] h-[440px] rounded-full bg-indigo-100/50 dark:bg-indigo-500/12 blur-3xl transition-colors duration-300" />
+        <div className="absolute -bottom-36 left-1/3 w-[520px] h-[520px] rounded-full bg-teal-100/55 dark:bg-teal-400/10 blur-3xl transition-colors duration-300" />
       </div>
 
       {/* HEADER */}
@@ -217,6 +274,8 @@ export default function StartPage() {
           activeWidgetName={
             activeWidget.widgets_label || activeWidget.widgets_title
           }
+          theme={theme}
+          onToggleTheme={handleToggleTheme}
         />
       </div>
 

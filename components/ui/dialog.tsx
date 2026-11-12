@@ -40,7 +40,7 @@ const dialogContentVariants = cva(
       variant: {
         default: "border-midnight-lightest bg-midnight-lighter text-white",
         glass:
-          "border-slate-200/90 bg-white/95 backdrop-blur-2xl text-slate-900 shadow-[0_24px_64px_-16px_rgba(15,23,42,0.2)]",
+          "border-slate-200/90 bg-white/95 backdrop-blur-2xl text-slate-900 shadow-[0_24px_64px_-16px_rgba(15,23,42,0.2)] dark:border-midnight-lightest dark:bg-midnight/95 dark:text-slate-100 dark:shadow-[0_24px_64px_-16px_rgba(0,0,0,0.65)]",
       },
     },
     defaultVariants: {
@@ -73,7 +73,7 @@ const DialogContent = React.forwardRef<
             className={cn(
               "group absolute right-4 top-4 rounded-lg p-1.5 opacity-75 ring-offset-background transition-all duration-200 hover:opacity-100 hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none cursor-pointer",
               variant === "glass"
-                ? "text-slate-500 hover:text-slate-900 hover:bg-slate-100"
+                ? "text-slate-500 hover:text-slate-900 hover:bg-slate-100 dark:text-slate-400 dark:hover:text-white dark:hover:bg-midnight-lightest"
                 : "text-slate-300 hover:text-white",
             )}
           >
@@ -136,7 +136,7 @@ const DialogDescription = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <DialogPrimitive.Description
     ref={ref}
-    className={cn("text-sm text-slate-500", className)}
+    className={cn("text-sm text-slate-500 dark:text-slate-400", className)}
     {...props}
   />
 ));
