@@ -21,7 +21,6 @@ export default function StartPage() {
   const [sidebarMode, setSidebarMode] = useState<SidebarMode>("by-page");
   const [selectedPageId, setSelectedPageId] = useState<string>("home");
   const [selectedWidgetId, setSelectedWidgetId] = useState<string>("w-home-0");
-  const [resetKey, setResetKey] = useState<number>(0);
 
   const activePage: PageWithWidgets = useMemo(() => {
     return PAGE_WIDGETS.find((p) => p.id === selectedPageId) || PAGE_WIDGETS[0];
@@ -194,13 +193,6 @@ export default function StartPage() {
     }
   }, []);
 
-  const handleReset = useCallback(() => {
-    setSidebarMode("by-page");
-    setSelectedPageId("home");
-    setSelectedWidgetId("w-home-0");
-    setResetKey((prev) => prev + 1);
-  }, []);
-
   const totalPages = PAGE_WIDGETS.length;
   const totalWidgets = UNIQUE_WIDGETS_LIST.length;
   const pageWidgetCount = activePage.child_widgets?.length ?? 0;
@@ -225,7 +217,6 @@ export default function StartPage() {
           activeWidgetName={
             activeWidget.widgets_label || activeWidget.widgets_title
           }
-          onReset={handleReset}
         />
       </div>
 
@@ -235,7 +226,6 @@ export default function StartPage() {
           {/* COL 1 — Sidebar (3 cols) */}
           <div className="lg:col-span-3 min-h-[350px] lg:min-h-0 overflow-hidden">
             <PageSidebar
-              key={resetKey}
               pages={PAGE_WIDGETS}
               flatWidgets={UNIQUE_WIDGETS_LIST}
               mode={sidebarMode}

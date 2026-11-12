@@ -4,7 +4,7 @@ import React from "react";
 import Link from "next/link";
 import { Button } from "@components/ui/button";
 import { Badge } from "@components/ui/badge";
-import { ArrowLeft, RotateCcw } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import type { SidebarMode } from "./PageSidebar";
 
 interface StartHeaderProps {
@@ -14,7 +14,6 @@ interface StartHeaderProps {
   pageWidgetCount: number;
   activePageLabel?: string;
   activeWidgetName?: string;
-  onReset?: () => void;
 }
 
 export function StartHeader({
@@ -24,7 +23,6 @@ export function StartHeader({
   pageWidgetCount,
   activePageLabel,
   activeWidgetName,
-  onReset,
 }: StartHeaderProps) {
   return (
     <header className="w-full glass-header-light px-5 py-3 mb-3 flex items-center justify-between gap-4">
@@ -103,27 +101,15 @@ export function StartHeader({
 
       {/* Right: Actions */}
       <div className="flex items-center gap-2 shrink-0">
-        {onReset && (
-          <Button
-            type="button"
-            variant="glass"
-            size="sm"
-            onClick={onReset}
-            className="h-8 text-xs font-medium px-3 rounded-lg"
-          >
-            <RotateCcw className="w-3 h-3 mr-1 text-slate-500" />
-            Reset
-          </Button>
-        )}
         <Button
           variant="midnight"
           size="sm"
           asChild
-          className="bg-slate-900/90 hover:bg-slate-800 text-white border-0 h-8 text-xs font-medium rounded-lg shadow-sm"
+          className="group h-8 gap-1.5 px-3.5 rounded-lg text-xs font-semibold text-white cursor-pointer bg-gradient-to-r from-[#162047] via-[#1c2a55] to-[#134e6f] border border-cyan-400/35 hover:from-[#1c2a55] hover:to-[#0f5e7a] hover:border-cyan-400/60 shadow-sm shadow-cyan-500/15 hover:shadow-cyan-500/25 transition-all duration-200 ease-out transform-gpu hover:scale-[1.03] active:scale-[0.97]"
         >
           <Link href="/">
-            <ArrowLeft className="w-3.5 h-3.5 mr-1" />
-            Home
+            <ArrowLeft className="w-3.5 h-3.5 text-teal transition-transform duration-200 group-hover:-translate-x-0.5" />
+            Back to Home
           </Link>
         </Button>
       </div>

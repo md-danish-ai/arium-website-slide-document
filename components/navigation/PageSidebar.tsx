@@ -224,20 +224,19 @@ export function PageSidebar({
                     : "translate-x-0",
                 )}
               />
-              <TabsTrigger
-                value="by-page"
-                className="relative z-10 gap-1.5 py-2 rounded-md text-xs font-semibold tracking-wide transition-colors duration-200 data-[state=active]:bg-transparent data-[state=active]:text-white data-[state=active]:shadow-none"
-              >
-                <Layers className="w-3.5 h-3.5 shrink-0" />
-                <span>BY PAGE</span>
-              </TabsTrigger>
-              <TabsTrigger
-                value="all-widgets"
-                className="relative z-10 gap-1.5 py-2 rounded-md text-xs font-semibold tracking-wide transition-colors duration-200 data-[state=active]:bg-transparent data-[state=active]:text-white data-[state=active]:shadow-none"
-              >
-                <LayoutGrid className="w-3.5 h-3.5 shrink-0" />
-                <span>BY WIDGETS</span>
-              </TabsTrigger>
+              {[
+                { value: "by-page", label: "BY PAGE", Icon: Layers },
+                { value: "all-widgets", label: "BY WIDGETS", Icon: LayoutGrid },
+              ].map(({ value, label, Icon }) => (
+                <TabsTrigger
+                  key={value}
+                  value={value}
+                  className="relative z-10 gap-1.5 py-2 rounded-md text-xs font-semibold tracking-wide cursor-pointer transition-all duration-200 ease-out transform-gpu hover:scale-[1.02] active:scale-[0.98] data-[state=active]:bg-transparent data-[state=active]:text-white data-[state=active]:shadow-none"
+                >
+                  <Icon className="w-3.5 h-3.5 shrink-0" />
+                  <span>{label}</span>
+                </TabsTrigger>
+              ))}
             </TabsList>
           </Tabs>
         </div>
