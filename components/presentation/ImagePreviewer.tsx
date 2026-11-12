@@ -510,11 +510,11 @@ export function ImagePreviewer({
         <DialogContent
           variant="glass"
           onKeyDown={handleModalKeyDown}
-          className="max-w-[1400px] w-[94vw] max-h-[92vh] p-0 overflow-hidden flex flex-col gap-0 border-0 bg-white dark:bg-midnight shadow-2xl"
+          className="max-w-[1600px] w-[96vw] sm:w-[95vw] max-h-[92vh] sm:max-h-[94vh] p-0 overflow-hidden flex flex-col gap-0 border-0 rounded-xl sm:rounded-2xl bg-white dark:bg-midnight shadow-2xl"
         >
-          <DialogHeader className="shrink-0 px-5 py-3.5 bg-white/95 dark:bg-midnight/95 backdrop-blur-md border-b border-slate-200/80 dark:border-midnight-lightest flex flex-row items-center justify-between gap-4 space-y-0 pr-12">
+          <DialogHeader className="shrink-0 px-3.5 py-3 sm:px-5 sm:py-3.5 bg-white/95 dark:bg-midnight/95 backdrop-blur-md border-b border-slate-200/80 dark:border-midnight-lightest flex flex-row items-center justify-between gap-3 sm:gap-4 space-y-0 pr-11 sm:pr-12">
             <div className="min-w-0 flex items-center gap-2">
-              <DialogTitle className="text-sm md:text-base font-bold text-slate-900 dark:text-white flex items-center gap-1.5 truncate">
+              <DialogTitle className="text-xs sm:text-sm md:text-base font-bold text-slate-900 dark:text-white flex items-center gap-1.5 truncate">
                 {resolvedModalSubtitle && (
                   <>
                     <span className="text-slate-500 dark:text-slate-400 font-medium">
@@ -568,16 +568,16 @@ export function ImagePreviewer({
             )}
           </DialogHeader>
 
-          {/* Modal Body — Theme-aware stage with preloaded smooth cross-fade + Prev/Next */}
+          {/* Modal Body — Theme-aware full-width stage with smooth scroll & load skeleton */}
           <div className="relative flex-1 min-h-0 flex flex-col">
             <div
               className={cn(
-                "flex-1 min-h-0 overflow-auto flex items-center justify-center glass-scrollbar transition-[padding] duration-300",
+                "flex-1 min-h-0 w-full overflow-y-auto overflow-x-hidden flex glass-scrollbar transition-[padding] duration-300",
                 modalContent || isActiveModalSvg
-                  ? "p-4 md:p-6 bg-slate-50 dark:bg-[#0d1430]"
+                  ? "p-3 sm:p-4 md:p-6 bg-slate-50 dark:bg-[#0d1430]"
                   : viewport === "desktop"
                     ? "p-0 bg-white dark:bg-[#0d1430]"
-                    : "p-4 md:p-6 bg-slate-50 dark:bg-[#0d1430]",
+                    : "p-3 sm:p-4 md:p-6 bg-slate-50 dark:bg-[#0d1430]",
               )}
             >
               {modalContent ? (
@@ -585,7 +585,7 @@ export function ImagePreviewer({
               ) : (
                 <div
                   className={cn(
-                    "relative transition-all duration-300 ease-out overflow-hidden flex items-center justify-center",
+                    "relative m-auto w-full transition-all duration-300 ease-out flex items-center justify-center",
                     currentViewport.containerClass,
                   )}
                 >
@@ -637,7 +637,7 @@ export function ImagePreviewer({
                             "flex items-center justify-center transition-all duration-200 ease-out",
                             isActive &&
                               !isLayerLoaded &&
-                              "relative w-[min(86vw,1080px)] h-[65vh] min-h-[340px]",
+                              "relative w-full h-[50vh] sm:h-[62vh] min-h-[240px] sm:min-h-[340px]",
                             isActive
                               ? cn(
                                   "relative z-10 w-full opacity-100 scale-100",
@@ -664,19 +664,16 @@ export function ImagePreviewer({
                             unoptimized={isLayerSvg}
                             sizes={
                               value === "desktop"
-                                ? "94vw"
+                                ? "(max-width: 640px) 96vw, (max-width: 1680px) 95vw, 1600px"
                                 : value === "tablet"
-                                  ? "576px"
+                                  ? "(max-width: 640px) 96vw, 576px"
                                   : "320px"
                             }
                             onLoad={() => markSrcLoaded(layerLoadKey)}
                             onError={() => markSrcFailed(rawSrc, layerLoadKey)}
                             className={cn(
-                              "block mx-auto w-auto max-w-full h-auto object-contain transition-opacity duration-300 ease-out",
+                              "block w-full h-auto object-contain transition-opacity duration-300 ease-out",
                               isLayerLoaded ? "opacity-100" : "opacity-0",
-                              value === "desktop"
-                                ? "max-h-[78vh]"
-                                : "max-h-[74vh]",
                             )}
                           />
                         </div>
@@ -714,8 +711,8 @@ export function ImagePreviewer({
           </div>
 
           {activeModalImages.length > 1 && !modalContent && (
-            <div className="shrink-0 px-4 py-2.5 bg-white/95 dark:bg-midnight/95 backdrop-blur-md border-t border-slate-200/80 dark:border-midnight-lightest flex items-center justify-between gap-3">
-              <div className="flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400 font-medium min-w-[90px]">
+            <div className="shrink-0 px-3 sm:px-4 py-2 sm:py-2.5 bg-white/95 dark:bg-midnight/95 backdrop-blur-md border-t border-slate-200/80 dark:border-midnight-lightest flex flex-wrap items-center justify-between gap-2 sm:gap-3">
+              <div className="flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400 font-medium min-w-0">
                 {showViewportSwitcher && (
                   <span className="capitalize text-slate-700 dark:text-slate-200 font-semibold">
                     {viewport}
@@ -725,7 +722,7 @@ export function ImagePreviewer({
                   <span className="text-slate-300 dark:text-slate-600">·</span>
                 )}
                 {resolvedModalSubtitle && (
-                  <span className="text-slate-700 dark:text-slate-200 font-medium truncate max-w-[180px]">
+                  <span className="text-slate-700 dark:text-slate-200 font-medium truncate max-w-[120px] sm:max-w-[180px]">
                     {resolvedModalSubtitle}
                   </span>
                 )}
