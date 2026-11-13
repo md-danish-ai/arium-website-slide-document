@@ -697,7 +697,7 @@ export const WIDGETS_LIST: FlatWidget[] = [
     },
     strapi_image: "/images/strapi-widgets/community/illustration-split.png",
     widgets_response: WIDGETS_RESPONSES["shared.illustration-split"],
-    used_in_pages: ["community"],
+    used_in_pages: ["community", "solutions"],
   },
   {
     id: "widget-community-why-small-cells",
@@ -859,7 +859,7 @@ export const WIDGETS_LIST: FlatWidget[] = [
     id: "widget-solutions-small-cells",
     page_id: "solutions",
     position: 1,
-    widget_key: "shared.small-cells",
+    widget_key: "shared.illustration-split",
     widgets_title: "Small Cells — <IllustrationSplit />",
     widgets_label: "Illustration Split (Small Cells)",
     component_name: "IllustrationSplit",
@@ -869,7 +869,7 @@ export const WIDGETS_LIST: FlatWidget[] = [
     category: "flow",
     description:
       "Illustration split displaying title (title_color), description (description_color), right-aligned illustration_image (small-cells-illustration.svg via illustration_image_alignment), 2 KPI statistics (100K+, 700+), optional background, and show_bottom_divider.",
-    fallback_key: "illustration-split",
+    fallback_key: "small-cells",
     key_props: [
       "title",
       "title_color",
@@ -890,13 +890,13 @@ export const WIDGETS_LIST: FlatWidget[] = [
     },
     strapi_image: "/images/strapi-widgets/solutions/small-cells-split.png",
     widgets_response: WIDGETS_RESPONSES["shared.small-cells"],
-    used_in_pages: ["solutions"],
+    used_in_pages: ["community", "solutions"],
   },
   {
     id: "widget-solutions-das",
     page_id: "solutions",
-    position: 1,
-    widget_key: "shared.das",
+    position: 2,
+    widget_key: "shared.illustration-split",
     widgets_title: "Distributed Antenna Systems — <IllustrationSplit />",
     widgets_label: "Illustration Split (DAS)",
     component_name: "IllustrationSplit",
@@ -906,7 +906,7 @@ export const WIDGETS_LIST: FlatWidget[] = [
     category: "flow",
     description:
       "Illustration split displaying title (title_color), description (description_color), left-aligned illustration_image (das-illustration.svg via illustration_image_alignment), KPI statistics (300+ venues), optional background, and show_bottom_divider.",
-    fallback_key: "illustration-split",
+    fallback_key: "das",
     key_props: [
       "title",
       "title_color",
@@ -925,7 +925,7 @@ export const WIDGETS_LIST: FlatWidget[] = [
     },
     strapi_image: "/images/strapi-widgets/solutions/das-split.png",
     widgets_response: WIDGETS_RESPONSES["shared.das"],
-    used_in_pages: ["solutions"],
+    used_in_pages: ["community", "solutions"],
   },
   {
     id: "widget-solutions-industry",
@@ -1327,16 +1327,16 @@ export const WIDGETS_LIST: FlatWidget[] = [
     id: "widget-where-communities",
     page_id: "where-we-build",
     position: 1,
-    widget_key: "shared.communities",
+    widget_key: "shared.image-split",
     widgets_title: "Where we build - Communities — <WhereCommunities />",
-    widgets_label: "Where Communities",
+    widgets_label: "Image Split",
     component_name: "WhereCommunities",
     component_tag: "<WhereCommunities />",
     source_location: "@ui-component/where-we-build/WhereCommunities",
     renderer_name: "WhereCommunitiesRenderer",
     category: "content",
     description:
-      "Split layout on warm peach background_color displaying title (title_color), description (description_color), image aligned via image_alignment, and Learn more CTA_text/CTA_url link to /right-of-ways.",
+      "Split layout on warm peach background_color displaying title (title_color), description (description_color), image aligned via image_alignment (Right), and Learn more CTA_text/CTA_url link to /right-of-ways.",
     fallback_key: "communities",
     key_props: [
       "title",
@@ -1364,7 +1364,7 @@ export const WIDGETS_LIST: FlatWidget[] = [
     id: "widget-where-venues",
     page_id: "where-we-build",
     position: 2,
-    widget_key: "shared.venues",
+    widget_key: "shared.image-split",
     widgets_title: "Building and Venues - Where we build — <WhereVenues />",
     widgets_label: "Where Venues",
     component_name: "WhereVenues",
@@ -1373,7 +1373,7 @@ export const WIDGETS_LIST: FlatWidget[] = [
     renderer_name: "WhereVenuesRenderer",
     category: "content",
     description:
-      "Split layout on mint-teal background_color displaying title (title_color), description (description_color), desktop left-aligned image (image_alignment), and CTA_text/CTA_url link to /private-venues.",
+      "Split layout on mint-teal background_color displaying title (title_color), description (description_color), desktop left-aligned image via image_alignment (Left), and CTA_text/CTA_url link to /private-venues.",
     fallback_key: "venues",
     key_props: [
       "title",
@@ -1668,30 +1668,6 @@ export const WIDGETS_LIST: FlatWidget[] = [
       "leadership",
       "board-of-directors",
     ],
-  },
-  {
-    id: "widget-contact-form",
-    page_id: "contact",
-    position: 2,
-    widget_key: "contact-form",
-    widgets_title: "Contact Form — <ContactForm />",
-    widgets_label: "Contact Form",
-    component_name: "ContactForm",
-    component_tag: "<ContactForm />",
-    source_location: "@ui-component/contact/ContactForm",
-    category: "form",
-    description:
-      "Interactive inquiry form powered by React Hook Form + Zod validation, 9 topicOptions dropdown entries (Sales through Other), and POST /api/contact email delivery via Resend API.",
-    fallback_key: "contact-form",
-    key_props: ["topicOptions"],
-    preview_images: {
-      desktop: "/images/contact/contact-form/contact-form.png",
-      tablet: "/images/contact/contact-form/contact-form-tablet.png",
-      mobile: "/images/contact/contact-form/contact-form-mobile.png",
-    },
-    strapi_image: "/images/strapi-widgets/contact/contact-form.png",
-    widgets_response: WIDGETS_RESPONSES["contact-form"],
-    used_in_pages: ["contact"],
   },
 ];
 

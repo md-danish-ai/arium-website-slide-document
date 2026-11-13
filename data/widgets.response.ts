@@ -1193,6 +1193,24 @@ export const WIDGETS_RESPONSES = {
     __component: "shared.test-banner",
   },
 
+  "shared.image-split": {
+    id: 20,
+    title: "Communities",
+    title_color: "#162047",
+    description:
+      "We're installing small cells along roadways, sidewalks, and the public right of way to expand wireless coverage and capacity. As technology advances and connectivity needs grow, our solutions help communities by improving service in busy neighborhoods, increasing data speeds, and supporting the latest tech residents rely on.",
+    description_color: "#162047",
+    CTA_text: "Learn more",
+    CTA_url: "/right-of-ways",
+    image_alignment: "Right",
+    background_color:
+      "linear-gradient(135deg, rgb(255, 245, 239) 0%, rgb(255, 218, 200) 40%, rgb(255, 240, 232) 100%)",
+    image: {
+      url: "https://d2919ce8l80osk.cloudfront.net/community-hero.png",
+    },
+    __component: "shared.image-split",
+  },
+
   "shared.communities": {
     id: 20,
     title: "Communities",
@@ -1347,23 +1365,6 @@ export const WIDGETS_RESPONSES = {
       "linear-gradient(135deg, #FFF5EE 0%, #FFE8D6 40%, #FFDAC8 100%)",
     content_max_width: null,
     __component: "shared.inner-page-hero",
-  },
-
-  "contact-form": {
-    id: "contact-form",
-    __component: "contact-form",
-    endpoint: "/api/contact",
-    topicOptions: [
-      { value: "sales", label: "Sales" },
-      { value: "client_services", label: "Client Services" },
-      { value: "noc", label: "Network Operations Center" },
-      { value: "billing", label: "Billing" },
-      { value: "communities", label: "Communities" },
-      { value: "suppliers", label: "Suppliers" },
-      { value: "media", label: "Media Relations" },
-      { value: "careers", label: "Careers" },
-      { value: "other", label: "Other" },
-    ],
   },
 
   // ── DYNAMIC STRAPI PAGE WIDGETS ──────────────────────────────────────────

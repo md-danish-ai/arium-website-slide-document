@@ -827,14 +827,14 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
       {
         id: "w-sol-1",
         position: 1,
-        widget_key: "shared.small-cells",
+        widget_key: "shared.illustration-split",
         widgets_title: "Small Cells — <IllustrationSplit />",
         widgets_label: "Illustration Split (Small Cells)",
         component_name: "IllustrationSplit",
         component_tag: "<IllustrationSplit />",
         source_location: "@ui-common/IllustrationSplit",
         renderer_name: "SolutionsSmallCellsRenderer",
-        fallback_key: "illustration-split",
+        fallback_key: "small-cells",
         category: "flow",
         description:
           "Illustration split displaying title (title_color), description (description_color), right-aligned illustration_image (small-cells-illustration.svg via illustration_image_alignment), 2 KPI statistics (100K+, 700+), optional background, and show_bottom_divider.",
@@ -860,15 +860,15 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
       },
       {
         id: "w-sol-2",
-        position: 1,
-        widget_key: "shared.das",
+        position: 2,
+        widget_key: "shared.illustration-split",
         widgets_title: "Distributed Antenna Systems — <IllustrationSplit />",
         widgets_label: "Illustration Split (DAS)",
         component_name: "IllustrationSplit",
         component_tag: "<IllustrationSplit />",
         source_location: "@ui-common/IllustrationSplit",
         renderer_name: "SolutionsDasRenderer",
-        fallback_key: "illustration-split",
+        fallback_key: "das",
         category: "flow",
         description:
           "Illustration split displaying title (title_color), description (description_color), left-aligned illustration_image (das-illustration.svg via illustration_image_alignment), KPI statistics (300+ venues), optional background, and show_bottom_divider.",
@@ -1271,7 +1271,7 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
       {
         id: "w-where-1",
         position: 1,
-        widget_key: "shared.communities",
+        widget_key: "shared.image-split",
         widgets_title: "Where we build - Communities — <WhereCommunities />",
         widgets_label: "Where Communities",
         component_name: "WhereCommunities",
@@ -1281,7 +1281,7 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
         fallback_key: "communities",
         category: "content",
         description:
-          "Split layout on warm peach background_color displaying title (title_color), description (description_color), image aligned via image_alignment, and Learn more CTA_text/CTA_url link to /right-of-ways.",
+          "Split layout on warm peach background_color displaying title (title_color), description (description_color), image aligned via image_alignment (Right), and Learn more CTA_text/CTA_url link to /right-of-ways.",
         key_props: [
           "title",
           "title_color",
@@ -1307,7 +1307,7 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
       {
         id: "w-where-2",
         position: 2,
-        widget_key: "shared.venues",
+        widget_key: "shared.image-split",
         widgets_title: "Building and Venues - Where we build — <WhereVenues />",
         widgets_label: "Where Venues",
         component_name: "WhereVenues",
@@ -1317,7 +1317,7 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
         fallback_key: "venues",
         category: "content",
         description:
-          "Split layout on mint-teal background_color displaying title (title_color), description (description_color), desktop left-aligned image (image_alignment), and CTA_text/CTA_url link to /private-venues.",
+          "Split layout on mint-teal background_color displaying title (title_color), description (description_color), desktop left-aligned image via image_alignment (Left), and CTA_text/CTA_url link to /private-venues.",
         key_props: [
           "title",
           "title_color",
@@ -1597,27 +1597,6 @@ export const PAGE_WIDGETS: PageWithWidgets[] = [
           mobile: "/images/contact/sub-page-hero/sub-page-hero-mobile.png",
         },
         strapi_image: "/images/strapi-widgets/contact/sub-page-hero.png",
-      },
-      {
-        id: "w-contact-1",
-        position: 2,
-        widget_key: "contact-form",
-        widgets_title: "Contact Form — <ContactForm />",
-        widgets_label: "Contact Form",
-        component_name: "ContactForm",
-        component_tag: "<ContactForm />",
-        source_location: "@ui-component/contact/ContactForm",
-        fallback_key: "contact-form",
-        category: "form",
-        description:
-          "Interactive inquiry form powered by React Hook Form + Zod validation, 9 topicOptions dropdown entries (Sales through Other), and POST /api/contact email delivery via Resend API.",
-        key_props: ["topicOptions"],
-        preview_images: {
-          desktop: "/images/contact/contact-form/contact-form.png",
-          tablet: "/images/contact/contact-form/contact-form-tablet.png",
-          mobile: "/images/contact/contact-form/contact-form-mobile.png",
-        },
-        strapi_image: "/images/strapi-widgets/contact/contact-form.png",
       },
     ],
   },

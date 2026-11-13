@@ -54,6 +54,8 @@ export default function StartPage() {
   const [sidebarMode, setSidebarMode] = useState<SidebarMode>("by-page");
   const [selectedPageId, setSelectedPageId] = useState<string>("home");
   const [selectedWidgetId, setSelectedWidgetId] = useState<string>("w-home-0");
+  const [selectedWidgetKey, setSelectedWidgetKey] =
+    useState<string>("shared.main-hero");
 
   const theme = useSyncExternalStore(
     subscribeToStartTheme,
@@ -84,6 +86,23 @@ export default function StartPage() {
   }, [selectedPageId]);
 
   const activeWidget: ChildWidget = useMemo(() => {
+    if (sidebarMode === "all-widgets") {
+      const flat =
+        UNIQUE_WIDGETS_LIST.find((w) => w.widget_key === selectedWidgetKey) ??
+        UNIQUE_WIDGETS_LIST.find((w) => w.id === selectedWidgetId) ??
+        UNIQUE_WIDGETS_LIST[0];
+
+      if (flat) {
+        const found = PAGE_WIDGETS.flatMap((p) => p.child_widgets).find(
+          (cw) =>
+            (cw.widget_key === flat.widget_key && cw.id === selectedWidgetId) ||
+            cw.widget_key === flat.widget_key,
+        );
+        if (found) return found;
+        return flat;
+      }
+    }
+
     const foundInPage = activePage.child_widgets?.find(
       (w) => w.id === selectedWidgetId || w.widget_key === selectedWidgetId,
     );
@@ -115,7 +134,7 @@ export default function StartPage() {
         ],
       }
     );
-  }, [activePage, selectedWidgetId]);
+  }, [sidebarMode, selectedWidgetKey, activePage, selectedWidgetId]);
 
   const activeFlatWidget = useMemo(() => {
     return (
@@ -126,18 +145,29 @@ export default function StartPage() {
           item.widget_key === activeWidget.widget_key &&
           item.position === activeWidget.position,
       ) ??
+      (activeWidget.fallback_key
+        ? WIDGETS_LIST.find(
+            (item) =>
+              item.page_id === activePage.id &&
+              item.fallback_key === activeWidget.fallback_key,
+          )
+        : undefined) ??
+      UNIQUE_WIDGETS_LIST.find(
+        (item) => item.widget_key === activeWidget.widget_key,
+      ) ??
       WIDGETS_LIST.find((item) => item.widget_key === activeWidget.widget_key)
     );
   }, [
     activeWidget.id,
     activeWidget.widget_key,
     activeWidget.position,
+    activeWidget.fallback_key,
     activePage.id,
   ]);
 
   const usedInPages = useMemo<WidgetUsagePage[]>(() => {
     const pages: WidgetUsagePage[] = [];
-    const seenPageIds = new Set<string>();
+    const seenWidgetIds = new Set<string>();
 
     const matchesSlug = (
       pId: string,
@@ -151,24 +181,29 @@ export default function StartPage() {
       (target === "[slug]" && pId === "dynamic-slug");
 
     for (const p of PAGE_WIDGETS) {
-      const matchingWidget = p.child_widgets.find(
-        (cw) => cw.widget_key === activeWidget.widget_key,
+      const matchingWidgets = p.child_widgets.filter(
+        (cw) =>
+          cw.widget_key === activeWidget.widget_key ||
+          (activeWidget.fallback_key &&
+            cw.fallback_key === activeWidget.fallback_key),
       );
-      if (matchingWidget && !seenPageIds.has(p.id)) {
-        seenPageIds.add(p.id);
-        pages.push({
-          id: p.id,
-          title: p.title,
-          label: p.label,
-          route: p.route,
-          strapiSlug: p.strapi_slug,
-          pageCategory: p.category,
-          matchingWidgetId: matchingWidget.id,
-          matchingWidgetLabel: matchingWidget.widgets_label,
-          matchingPosition: matchingWidget.position,
-          previewImages: matchingWidget.preview_images,
-          strapiImage: matchingWidget.strapi_image,
-        });
+      for (const matchingWidget of matchingWidgets) {
+        if (!seenWidgetIds.has(matchingWidget.id)) {
+          seenWidgetIds.add(matchingWidget.id);
+          pages.push({
+            id: p.id,
+            title: p.title,
+            label: p.label,
+            route: p.route,
+            strapiSlug: p.strapi_slug,
+            pageCategory: p.category,
+            matchingWidgetId: matchingWidget.id,
+            matchingWidgetLabel: matchingWidget.widgets_label,
+            matchingPosition: matchingWidget.position,
+            previewImages: matchingWidget.preview_images,
+            strapiImage: matchingWidget.strapi_image,
+          });
+        }
       }
     }
 
@@ -177,29 +212,36 @@ export default function StartPage() {
         const matchedPage = PAGE_WIDGETS.find((p) =>
           matchesSlug(p.id, p.strapi_slug, p.route, slug),
         );
-        if (matchedPage && !seenPageIds.has(matchedPage.id)) {
-          seenPageIds.add(matchedPage.id);
-          const matchingWidget = matchedPage.child_widgets.find(
-            (cw) => cw.widget_key === activeWidget.widget_key,
+        if (matchedPage) {
+          const matchingWidgets = matchedPage.child_widgets.filter(
+            (cw) =>
+              cw.widget_key === activeWidget.widget_key ||
+              (activeWidget.fallback_key &&
+                cw.fallback_key === activeWidget.fallback_key),
           );
-          pages.push({
-            id: matchedPage.id,
-            title: matchedPage.title,
-            label: matchedPage.label,
-            route: matchedPage.route,
-            strapiSlug: matchedPage.strapi_slug,
-            pageCategory: matchedPage.category,
-            matchingWidgetId: matchingWidget?.id,
-            matchingWidgetLabel: matchingWidget?.widgets_label,
-            matchingPosition: matchingWidget?.position,
-            previewImages: matchingWidget?.preview_images,
-            strapiImage: matchingWidget?.strapi_image,
-          });
+          for (const matchingWidget of matchingWidgets) {
+            if (!seenWidgetIds.has(matchingWidget.id)) {
+              seenWidgetIds.add(matchingWidget.id);
+              pages.push({
+                id: matchedPage.id,
+                title: matchedPage.title,
+                label: matchedPage.label,
+                route: matchedPage.route,
+                strapiSlug: matchedPage.strapi_slug,
+                pageCategory: matchedPage.category,
+                matchingWidgetId: matchingWidget.id,
+                matchingWidgetLabel: matchingWidget.widgets_label,
+                matchingPosition: matchingWidget.position,
+                previewImages: matchingWidget.preview_images,
+                strapiImage: matchingWidget.strapi_image,
+              });
+            }
+          }
         }
       }
     }
 
-    if (!seenPageIds.has(activePage.id)) {
+    if (!seenWidgetIds.has(activeWidget.id)) {
       pages.unshift({
         id: activePage.id,
         title: activePage.title,
@@ -214,7 +256,9 @@ export default function StartPage() {
         strapiImage: activeWidget.strapi_image,
       });
     } else {
-      const activeIdx = pages.findIndex((p) => p.id === activePage.id);
+      const activeIdx = pages.findIndex(
+        (p) => p.matchingWidgetId === activeWidget.id,
+      );
       if (activeIdx > 0) {
         const [activeEntry] = pages.splice(activeIdx, 1);
         pages.unshift(activeEntry);
@@ -224,21 +268,72 @@ export default function StartPage() {
     return pages;
   }, [activeWidget, activePage, activeFlatWidget]);
 
-  const handleSelectWidget = useCallback((pageId: string, widgetId: string) => {
-    setSelectedPageId(pageId);
-    setSelectedWidgetId(widgetId);
-  }, []);
+  const handleSelectWidget = useCallback(
+    (pageId: string, widgetId: string) => {
+      // 1. Try to find the matching flat widget from UNIQUE_WIDGETS_LIST
+      let flat = UNIQUE_WIDGETS_LIST.find(
+        (w) => w.widget_key === widgetId || w.id === widgetId,
+      );
+
+      // 2. If not found directly, check if widgetId is a child widget ID in PAGE_WIDGETS
+      const matchedChild = PAGE_WIDGETS.flatMap((p) => p.child_widgets).find(
+        (cw) => cw.id === widgetId || cw.widget_key === widgetId,
+      );
+
+      if (!flat && matchedChild) {
+        flat =
+          UNIQUE_WIDGETS_LIST.find(
+            (w) => w.widget_key === matchedChild.widget_key,
+          ) ??
+          WIDGETS_LIST.find((w) => w.widget_key === matchedChild.widget_key);
+      }
+
+      if (!flat) {
+        flat = WIDGETS_LIST.find(
+          (w) => w.widget_key === widgetId || w.id === widgetId,
+        );
+      }
+
+      const resolvedKey =
+        flat?.widget_key ?? matchedChild?.widget_key ?? widgetId;
+      const resolvedPageId = flat?.page_id ?? pageId;
+
+      setSelectedWidgetKey(resolvedKey);
+      setSelectedPageId(resolvedPageId);
+
+      if (sidebarMode === "all-widgets") {
+        const canonicalChild = PAGE_WIDGETS.find(
+          (p) => p.id === resolvedPageId,
+        )?.child_widgets.find(
+          (cw) => cw.id === flat?.id || cw.widget_key === resolvedKey,
+        );
+        setSelectedWidgetId(
+          canonicalChild?.id ?? matchedChild?.id ?? flat?.id ?? widgetId,
+        );
+      } else {
+        setSelectedWidgetId(matchedChild?.id ?? widgetId);
+      }
+    },
+    [sidebarMode],
+  );
 
   const handleSelectUsage = useCallback((pageId: string, widgetId?: string) => {
     setSidebarMode("by-page");
     setSelectedPageId(pageId);
     if (widgetId) {
       setSelectedWidgetId(widgetId);
+      const child = PAGE_WIDGETS.find(
+        (p) => p.id === pageId,
+      )?.child_widgets.find((cw) => cw.id === widgetId);
+      if (child) {
+        setSelectedWidgetKey(child.widget_key);
+      }
       return;
     }
     const targetPage = PAGE_WIDGETS.find((p) => p.id === pageId);
     if (targetPage?.child_widgets && targetPage.child_widgets.length > 0) {
       setSelectedWidgetId(targetPage.child_widgets[0].id);
+      setSelectedWidgetKey(targetPage.child_widgets[0].widget_key);
     }
   }, []);
 
@@ -247,6 +342,7 @@ export default function StartPage() {
     const targetPage = PAGE_WIDGETS.find((p) => p.id === pageId);
     if (targetPage?.child_widgets && targetPage.child_widgets.length > 0) {
       setSelectedWidgetId(targetPage.child_widgets[0].id);
+      setSelectedWidgetKey(targetPage.child_widgets[0].widget_key);
     }
   }, []);
 

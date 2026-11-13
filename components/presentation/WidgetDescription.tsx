@@ -99,6 +99,13 @@ export function WidgetDescription({
         item.widget_key === widget.widget_key &&
         item.position === widget.position,
     ) ??
+    (widget.fallback_key
+      ? WIDGETS_LIST.find(
+          (item) =>
+            item.page_id === page.id &&
+            item.fallback_key === widget.fallback_key,
+        )
+      : undefined) ??
     WIDGETS_LIST.find((item) => item.widget_key === widget.widget_key);
   const keyProps = flatMeta?.key_props ?? widget.key_props ?? [];
 
@@ -237,18 +244,28 @@ export function WidgetDescription({
               </div>
 
               <div className="flex flex-wrap items-center gap-2">
-                {usedInPages.map((targetPage) => (
-                  <button
-                    key={targetPage.id}
-                    type="button"
-                    onClick={() => handleUsageClick(targetPage)}
-                    className="group inline-flex items-center gap-1.5 rounded-md border border-slate-200/90 border-l-2 border-l-cyan-500/75 bg-slate-50/85 px-2.5 py-1 text-xs font-medium text-slate-700 shadow-[0_1px_2px_rgba(15,23,42,0.03)] transition-all duration-150 hover:border-cyan-400 hover:border-l-cyan-500 hover:bg-white hover:text-slate-900 hover:shadow-xs dark:border-midnight-lightest dark:border-l-teal dark:bg-midnight/75 dark:text-slate-200 dark:hover:border-cyan-400/70 dark:hover:border-l-teal dark:hover:bg-midnight-lighter dark:hover:text-white cursor-pointer"
-                  >
-                    <PanelTop className="w-3 h-3 text-slate-400 group-hover:text-cyan-600 dark:text-slate-400 dark:group-hover:text-teal transition-colors shrink-0" />
-                    <span>{targetPage.label} Page</span>
-                    <ArrowUpRight className="w-3 h-3 text-slate-300 group-hover:text-cyan-600 dark:text-slate-500 dark:group-hover:text-teal transition-colors shrink-0" />
-                  </button>
-                ))}
+                {usedInPages.map((targetPage) => {
+                  const displayLabel =
+                    targetPage.matchingWidgetLabel &&
+                    targetPage.matchingWidgetLabel !== targetPage.label
+                      ? `${targetPage.label} — ${targetPage.matchingWidgetLabel}`
+                      : `${targetPage.label} Page`;
+                  return (
+                    <button
+                      key={
+                        targetPage.matchingWidgetId ??
+                        `${targetPage.id}-${targetPage.matchingPosition ?? 0}`
+                      }
+                      type="button"
+                      onClick={() => handleUsageClick(targetPage)}
+                      className="group inline-flex items-center gap-1.5 rounded-md border border-slate-200/90 border-l-2 border-l-cyan-500/75 bg-slate-50/85 px-2.5 py-1 text-xs font-medium text-slate-700 shadow-[0_1px_2px_rgba(15,23,42,0.03)] transition-all duration-150 hover:border-cyan-400 hover:border-l-cyan-500 hover:bg-white hover:text-slate-900 hover:shadow-xs dark:border-midnight-lightest dark:border-l-teal dark:bg-midnight/75 dark:text-slate-200 dark:hover:border-cyan-400/70 dark:hover:border-l-teal dark:hover:bg-midnight-lighter dark:hover:text-white cursor-pointer"
+                    >
+                      <PanelTop className="w-3 h-3 text-slate-400 group-hover:text-cyan-600 dark:text-slate-400 dark:group-hover:text-teal transition-colors shrink-0" />
+                      <span>{displayLabel}</span>
+                      <ArrowUpRight className="w-3 h-3 text-slate-300 group-hover:text-cyan-600 dark:text-slate-500 dark:group-hover:text-teal transition-colors shrink-0" />
+                    </button>
+                  );
+                })}
               </div>
             </div>
           </>

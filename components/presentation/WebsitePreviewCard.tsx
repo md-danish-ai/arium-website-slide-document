@@ -74,15 +74,25 @@ export function WebsitePreviewCard({
       ) ??
       WIDGETS_LIST.find(
         (item) =>
+          (page ? item.page_id === page.id : true) &&
           item.widget_key === widget.widget_key &&
           item.position === widget.position,
       ) ??
+      (widget.fallback_key && page
+        ? WIDGETS_LIST.find(
+            (item) =>
+              item.page_id === page.id &&
+              item.fallback_key === widget.fallback_key,
+          )
+        : undefined) ??
       WIDGETS_LIST.find((item) => item.widget_key === widget.widget_key))
     : undefined;
 
   const fallbackSvg =
     widget &&
-    (widget.category === "flow" || widget.widget_key.includes("small-cells"))
+    (widget.category === "flow" ||
+      widget.widget_key.includes("small-cells") ||
+      widget.widget_key.includes("illustration-split"))
       ? "/assets/small-cells-illustration.svg"
       : "/assets/connection-globe.svg";
 
@@ -98,13 +108,20 @@ export function WebsitePreviewCard({
 
   const blueprintEntries = isMultiUsageMode
     ? (usagePages ?? [])
-        .map((entry) => ({
-          label: entry.label,
-          src: resolveFirstImage(entry.strapiImage),
-        }))
-        .filter((item): item is { label: string; src: string } =>
-          Boolean(item.src),
-        )
+        .map((entry) => {
+          const src = resolveFirstImage(entry.strapiImage);
+          if (!src) return null;
+          const displayLabel =
+            entry.matchingWidgetLabel &&
+            entry.matchingWidgetLabel !== entry.label
+              ? `${entry.label} — ${entry.matchingWidgetLabel}`
+              : entry.label;
+          return {
+            label: displayLabel,
+            src,
+          };
+        })
+        .filter((item): item is { label: string; src: string } => Boolean(item))
     : [];
 
   const browserEntries = isMultiUsageMode
@@ -112,8 +129,13 @@ export function WebsitePreviewCard({
         .map((entry) => {
           const desktop = resolveFirstImage(entry.previewImages?.desktop);
           if (!desktop) return null;
+          const displayLabel =
+            entry.matchingWidgetLabel &&
+            entry.matchingWidgetLabel !== entry.label
+              ? `${entry.label} — ${entry.matchingWidgetLabel}`
+              : entry.label;
           return {
-            label: entry.label,
+            label: displayLabel,
             desktop,
             tablet: resolveFirstImage(entry.previewImages?.tablet) ?? desktop,
             mobile: resolveFirstImage(entry.previewImages?.mobile) ?? desktop,

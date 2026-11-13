@@ -331,16 +331,6 @@ export function PageSidebar({
         ) : (
           <div className="space-y-2">
             {filteredFlatWidgets.map((flat, index) => {
-              const targetPage = pages.find((p) => p.id === flat.page_id);
-              const matchedChild = targetPage?.child_widgets?.find(
-                (cw) =>
-                  cw.id === flat.id ||
-                  (cw.widget_key === flat.widget_key &&
-                    cw.position === flat.position) ||
-                  cw.widget_key === flat.widget_key,
-              );
-              const resolvedWidgetId =
-                matchedChild?.id ?? flat.widget_key ?? flat.id;
               const isSelected = selectedWidgetKey
                 ? flat.widget_key === selectedWidgetKey
                 : allWidgetsSelectedId === flat.id;
@@ -354,7 +344,7 @@ export function PageSidebar({
                   isActive={isSelected}
                   onClick={() => {
                     setAllWidgetsSelectedId(flat.id);
-                    onSelectWidget(flat.page_id, resolvedWidgetId);
+                    onSelectWidget(flat.page_id, flat.widget_key);
                   }}
                 />
               );
